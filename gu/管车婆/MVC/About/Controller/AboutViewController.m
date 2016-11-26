@@ -26,6 +26,8 @@
     
     //第一块内容
     UIView *_up_bgView;
+    UIButton *_signInBtn;
+    
     //第二块内容
     UIView *_secondView;
     //第三块内容
@@ -114,13 +116,13 @@
 //中间的签到按钮
 - (void)addFirstMedium
 {
-    UIButton *signInBtn = [[UIButton alloc] initWithFrame:CGRectMake(kScreenWidth/2 - kSignBtnWidth/2, CGRectGetMaxY(_up_bgView.frame) - kSignBtnWidth/2, kSignBtnWidth, kSignBtnWidth)];
-    [signInBtn setBackgroundImage:[UIImage imageNamed:@"about_first_circle"] forState:UIControlStateNormal];
-    [signInBtn setTitle:@"签到" forState:UIControlStateNormal];
-    [signInBtn setTitleColor:[UIColor colorWithRed:0 green:126/255.0 blue:1 alpha:1] forState:UIControlStateNormal];
-    signInBtn.titleLabel.font = [UIFont systemFontOfSize:14.0*kRate];
-    [signInBtn addTarget:self action:@selector(signInBtnAction) forControlEvents:UIControlEventTouchUpInside];
-    [_scrollView addSubview:signInBtn];
+    _signInBtn = [[UIButton alloc] initWithFrame:CGRectMake(kScreenWidth/2 - kSignBtnWidth/2, CGRectGetMaxY(_up_bgView.frame) - kSignBtnWidth/2, kSignBtnWidth, kSignBtnWidth)];
+    [_signInBtn setBackgroundImage:[UIImage imageNamed:@"about_first_circle"] forState:UIControlStateNormal];
+    [_signInBtn setTitle:@"签到" forState:UIControlStateNormal];
+    [_signInBtn setTitleColor:[UIColor colorWithRed:0 green:126/255.0 blue:1 alpha:1] forState:UIControlStateNormal];
+    _signInBtn.titleLabel.font = [UIFont systemFontOfSize:14.0*kRate];
+    [_signInBtn addTarget:self action:@selector(signInBtnAction) forControlEvents:UIControlEventTouchUpInside];
+    [_scrollView addSubview:_signInBtn];
 }
 
 //下面的优惠券和我的爱车
@@ -164,7 +166,11 @@
 {
     NSLog(@"签到");
     
-    
+    _signInBtn.alpha = 0;
+    [UIView animateWithDuration:0.6 animations:^{
+        [_signInBtn setTitle:@"已签到" forState:UIControlStateNormal];
+        _signInBtn.alpha = 1;
+    }];
 }
 
 - (void)cardTapAction:(UITapGestureRecognizer *)gesture
