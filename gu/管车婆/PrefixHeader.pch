@@ -1,0 +1,28 @@
+//
+//  PrefixHeader.pch
+//  管车婆
+//
+//  Created by 李伟 on 16/9/27.
+//  Copyright © 2016年 Norman Lee. All rights reserved.
+//
+
+#ifndef PrefixHeader_pch
+#define PrefixHeader_pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+#endif /* PrefixHeader_pch */
+
+#define kScreenWidth    [UIScreen mainScreen].bounds.size.width
+#define kScreenHeight   [UIScreen mainScreen].bounds.size.height
+
+#define kSelfWidth self.frame.size.width
+#define kSelfHeight self.frame.size.height
+
+#define kRate kScreenWidth/414  //iPhone7 Plus运行的时候需要用到该比例,414是iPhone 7 Plus的屏幕宽度
+#define kIP @"192.168.1.147"
+
+#import "Masonry.h"
+#import "UIResponder+FindResponderVC.h"
+#import "AFNetworking.h"
