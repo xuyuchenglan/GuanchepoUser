@@ -37,6 +37,12 @@
     
 }
 
+- (void)addObserver
+{
+    //添加观察者，监听HomeViewController中发送过来的通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(theViewToShow:) name:@"页面index" object:nil];
+}
+
 
 #pragma mark
 #pragma mark *****************  设置导航栏  *****************
@@ -87,14 +93,8 @@
 
 - (void)setTitleArray:(NSArray *)titleArray
 {
-    NSLog(@"麻黄素股份，三个字");
-    
-    //添加观察者，监听HomeViewController中发送过来的通知
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(theViewToShow:) name:@"页面index" object:nil];
-    
     _titleArray = titleArray;
     [self initWithTitleButton];
-    
 }
 
 - (void)theViewToShow:(NSNotification *)notification
@@ -212,8 +212,6 @@
 {
     //配置scrollView的位置、尺寸以及内容大小
     UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(titleView.frame), kScreenWidth, kScreenHeight - CGRectGetMaxY(titleView.frame))];
-    
-    NSLog(@"%f", titleView.frame.origin.y);
     
     scrollView.delegate = self;
     scrollView.backgroundColor = [UIColor colorWithWhite:0.9 alpha:1];
