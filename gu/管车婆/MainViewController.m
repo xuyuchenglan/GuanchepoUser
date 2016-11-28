@@ -40,6 +40,7 @@
     
     //门店页面
     StoresViewController *storesVC = [[StoresViewController alloc] init];
+    storesVC.selectedNum = 0;
     UINavigationController *storesNav = [[UINavigationController alloc] initWithRootViewController:storesVC];
     [storesVC.navigationController.tabBarItem setTitlePositionAdjustment:UIOffsetMake(0, -2)];
     

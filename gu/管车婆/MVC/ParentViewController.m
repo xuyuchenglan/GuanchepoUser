@@ -37,6 +37,8 @@
     
 }
 
+
+#pragma mark
 #pragma mark *****************  设置导航栏  *****************
 //导航栏标题(文字)
 - (void)setNavigationItemTitle:(NSString *)title
@@ -85,10 +87,26 @@
 
 - (void)setTitleArray:(NSArray *)titleArray
 {
+    NSLog(@"麻黄素股份，三个字");
+    
+    //添加观察者，监听HomeViewController中发送过来的通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(theViewToShow:) name:@"页面index" object:nil];
+    
     _titleArray = titleArray;
     [self initWithTitleButton];
     
 }
+
+- (void)theViewToShow:(NSNotification *)notification
+{
+    int index = [[[notification userInfo] objectForKey:@"index"] intValue];
+    _selectedNum = index;
+    NSLog(@"%d", _selectedNum);
+    
+    [titleView removeFromSuperview];
+    [self initWithTitleButton];
+}
+
 
 - (void)initWithTitleButton
 {
@@ -125,7 +143,7 @@
         [titleBtn addTarget:self action:@selector(scrollViewSelectToIndex:) forControlEvents:UIControlEventTouchUpInside];
         [titleView addSubview:titleBtn];
         
-        if (i == 0) {
+        if (i == _selectedNum) {
             selectButton = titleBtn;
             [selectButton setTitleColor:[UIColor colorWithRed:0 green:126/255.0 blue:1 alpha:1] forState:UIControlStateNormal];//按钮选中状态下的颜色
         }
@@ -134,7 +152,7 @@
     }
     
     //底部蓝色小滑块
-    UIView *sliderV = [[UIView alloc] initWithFrame:CGRectMake(0, kTitleHeight - 0.5, kTitleWidth, 0.5)];
+    UIView *sliderV = [[UIView alloc] initWithFrame:CGRectMake(kTitleWidth*_selectedNum, kTitleHeight - 0.5, kTitleWidth, 0.5)];
     sliderV.backgroundColor = [UIColor colorWithRed:0 green:126/255.0 blue:1 alpha:1];
     [titleView addSubview:sliderV];
     _sliderView = sliderV;
@@ -195,6 +213,8 @@
     //配置scrollView的位置、尺寸以及内容大小
     UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(titleView.frame), kScreenWidth, kScreenHeight - CGRectGetMaxY(titleView.frame))];
     
+    NSLog(@"%f", titleView.frame.origin.y);
+    
     scrollView.delegate = self;
     scrollView.backgroundColor = [UIColor colorWithWhite:0.9 alpha:1];
     scrollView.pagingEnabled = YES;
@@ -212,6 +232,13 @@
         
         [scrollView addSubview:view_c];
     }
+}
+
+#pragma mark 
+#pragma mark 复写deallock,移除观察者
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"页面index" object:nil];
 }
 
 

@@ -15,6 +15,7 @@
 - (void)setBackButtonWithImageName:(NSString *)imageName;//返回按钮
 
 /******************  同步滑动页的配置  *******************/
+@property (nonatomic, assign) int       selectedNum;
 @property (nonatomic, strong) NSArray  *titleArray;
 @property (nonatomic, strong) NSArray  *controllerArray;
 
