@@ -43,6 +43,18 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(theViewToShow:) name:@"页面index" object:nil];
 }
 
+- (void)theViewToShow:(NSNotification *)notification
+{
+    int index = [[[notification userInfo] objectForKey:@"index"] intValue];
+    _selectedNum = index;
+    NSLog(@"%d", _selectedNum);
+    
+    if (titleView) {
+        [titleView removeFromSuperview];
+    }
+    
+    [self initWithTitleButton];
+}
 
 #pragma mark
 #pragma mark *****************  设置导航栏  *****************
@@ -94,18 +106,14 @@
 - (void)setTitleArray:(NSArray *)titleArray
 {
     _titleArray = titleArray;
-    [self initWithTitleButton];
+    
+    if (!titleView) {
+        [self initWithTitleButton];
+    }
+    
 }
 
-- (void)theViewToShow:(NSNotification *)notification
-{
-    int index = [[[notification userInfo] objectForKey:@"index"] intValue];
-    _selectedNum = index;
-    NSLog(@"%d", _selectedNum);
-    
-    [titleView removeFromSuperview];
-    [self initWithTitleButton];
-}
+
 
 
 - (void)initWithTitleButton
