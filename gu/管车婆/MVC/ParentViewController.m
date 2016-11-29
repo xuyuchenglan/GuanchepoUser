@@ -52,8 +52,12 @@
     if (titleView) {
         [titleView removeFromSuperview];
     }
-    
     [self initWithTitleButton];
+    
+    if (_scrollView) {
+        [_scrollView removeFromSuperview];
+    }
+    [self initWithController];
 }
 
 #pragma mark
@@ -110,11 +114,7 @@
     if (!titleView) {
         [self initWithTitleButton];
     }
-    
 }
-
-
-
 
 - (void)initWithTitleButton
 {
@@ -221,6 +221,7 @@
     //配置scrollView的位置、尺寸以及内容大小
     UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(titleView.frame), kScreenWidth, kScreenHeight - CGRectGetMaxY(titleView.frame))];
     
+    scrollView.contentOffset = CGPointMake(kScreenWidth*_selectedNum, 0);
     scrollView.delegate = self;
     scrollView.backgroundColor = [UIColor colorWithWhite:0.9 alpha:1];
     scrollView.pagingEnabled = YES;
