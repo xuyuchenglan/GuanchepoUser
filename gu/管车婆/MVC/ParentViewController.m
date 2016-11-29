@@ -18,7 +18,7 @@
     
     UIButton *selectButton;//选中按钮
     UIView *_sliderView;//选中按钮下面的小滑块
-    UIScrollView *_scrollView;
+    UIScrollView *_scrollContentView;
     
     UILabel* titleLabel;//导航栏标题
 }
@@ -54,8 +54,8 @@
     }
     [self initWithTitleButton];
     
-    if (_scrollView) {
-        [_scrollView removeFromSuperview];
+    if (_scrollContentView) {
+        [_scrollContentView removeFromSuperview];
     }
     [self initWithController];
 }
@@ -173,7 +173,7 @@
     
     //点击相应按钮后，显示对应的视图
     [UIView animateWithDuration:0 animations:^{
-        _scrollView.contentOffset = CGPointMake(kScreenWidth * (btn.tag-100), 0);
+        _scrollContentView.contentOffset = CGPointMake(kScreenWidth * (btn.tag-100), 0);
     }];
     
     //选择细分服务视图
@@ -238,8 +238,8 @@
     scrollView.pagingEnabled = YES;
     scrollView.scrollEnabled = YES;
     scrollView.contentSize = CGSizeMake(kScreenWidth * _controllerArray.count, 0);//scrollView的起始位置
-    [self.view addSubview:scrollView];
-    _scrollView = scrollView;
+    [self.view insertSubview:scrollView atIndex:0];//如果直接使用addSubView添加视图的话，会导致选择详细信息的视图被scrollView给覆盖而显示不出来
+    _scrollContentView = scrollView;
     
     //将各个控制器中的View视图填充到scrollView对应的内容位置上
     for (int i = 0; i < _controllerArray.count; i++) {

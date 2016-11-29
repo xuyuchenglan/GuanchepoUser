@@ -72,6 +72,7 @@
     [self.view addSubview:_tableView];
     _tableView.hidden = YES;
     
+    _currentBtnTag = (long)(self.selectedNum);//_currentBtnTag根据选中那个按钮来进行相应的改变
 }
 
 
@@ -79,17 +80,17 @@
 {
     long btnTag = btn.tag - 100;
     
+    NSLog(@"_currentBtnTag:%ld, btnTag:%ld", _currentBtnTag, btnTag);
+    
     if (_currentBtnTag == btnTag) {
         _tableView.hidden = !_tableView.hidden;
         NSLog(@"相等");
+        NSLog(@"_tableView.hidden:%d", _tableView.hidden);
     } else {
         _tableView.hidden = YES;
         NSLog(@"不相等");
     }
     _currentBtnTag = btnTag;
-    
-    
-    
     
     if (!_tableView.hidden) {
         
