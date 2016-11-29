@@ -196,10 +196,21 @@
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView{
     
     //当滑动选择细分服务的View的时候也会调用scrollViewDidScroll方法，为确保滑动选择细分服务的View的时候不调用selectButton方法，需进行如下判断。
-    if (scrollView.contentOffset.x != 0) {
+    //    if (scrollView.contentOffset.x != 0) {//这个判断用下面的indexF>0代替了
+    //        NSInteger index = scrollView.contentOffset.x / kScreenWidth;
+    //        [self selectButton:index];
+    //    }
+    
+    
+    float indexF = scrollView.contentOffset.x / kScreenWidth;
+    NSLog(@"%f", indexF);
+    
+    if (indexF > 0) {
         NSInteger index = scrollView.contentOffset.x / kScreenWidth;
         [self selectButton:index];
     }
+    
+    
 }
 
 //选择细分服务视图
@@ -226,7 +237,7 @@
     scrollView.backgroundColor = [UIColor colorWithWhite:0.9 alpha:1];
     scrollView.pagingEnabled = YES;
     scrollView.scrollEnabled = YES;
-    scrollView.contentSize = CGSizeMake(kScreenWidth * _controllerArray.count, 0);
+    scrollView.contentSize = CGSizeMake(kScreenWidth * _controllerArray.count, 0);//scrollView的起始位置
     [self.view addSubview:scrollView];
     _scrollView = scrollView;
     
