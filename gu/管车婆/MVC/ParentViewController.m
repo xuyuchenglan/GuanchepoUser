@@ -47,7 +47,6 @@
 {
     int index = [[[notification userInfo] objectForKey:@"index"] intValue];
     _selectedNum = index;
-    NSLog(@"%d", _selectedNum);
     
     if (titleView) {
         [titleView removeFromSuperview];
@@ -119,7 +118,6 @@
 - (void)initWithTitleButton
 {
     //标题视图
-    
     titleView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kTitleHeight)];
     titleView.backgroundColor = [UIColor whiteColor];//背景色
     [self.view addSubview:titleView];
@@ -168,6 +166,8 @@
 
 - (void)scrollViewSelectToIndex:(UIButton *)btn
 {
+    NSLog(@"_selectedNum:%d; btn.tag-100:%ld", _selectedNum, btn.tag-100);
+    
     //点击相应按钮后，小滑块随之滑动，按钮颜色改变
     [self selectButton:(btn.tag - 100)];
     
@@ -178,12 +178,12 @@
     
     //选择细分服务视图
     [self selectDetailServeWithBtn:btn];
-    
 }
 
 //选择某个标题按钮（小滑块随之滑动，按钮颜色改变）
 - (void)selectButton:(NSInteger)index
 {
+    NSLog(@"selectButton");
     [selectButton setTitleColor:kTitleBgColor forState:UIControlStateNormal];
     selectButton = _buttonArray[index];
     [selectButton setTitleColor:[UIColor colorWithRed:0 green:126/255.0 blue:1 alpha:1] forState:UIControlStateNormal];//按钮选中状态下变为蓝色
@@ -201,9 +201,7 @@
     //        [self selectButton:index];
     //    }
     
-    
     float indexF = scrollView.contentOffset.x / kScreenWidth;
-    NSLog(@"%f", indexF);
     
     if (indexF > 0) {
         NSInteger index = scrollView.contentOffset.x / kScreenWidth;

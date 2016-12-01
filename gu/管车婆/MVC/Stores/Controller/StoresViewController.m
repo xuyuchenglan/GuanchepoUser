@@ -15,7 +15,6 @@
 {
     UITableView *_tableView;
 }
-@property (nonatomic, assign)long      currentBtnTag;
 @property (nonatomic, strong)NSArray  *servesArr;//细分服务数组
 @property (nonatomic, strong)NSString *selectedServe;//记录选中的服务
 @end
@@ -34,6 +33,13 @@
     //选择细分服务视图
     [self addDetailServeTableView];
     
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    _tableView.hidden = YES;
 }
 
 #pragma mark ******************      导航栏      ****************
@@ -71,8 +77,6 @@
     _tableView.dataSource = self;
     [self.view addSubview:_tableView];
     _tableView.hidden = YES;
-    
-    _currentBtnTag = (long)(self.selectedNum);//_currentBtnTag根据选中那个按钮来进行相应的改变
 }
 
 
@@ -80,17 +84,14 @@
 {
     long btnTag = btn.tag - 100;
     
-    NSLog(@"_currentBtnTag:%ld, btnTag:%ld", _currentBtnTag, btnTag);
+    NSLog(@"btnTag:%ld, self.selectedNum:%d", btnTag, self.selectedNum);
     
-    if (_currentBtnTag == btnTag) {
+    if (self.selectedNum == btnTag) {
         _tableView.hidden = !_tableView.hidden;
-        NSLog(@"相等");
-        NSLog(@"_tableView.hidden:%d", _tableView.hidden);
     } else {
         _tableView.hidden = YES;
-        NSLog(@"不相等");
     }
-    _currentBtnTag = btnTag;
+    self.selectedNum = (int)btnTag;
     
     if (!_tableView.hidden) {
         
@@ -142,5 +143,6 @@
     NSDictionary *infoDic = [NSDictionary dictionaryWithObjectsAndKeys:_selectedServe, @"selectedServe", nil];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"showSelectedServe" object:nil userInfo:infoDic];
 }
+
 
 @end
