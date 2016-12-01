@@ -183,7 +183,8 @@
 //选择某个标题按钮（小滑块随之滑动，按钮颜色改变）
 - (void)selectButton:(NSInteger)index
 {
-    NSLog(@"selectButton");
+    self.selectedNum = (int)index;
+    
     [selectButton setTitleColor:kTitleBgColor forState:UIControlStateNormal];
     selectButton = _buttonArray[index];
     [selectButton setTitleColor:[UIColor colorWithRed:0 green:126/255.0 blue:1 alpha:1] forState:UIControlStateNormal];//按钮选中状态下变为蓝色
