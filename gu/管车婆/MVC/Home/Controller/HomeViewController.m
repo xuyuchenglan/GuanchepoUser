@@ -717,6 +717,7 @@
     
     NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:index, @"index", nil];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"页面index" object:nil userInfo:dic];
+    
 }
 
 #pragma mark ******************      第三块内容      ****************

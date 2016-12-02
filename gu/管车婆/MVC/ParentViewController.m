@@ -46,7 +46,7 @@
 - (void)theViewToShow:(NSNotification *)notification
 {
     int index = [[[notification userInfo] objectForKey:@"index"] intValue];
-    _selectedNum = index;
+    _selectedNum = index;//保证在首页点击某按钮后进入门店的相应页面后，_selectedNum参数能够同步改变
     
     if (titleView) {
         [titleView removeFromSuperview];
@@ -166,8 +166,6 @@
 
 - (void)scrollViewSelectToIndex:(UIButton *)btn
 {
-    NSLog(@"_selectedNum:%d; btn.tag-100:%ld", _selectedNum, btn.tag-100);
-    
     //点击相应按钮后，小滑块随之滑动，按钮颜色改变
     [self selectButton:(btn.tag - 100)];
     
@@ -183,8 +181,6 @@
 //选择某个标题按钮（小滑块随之滑动，按钮颜色改变）
 - (void)selectButton:(NSInteger)index
 {
-    self.selectedNum = (int)index;
-    
     [selectButton setTitleColor:kTitleBgColor forState:UIControlStateNormal];
     selectButton = _buttonArray[index];
     [selectButton setTitleColor:[UIColor colorWithRed:0 green:126/255.0 blue:1 alpha:1] forState:UIControlStateNormal];//按钮选中状态下变为蓝色
@@ -206,6 +202,9 @@
     
     if (indexF > 0) {
         NSInteger index = scrollView.contentOffset.x / kScreenWidth;
+        
+        _selectedNum = (int)index;//滑动的时候保证_selectedNum与当前页面是同步的
+        
         [self selectButton:index];
     }
     

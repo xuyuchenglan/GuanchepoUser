@@ -83,15 +83,14 @@
 - (void)selectDetailServeWithBtn:(UIButton *)btn
 {
     long btnTag = btn.tag - 100;
-    
-    NSLog(@"btnTag:%ld, self.selectedNum:%d", btnTag, self.selectedNum);
-    
+
     if (self.selectedNum == btnTag) {
         _tableView.hidden = !_tableView.hidden;
     } else {
         _tableView.hidden = YES;
     }
     self.selectedNum = (int)btnTag;
+
     
     if (!_tableView.hidden) {
         
@@ -142,6 +141,12 @@
     //给StoresListVC发送一个通知，让他改变topView上的显示内容
     NSDictionary *infoDic = [NSDictionary dictionaryWithObjectsAndKeys:_selectedServe, @"selectedServe", nil];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"showSelectedServe" object:nil userInfo:infoDic];
+}
+
+#pragma mark
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 
