@@ -83,6 +83,8 @@
 - (void)selectDetailServeWithBtn:(UIButton *)btn
 {
     long btnTag = btn.tag - 100;
+    
+    NSLog(@"self.selectedNum:%d, btnTag:%ld", self.selectedNum, btnTag);
 
     if (self.selectedNum == btnTag) {
         _tableView.hidden = !_tableView.hidden;

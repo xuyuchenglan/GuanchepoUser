@@ -169,13 +169,13 @@
     //点击相应按钮后，小滑块随之滑动，按钮颜色改变
     [self selectButton:(btn.tag - 100)];
     
-    //点击相应按钮后，显示对应的视图
+    //选择细分服务视图(*1*)
+    [self selectDetailServeWithBtn:btn];
+    
+    //点击相应按钮后，显示对应的视图(*2*)
     [UIView animateWithDuration:0 animations:^{
         _scrollContentView.contentOffset = CGPointMake(kScreenWidth * (btn.tag-100), 0);
-    }];
-    
-    //选择细分服务视图
-    [self selectDetailServeWithBtn:btn];
+    }];//注意，(*1*)和(*2*)的顺序不要颠倒，因为(*2*)中当contentOffset改变后会调用scrollViewDidScroll方法，进而改变_selectedNum的值，就会导致在门店页面中，由美容页面（未显示服务详情选择页面）通过点击按钮的方式进入到保养页面后，会直接显示服务详情选择页面。
 }
 
 //选择某个标题按钮（小滑块随之滑动，按钮颜色改变）
@@ -204,7 +204,7 @@
         NSInteger index = scrollView.contentOffset.x / kScreenWidth;
         
         _selectedNum = (int)index;//滑动的时候保证_selectedNum与当前页面是同步的
-        
+    
         [self selectButton:index];
     }
     
