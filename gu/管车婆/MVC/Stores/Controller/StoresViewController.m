@@ -54,6 +54,8 @@
 #pragma mark ******************  设置同步滑动视图  ****************
 - (void)addSyncScrollView
 {
+    NSLog(@"设置同步滑动视图");
+    
     //配置按钮标题数组
     self.titleArray = [NSArray arrayWithObjects:@"汽车服务", @"汽车美容", @"轮胎服务", @"保养服务", nil];
     

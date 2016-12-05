@@ -137,7 +137,6 @@
     }
     
     
-    
     //标题按钮
     for (int i = 0; i < _titleArray.count; i++) {
         UIButton *titleBtn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -192,6 +191,8 @@
 //监听滚动事件,以实现通过左右滑动视图也可以使上面的标题按钮与之同步。
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView{
     
+    NSLog(@"滚动");
+    
     //当滑动选择细分服务的View的时候也会调用scrollViewDidScroll方法，为确保滑动选择细分服务的View的时候不调用selectButton方法，需进行如下判断。
     //    if (scrollView.contentOffset.x != 0) {//这个判断用下面的indexF>0代替了
     //        NSInteger index = scrollView.contentOffset.x / kScreenWidth;
@@ -207,8 +208,6 @@
     
         [self selectButton:index];
     }
-    
-    
 }
 
 //选择细分服务视图
@@ -245,9 +244,12 @@
         UIViewController *vc = _controllerArray[i];
         view_c = vc.view;
         view_c.frame = CGRectMake(kScreenWidth * i, 0, kScreenWidth, kScreenHeight);
-        
+
         [scrollView addSubview:view_c];
     }
+    
+    _scrollContentView.contentOffset = CGPointMake(kScreenWidth*_selectedNum, 0);
+    
 }
 
 #pragma mark 

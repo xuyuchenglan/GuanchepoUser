@@ -45,8 +45,6 @@
     UINavigationController *storesNav = [[UINavigationController alloc] initWithRootViewController:storesVC];
     [storesVC.navigationController.tabBarItem setTitlePositionAdjustment:UIOffsetMake(0, -2)];
     
-    
-    
     //车一族页面
     CarOwnersViewController *carOwnersVC = [[CarOwnersViewController alloc] init];
     UINavigationController *carOwnersNav = [[UINavigationController alloc] initWithRootViewController:carOwnersVC];
