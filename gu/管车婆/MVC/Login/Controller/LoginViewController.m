@@ -161,8 +161,10 @@
     [accountTF resignFirstResponder];//收起键盘
     [passwordTF resignFirstResponder];
     
-    MainViewController *mainVC = [[MainViewController alloc] init];
-    [self presentViewController:mainVC animated:NO completion:nil];
+    
+    
+//    MainViewController *mainVC = [[MainViewController alloc] init];
+//    [self presentViewController:mainVC animated:NO completion:nil];
     
 }
 

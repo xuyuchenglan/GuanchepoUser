@@ -15,7 +15,6 @@
 {
     UITableView *_tableView;
 }
-@property (nonatomic, assign)long      currentBtnTag;
 @property (nonatomic, strong)NSArray  *servesArr;//细分服务数组
 @property (nonatomic, strong)NSString *selectedServe;//记录选中的服务
 @end
@@ -36,6 +35,13 @@
     
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    _tableView.hidden = YES;
+}
+
 #pragma mark ******************      导航栏      ****************
 - (void)addNavBar
 {
@@ -48,6 +54,8 @@
 #pragma mark ******************  设置同步滑动视图  ****************
 - (void)addSyncScrollView
 {
+    NSLog(@"设置同步滑动视图");
+    
     //配置按钮标题数组
     self.titleArray = [NSArray arrayWithObjects:@"汽车服务", @"汽车美容", @"轮胎服务", @"保养服务", nil];
     
@@ -71,7 +79,6 @@
     _tableView.dataSource = self;
     [self.view addSubview:_tableView];
     _tableView.hidden = YES;
-    
 }
 
 
@@ -79,17 +86,15 @@
 {
     long btnTag = btn.tag - 100;
     
-    if (_currentBtnTag == btnTag) {
+    NSLog(@"self.selectedNum:%d, btnTag:%ld", self.selectedNum, btnTag);
+
+    if (self.selectedNum == btnTag) {
         _tableView.hidden = !_tableView.hidden;
-        NSLog(@"相等");
     } else {
         _tableView.hidden = YES;
-        NSLog(@"不相等");
     }
-    _currentBtnTag = btnTag;
-    
-    
-    
+    self.selectedNum = (int)btnTag;
+
     
     if (!_tableView.hidden) {
         
@@ -141,5 +146,12 @@
     NSDictionary *infoDic = [NSDictionary dictionaryWithObjectsAndKeys:_selectedServe, @"selectedServe", nil];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"showSelectedServe" object:nil userInfo:infoDic];
 }
+
+#pragma mark
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 
 @end

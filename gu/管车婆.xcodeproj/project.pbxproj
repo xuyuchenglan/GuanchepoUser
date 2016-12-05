@@ -2571,7 +2571,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEVELOPMENT_TEAM = RRJR6A5BF9;
-				GCC_PREFIX_HEADER = "/Users/liwei/Desktop/管车婆用户版/管车婆/管车婆/PrefixHeader.pch";
+				GCC_PREFIX_HEADER = "/Users/liwei/Git/GuanchepoUser/gu/管车婆/PrefixHeader.pch";
 				INFOPLIST_FILE = "管车婆/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -2587,7 +2587,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEVELOPMENT_TEAM = RRJR6A5BF9;
-				GCC_PREFIX_HEADER = "/Users/liwei/Desktop/管车婆用户版/管车婆/管车婆/PrefixHeader.pch";
+				GCC_PREFIX_HEADER = "/Users/liwei/Git/GuanchepoUser/gu/管车婆/PrefixHeader.pch";
 				INFOPLIST_FILE = "管车婆/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

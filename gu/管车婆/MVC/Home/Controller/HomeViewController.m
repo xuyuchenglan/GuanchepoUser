@@ -459,6 +459,8 @@
 - (void)dujingBtnAction
 {
     NSLog(@"全车镀晶");
+    
+    [self postNotificationWithIndex:[NSNumber numberWithInt:2]];
 }
 
 
@@ -483,6 +485,8 @@
 - (void)jieqimenBtnAction
 {
     NSLog(@"清洗节气门");
+    
+    [self postNotificationWithIndex:[NSNumber numberWithInt:1]];
 }
 
 
@@ -507,6 +511,8 @@
 - (void)fadongjiBtnAction
 {
     NSLog(@"清洗发动机");
+    
+    [self postNotificationWithIndex:[NSNumber numberWithInt:0]];
 }
 
 //轮胎检查
@@ -530,6 +536,8 @@
 - (void)luntaiBtnAction
 {
     NSLog(@"轮胎检查");
+    
+    [self postNotificationWithIndex:[NSNumber numberWithInt:3]];
 }
 
 //底盘检查
@@ -553,6 +561,8 @@
 - (void)dipanBtnAction
 {
     NSLog(@"底盘检查");
+    
+    [self postNotificationWithIndex:[NSNumber numberWithInt:2]];
 }
 
 //广告位
@@ -571,6 +581,8 @@
 - (void)secondAd:(UITapGestureRecognizer *)gesture
 {
     NSLog(@"中间的广告位");
+    
+    [self postNotificationWithIndex:[NSNumber numberWithInt:1]];
 }
 
 //空调清洗
@@ -594,6 +606,8 @@
 - (void)kongtiaoBtnAction
 {
     NSLog(@"空调清洗");
+    
+    [self postNotificationWithIndex:[NSNumber numberWithInt:0]];
 }
 
 //清洗进气管道
@@ -617,6 +631,8 @@
 - (void)jinqiguanBtnAction
 {
     NSLog(@"清洗进气管道");
+    
+    [self postNotificationWithIndex:[NSNumber numberWithInt:3]];
 }
 
 //真皮护理
@@ -640,6 +656,8 @@
 - (void)zhenpiBtnAction
 {
     NSLog(@"真皮护理");
+    
+    [self postNotificationWithIndex:[NSNumber numberWithInt:2]];
 }
 
 //玻璃镀膜
@@ -663,6 +681,8 @@
 - (void)boliBtnAction
 {
     NSLog(@"玻璃镀膜");
+    
+    [self postNotificationWithIndex:[NSNumber numberWithInt:1]];
 }
 
 //更多
@@ -686,6 +706,18 @@
 - (void)moreBtnAction
 {
     NSLog(@"更多");
+    
+    [self postNotificationWithIndex:[NSNumber numberWithInt:0]];
+}
+
+#pragma mark --- 给ParentVC发送一个通知，将具体显示哪一个页面的参数传过去
+- (void)postNotificationWithIndex:(NSNumber *)index
+{
+    [self.tabBarController setSelectedIndex:1];
+    
+    NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:index, @"index", nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"页面index" object:nil userInfo:dic];
+    
 }
 
 #pragma mark ******************      第三块内容      ****************
