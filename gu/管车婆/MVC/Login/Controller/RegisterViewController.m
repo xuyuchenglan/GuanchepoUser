@@ -199,10 +199,6 @@
     
     [numberTF resignFirstResponder];//收起键盘
     [verificationCodeTF resignFirstResponder];
-    
-    MainViewController *mainVC = [[MainViewController alloc] init];
-    [self presentViewController:mainVC animated:NO completion:nil];
-    
 }
 
 #pragma mark UITextFieldDelegate

@@ -14,4 +14,5 @@
 
 - (void)setBackButtonWithIsText:(BOOL)isText_noImage withIsExit:(BOOL)isExit WithText:(NSString *)text WithImageName:(NSString *)imageName;//设置返回按钮
 
+- (void)saveDataToPlistWithDic:(NSDictionary *)contentDic;//保存数据到本地
 @end

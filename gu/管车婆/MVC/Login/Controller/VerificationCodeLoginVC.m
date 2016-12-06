@@ -25,8 +25,9 @@
     NSInteger   _count;//记录获取验证码之后，到下一次点击还需要的时间
 
 }
-@property (nonatomic, strong)NSString *accountStr;//记录输入框中输入的账号
-@property (nonatomic, strong)NSString *passwordStr;//记录密码输入框中输入的密码
+@property (nonatomic, strong)NSString *numberStr;//记录输入框中输入的手机号
+@property (nonatomic, strong)NSString *verificationCodeStr;//记录验证码输入框中输入的验证码
+@property (nonatomic, strong)NSString *verificationCodePostStr;//网络请求获得的验证码
 @end
 
 @implementation VerificationCodeLoginVC
@@ -74,13 +75,14 @@
     //手机号输入框
     numberTF = [[UITextField alloc] initWithFrame:CGRectMake(40*kRate, CGRectGetMaxY(logoImgView.frame) + 30*kRate, kScreenWidth - 160*kRate, 40*kRate)];
     numberTF.delegate = self;
+    numberTF.keyboardType = UIKeyboardTypeNumberPad;//键盘类型（数字）
     [numberTF setBorderStyle:UITextBorderStyleRoundedRect];//边框
     numberTF.secureTextEntry = NO;//密码状态
     numberTF.autocorrectionType = UITextAutocorrectionTypeNo;//不自动纠错
     numberTF.returnKeyType = UIReturnKeyDone;//“return”键的类型
     numberTF.clearButtonMode = UITextFieldViewModeWhileEditing;//清除按钮何时出现
     numberTF.adjustsFontSizeToFitWidth = YES;//字体大小自适应输入框宽度
-    numberTF.tag = 666;
+    numberTF.tag = 923;
     [contentView addSubview:numberTF];
     ///placeHolder
     NSMutableAttributedString *attrs = [[NSMutableAttributedString alloc] initWithString:@"请输入您的手机号"];
@@ -109,7 +111,7 @@
     verificationCodeTF.returnKeyType = UIReturnKeyDone;//“return”键的类型
     verificationCodeTF.clearButtonMode = UITextFieldViewModeWhileEditing;//清除按钮何时出现
     verificationCodeTF.adjustsFontSizeToFitWidth = YES;//字体大小自适应输入框宽度
-    verificationCodeTF.tag = 888;
+    verificationCodeTF.tag = 803;
     [contentView addSubview:verificationCodeTF];
     ///placeHolder
     NSMutableAttributedString *attrs1 = [[NSMutableAttributedString alloc] initWithString:@"请输入您的验证码"];
@@ -169,17 +171,32 @@
 {
     NSLog(@"获取手机验证码");
     
-    //当点击“获取验证码”按钮后，按钮进行倒计时
-    getVerCodeBtn.enabled = NO;
-    _count = 60;
-    [getVerCodeBtn setTitle:@"60秒" forState:UIControlStateDisabled];
-    getVerCodeBtn.backgroundColor = [UIColor grayColor];
-    [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(timerFired:) userInfo:nil repeats:YES];
+    [numberTF resignFirstResponder];//收起键盘
+    
+    if (_numberStr.length == 11) {
+        
+        //获取手机验证码
+        [self getVerificationCodePost];
+        
+        //当点击“获取验证码”按钮后，按钮进行倒计时
+        getVerCodeBtn.enabled = NO;
+        _count = 60;
+        [getVerCodeBtn setTitle:@"60秒" forState:UIControlStateDisabled];
+        getVerCodeBtn.backgroundColor = [UIColor grayColor];
+        [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(timerFired:) userInfo:nil repeats:YES];
+    
+    } else {
+        
+        [self showAlertViewWithTitle:@"提示" WithMessage:@"您的手机号码输入有误，请重试！"];
+
+    }
+    
 }
 
 -(void)timerFired:(NSTimer *)timer
 {
-    if (_count !=1) {
+    if (_count !=1)
+    {
         _count -=1;
         [getVerCodeBtn setTitle:[NSString stringWithFormat:@"%ld秒",_count] forState:UIControlStateDisabled];
     }
@@ -194,13 +211,28 @@
 
 - (void)loginBtnAction
 {
-    NSLog(@"登录");
+    NSLog(@"手机验证码登录按钮");
     
     [numberTF resignFirstResponder];//收起键盘
     [verificationCodeTF resignFirstResponder];
     
-    MainViewController *mainVC = [[MainViewController alloc] init];
-    [self presentViewController:mainVC animated:NO completion:nil];
+    if (_numberStr.length!=0 && _verificationCodeStr.length!=0) {
+        
+        if ([_verificationCodePostStr isEqualToString:_verificationCodeStr]) {
+            
+            //在这里进行手机验证码登录的网络请求
+            [self loginByVerificationCode];
+            
+        } else {
+            
+            [self showAlertViewWithTitle:@"提示" WithMessage:@"您的验证码输入有误，请重试！"];
+            
+        }
+        
+    } else {
+
+        [self showAlertViewWithTitle:@"提示" WithMessage:@"您的手机号或验证码均不能为空，请重试！"];
+    }
 }
 
 - (void)retrievePasswordBtnAction
@@ -231,25 +263,95 @@
 //当开始点击textField的时候会调用的方法
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
-    if (textField.tag == 666) {
-        _accountStr = textField.text;
-    } else if (textField.tag == 888) {
-        _passwordStr = textField.text;
+    if (textField.tag == 923) {
+        _numberStr = textField.text;
+    } else if (textField.tag == 803) {
+        _verificationCodeStr = textField.text;
     }
-    NSLog(@"手机号是:%@,验证码是:%@", _accountStr, _passwordStr);
+    NSLog(@"手机号是:%@,验证码是:%@", _numberStr, _verificationCodeStr);
 }
 
 //当textField编辑结束时会调用的方法
 - (void)textFieldDidEndEditing:(UITextField *)textField
 {
-    if (textField.tag == 666) {
-        _accountStr = textField.text;
-    } else if (textField.tag == 888) {
-        _passwordStr = textField.text;
+    if (textField.tag == 923) {
+        _numberStr = textField.text;
+    } else if (textField.tag == 803) {
+        _verificationCodeStr = textField.text;
     }
-    NSLog(@"手机号是:%@,验证码是:%@", _accountStr, _passwordStr);
+    NSLog(@"手机号是:%@,验证码是:%@", _numberStr, _verificationCodeStr);
 }
 
 
+
+#pragma mark
+#pragma mark --- 网络请求
+//获取手机验证码
+- (void)getVerificationCodePost
+{
+    NSString *url_post = [NSString stringWithFormat:@"http://%@:8080/zcar/userapp/getSmsAlidayu.action", kIP];
+    
+    NSDictionary *params = @{
+                             @"phone":_numberStr
+                             };
+    
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    
+    AFHTTPResponseSerializer *responseSerializer = [AFHTTPResponseSerializer serializer];
+    manager.responseSerializer = responseSerializer;
+    
+    [manager POST:url_post parameters:params progress:NULL success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        
+        NSDictionary *content = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+        
+        _verificationCodePostStr = [NSString stringWithFormat:@"%@", [content objectForKey:@"sms_yzm"]];
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"请求失败， 失败原因是：%@", error);
+    }];
+
+}
+
+//手机验证码登录
+- (void)loginByVerificationCode
+{
+    NSString *url_post = [NSString stringWithFormat:@"http://%@:8080/zcar/userapp/loginByPhone.action", kIP];
+    
+    NSDictionary *params = @{
+                             @"phone":@"13957288226"
+                             };
+    
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    
+    AFHTTPResponseSerializer *responseSerializer = [AFHTTPResponseSerializer serializer];
+    
+    manager.responseSerializer = responseSerializer;
+    
+    [manager POST:url_post parameters:params progress:NULL success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        
+        NSDictionary *content = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+        NSLog(@"手机验证码成功，请求下来的Json格式的数据是%@", content);
+        
+        NSDictionary *jsondataDic = [content objectForKey:@"jsondata"];
+        NSString *resultStr = [content objectForKey:@"result"];
+        
+        if ([resultStr isEqualToString:@"success"]  && ![jsondataDic  isEqual: @""]) {
+            
+            NSLog(@"登陆成功");
+            
+            //保存个人数据,将获取到的jsondata对应的数组中的uid等数据存储到本地plist文件中
+            [self saveDataToPlistWithDic:jsondataDic];
+            
+            //跳入到MainViewController
+            [self presentViewController:[[MainViewController alloc] init] animated:NO completion:nil];
+            
+        } else {
+            NSLog(@"登录失败");
+        }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"请求失败， 失败原因是：%@", error);
+    }];
+}
 
 @end

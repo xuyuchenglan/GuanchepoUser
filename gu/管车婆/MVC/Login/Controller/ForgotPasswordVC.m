@@ -216,14 +216,10 @@
 
 - (void)loginBtnAction
 {
-    NSLog(@"注册并登录");
+    NSLog(@"修改并登录");
     
     [numberTF resignFirstResponder];//收起键盘
     [verificationCodeTF resignFirstResponder];
-    
-    MainViewController *mainVC = [[MainViewController alloc] init];
-    [self presentViewController:mainVC animated:NO completion:nil];
-    
 }
 
 #pragma mark UITextFieldDelegate

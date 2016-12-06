@@ -99,4 +99,21 @@
     
     [self presentViewController:alertController animated:YES completion:nil];//这种弹出方式会在原来视图的背景下弹出一个视图。
 }
+
+#pragma mark
+#pragma mark --- 登陆成功后，保存数据到本地
+//保存数据到plist文件
+- (void)saveDataToPlistWithDic:(NSDictionary *)contentDic
+{
+    //将请求下来的数据中的data对应的字典保存到沙盒的自己创建的plist文件中
+    NSArray *paths=NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask,YES);
+    NSString *plistPath1 = [paths objectAtIndex:0];
+    NSString *filename=[plistPath1 stringByAppendingPathComponent:@"my.plist"];
+    [contentDic  writeToFile:filename atomically:YES];
+    
+    //从沙盒中获取到plist文件
+    //NSDictionary * getDic = [NSDictionary dictionaryWithContentsOfFile:filename];
+    //NSLog(@"沙盒中存储的信息是：%@", getDic);
+}
+
 @end
