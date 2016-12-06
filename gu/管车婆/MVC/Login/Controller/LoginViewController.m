@@ -51,7 +51,7 @@
 #pragma mark ****************  设置下面的内容  ******************
 - (void)addContentView
 {
-    UIView *contentView = [[UIView alloc] initWithFrame:CGRectMake(0, 65, kScreenWidth, kScreenHeight - 65)];
+    UIView *contentView = [[UIView alloc] initWithFrame:CGRectMake(0, 65*kRate, kScreenWidth, kScreenHeight - 65*kRate)];
     contentView.backgroundColor = [UIColor colorWithRed:249/255.0 green:249/255.0 blue:249/255.0 alpha:1];
     [self.view addSubview:contentView];
     
