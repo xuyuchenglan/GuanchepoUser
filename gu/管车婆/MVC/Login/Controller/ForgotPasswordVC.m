@@ -7,7 +7,6 @@
 //
 
 #import "ForgotPasswordVC.h"
-#import "MainViewController.h"
 #import "ProtocolViewController.h"
 
 @interface ForgotPasswordVC ()<UITextFieldDelegate>
@@ -25,7 +24,6 @@
 }
 @property (nonatomic, strong)NSString *numberStr;//记录输入框中输入的账号
 @property (nonatomic, strong)NSString *verificationCodeStr;//记录验证码输入框中输入的验证码
-@property (nonatomic, strong)NSString *verificationCodePostStr;//记录网络获取到的验证码
 @property (nonatomic, strong)NSString *passwordStr;//记录密码输入框中输入的密码
 @property (nonatomic, strong)NSString *submitPwStr;//记录确认密码输入框中输入的密码
 
@@ -192,7 +190,7 @@
     if (_numberStr.length == 11) {
         
         //获取手机验证码
-        [self getVerificationCodePost];
+        [self getVerificationCodePostWithNumber:_numberStr];
         
         //当点击“获取验证码”按钮后，按钮进行倒计时
         getVerCodeBtn.enabled = NO;
@@ -242,7 +240,7 @@
     [submitPwTF resignFirstResponder];
     
     if (_numberStr.length!=0 && _verificationCodeStr.length!=0 && _passwordStr.length!=0 && _submitPwStr!=0) {
-        if ([_verificationCodePostStr isEqualToString:_verificationCodeStr]) {
+        if ([self.verificationCodePostStr isEqualToString:_verificationCodeStr]) {
             
             if ([_passwordStr isEqualToString:_submitPwStr]) {
                 
@@ -306,31 +304,6 @@
 
 #pragma mark
 #pragma mark --- 网络请求
-//获取手机验证码
-- (void)getVerificationCodePost
-{
-    NSString *url_post = [NSString stringWithFormat:@"http://%@:8080/zcar/userapp/getSmsAlidayu.action", kIP];
-    
-    NSDictionary *params = @{
-                             @"phone":_numberStr
-                             };
-    
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-    
-    AFHTTPResponseSerializer *responseSerializer = [AFHTTPResponseSerializer serializer];
-    manager.responseSerializer = responseSerializer;
-    
-    [manager POST:url_post parameters:params progress:NULL success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        
-        NSDictionary *content = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
-        
-        _verificationCodePostStr = [NSString stringWithFormat:@"%@", [content objectForKey:@"sms_yzm"]];
-        
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        NSLog(@"请求失败， 失败原因是：%@", error);
-    }];
-    
-}
 
 //修改密码
 - (void)changePwdPost
@@ -351,25 +324,26 @@
     [manager POST:url_post parameters:params progress:NULL success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
         NSDictionary *content = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
-        NSLog(@"手机验证码成功，请求下来的Json格式的数据是%@", content);
+        NSLog(@"修改密码请求成功，请求下来的Json格式的数据是%@", content);
         
         NSString *resultStr = [content objectForKey:@"result"];
         
         if ([resultStr isEqualToString:@"success"]) {
             
-            NSLog(@"登陆成功");
+            NSLog(@"修改密码成功");
             
-            //跳入到MainViewController
-            [self presentViewController:[[MainViewController alloc] init] animated:NO completion:nil];
+            //登录，获取数据并保存到本地，然后页面跳转
+            [self loginByNumber:_numberStr];
             
         } else {
-            NSLog(@"登录失败");
+            NSLog(@"修改密码失败");
         }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"请求失败， 失败原因是：%@", error);
     }];
 }
+
 
 
 @end

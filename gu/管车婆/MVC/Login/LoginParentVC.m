@@ -8,6 +8,7 @@
 
 #import "LoginParentVC.h"
 
+
 @interface LoginParentVC ()
 {
     UIView *_titleView;//类似导航栏的视图
@@ -101,6 +102,75 @@
 }
 
 #pragma mark
+#pragma mark --- 手机号登录（在验证码登录、修改密码、注册三个页面中会用到）
+- (void)loginByNumber:(NSString *)number
+{
+    NSString *url_post = [NSString stringWithFormat:@"http://%@:8080/zcar/userapp/loginByPhone.action", kIP];
+    
+    NSDictionary *params = @{
+                             @"phone":number
+                             };
+    
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    
+    AFHTTPResponseSerializer *responseSerializer = [AFHTTPResponseSerializer serializer];
+    
+    manager.responseSerializer = responseSerializer;
+    
+    [manager POST:url_post parameters:params progress:NULL success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        
+        NSDictionary *content = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+        NSLog(@"手机验证码成功，请求下来的Json格式的数据是%@", content);
+        
+        NSDictionary *jsondataDic = [content objectForKey:@"jsondata"];
+        NSString *resultStr = [content objectForKey:@"result"];
+        
+        if ([resultStr isEqualToString:@"success"]  && ![jsondataDic  isEqual: @""]) {
+            
+            NSLog(@"登陆成功");
+            
+            //保存个人数据,将获取到的jsondata对应的数组中的uid等数据存储到本地plist文件中
+            [self saveDataToPlistWithDic:jsondataDic];
+            
+            //跳入到MainViewController
+            [self presentViewController:[[MainViewController alloc] init] animated:NO completion:nil];
+            
+        } else {
+            NSLog(@"登录失败");
+        }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"请求失败， 失败原因是：%@", error);
+    }];
+}
+
+#pragma mark --- 获取手机验证码
+//获取手机验证码
+- (void)getVerificationCodePostWithNumber:(NSString *)number
+{
+    NSString *url_post = [NSString stringWithFormat:@"http://%@:8080/zcar/userapp/getSmsAlidayu.action", kIP];
+    
+    NSDictionary *params = @{
+                             @"phone":number
+                             };
+    
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    
+    AFHTTPResponseSerializer *responseSerializer = [AFHTTPResponseSerializer serializer];
+    manager.responseSerializer = responseSerializer;
+    
+    [manager POST:url_post parameters:params progress:NULL success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        
+        NSDictionary *content = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+        
+        _verificationCodePostStr = [NSString stringWithFormat:@"%@", [content objectForKey:@"sms_yzm"]];
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"请求失败， 失败原因是：%@", error);
+    }];
+    
+}
+
 #pragma mark --- 登陆成功后，保存数据到本地
 //保存数据到plist文件
 - (void)saveDataToPlistWithDic:(NSDictionary *)contentDic
@@ -115,5 +185,6 @@
     //NSDictionary * getDic = [NSDictionary dictionaryWithContentsOfFile:filename];
     //NSLog(@"沙盒中存储的信息是：%@", getDic);
 }
+
 
 @end

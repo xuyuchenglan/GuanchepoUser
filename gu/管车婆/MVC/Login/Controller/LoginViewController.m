@@ -10,7 +10,6 @@
 #import "VerificationCodeLoginVC.h"
 #import "RegisterViewController.h"
 #import "ForgotPasswordVC.h"
-#import "MainViewController.h"
 
 @interface LoginViewController ()<UITextFieldDelegate>
 {
