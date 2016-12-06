@@ -46,6 +46,7 @@
 		D0139A9F1DD5B7DA005141F2 /* CashWithdrawalVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D0139A9E1DD5B7DA005141F2 /* CashWithdrawalVC.m */; };
 		D01CB9CE1DA8855600DD5527 /* ProtocolViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D01CB9CD1DA8855600DD5527 /* ProtocolViewController.m */; };
 		D01CB9D11DA88DCB00DD5527 /* CardAndCarView.m in Sources */ = {isa = PBXBuildFile; fileRef = D01CB9D01DA88DCB00DD5527 /* CardAndCarView.m */; };
+		D026E9B31DF56A8D00C563D8 /* UIViewController+ShowAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = D026E9B21DF56A8D00C563D8 /* UIViewController+ShowAlertView.m */; };
 		D032F9DA1DB740B10052562D /* WeatherCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D032F9D91DB740B10052562D /* WeatherCell.m */; };
 		D032F9E21DB765F30052562D /* OrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D032F9E11DB765F30052562D /* OrderViewController.m */; };
 		D032F9E51DB76A400052562D /* OrderListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D032F9E41DB76A400052562D /* OrderListVC.m */; };
@@ -325,6 +326,8 @@
 		D01CB9CD1DA8855600DD5527 /* ProtocolViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProtocolViewController.m; sourceTree = "<group>"; };
 		D01CB9CF1DA88DCB00DD5527 /* CardAndCarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardAndCarView.h; sourceTree = "<group>"; };
 		D01CB9D01DA88DCB00DD5527 /* CardAndCarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CardAndCarView.m; sourceTree = "<group>"; };
+		D026E9B11DF56A8D00C563D8 /* UIViewController+ShowAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+ShowAlertView.h"; sourceTree = "<group>"; };
+		D026E9B21DF56A8D00C563D8 /* UIViewController+ShowAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+ShowAlertView.m"; sourceTree = "<group>"; };
 		D032F9D81DB740B10052562D /* WeatherCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeatherCell.h; sourceTree = "<group>"; };
 		D032F9D91DB740B10052562D /* WeatherCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeatherCell.m; sourceTree = "<group>"; };
 		D032F9E01DB765F30052562D /* OrderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderViewController.h; sourceTree = "<group>"; };
@@ -803,6 +806,8 @@
 				D00F8CD91D9A0A1B00AD7CC8 /* AppDelegate.m */,
 				D00F8D081D9A0AEF00AD7CC8 /* MainViewController.h */,
 				D00F8D091D9A0AEF00AD7CC8 /* MainViewController.m */,
+				D026E9B11DF56A8D00C563D8 /* UIViewController+ShowAlertView.h */,
+				D026E9B21DF56A8D00C563D8 /* UIViewController+ShowAlertView.m */,
 				D0758A771D9CAF710071D8A6 /* Login */,
 				D0C5F9D61D9A0DCA00D00B85 /* MVC */,
 				D00F8CE11D9A0A1B00AD7CC8 /* Assets.xcassets */,
@@ -2350,6 +2355,7 @@
 				D0A4B4C51DBDFA44005C8C79 /* CouponInfoView.m in Sources */,
 				D006C2491DB84BD00017FCD5 /* OrderCell.m in Sources */,
 				D0D918D51DA8F432003379E3 /* EnquiryIllegalVC.m in Sources */,
+				D026E9B31DF56A8D00C563D8 /* UIViewController+ShowAlertView.m in Sources */,
 				D0C5FA181D9A25E600D00B85 /* NormanGuideViewCell.m in Sources */,
 				D0A4B4C21DBDE67F005C8C79 /* MaintainCouponVC.m in Sources */,
 				D0F7808D1DC2FE1900347B21 /* CardCell.m in Sources */,

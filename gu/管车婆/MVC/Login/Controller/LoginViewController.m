@@ -10,7 +10,6 @@
 #import "VerificationCodeLoginVC.h"
 #import "RegisterViewController.h"
 #import "ForgotPasswordVC.h"
-#import "MainViewController.h"
 
 @interface LoginViewController ()<UITextFieldDelegate>
 {
@@ -51,7 +50,7 @@
 #pragma mark ****************  设置下面的内容  ******************
 - (void)addContentView
 {
-    UIView *contentView = [[UIView alloc] initWithFrame:CGRectMake(0, 65, kScreenWidth, kScreenHeight - 65)];
+    UIView *contentView = [[UIView alloc] initWithFrame:CGRectMake(0, 65*kRate, kScreenWidth, kScreenHeight - 65*kRate)];
     contentView.backgroundColor = [UIColor colorWithRed:249/255.0 green:249/255.0 blue:249/255.0 alpha:1];
     [self.view addSubview:contentView];
     
@@ -161,6 +160,15 @@
     [accountTF resignFirstResponder];//收起键盘
     [passwordTF resignFirstResponder];
     
+    if (_accountStr.length!=0 && _passwordStr.length!=0) {
+        //账号密码登录
+        [self loginByPhoneAndPwd];
+        
+    } else {
+        NSLog(@"您的账户名或密码输入有误，请重试！");
+        [self showAlertViewWithTitle:@"提示" WithMessage:@"您的账户名或密码输入有误，请重试！"];
+    }
+
     
     
 //    MainViewController *mainVC = [[MainViewController alloc] init];
@@ -216,6 +224,55 @@
     }
     NSLog(@"账号是:%@,密码是:%@", _accountStr, _passwordStr);
 }
+
+
+#pragma mark
+#pragma mark --- 网络请求
+- (void)loginByPhoneAndPwd
+{
+    NSString *url_post = [NSString stringWithFormat:@"http://%@:8080/zcar/userapp/loginByPhoneAndPwd.action", kIP];
+    
+    NSDictionary *params = @{
+                             @"phone":_accountStr,
+                             @"pwd":_passwordStr
+                             };
+    
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    
+    AFHTTPResponseSerializer *responseSerializer = [AFHTTPResponseSerializer serializer];
+
+    manager.responseSerializer = responseSerializer;
+    
+    [manager POST:url_post parameters:params progress:NULL success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        
+        NSDictionary *content = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+        NSLog(@"账号密码登录请求数据成功，请求下来的Json格式的数据是%@", content);
+        
+        NSDictionary *jsondataDic = [content objectForKey:@"jsondata"];
+        NSString *resultStr = [content objectForKey:@"result"];
+        
+        if ([resultStr isEqualToString:@"success"]  && ![jsondataDic  isEqual: @""]) {
+            
+            NSLog(@"登陆成功");
+            
+            //保存个人数据,将获取到的jsondata对应的数组中的uid等数据存储到本地plist文件中
+            [self saveDataToPlistWithDic:jsondataDic];
+            
+            //跳入到MainViewController
+            [self presentViewController:[[MainViewController alloc] init] animated:NO completion:nil];
+            
+        } else {
+            NSLog(@"账号密码验证失败");
+        }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"请求失败， 失败原因是：%@", error);
+    }];
+
+}
+
+
+
 
 
 @end

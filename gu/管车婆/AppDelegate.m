@@ -22,7 +22,8 @@
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     self.window.backgroundColor = [UIColor whiteColor];
     
-    BOOL isLogin = false;
+    BOOL isLogin = [self isLogin];
+    
     if (isLogin) {
         self.window.rootViewController = [[MainViewController alloc] init];
     } else {
@@ -60,6 +61,23 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+#pragma mark 
+#pragma mark --获取本地存储的数据，以验证是否已登录
+- (BOOL)isLogin
+{
+    NSArray *paths=NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask,YES);
+    NSString *plistPath1 = [paths objectAtIndex:0];
+    NSString *filename=[plistPath1 stringByAppendingPathComponent:@"my.plist"];
+    
+    NSDictionary * getDic = [NSDictionary dictionaryWithContentsOfFile:filename];
+    
+    if (getDic == NULL) {
+        return NO;
+    } else {
+        return YES;
+    }
 }
 
 
