@@ -15,7 +15,7 @@
     if (self = [super init]) {
         
         //service
-        self.serviceImg = [NSString stringWithFormat:@"http://%@:8080%@", kIP, [dic objectForKey:@"wxuimore_img"]];
+        self.serviceImg = [NSURL URLWithString:[NSString stringWithFormat:@"http://%@:8080%@", kIP, [dic objectForKey:@"wxuimore_img"]]];
         self.serviceName = [dic objectForKey:@"name"];
         self.serviceId = [[dic objectForKey:@"id"] intValue];
         

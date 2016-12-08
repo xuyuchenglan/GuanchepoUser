@@ -37,28 +37,6 @@
     
 }
 
-- (void)addObserver
-{
-    //添加观察者，监听HomeViewController中发送过来的通知
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(theViewToShow:) name:@"页面index" object:nil];
-}
-
-- (void)theViewToShow:(NSNotification *)notification
-{
-    int index = [[[notification userInfo] objectForKey:@"index"] intValue];
-    _selectedNum = index;//保证在首页点击某按钮后进入门店的相应页面后，_selectedNum参数能够同步改变
-    
-    if (titleView) {
-        [titleView removeFromSuperview];
-    }
-    [self initWithTitleButton];
-    
-    if (_scrollContentView) {
-        [_scrollContentView removeFromSuperview];
-    }
-    [self initWithController];
-}
-
 #pragma mark
 #pragma mark *****************  设置导航栏  *****************
 //导航栏标题(文字)
@@ -110,9 +88,7 @@
 {
     _titleArray = titleArray;
     
-    if (!titleView) {
-        [self initWithTitleButton];
-    }
+    [self initWithTitleButton];
 }
 
 - (void)initWithTitleButton
@@ -148,7 +124,7 @@
         [titleBtn addTarget:self action:@selector(scrollViewSelectToIndex:) forControlEvents:UIControlEventTouchUpInside];
         [titleView addSubview:titleBtn];
         
-        if (i == _selectedNum) {
+        if (i == 0) {
             selectButton = titleBtn;
             [selectButton setTitleColor:[UIColor colorWithRed:0 green:126/255.0 blue:1 alpha:1] forState:UIControlStateNormal];//按钮选中状态下的颜色
         }
@@ -157,7 +133,7 @@
     }
     
     //底部蓝色小滑块
-    UIView *sliderV = [[UIView alloc] initWithFrame:CGRectMake(kTitleWidth*_selectedNum, kTitleHeight - 0.5, kTitleWidth, 0.5)];
+    UIView *sliderV = [[UIView alloc] initWithFrame:CGRectMake(0, kTitleHeight - 0.5, kTitleWidth, 0.5)];
     sliderV.backgroundColor = [UIColor colorWithRed:0 green:126/255.0 blue:1 alpha:1];
     [titleView addSubview:sliderV];
     _sliderView = sliderV;
@@ -168,13 +144,15 @@
     //点击相应按钮后，小滑块随之滑动，按钮颜色改变
     [self selectButton:(btn.tag - 100)];
     
-    //选择细分服务视图(*1*)
-    [self selectDetailServeWithBtn:btn];
-    
     //点击相应按钮后，显示对应的视图(*2*)
     [UIView animateWithDuration:0 animations:^{
         _scrollContentView.contentOffset = CGPointMake(kScreenWidth * (btn.tag-100), 0);
-    }];//注意，(*1*)和(*2*)的顺序不要颠倒，因为(*2*)中当contentOffset改变后会调用scrollViewDidScroll方法，进而改变_selectedNum的值，就会导致在门店页面中，由美容页面（未显示服务详情选择页面）通过点击按钮的方式进入到保养页面后，会直接显示服务详情选择页面。
+    }];//注意，(*1*)要在(*2*)前面，因为(*2*)中当contentOffset改变后会调用scrollViewDidScroll方法，进而改变_selectedNum的值，就会导致在门店页面中，由美容页面（未显示服务详情选择页面）通过点击按钮的方式进入到保养页面后，会直接显示服务详情选择页面。
+    
+    //选择细分服务视图(*1*)
+    [self selectDetailServeWithBtn:btn];
+    
+    
 }
 
 //选择某个标题按钮（小滑块随之滑动，按钮颜色改变）
@@ -204,7 +182,7 @@
     if (indexF > 0) {
         NSInteger index = scrollView.contentOffset.x / kScreenWidth;
         
-        _selectedNum = (int)index;//滑动的时候保证_selectedNum与当前页面是同步的
+//        _selectedNum = (int)index;//滑动的时候保证_selectedNum与当前页面是同步的
     
         [self selectButton:index];
     }
@@ -229,13 +207,14 @@
     //配置scrollView的位置、尺寸以及内容大小
     UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(titleView.frame), kScreenWidth, kScreenHeight - CGRectGetMaxY(titleView.frame))];
     
-    scrollView.contentOffset = CGPointMake(kScreenWidth*_selectedNum, 0);
+//    scrollView.contentOffset = CGPointMake(kScreenWidth*_selectedNum, 0);
     scrollView.delegate = self;
     scrollView.backgroundColor = [UIColor colorWithWhite:0.9 alpha:1];
     scrollView.pagingEnabled = YES;
     scrollView.scrollEnabled = YES;
     scrollView.contentSize = CGSizeMake(kScreenWidth * _controllerArray.count, 0);//scrollView的起始位置
-    [self.view insertSubview:scrollView atIndex:0];//如果直接使用addSubView添加视图的话，会导致选择详细信息的视图被scrollView给覆盖而显示不出来
+//    [self.view insertSubview:scrollView atIndex:0];//如果直接使用addSubView添加视图的话，会导致选择详细信息的视图被scrollView给覆盖而显示不出来
+    [self.view addSubview:scrollView];
     _scrollContentView = scrollView;
     
     //将各个控制器中的View视图填充到scrollView对应的内容位置上
@@ -248,16 +227,10 @@
         [scrollView addSubview:view_c];
     }
     
-    _scrollContentView.contentOffset = CGPointMake(kScreenWidth*_selectedNum, 0);
+//    _scrollContentView.contentOffset = CGPointMake(kScreenWidth*_selectedNum, 0);
     
 }
 
-#pragma mark 
-#pragma mark 复写deallock,移除观察者
-- (void)dealloc
-{
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"页面index" object:nil];
-}
 
 
 @end

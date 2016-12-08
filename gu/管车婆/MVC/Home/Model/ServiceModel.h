@@ -12,7 +12,7 @@
 
 //service
 @property (nonatomic, strong) NSString *serviceName;
-@property (nonatomic, strong) NSString *serviceImg;
+@property (nonatomic, strong) NSURL    *serviceImg;
 @property (nonatomic, assign) int       serviceId;
 
 - (instancetype)initWithDic:(NSDictionary *)dic;
