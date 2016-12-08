@@ -54,10 +54,8 @@
     //导航栏
     [self addNavBar];
     
+    //导航栏下面的内容视图
     [self addContentView];
-    
-    
-    //导航栏下面的内容视图在网络请求数据成功后显示
     
     //网络请求数据
     [self getHomeInfo];
@@ -470,57 +468,65 @@
     [up1Btn addTarget:self action:@selector(up1BtnAction) forControlEvents:UIControlEventTouchUpInside];
     
     [up1Btn sd_setImageWithURL:serviceModel.serviceImg forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"home_second_dujing"]];
-    up1Btn.imageEdgeInsets = UIEdgeInsetsMake(20*kRate, 35*kRate, 35*kRate, 30*kRate);
+    up1Btn.imageEdgeInsets = UIEdgeInsetsMake(20*kRate, 30*kRate, 35*kRate, 25*kRate);
     
     [up1Btn setTitle:serviceModel.serviceName forState:UIControlStateNormal];
     up1Btn.titleLabel.font = [UIFont systemFontOfSize:12.0*kRate];
     up1Btn.titleLabel.textAlignment = NSTextAlignmentCenter;
     [up1Btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    up1Btn.titleEdgeInsets = UIEdgeInsetsMake(kSecondBtnWidth - 35*kRate, -up1Btn.titleLabel.bounds.size.width - 45, 5*kRate, 0);
+    up1Btn.titleEdgeInsets = UIEdgeInsetsMake(kSecondBtnWidth - 35*kRate, -up1Btn.titleLabel.bounds.size.width - 70, 5*kRate, 0);
     
     [_secondView addSubview:up1Btn];
 }
 
 - (void)up1BtnAction
 {
-    NSLog(@"全车镀晶");
+    ServiceModel *serviceModel = _homeModel.services[0];
+    
+    NSLog(@"%d", serviceModel.serviceId);
 }
 
 
 //上2
 - (void)addUp2Btn
 {
+    ServiceModel *serviceModel = _homeModel.services[1];
+    
     UIButton *up2Btn = [[UIButton alloc] initWithFrame:CGRectMake(kSecondBtnWidth, 0, kSecondBtnWidth, kSecondBtnWidth)];
     [up2Btn addTarget:self action:@selector(up2BtnAction) forControlEvents:UIControlEventTouchUpInside];
     
-    [up2Btn setImage:[UIImage imageNamed:@"home_second_jieqimen"] forState:UIControlStateNormal];
-    up2Btn.imageEdgeInsets = UIEdgeInsetsMake(20*kRate, 35*kRate, 35*kRate, 30*kRate);
+    [up2Btn sd_setImageWithURL:serviceModel.serviceImg forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"home_second_dujing"]];
+    up2Btn.imageEdgeInsets = UIEdgeInsetsMake(20*kRate, 30*kRate, 35*kRate, 25*kRate);
     
-    [up2Btn setTitle:@"清洗节气门" forState:UIControlStateNormal];
+    [up2Btn setTitle:serviceModel.serviceName forState:UIControlStateNormal];
     up2Btn.titleLabel.font = [UIFont systemFontOfSize:12.0*kRate];
     up2Btn.titleLabel.textAlignment = NSTextAlignmentCenter;
     [up2Btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    up2Btn.titleEdgeInsets = UIEdgeInsetsMake(kSecondBtnWidth - 35*kRate, -up2Btn.titleLabel.bounds.size.width - 50, 5*kRate, 0);
+    up2Btn.titleEdgeInsets = UIEdgeInsetsMake(kSecondBtnWidth - 35*kRate, -up2Btn.titleLabel.bounds.size.width - 70, 5*kRate, 0);
     
     [_secondView addSubview:up2Btn];
 }
 
 - (void)up2BtnAction
 {
-    NSLog(@"清洗节气门");
+    ServiceModel *serviceModel = _homeModel.services[1];
+    
+    NSLog(@"%d", serviceModel.serviceId);
 }
 
 
 //上3
 - (void)addUp3Btn
 {
+    ServiceModel *serviceModel = _homeModel.services[2];
+    
     UIButton *up3Btn = [[UIButton alloc] initWithFrame:CGRectMake(kSecondBtnWidth*2, 0, kSecondBtnWidth, kSecondBtnWidth)];
     [up3Btn addTarget:self action:@selector(up3BtnAction) forControlEvents:UIControlEventTouchUpInside];
     
-    [up3Btn setImage:[UIImage imageNamed:@"home_second_fadongji"] forState:UIControlStateNormal];
+    [up3Btn sd_setImageWithURL:serviceModel.serviceImg forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"home_second_dujing"]];
     up3Btn.imageEdgeInsets = UIEdgeInsetsMake(20*kRate, 30*kRate, 35*kRate, 25*kRate);
     
-    [up3Btn setTitle:@"清洗发动机" forState:UIControlStateNormal];
+    [up3Btn setTitle:serviceModel.serviceName forState:UIControlStateNormal];
     up3Btn.titleLabel.font = [UIFont systemFontOfSize:12.0*kRate];
     up3Btn.titleLabel.textAlignment = NSTextAlignmentCenter;
     [up3Btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
@@ -531,19 +537,23 @@
 
 - (void)up3BtnAction
 {
-    NSLog(@"清洗发动机");
+    ServiceModel *serviceModel = _homeModel.services[2];
+    
+    NSLog(@"%d", serviceModel.serviceId);
 }
 
 //上4
 - (void)addUp4Btn
 {
+    ServiceModel *serviceModel = _homeModel.services[3];
+    
     UIButton *up4Btn = [[UIButton alloc] initWithFrame:CGRectMake(kSecondBtnWidth*3, 0, kSecondBtnWidth, kSecondBtnWidth)];
     [up4Btn addTarget:self action:@selector(up4BtnAction) forControlEvents:UIControlEventTouchUpInside];
     
-    [up4Btn setImage:[UIImage imageNamed:@"home_second_luntai"] forState:UIControlStateNormal];
+    [up4Btn sd_setImageWithURL:serviceModel.serviceImg forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"home_second_dujing"]];
     up4Btn.imageEdgeInsets = UIEdgeInsetsMake(20*kRate, 30*kRate, 35*kRate, 25*kRate);
     
-    [up4Btn setTitle:@"轮胎检查" forState:UIControlStateNormal];
+    [up4Btn setTitle:serviceModel.serviceName forState:UIControlStateNormal];
     up4Btn.titleLabel.font = [UIFont systemFontOfSize:12.0*kRate];
     up4Btn.titleLabel.textAlignment = NSTextAlignmentCenter;
     [up4Btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
@@ -554,19 +564,23 @@
 
 - (void)up4BtnAction
 {
-    NSLog(@"轮胎检查");
+    ServiceModel *serviceModel = _homeModel.services[3];
+    
+    NSLog(@"%d", serviceModel.serviceId);
 }
 
 //中1
 - (void)addMedium1Btn
 {
+    ServiceModel *serviceModel = _homeModel.services[4];
+    
     UIButton *medium1Btn = [[UIButton alloc] initWithFrame:CGRectMake(0, kSecondBtnWidth, kSecondBtnWidth, kSecondBtnWidth)];
     [medium1Btn addTarget:self action:@selector(medium1BtnAction) forControlEvents:UIControlEventTouchUpInside];
     
-    [medium1Btn setImage:[UIImage imageNamed:@"home_second_dipan"] forState:UIControlStateNormal];
+    [medium1Btn sd_setImageWithURL:serviceModel.serviceImg forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"home_second_dujing"]];
     medium1Btn.imageEdgeInsets = UIEdgeInsetsMake(20*kRate, 30*kRate, 35*kRate, 25*kRate);
     
-    [medium1Btn setTitle:@"底盘检查" forState:UIControlStateNormal];
+    [medium1Btn setTitle:serviceModel.serviceName forState:UIControlStateNormal];
     medium1Btn.titleLabel.font = [UIFont systemFontOfSize:12.0*kRate];
     medium1Btn.titleLabel.textAlignment = NSTextAlignmentCenter;
     [medium1Btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
@@ -577,7 +591,9 @@
 
 - (void)medium1BtnAction
 {
-    NSLog(@"底盘检查");
+    ServiceModel *serviceModel = _homeModel.services[4];
+    
+    NSLog(@"%d", serviceModel.serviceId);
 }
 
 //广告位
@@ -609,13 +625,15 @@
 //中2
 - (void)addMedium2Btn
 {
+    ServiceModel *serviceModel = _homeModel.services[5];
+    
     UIButton *medium2Btn = [[UIButton alloc] initWithFrame:CGRectMake(kSecondBtnWidth*3, kSecondBtnWidth, kSecondBtnWidth, kSecondBtnWidth)];
     [medium2Btn addTarget:self action:@selector(medium2BtnAction) forControlEvents:UIControlEventTouchUpInside];
     
-    [medium2Btn setImage:[UIImage imageNamed:@"home_second_kongtiao"] forState:UIControlStateNormal];
+    [medium2Btn sd_setImageWithURL:serviceModel.serviceImg forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"home_second_dujing"]];
     medium2Btn.imageEdgeInsets = UIEdgeInsetsMake(20*kRate, 30*kRate, 35*kRate, 25*kRate);
     
-    [medium2Btn setTitle:@"空调清洗" forState:UIControlStateNormal];
+    [medium2Btn setTitle:serviceModel.serviceName forState:UIControlStateNormal];
     medium2Btn.titleLabel.font = [UIFont systemFontOfSize:12.0*kRate];
     medium2Btn.titleLabel.textAlignment = NSTextAlignmentCenter;
     [medium2Btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
@@ -626,65 +644,77 @@
 
 - (void)medium2BtnAction
 {
-    NSLog(@"空调清洗");
+    ServiceModel *serviceModel = _homeModel.services[5];
+    
+    NSLog(@"%d", serviceModel.serviceId);
 }
 
 //下1
 - (void)addDown1Btn
 {
+    ServiceModel *serviceModel = _homeModel.services[6];
+    
     UIButton *down1Btn = [[UIButton alloc] initWithFrame:CGRectMake(0, kSecondBtnWidth*2, kSecondBtnWidth, kSecondBtnWidth)];
     [down1Btn addTarget:self action:@selector(down1BtnAction) forControlEvents:UIControlEventTouchUpInside];
     
-    [down1Btn setImage:[UIImage imageNamed:@"home_second_jinqiguandao"] forState:UIControlStateNormal];
-    down1Btn.imageEdgeInsets = UIEdgeInsetsMake(20*kRate, 35*kRate, 35*kRate, 30*kRate);
+    [down1Btn sd_setImageWithURL:serviceModel.serviceImg forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"home_second_dujing"]];
+    down1Btn.imageEdgeInsets = UIEdgeInsetsMake(20*kRate, 30*kRate, 35*kRate, 25*kRate);
     
-    [down1Btn setTitle:@"清洗进气管道" forState:UIControlStateNormal];
+    [down1Btn setTitle:serviceModel.serviceName forState:UIControlStateNormal];
     down1Btn.titleLabel.font = [UIFont systemFontOfSize:12.0*kRate];
     down1Btn.titleLabel.textAlignment = NSTextAlignmentCenter;
     [down1Btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    down1Btn.titleEdgeInsets = UIEdgeInsetsMake(kSecondBtnWidth - 35*kRate, -down1Btn.titleLabel.bounds.size.width - 50, 5*kRate, 0);
+    down1Btn.titleEdgeInsets = UIEdgeInsetsMake(kSecondBtnWidth - 35*kRate, -down1Btn.titleLabel.bounds.size.width - 70, 5*kRate, 0);
     
     [_secondView addSubview:down1Btn];
 }
 
 - (void)down1BtnAction
 {
-    NSLog(@"清洗进气管道");
+    ServiceModel *serviceModel = _homeModel.services[6];
+    
+    NSLog(@"%d", serviceModel.serviceId);
 }
 
 //下2
 - (void)addDown2Btn
 {
+    ServiceModel *serviceModel = _homeModel.services[7];
+    
     UIButton *down2Btn = [[UIButton alloc] initWithFrame:CGRectMake(kSecondBtnWidth, kSecondBtnWidth*2, kSecondBtnWidth, kSecondBtnWidth)];
     [down2Btn addTarget:self action:@selector(down2BtnAction) forControlEvents:UIControlEventTouchUpInside];
     
-    [down2Btn setImage:[UIImage imageNamed:@"home_second_zhenpi"] forState:UIControlStateNormal];
+    [down2Btn sd_setImageWithURL:serviceModel.serviceImg forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"home_second_dujing"]];
     down2Btn.imageEdgeInsets = UIEdgeInsetsMake(20*kRate, 30*kRate, 35*kRate, 25*kRate);
     
-    [down2Btn setTitle:@"真皮护理" forState:UIControlStateNormal];
+    [down2Btn setTitle:serviceModel.serviceName forState:UIControlStateNormal];
     down2Btn.titleLabel.font = [UIFont systemFontOfSize:12.0*kRate];
     down2Btn.titleLabel.textAlignment = NSTextAlignmentCenter;
     [down2Btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    down2Btn.titleEdgeInsets = UIEdgeInsetsMake(kSecondBtnWidth - 35*kRate, -down2Btn.titleLabel.bounds.size.width - 60, 5*kRate, 0);
+    down2Btn.titleEdgeInsets = UIEdgeInsetsMake(kSecondBtnWidth - 35*kRate, -down2Btn.titleLabel.bounds.size.width - 70, 5*kRate, 0);
     
     [_secondView addSubview:down2Btn];
 }
 
 - (void)down2BtnAction
 {
-    NSLog(@"真皮护理");
+    ServiceModel *serviceModel = _homeModel.services[7];
+    
+    NSLog(@"%d", serviceModel.serviceId);
 }
 
 //下3
 - (void)addDown3Btn
 {
+    ServiceModel *serviceModel = _homeModel.services[8];
+    
     UIButton *down3Btn = [[UIButton alloc] initWithFrame:CGRectMake(kSecondBtnWidth*2, kSecondBtnWidth*2, kSecondBtnWidth, kSecondBtnWidth)];
     [down3Btn addTarget:self action:@selector(down3BtnAction) forControlEvents:UIControlEventTouchUpInside];
     
-    [down3Btn setImage:[UIImage imageNamed:@"home_second_boli"] forState:UIControlStateNormal];
+    [down3Btn sd_setImageWithURL:serviceModel.serviceImg forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"home_second_dujing"]];
     down3Btn.imageEdgeInsets = UIEdgeInsetsMake(20*kRate, 30*kRate, 35*kRate, 25*kRate);
     
-    [down3Btn setTitle:@"玻璃镀膜" forState:UIControlStateNormal];
+    [down3Btn setTitle:serviceModel.serviceName forState:UIControlStateNormal];
     down3Btn.titleLabel.font = [UIFont systemFontOfSize:12.0*kRate];
     down3Btn.titleLabel.textAlignment = NSTextAlignmentCenter;
     [down3Btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
@@ -695,10 +725,12 @@
 
 - (void)down3BtnAction
 {
-    NSLog(@"玻璃镀膜");
+    ServiceModel *serviceModel = _homeModel.services[8];
+    
+    NSLog(@"%d", serviceModel.serviceId);
 }
 
-//下4
+//下4(更多)
 - (void)addDown4Btn
 {
     UIButton *down4Btn = [[UIButton alloc] initWithFrame:CGRectMake(kSecondBtnWidth*3, kSecondBtnWidth*2, kSecondBtnWidth, kSecondBtnWidth)];
@@ -719,6 +751,10 @@
 - (void)down4BtnAction
 {
     NSLog(@"更多");
+    
+    NSArray *newArr = [_homeModel.services subarrayWithRange:NSMakeRange(10, _homeModel.services.count-10)];
+    NSLog(@"%@", newArr);
+    
 }
 
 

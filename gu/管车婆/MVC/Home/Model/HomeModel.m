@@ -16,6 +16,14 @@
 {
     if (self = [super init]) {
         
+        NSArray *banner1Arr = [dic objectForKey:@"banner1"];
+        NSMutableArray *banner1ModelsMu = [NSMutableArray array];
+        for (NSDictionary *banner1Dic in banner1Arr) {
+            BannerModel *bannerModel = [[BannerModel alloc] initWithDic:banner1Dic];
+            [banner1ModelsMu addObject:bannerModel];
+        }
+        self.banner1Models = banner1ModelsMu;
+        
         NSDictionary *banner2Dic = [dic objectForKey:@"banner2"];
         self.banner2Model = [[BannerModel alloc] initWithDic:banner2Dic];
         

@@ -12,8 +12,9 @@
 @interface HomeModel : NSObject
 
 //banner
-@property (nonatomic, strong) BannerModel *banner3Model;
+@property (nonatomic, copy)   NSArray     *banner1Models;
 @property (nonatomic, strong) BannerModel *banner2Model;
+@property (nonatomic, strong) BannerModel *banner3Model;
 
 
 @property (nonatomic, strong) NSString *car;
