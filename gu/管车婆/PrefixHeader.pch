@@ -27,3 +27,5 @@
 #import "UIResponder+FindResponderVC.h"
 #import "AFNetworking.h"
 #import "UIViewController+ShowAlertView.h"
+#import "UIViewController+GetLocalDic.h"
+#import "UIImageView+WebCache.h"

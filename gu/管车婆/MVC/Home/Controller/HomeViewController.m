@@ -16,6 +16,8 @@
 #import "EnquiryDriverScoresVC.h"
 #import "BuyAutoInsuranceVC.h"
 #import "OpenCardVC.h"
+#import "HomeModel.h"
+#import "ADViewController.h"
 
 #define kFirstBtnWidth  kScreenWidth/4
 #define kFirstBtnHeight 80*kRate
@@ -34,6 +36,10 @@
 @property (nonatomic, strong)UIView          *thirdView;
 @property (nonatomic, strong)UIView          *forthView;
 @property (nonatomic, strong)UIImageView     *fifthImgView;
+
+@property (nonatomic, strong)HomeModel       *homeModel;
+@property (nonatomic, strong)NSMutableArray  *banner1Models;//装有banner1轮播图的model的数组
+
 @end
 
 @implementation HomeViewController
@@ -47,7 +53,20 @@
     //导航栏
     [self addNavBar];
     
+    //导航栏下面的内容视图在网络请求数据成功后显示
+    
+    //网络请求数据
+    [self getHomeInfo];
+}
+
+- (void)addContentView
+{
     _scrollView = [[UIScrollView alloc] initWithFrame:[UIScreen mainScreen].bounds];//滑动视图的可视范围
+    if (self.navigationController.navigationBar) {
+        _scrollView.frame = CGRectMake(0, 64, kScreenWidth, kScreenHeight-64-49);
+    } else {
+        _scrollView.frame = [UIScreen mainScreen].bounds;
+    }
     _scrollView.backgroundColor = [UIColor colorWithRed:234/255.0 green:238/255.0 blue:239/255.0 alpha:1];
     _scrollView.showsHorizontalScrollIndicator = NO;
     _scrollView.showsVerticalScrollIndicator = NO;
@@ -73,7 +92,7 @@
     [self addFifthContent];
 }
 
-
+#pragma mark
 #pragma mark ******************      导航引导页      ****************
 - (void)guideView
 {
@@ -188,7 +207,7 @@
     carText.textColor = [UIColor colorWithWhite:0.4 alpha:1];
     carText.shadowColor = [UIColor colorWithWhite:0.4 alpha:1];
     carText.shadowOffset = CGSizeMake(0.3*kRate, 0.3*kRate);
-    carText.text = @"宝马 BMW 4系双门轿跑车121420 18";
+    carText.text = _homeModel.car;
     [_topView addSubview:carText];
     
     //是否适宜洗车
@@ -199,7 +218,7 @@
     UILabel *isSuitable = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(weatherImg.frame), 6*kRate, 70*kRate, 22*kRate)];
     isSuitable.font = [UIFont systemFontOfSize:12.0*kRate];
     isSuitable.textColor = [UIColor colorWithWhite:0.4 alpha:1];
-    isSuitable.text = @"不宜洗车";
+    isSuitable.text = _homeModel.isSuitableForClean;
     [_topView addSubview:isSuitable];
 }
 
@@ -568,8 +587,9 @@
 //广告位
 - (void)addAdView
 {
-    UIImageView *secondImgView = [[UIImageView alloc] initWithFrame:CGRectMake(kSecondBtnWidth + 10*kRate, kSecondBtnWidth + 15*kRate, 2*kSecondBtnWidth - 20*kRate, kSecondBtnWidth - 30*kRate)];
-    secondImgView.image = [UIImage imageNamed:@"home_second_ad"];
+    UIImageView *secondImgView = [[UIImageView alloc] initWithFrame:CGRectMake(kSecondBtnWidth + 1, kSecondBtnWidth + 1, 2*kSecondBtnWidth - 1, kSecondBtnWidth - 1)];
+    NSLog(@"%@", _homeModel.banner2Model.picUrl);
+    [secondImgView sd_setImageWithURL:[NSURL URLWithString:_homeModel.banner2Model.picUrl] placeholderImage:[UIImage imageNamed:@"home_second_ad"]];
     secondImgView.userInteractionEnabled = YES;
     [_secondView addSubview:secondImgView];
     
@@ -582,7 +602,12 @@
 {
     NSLog(@"中间的广告位");
     
-    [self postNotificationWithIndex:[NSNumber numberWithInt:1]];
+    ADViewController *banner2VC = [[ADViewController alloc] init];
+    banner2VC.titleStr = self.homeModel.banner3Model.titleName;
+    banner2VC.linkUrl = self.homeModel.banner3Model.linkUrl;
+    banner2VC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:banner2VC animated:NO];
+    banner2VC.hidesBottomBarWhenPushed = NO;
 }
 
 //空调清洗
@@ -957,7 +982,7 @@
 {
     _fifthImgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_forthView.frame) + 10*kRate, kScreenWidth, 100*kRate)];
     _fifthImgView.userInteractionEnabled = YES;
-    _fifthImgView.image = [UIImage imageNamed:@"ad_01"];
+    [_fifthImgView sd_setImageWithURL:[NSURL URLWithString:_homeModel.banner3Model.picUrl] placeholderImage:[UIImage imageNamed:@"ad_01"]];
     [_scrollView addSubview:_fifthImgView];
     
     UITapGestureRecognizer *fifthTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(fifthTapAction)];
@@ -967,8 +992,48 @@
 - (void)fifthTapAction
 {
     NSLog(@"最下方的广告位");
+    
+    ADViewController *banner3VC = [[ADViewController alloc] init];
+    banner3VC.titleStr = self.homeModel.banner3Model.titleName;
+    banner3VC.linkUrl = self.homeModel.banner3Model.linkUrl;
+    banner3VC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:banner3VC animated:NO];
+    banner3VC.hidesBottomBarWhenPushed = NO;
 }
 
+
+#pragma mark 
+#pragma mark --- 网络请求
+- (void)getHomeInfo
+{
+    NSString *url_post = [NSString stringWithFormat:@"http://%@:8080/zcar/userapp/getIndexInfo.action", kIP];
+    
+    NSDictionary *params = @{
+                             @"phone":[NSString stringWithFormat:@"%@", [[self getLocalDic] objectForKey:@"phone"]],
+                             };
+    
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    
+    AFHTTPResponseSerializer *responseSerializer = [AFHTTPResponseSerializer serializer];
+    
+    manager.responseSerializer = responseSerializer;
+    
+    [manager POST:url_post parameters:params progress:NULL success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        
+        NSDictionary *content = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+        NSLog(@"请求成功，请求下来的Json格式的数据是%@", content);
+        
+        _homeModel = [[HomeModel alloc] initWithDic:content];
+        
+        //刷新UI
+        [_scrollView removeFromSuperview];
+        [self addContentView];
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"请求失败， 失败原因是：%@", error);
+    }];
+
+}
 
 
 @end

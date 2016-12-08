@@ -47,6 +47,11 @@
 		D01CB9CE1DA8855600DD5527 /* ProtocolViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D01CB9CD1DA8855600DD5527 /* ProtocolViewController.m */; };
 		D01CB9D11DA88DCB00DD5527 /* CardAndCarView.m in Sources */ = {isa = PBXBuildFile; fileRef = D01CB9D01DA88DCB00DD5527 /* CardAndCarView.m */; };
 		D026E9B31DF56A8D00C563D8 /* UIViewController+ShowAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = D026E9B21DF56A8D00C563D8 /* UIViewController+ShowAlertView.m */; };
+		D026E9B61DF7A23600C563D8 /* UIViewController+GetLocalDic.m in Sources */ = {isa = PBXBuildFile; fileRef = D026E9B51DF7A23600C563D8 /* UIViewController+GetLocalDic.m */; };
+		D026E9B91DF7AB3700C563D8 /* HomeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D026E9B81DF7AB3700C563D8 /* HomeModel.m */; };
+		D026E9BC1DF7EA0500C563D8 /* BannerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D026E9BB1DF7EA0500C563D8 /* BannerModel.m */; };
+		D026E9BF1DF80A8900C563D8 /* ADViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D026E9BE1DF80A8900C563D8 /* ADViewController.m */; };
+		D026E9C21DF8ED5600C563D8 /* ServiceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D026E9C11DF8ED5600C563D8 /* ServiceModel.m */; };
 		D032F9DA1DB740B10052562D /* WeatherCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D032F9D91DB740B10052562D /* WeatherCell.m */; };
 		D032F9E21DB765F30052562D /* OrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D032F9E11DB765F30052562D /* OrderViewController.m */; };
 		D032F9E51DB76A400052562D /* OrderListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D032F9E41DB76A400052562D /* OrderListVC.m */; };
@@ -328,6 +333,16 @@
 		D01CB9D01DA88DCB00DD5527 /* CardAndCarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CardAndCarView.m; sourceTree = "<group>"; };
 		D026E9B11DF56A8D00C563D8 /* UIViewController+ShowAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+ShowAlertView.h"; sourceTree = "<group>"; };
 		D026E9B21DF56A8D00C563D8 /* UIViewController+ShowAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+ShowAlertView.m"; sourceTree = "<group>"; };
+		D026E9B41DF7A23600C563D8 /* UIViewController+GetLocalDic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+GetLocalDic.h"; sourceTree = "<group>"; };
+		D026E9B51DF7A23600C563D8 /* UIViewController+GetLocalDic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+GetLocalDic.m"; sourceTree = "<group>"; };
+		D026E9B71DF7AB3700C563D8 /* HomeModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeModel.h; sourceTree = "<group>"; };
+		D026E9B81DF7AB3700C563D8 /* HomeModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeModel.m; sourceTree = "<group>"; };
+		D026E9BA1DF7EA0500C563D8 /* BannerModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BannerModel.h; sourceTree = "<group>"; };
+		D026E9BB1DF7EA0500C563D8 /* BannerModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BannerModel.m; sourceTree = "<group>"; };
+		D026E9BD1DF80A8900C563D8 /* ADViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADViewController.h; sourceTree = "<group>"; };
+		D026E9BE1DF80A8900C563D8 /* ADViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADViewController.m; sourceTree = "<group>"; };
+		D026E9C01DF8ED5600C563D8 /* ServiceModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceModel.h; sourceTree = "<group>"; };
+		D026E9C11DF8ED5600C563D8 /* ServiceModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceModel.m; sourceTree = "<group>"; };
 		D032F9D81DB740B10052562D /* WeatherCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeatherCell.h; sourceTree = "<group>"; };
 		D032F9D91DB740B10052562D /* WeatherCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeatherCell.m; sourceTree = "<group>"; };
 		D032F9E01DB765F30052562D /* OrderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderViewController.h; sourceTree = "<group>"; };
@@ -808,6 +823,8 @@
 				D00F8D091D9A0AEF00AD7CC8 /* MainViewController.m */,
 				D026E9B11DF56A8D00C563D8 /* UIViewController+ShowAlertView.h */,
 				D026E9B21DF56A8D00C563D8 /* UIViewController+ShowAlertView.m */,
+				D026E9B41DF7A23600C563D8 /* UIViewController+GetLocalDic.h */,
+				D026E9B51DF7A23600C563D8 /* UIViewController+GetLocalDic.m */,
 				D0758A771D9CAF710071D8A6 /* Login */,
 				D0C5F9D61D9A0DCA00D00B85 /* MVC */,
 				D00F8CE11D9A0A1B00AD7CC8 /* Assets.xcassets */,
@@ -1395,6 +1412,8 @@
 			children = (
 				D0C5F9EA1D9A0F1D00D00B85 /* HomeViewController.h */,
 				D0C5F9EB1D9A0F1D00D00B85 /* HomeViewController.m */,
+				D026E9BD1DF80A8900C563D8 /* ADViewController.h */,
+				D026E9BE1DF80A8900C563D8 /* ADViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1402,6 +1421,12 @@
 		D0C5F9E11D9A0DCA00D00B85 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				D026E9B71DF7AB3700C563D8 /* HomeModel.h */,
+				D026E9B81DF7AB3700C563D8 /* HomeModel.m */,
+				D026E9BA1DF7EA0500C563D8 /* BannerModel.h */,
+				D026E9BB1DF7EA0500C563D8 /* BannerModel.m */,
+				D026E9C01DF8ED5600C563D8 /* ServiceModel.h */,
+				D026E9C11DF8ED5600C563D8 /* ServiceModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2353,6 +2378,7 @@
 				D0FA2AF61DCAE7F400BCA242 /* CarCouponListVC.m in Sources */,
 				D0758A861D9CB1280071D8A6 /* ForgotPasswordVC.m in Sources */,
 				D0A4B4C51DBDFA44005C8C79 /* CouponInfoView.m in Sources */,
+				D026E9C21DF8ED5600C563D8 /* ServiceModel.m in Sources */,
 				D006C2491DB84BD00017FCD5 /* OrderCell.m in Sources */,
 				D0D918D51DA8F432003379E3 /* EnquiryIllegalVC.m in Sources */,
 				D026E9B31DF56A8D00C563D8 /* UIViewController+ShowAlertView.m in Sources */,
@@ -2375,6 +2401,7 @@
 				D0C5F9F51D9A0F4F00D00B85 /* AboutViewController.m in Sources */,
 				D0FA2AF31DCAE48100BCA242 /* CarCouponVC.m in Sources */,
 				D0FA2AE71DCAC93A00BCA242 /* ExchangePointsView.m in Sources */,
+				D026E9B91DF7AB3700C563D8 /* HomeModel.m in Sources */,
 				D0629F291DC6CD3400076CF4 /* CompanyCardView.m in Sources */,
 				D04C804D1DC07C9900C72829 /* MaintainItemCell.m in Sources */,
 				D0C5F9EF1D9A0F2A00D00B85 /* StoresViewController.m in Sources */,
@@ -2420,6 +2447,8 @@
 				D003F0BA1DD06097003F0A3C /* OpenCardCell.m in Sources */,
 				D0A4B4CC1DBEE514005C8C79 /* CouponItemView.m in Sources */,
 				D0F92F761DD17E5A00BC0302 /* UIResponder+FindResponderVC.m in Sources */,
+				D026E9BC1DF7EA0500C563D8 /* BannerModel.m in Sources */,
+				D026E9B61DF7A23600C563D8 /* UIViewController+GetLocalDic.m in Sources */,
 				D006C24E1DB8BED60017FCD5 /* ItemAndCountView.m in Sources */,
 				D0758A651D9C9FD80071D8A6 /* StoreModel.m in Sources */,
 				D09BC1621DC844F70035DE65 /* PaymentWayView.m in Sources */,
@@ -2427,6 +2456,7 @@
 				D0C7A4AF1DAA3390005FC697 /* IllegalResultVC.m in Sources */,
 				D0C3E9581DB205570084CDA4 /* IllegalResultAccountView.m in Sources */,
 				D0FA2AF91DCB063500BCA242 /* CarCouponCell.m in Sources */,
+				D026E9BF1DF80A8900C563D8 /* ADViewController.m in Sources */,
 				D0F92F8C1DD1A20100BC0302 /* PayForOpeningCard.m in Sources */,
 				D0A4B4B41DBB6873005C8C79 /* BuyCouponVC.m in Sources */,
 				D0C5FA141D9A254500D00B85 /* NormanGuideViewManager.m in Sources */,
