@@ -32,7 +32,6 @@
 }
 @property (nonatomic, strong)UIView          *topView;
 @property (nonatomic, strong)ScrollImageView *scrollImageView;//广告轮播图
-@property (nonatomic, strong)UIView          *firstBtnsView;
 @property (nonatomic, strong)UIView          *secondView;
 @property (nonatomic, strong)UIView          *thirdView;
 @property (nonatomic, strong)UIView          *forthView;
@@ -233,9 +232,6 @@
     if (_isLoadSuccess) {
         [_scrollView addSubview:self.scrollImageView];
     }
-    
-    //洗车、保养、预约、活动按钮
-    [self addFirstBtns];
 }
 
 /// 懒加载
@@ -260,121 +256,6 @@
 }
 
 
-///洗车、保养、预约、活动按钮
-- (void)addFirstBtns
-{
-    _firstBtnsView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_scrollImageView.frame), kScreenWidth, kFirstBtnHeight)];
-    _firstBtnsView.backgroundColor = [UIColor whiteColor];
-    [_scrollView addSubview:_firstBtnsView];
-    
-    //洗车
-    [self addWashBtn];
-    
-    //保养
-    [self addMaintenanceBtn];
-    
-    //预约
-    [self addAppointmentBtn];
-    
-    //活动
-    [self addActivityBtn];
-}
-
-//洗车
-- (void)addWashBtn
-{
-    UIButton *washBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, kFirstBtnWidth, kFirstBtnHeight)];
-    [washBtn addTarget:self action:@selector(washBtnAction) forControlEvents:UIControlEventTouchUpInside];
-    
-    [washBtn setImage:[UIImage imageNamed:@"home_first_wash"] forState:UIControlStateNormal];
-    washBtn.imageEdgeInsets = UIEdgeInsetsMake(8*kRate, 25*kRate, 22*kRate, 25*kRate);
-    
-    [washBtn setTitle:@"洗车" forState:UIControlStateNormal];
-    washBtn.titleLabel.font = [UIFont systemFontOfSize:13.0*kRate];
-    washBtn.titleLabel.textAlignment = NSTextAlignmentCenter;
-    [washBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    washBtn.titleEdgeInsets = UIEdgeInsetsMake(kFirstBtnWidth - 45*kRate, -washBtn.titleLabel.bounds.size.width - 98, 5*kRate, 0);
-    
-    
-    [_firstBtnsView addSubview:washBtn];
-}
-
-- (void)washBtnAction
-{
-    NSLog(@"洗车");
-}
-
-//保养
-- (void)addMaintenanceBtn
-{
-    UIButton *maintenanceBtn = [[UIButton alloc] initWithFrame:CGRectMake(kFirstBtnWidth, 0, kFirstBtnWidth, kFirstBtnHeight)];
-    [maintenanceBtn addTarget:self action:@selector(mainTenanceBtnAction) forControlEvents:UIControlEventTouchUpInside];
-    
-    [maintenanceBtn setImage:[UIImage imageNamed:@"home_first_maintenance"] forState:UIControlStateNormal];
-    maintenanceBtn.imageEdgeInsets = UIEdgeInsetsMake(10*kRate, 28*kRate, 22*kRate, 28*kRate);
-    
-    [maintenanceBtn setTitle:@"保养" forState:UIControlStateNormal];
-    maintenanceBtn.titleLabel.font = [UIFont systemFontOfSize:13.0*kRate];
-    maintenanceBtn.titleLabel.textAlignment = NSTextAlignmentCenter;
-    [maintenanceBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    maintenanceBtn.titleEdgeInsets = UIEdgeInsetsMake(kFirstBtnWidth - 45*kRate, -maintenanceBtn.titleLabel.bounds.size.width - 85, 5*kRate, 0);
-    
-    
-    
-    [_firstBtnsView addSubview:maintenanceBtn];
-}
-
-- (void)mainTenanceBtnAction
-{
-    NSLog(@"保养");
-}
-
-
-//预约
-- (void)addAppointmentBtn
-{
-    UIButton *appointmentBtn = [[UIButton alloc] initWithFrame:CGRectMake(kFirstBtnWidth*2, 0, kFirstBtnWidth, kFirstBtnHeight)];
-    [appointmentBtn addTarget:self action:@selector(appointmentBtnAction) forControlEvents:UIControlEventTouchUpInside];
-    
-    [appointmentBtn setImage:[UIImage imageNamed:@"home_first_appointment"] forState:UIControlStateNormal];
-    appointmentBtn.imageEdgeInsets = UIEdgeInsetsMake(10*kRate, 28*kRate, 22*kRate, 28*kRate);
-    
-    [appointmentBtn setTitle:@"预约" forState:UIControlStateNormal];
-    appointmentBtn.titleLabel.font = [UIFont systemFontOfSize:13.0*kRate];
-    appointmentBtn.titleLabel.textAlignment = NSTextAlignmentCenter;
-    [appointmentBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    appointmentBtn.titleEdgeInsets = UIEdgeInsetsMake(kFirstBtnWidth - 45*kRate, -appointmentBtn.titleLabel.bounds.size.width - 85, 5*kRate, 0);
-    
-    [_firstBtnsView addSubview:appointmentBtn];
-}
-
-- (void)appointmentBtnAction
-{
-    NSLog(@"预约");
-}
-
-//活动
-- (void)addActivityBtn
-{
-    UIButton *activityBtn = [[UIButton alloc] initWithFrame:CGRectMake(kFirstBtnWidth*3, 0, kFirstBtnWidth, kFirstBtnHeight)];
-    [activityBtn addTarget:self action:@selector(activitybtnAction) forControlEvents:UIControlEventTouchUpInside];
-    
-    [activityBtn setImage:[UIImage imageNamed:@"home_first_activity"] forState:UIControlStateNormal];
-    activityBtn.imageEdgeInsets = UIEdgeInsetsMake(10*kRate, 28*kRate, 22*kRate, 28*kRate);
-    
-    [activityBtn setTitle:@"活动" forState:UIControlStateNormal];
-    activityBtn.titleLabel.font = [UIFont systemFontOfSize:13.0*kRate];
-    activityBtn.titleLabel.textAlignment = NSTextAlignmentCenter;
-    [activityBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    activityBtn.titleEdgeInsets = UIEdgeInsetsMake(kFirstBtnWidth - 45*kRate, -activityBtn.titleLabel.bounds.size.width - 85, 5*kRate, 0);
-    
-    [_firstBtnsView addSubview:activityBtn];
-}
-
-- (void)activitybtnAction
-{
-    NSLog(@"活动");
-}
 
 #pragma mark ---- scrollImageViewDelegate
 -(void)scrollImageView:(ScrollImageView *)srollImageView didTapImageView:(UIImageView *)image atIndex:(NSInteger)index
@@ -396,7 +277,7 @@
 #pragma mark ******************      第二块内容      ****************
 - (void)addSecondContend
 {
-    _secondView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_firstBtnsView.frame) + 10*kRate, kScreenWidth, kScreenWidth/4*3)];
+    _secondView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_scrollImageView.frame) + 10*kRate, kScreenWidth, kScreenWidth/4*3)];
     _secondView.backgroundColor = [UIColor whiteColor];
     [_scrollView addSubview:_secondView];
     
