@@ -52,6 +52,7 @@
 		D026E9BC1DF7EA0500C563D8 /* BannerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D026E9BB1DF7EA0500C563D8 /* BannerModel.m */; };
 		D026E9BF1DF80A8900C563D8 /* ADViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D026E9BE1DF80A8900C563D8 /* ADViewController.m */; };
 		D026E9C21DF8ED5600C563D8 /* ServiceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D026E9C11DF8ED5600C563D8 /* ServiceModel.m */; };
+		D026E9C51DFA7AF800C563D8 /* OpenCardModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D026E9C41DFA7AF800C563D8 /* OpenCardModel.m */; };
 		D032F9DA1DB740B10052562D /* WeatherCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D032F9D91DB740B10052562D /* WeatherCell.m */; };
 		D032F9E21DB765F30052562D /* OrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D032F9E11DB765F30052562D /* OrderViewController.m */; };
 		D032F9E51DB76A400052562D /* OrderListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D032F9E41DB76A400052562D /* OrderListVC.m */; };
@@ -343,6 +344,8 @@
 		D026E9BE1DF80A8900C563D8 /* ADViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADViewController.m; sourceTree = "<group>"; };
 		D026E9C01DF8ED5600C563D8 /* ServiceModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceModel.h; sourceTree = "<group>"; };
 		D026E9C11DF8ED5600C563D8 /* ServiceModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceModel.m; sourceTree = "<group>"; };
+		D026E9C31DFA7AF800C563D8 /* OpenCardModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenCardModel.h; sourceTree = "<group>"; };
+		D026E9C41DFA7AF800C563D8 /* OpenCardModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpenCardModel.m; sourceTree = "<group>"; };
 		D032F9D81DB740B10052562D /* WeatherCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeatherCell.h; sourceTree = "<group>"; };
 		D032F9D91DB740B10052562D /* WeatherCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeatherCell.m; sourceTree = "<group>"; };
 		D032F9E01DB765F30052562D /* OrderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderViewController.h; sourceTree = "<group>"; };
@@ -758,6 +761,8 @@
 		D003F0B31DD05C50003F0A3C /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				D026E9C31DFA7AF800C563D8 /* OpenCardModel.h */,
+				D026E9C41DFA7AF800C563D8 /* OpenCardModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2451,6 +2456,7 @@
 				D026E9B61DF7A23600C563D8 /* UIViewController+GetLocalDic.m in Sources */,
 				D006C24E1DB8BED60017FCD5 /* ItemAndCountView.m in Sources */,
 				D0758A651D9C9FD80071D8A6 /* StoreModel.m in Sources */,
+				D026E9C51DFA7AF800C563D8 /* OpenCardModel.m in Sources */,
 				D09BC1621DC844F70035DE65 /* PaymentWayView.m in Sources */,
 				D0A4B4A41DBB46CF005C8C79 /* OrderContentMoreView.m in Sources */,
 				D0C7A4AF1DAA3390005FC697 /* IllegalResultVC.m in Sources */,

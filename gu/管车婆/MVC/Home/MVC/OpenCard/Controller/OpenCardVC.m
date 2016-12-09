@@ -8,11 +8,13 @@
 
 #import "OpenCardVC.h"
 #import "OpenCardCell.h"
+#import "OpenCardModel.h"
 
 @interface OpenCardVC ()<UITableViewDelegate, UITableViewDataSource>
 {
     UITableView *_tableView;
 }
+@property (nonatomic, copy) NSArray *opencardModels;
 @end
 
 @implementation OpenCardVC
@@ -25,6 +27,9 @@
     
     //设置下面的卡片列表
     [self addTableView];
+    
+    //网络请求卡片列表数据
+    [self getCardList];
 }
 
 #pragma mark ****** 设置导航栏 ******
@@ -50,7 +55,7 @@
 #pragma mark --- UITableViewDelegate && UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 8;
+    return _opencardModels.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -65,6 +70,9 @@
         
     }
     
+    if (_opencardModels.count > indexPath.row) {
+        cell.openCardModel = _opencardModels[indexPath.row];
+    }
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     return cell;
@@ -75,6 +83,41 @@
     return 240*kRate;
 }
 
+#pragma mark
+#pragma mark --- 网络请求
+//获得卡片列表
+- (void)getCardList
+{
+    NSString *url_get = [NSString stringWithFormat:@"http://%@:8080/zcar/userapp/getCardTypeList.action", kIP];
+    
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];//单例
+    
+    manager.requestSerializer = [AFHTTPRequestSerializer serializer];
+    
+    manager.responseSerializer = [AFJSONResponseSerializer serializer];
+    
+    [manager GET:url_get parameters:nil progress:NULL success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        
+        NSArray *jsonDataArr = [responseObject objectForKey:@"jsondata"];
+        NSMutableArray *muArr = [NSMutableArray array];
+        for (NSDictionary *jsonDataDic in jsonDataArr) {
+            
+            OpenCardModel *openCardModel = [[OpenCardModel alloc] initWithDic:jsonDataDic];
+            [muArr addObject:openCardModel];
+            
+        }
+        _opencardModels = muArr;
+        
+        //刷新UI
+        [_tableView reloadData];
+        
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+        NSLog(@"请求失败，原因是%@", error);
+        
+    }];
 
+}
 
 @end

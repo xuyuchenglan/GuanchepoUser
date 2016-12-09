@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
+@class OpenCardModel;
 @interface OpenCardCell : UITableViewCell
+
+@property (nonatomic, strong) OpenCardModel *openCardModel;
 
 @end

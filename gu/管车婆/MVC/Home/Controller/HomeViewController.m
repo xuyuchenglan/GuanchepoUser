@@ -248,7 +248,6 @@
             [dataUrlsMutable addObject:banner1Model.picUrl];
         }
         NSArray *dataUrls = [dataUrlsMutable copy];
-        NSLog(@"dataUrls:%@", dataUrls);
         
         NSArray * dataPics = @[@"ad_01",@"ad_02",@"ad_03",@"ad_04",@"ad_01"];
         _scrollImageView = [[ScrollImageView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_topView.frame), kScreenWidth, 100*kRate) andPictureUrls:dataUrls andPlaceHolderImages:dataPics];
@@ -621,7 +620,6 @@
 - (void)addAdView
 {
     UIImageView *secondImgView = [[UIImageView alloc] initWithFrame:CGRectMake(kSecondBtnWidth + 1, kSecondBtnWidth + 1, 2*kSecondBtnWidth - 1, kSecondBtnWidth - 1)];
-    NSLog(@"%@", _homeModel.banner2Model.picUrl);
     [secondImgView sd_setImageWithURL:[NSURL URLWithString:_homeModel.banner2Model.picUrl] placeholderImage:[UIImage imageNamed:@"home_second_ad"]];
     secondImgView.userInteractionEnabled = YES;
     [_secondView addSubview:secondImgView];
@@ -1055,7 +1053,7 @@
     [manager POST:url_post parameters:params progress:NULL success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
         NSDictionary *content = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
-        NSLog(@"请求成功，请求下来的Json格式的数据是%@", content);
+        //NSLog(@"首页数据请求成功，请求下来的Json格式的数据是%@", content);
         
         _homeModel = [[HomeModel alloc] initWithDic:content];
         _isLoadSuccess = YES;
