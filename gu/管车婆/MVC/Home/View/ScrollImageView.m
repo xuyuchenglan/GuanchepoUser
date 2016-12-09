@@ -49,7 +49,7 @@
     //第一张图片(向前拖拽，为了循环，第一张图应该和显示的最后一张图一样)
     UIImageView *firstImg = [[UIImageView alloc] initWithFrame:CGRectMake(0, 100, kSelfWidth, kSelfHeight)];
     firstImg.userInteractionEnabled = YES;
-    firstImg.image = [UIImage imageNamed:[_dataSourcePlaceImages firstObject]];
+    [firstImg sd_setImageWithURL:[NSURL URLWithString:[_dataSourceUrls firstObject]] placeholderImage:[UIImage imageNamed:[_dataSourcePlaceImages firstObject]]];
     firstImg.tag = 11;
     [self.scrollView addSubview:firstImg];
     
@@ -58,7 +58,7 @@
     
     //最后一张图片(向后拖拽，为了循环，最后一张图应该和显示的第一张图一样)
     UIImageView *lastImg = [[UIImageView alloc] initWithFrame:CGRectMake((_imageCount + 1) * kSelfWidth, 0, kSelfWidth, kSelfHeight)];
-    lastImg.image = [UIImage imageNamed:[_dataSourcePlaceImages lastObject]];
+    [lastImg sd_setImageWithURL:[NSURL URLWithString:[_dataSourceUrls lastObject]] placeholderImage:[UIImage imageNamed:[_dataSourcePlaceImages lastObject]]];
     lastImg.tag = 22;
     [self.scrollView addSubview:lastImg];
     
@@ -69,7 +69,8 @@
     //这里用最少的那个数组
     NSArray * array = _dataSourcePlaceImages.count<_dataSourceUrls.count?_dataSourcePlaceImages:_dataSourceUrls;
     for (NSInteger i = 0; i < array.count; i++) {
-        UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:_dataSourcePlaceImages[i]]];
+        UIImageView *imageView = [[UIImageView alloc] init];
+        [imageView sd_setImageWithURL:[NSURL URLWithString:_dataSourceUrls[i]] placeholderImage:[UIImage imageNamed:_dataSourcePlaceImages[i]]];
         imageView.frame = CGRectMake(kSelfWidth * (i + 1), 0, kSelfWidth, kSelfHeight);
         imageView.userInteractionEnabled = YES;
         imageView.tag = i + 33;
@@ -206,7 +207,7 @@
         _pageControl.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin|UIViewAutoresizingFlexibleRightMargin|UIViewAutoresizingFlexibleTopMargin;
         _pageControl.numberOfPages = _imageCount;
         _pageControl.currentPageIndicatorTintColor = [UIColor redColor];
-        _pageControl.pageIndicatorTintColor = [UIColor yellowColor];
+        _pageControl.pageIndicatorTintColor = [UIColor grayColor];
         _pageControl.currentPage = 0;
     }
     return _pageControl;

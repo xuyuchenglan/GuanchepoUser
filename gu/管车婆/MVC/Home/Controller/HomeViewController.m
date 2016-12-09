@@ -39,7 +39,8 @@
 @property (nonatomic, strong)UIImageView     *fifthImgView;
 
 @property (nonatomic, strong)HomeModel       *homeModel;
-@property (nonatomic, strong)NSMutableArray  *banner1Models;//装有banner1轮播图的model的数组
+
+@property (nonatomic, assign)BOOL             isLoadSuccess;//当网络请求成功时设置其值
 
 @end
 
@@ -229,7 +230,9 @@
 - (void)addFirstContent
 {
     //按钮上方的轮播图
-    [_scrollView addSubview:self.scrollImageView];
+    if (_isLoadSuccess) {
+        [_scrollView addSubview:self.scrollImageView];
+    }
     
     //洗车、保养、预约、活动按钮
     [self addFirstBtns];
@@ -240,9 +243,16 @@
 {
     if (!_scrollImageView) {
         
-        NSArray * dataUrls = @[@"http://",@"http://",@"http://",@"http://"];
+        NSMutableArray * dataUrlsMutable = [NSMutableArray array];
+        for (BannerModel *banner1Model in _homeModel.banner1Models) {
+            [dataUrlsMutable addObject:banner1Model.picUrl];
+        }
+        NSArray *dataUrls = [dataUrlsMutable copy];
+        NSLog(@"dataUrls:%@", dataUrls);
+        
         NSArray * dataPics = @[@"ad_01",@"ad_02",@"ad_03",@"ad_04",@"ad_01"];
         _scrollImageView = [[ScrollImageView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_topView.frame), kScreenWidth, 100*kRate) andPictureUrls:dataUrls andPlaceHolderImages:dataPics];
+
         _scrollImageView.delegate = self;
         
     }
@@ -370,7 +380,18 @@
 #pragma mark ---- scrollImageViewDelegate
 -(void)scrollImageView:(ScrollImageView *)srollImageView didTapImageView:(UIImageView *)image atIndex:(NSInteger)index
 {
-    NSLog(@"轮播图");
+    NSLog(@"点击的是第%zd个图片，该图片是:%@",index+1,image);
+    //在这个方法里面实现点击相应图片后的跳转。
+    
+    BannerModel *currentModel = [[BannerModel alloc] init];
+    currentModel = _homeModel.banner1Models[index];
+    
+    ADViewController *adViewController = [[ADViewController alloc] init];
+    adViewController.linkUrl = currentModel.linkUrl;
+    adViewController.titleStr = currentModel.titleName;
+    [self.navigationController pushViewController:adViewController animated:NO];
+    
+    
 }
 
 #pragma mark ******************      第二块内容      ****************
@@ -615,8 +636,8 @@
     NSLog(@"中间的广告位");
     
     ADViewController *banner2VC = [[ADViewController alloc] init];
-    banner2VC.titleStr = self.homeModel.banner3Model.titleName;
-    banner2VC.linkUrl = self.homeModel.banner3Model.linkUrl;
+    banner2VC.titleStr = self.homeModel.banner2Model.titleName;
+    banner2VC.linkUrl = self.homeModel.banner2Model.linkUrl;
     banner2VC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:banner2VC animated:NO];
     banner2VC.hidesBottomBarWhenPushed = NO;
@@ -1037,6 +1058,7 @@
         NSLog(@"请求成功，请求下来的Json格式的数据是%@", content);
         
         _homeModel = [[HomeModel alloc] initWithDic:content];
+        _isLoadSuccess = YES;
         
         //刷新UI
         [_scrollView removeFromSuperview];
@@ -1045,6 +1067,14 @@
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"请求失败， 失败原因是：%@", error);
+        
+        _isLoadSuccess = NO;
+        
+        //当网络请求失败的时候，也刷新一下UI，否则广告视图就会被隐藏
+        [_scrollView removeFromSuperview];
+        [self addNavBar];
+        [self addContentView];
+        
     }];
 
 }
