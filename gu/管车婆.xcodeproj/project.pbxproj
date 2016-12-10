@@ -53,6 +53,7 @@
 		D026E9BF1DF80A8900C563D8 /* ADViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D026E9BE1DF80A8900C563D8 /* ADViewController.m */; };
 		D026E9C21DF8ED5600C563D8 /* ServiceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D026E9C11DF8ED5600C563D8 /* ServiceModel.m */; };
 		D026E9C51DFA7AF800C563D8 /* OpenCardModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D026E9C41DFA7AF800C563D8 /* OpenCardModel.m */; };
+		D026E9C81DFA9D6400C563D8 /* AboutModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D026E9C71DFA9D6400C563D8 /* AboutModel.m */; };
 		D032F9DA1DB740B10052562D /* WeatherCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D032F9D91DB740B10052562D /* WeatherCell.m */; };
 		D032F9E21DB765F30052562D /* OrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D032F9E11DB765F30052562D /* OrderViewController.m */; };
 		D032F9E51DB76A400052562D /* OrderListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D032F9E41DB76A400052562D /* OrderListVC.m */; };
@@ -346,6 +347,8 @@
 		D026E9C11DF8ED5600C563D8 /* ServiceModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceModel.m; sourceTree = "<group>"; };
 		D026E9C31DFA7AF800C563D8 /* OpenCardModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenCardModel.h; sourceTree = "<group>"; };
 		D026E9C41DFA7AF800C563D8 /* OpenCardModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpenCardModel.m; sourceTree = "<group>"; };
+		D026E9C61DFA9D6400C563D8 /* AboutModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutModel.h; sourceTree = "<group>"; };
+		D026E9C71DFA9D6400C563D8 /* AboutModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutModel.m; sourceTree = "<group>"; };
 		D032F9D81DB740B10052562D /* WeatherCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeatherCell.h; sourceTree = "<group>"; };
 		D032F9D91DB740B10052562D /* WeatherCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeatherCell.m; sourceTree = "<group>"; };
 		D032F9E01DB765F30052562D /* OrderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderViewController.h; sourceTree = "<group>"; };
@@ -1345,6 +1348,8 @@
 		D0C5F9D91D9A0DCA00D00B85 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				D026E9C61DFA9D6400C563D8 /* AboutModel.h */,
+				D026E9C71DFA9D6400C563D8 /* AboutModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2391,6 +2396,7 @@
 				D0A4B4C21DBDE67F005C8C79 /* MaintainCouponVC.m in Sources */,
 				D0F7808D1DC2FE1900347B21 /* CardCell.m in Sources */,
 				D0D918DB1DA8F46D003379E3 /* RechargeFuelCardVC.m in Sources */,
+				D026E9C81DFA9D6400C563D8 /* AboutModel.m in Sources */,
 				D0139A861DD417F6005141F2 /* LWCouponCell.m in Sources */,
 				D003F0B71DD05E3E003F0A3C /* OpenCardVC.m in Sources */,
 				D0D918BE1DA8E784003379E3 /* FillPhoneChargesVC.m in Sources */,

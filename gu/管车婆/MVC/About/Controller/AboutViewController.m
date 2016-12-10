@@ -16,6 +16,7 @@
 #import "SellCardVC.h"
 #import "CouponViewController.h"
 #import "BalanceViewController.h"
+#import "AboutModel.h"
 
 #define kSignBtnWidth 60*kRate
 #define kEdgeWidth    (kScreenWidth - 60*kRate*5)/6
@@ -27,17 +28,28 @@
     //第一块内容
     UIView *_up_bgView;
     UIButton *_signInBtn;
+    CardAndCarView *_carView;
     
     //第二块内容
     UIView *_secondView;
     //第三块内容
     UITableView *_tableView;
-
-    
 }
+@property (nonatomic, strong) AboutModel *aboutModel;
 @end
 
 @implementation AboutViewController
+
+- (instancetype)init
+{
+    if (self = [super init]) {
+        
+        //网络请求用户数据
+        [self getUserInfo];
+        
+    }
+    return self;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -82,7 +94,8 @@
     
     //积分
     UILabel *pointsLabel = [[UILabel alloc] initWithFrame:CGRectMake(kScreenWidth - 100*kRate, 30*kRate, 80*kRate, 20*kRate)];
-    pointsLabel.text = @"积分：188";
+//    pointsLabel.text = @"积分：188";
+    pointsLabel.text = [NSString stringWithFormat:@"积分：%@", _aboutModel.scores];
     pointsLabel.textColor = [UIColor whiteColor];
     pointsLabel.font = [UIFont systemFontOfSize:14.0*kRate];
     [_up_bgView addSubview:pointsLabel];
@@ -96,7 +109,8 @@
     
     //账号
     UILabel *accountLabel = [[UILabel alloc] initWithFrame:CGRectMake(kScreenWidth/2 - 75*kRate, CGRectGetMaxY(headImgView.frame)+10*kRate, 150*kRate, 20*kRate)];
-    accountLabel.text = @"王一旭18653400191";
+//    accountLabel.text = @"王一旭18653400191";
+    accountLabel.text = [NSString stringWithFormat:@"%@%@", self.aboutModel.realName, self.aboutModel.phoneNumber];
     accountLabel.textColor = [UIColor whiteColor];
     accountLabel.textAlignment = NSTextAlignmentCenter;
     accountLabel.font = [UIFont systemFontOfSize:14.0*kRate];
@@ -105,7 +119,7 @@
     
     //余额
     UIButton *balanceBtn = [[UIButton alloc] initWithFrame:CGRectMake(kScreenWidth/2 - 75*kRate, CGRectGetMaxY(accountLabel.frame), 150*kRate, 20*kRate)];
-    [balanceBtn setTitle:@"余额：100元" forState:UIControlStateNormal];
+    [balanceBtn setTitle:[NSString stringWithFormat:@"余额：%@元", self.aboutModel.balance] forState:UIControlStateNormal];
     balanceBtn.titleLabel.textColor = [UIColor whiteColor];
     balanceBtn.titleLabel.font = [UIFont systemFontOfSize:14.0*kRate];
     [balanceBtn addTarget:self action:@selector(balanceBtnAction) forControlEvents:UIControlEventTouchUpInside];
@@ -140,15 +154,15 @@
     [cardView addGestureRecognizer:cardTap];
     
     //我的爱车
-    CardAndCarView *carView = [[CardAndCarView alloc] initWithFrame:CGRectMake(kScreenWidth/2, CGRectGetMinY(cardView.frame), kScreenWidth/2, kScreenWidth*0.15)];
-    carView.title = @"我的爱车(11)";
-    carView.imgName = @"about_first_car";
-    carView.subTitle = @"鲁N12345";
-    carView.backgroundColor = [UIColor whiteColor];
-    [_scrollView addSubview:carView];
+    _carView = [[CardAndCarView alloc] initWithFrame:CGRectMake(kScreenWidth/2, CGRectGetMinY(cardView.frame), kScreenWidth/2, kScreenWidth*0.15)];
+    _carView.title = @"我的爱车(11)";
+    _carView.imgName = @"about_first_car";
+    _carView.subTitle = self.aboutModel.carNo;
+    _carView.backgroundColor = [UIColor whiteColor];
+    [_scrollView addSubview:_carView];
     
     UITapGestureRecognizer *carTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(carTapAction:)];
-    [carView addGestureRecognizer:carTap];
+    [_carView addGestureRecognizer:carTap];
     
 }
 
@@ -530,5 +544,50 @@
     
     [self.navigationController setNavigationBarHidden:NO animated:animated];
 }
+
+#pragma mark
+#pragma mark 网络请求
+//根据uid获取用户数据
+- (void)getUserInfo
+{
+    NSString *url_post = [NSString stringWithFormat:@"http://%@:8080/zcar/userapp/getUserByUid.action", kIP];
+    
+    NSDictionary *params = @{
+                             @"uid":[[self getLocalDic] objectForKey:@"uid"],
+                             };
+    
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    
+    AFHTTPResponseSerializer *responseSerializer = [AFHTTPResponseSerializer serializer];
+    
+    manager.responseSerializer = responseSerializer;
+    
+    [manager POST:url_post parameters:params progress:NULL success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        
+        NSDictionary *content = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+        
+        NSDictionary *jsonDataDic = [content objectForKey:@"jsondata"];
+        _aboutModel = [[AboutModel alloc] initWithDic:jsonDataDic];
+        
+        //更新UI
+        [self updateUI];
+        
+        //更新缓存的数据
+        
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"请求失败， 失败原因是：%@", error);
+    }];
+
+}
+
+//更新UI
+- (void)updateUI
+{
+    [_up_bgView removeFromSuperview];
+    [self addFirstUp];
+}
+
+//更新缓存的数据
 
 @end
