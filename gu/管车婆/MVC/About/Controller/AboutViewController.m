@@ -180,6 +180,8 @@
 {
     NSLog(@"签到");
     
+//    [self sign];//签到的网络请求
+    
     _signInBtn.alpha = 0;
     [UIView animateWithDuration:0.6 animations:^{
         [_signInBtn setTitle:@"已签到" forState:UIControlStateNormal];
@@ -565,6 +567,7 @@
     [manager POST:url_post parameters:params progress:NULL success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
         NSDictionary *content = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+        NSLog(@"思考和广发李伟刚付款时：%@", content);
         
         NSDictionary *jsonDataDic = [content objectForKey:@"jsondata"];
         _aboutModel = [[AboutModel alloc] initWithDic:jsonDataDic];
@@ -581,6 +584,47 @@
 
 }
 
+//签到
+- (void)sign
+{
+    NSString *url_post = [NSString stringWithFormat:@"http://%@:8080/zcar/userapp/sign.action", kIP];
+    
+    NSDictionary *params = @{
+                             @"uid":[[self getLocalDic] objectForKey:@"uid"],
+                             };
+    
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    
+    AFHTTPResponseSerializer *responseSerializer = [AFHTTPResponseSerializer serializer];
+    
+    manager.responseSerializer = responseSerializer;
+    
+    [manager POST:url_post parameters:params progress:NULL success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        
+        NSDictionary *content = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+        
+        NSString *result = [content objectForKey:@"result"];
+        
+        if ([result isEqualToString:@"success"]) {
+            
+            //更新UI
+            
+            
+        } else {
+            
+            //弹出提示框
+            NSString *errorMsg = [content objectForKey:@"errMsg"];
+            [self showAlertViewWithTitle:@"提示" WithMessage:errorMsg];
+            
+        }
+        
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"请求失败， 失败原因是：%@", error);
+    }];
+
+    
+}
 //更新UI
 - (void)updateUI
 {
