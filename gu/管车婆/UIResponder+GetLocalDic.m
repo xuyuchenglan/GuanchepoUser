@@ -1,14 +1,14 @@
 //
-//  UIViewController+GetLocalDic.m
+//  UIResponder+GetLocalDic.m
 //  管车婆
 //
-//  Created by 李伟 on 16/12/7.
+//  Created by 李伟 on 16/12/12.
 //  Copyright © 2016年 远恒网络科技有限公司. All rights reserved.
 //
 
-#import "UIViewController+GetLocalDic.h"
+#import "UIResponder+GetLocalDic.h"
 
-@implementation UIViewController (GetLocalDic)
+@implementation UIResponder (GetLocalDic)
 
 - (NSDictionary *)getLocalDic
 {

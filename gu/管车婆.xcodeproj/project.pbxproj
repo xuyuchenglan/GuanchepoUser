@@ -47,13 +47,16 @@
 		D01CB9CE1DA8855600DD5527 /* ProtocolViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D01CB9CD1DA8855600DD5527 /* ProtocolViewController.m */; };
 		D01CB9D11DA88DCB00DD5527 /* CardAndCarView.m in Sources */ = {isa = PBXBuildFile; fileRef = D01CB9D01DA88DCB00DD5527 /* CardAndCarView.m */; };
 		D026E9B31DF56A8D00C563D8 /* UIViewController+ShowAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = D026E9B21DF56A8D00C563D8 /* UIViewController+ShowAlertView.m */; };
-		D026E9B61DF7A23600C563D8 /* UIViewController+GetLocalDic.m in Sources */ = {isa = PBXBuildFile; fileRef = D026E9B51DF7A23600C563D8 /* UIViewController+GetLocalDic.m */; };
 		D026E9B91DF7AB3700C563D8 /* HomeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D026E9B81DF7AB3700C563D8 /* HomeModel.m */; };
 		D026E9BC1DF7EA0500C563D8 /* BannerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D026E9BB1DF7EA0500C563D8 /* BannerModel.m */; };
 		D026E9BF1DF80A8900C563D8 /* ADViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D026E9BE1DF80A8900C563D8 /* ADViewController.m */; };
 		D026E9C21DF8ED5600C563D8 /* ServiceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D026E9C11DF8ED5600C563D8 /* ServiceModel.m */; };
 		D026E9C51DFA7AF800C563D8 /* OpenCardModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D026E9C41DFA7AF800C563D8 /* OpenCardModel.m */; };
 		D026E9C81DFA9D6400C563D8 /* AboutModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D026E9C71DFA9D6400C563D8 /* AboutModel.m */; };
+		D026E9CC1DFBA2B500C563D8 /* MyMembershipCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D026E9CB1DFBA2B500C563D8 /* MyMembershipCardViewController.m */; };
+		D026E9CF1DFBD56D00C563D8 /* MembershipServicesView.m in Sources */ = {isa = PBXBuildFile; fileRef = D026E9CE1DFBD56D00C563D8 /* MembershipServicesView.m */; };
+		D026E9D21DFE438500C563D8 /* MembershipServicesModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D026E9D11DFE438500C563D8 /* MembershipServicesModel.m */; };
+		D026E9D51DFE836A00C563D8 /* UIResponder+GetLocalDic.m in Sources */ = {isa = PBXBuildFile; fileRef = D026E9D41DFE836A00C563D8 /* UIResponder+GetLocalDic.m */; };
 		D032F9DA1DB740B10052562D /* WeatherCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D032F9D91DB740B10052562D /* WeatherCell.m */; };
 		D032F9E21DB765F30052562D /* OrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D032F9E11DB765F30052562D /* OrderViewController.m */; };
 		D032F9E51DB76A400052562D /* OrderListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D032F9E41DB76A400052562D /* OrderListVC.m */; };
@@ -335,8 +338,6 @@
 		D01CB9D01DA88DCB00DD5527 /* CardAndCarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CardAndCarView.m; sourceTree = "<group>"; };
 		D026E9B11DF56A8D00C563D8 /* UIViewController+ShowAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+ShowAlertView.h"; sourceTree = "<group>"; };
 		D026E9B21DF56A8D00C563D8 /* UIViewController+ShowAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+ShowAlertView.m"; sourceTree = "<group>"; };
-		D026E9B41DF7A23600C563D8 /* UIViewController+GetLocalDic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+GetLocalDic.h"; sourceTree = "<group>"; };
-		D026E9B51DF7A23600C563D8 /* UIViewController+GetLocalDic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+GetLocalDic.m"; sourceTree = "<group>"; };
 		D026E9B71DF7AB3700C563D8 /* HomeModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeModel.h; sourceTree = "<group>"; };
 		D026E9B81DF7AB3700C563D8 /* HomeModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeModel.m; sourceTree = "<group>"; };
 		D026E9BA1DF7EA0500C563D8 /* BannerModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BannerModel.h; sourceTree = "<group>"; };
@@ -349,6 +350,14 @@
 		D026E9C41DFA7AF800C563D8 /* OpenCardModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpenCardModel.m; sourceTree = "<group>"; };
 		D026E9C61DFA9D6400C563D8 /* AboutModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutModel.h; sourceTree = "<group>"; };
 		D026E9C71DFA9D6400C563D8 /* AboutModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutModel.m; sourceTree = "<group>"; };
+		D026E9CA1DFBA2B500C563D8 /* MyMembershipCardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyMembershipCardViewController.h; sourceTree = "<group>"; };
+		D026E9CB1DFBA2B500C563D8 /* MyMembershipCardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyMembershipCardViewController.m; sourceTree = "<group>"; };
+		D026E9CD1DFBD56D00C563D8 /* MembershipServicesView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MembershipServicesView.h; sourceTree = "<group>"; };
+		D026E9CE1DFBD56D00C563D8 /* MembershipServicesView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MembershipServicesView.m; sourceTree = "<group>"; };
+		D026E9D01DFE438500C563D8 /* MembershipServicesModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MembershipServicesModel.h; sourceTree = "<group>"; };
+		D026E9D11DFE438500C563D8 /* MembershipServicesModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MembershipServicesModel.m; sourceTree = "<group>"; };
+		D026E9D31DFE836A00C563D8 /* UIResponder+GetLocalDic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIResponder+GetLocalDic.h"; sourceTree = "<group>"; };
+		D026E9D41DFE836A00C563D8 /* UIResponder+GetLocalDic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIResponder+GetLocalDic.m"; sourceTree = "<group>"; };
 		D032F9D81DB740B10052562D /* WeatherCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeatherCell.h; sourceTree = "<group>"; };
 		D032F9D91DB740B10052562D /* WeatherCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeatherCell.m; sourceTree = "<group>"; };
 		D032F9E01DB765F30052562D /* OrderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderViewController.h; sourceTree = "<group>"; };
@@ -831,8 +840,8 @@
 				D00F8D091D9A0AEF00AD7CC8 /* MainViewController.m */,
 				D026E9B11DF56A8D00C563D8 /* UIViewController+ShowAlertView.h */,
 				D026E9B21DF56A8D00C563D8 /* UIViewController+ShowAlertView.m */,
-				D026E9B41DF7A23600C563D8 /* UIViewController+GetLocalDic.h */,
-				D026E9B51DF7A23600C563D8 /* UIViewController+GetLocalDic.m */,
+				D026E9D31DFE836A00C563D8 /* UIResponder+GetLocalDic.h */,
+				D026E9D41DFE836A00C563D8 /* UIResponder+GetLocalDic.m */,
 				D0758A771D9CAF710071D8A6 /* Login */,
 				D0C5F9D61D9A0DCA00D00B85 /* MVC */,
 				D00F8CE11D9A0A1B00AD7CC8 /* Assets.xcassets */,
@@ -971,6 +980,19 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		D026E9C91DFBA28D00C563D8 /* MyMembershipCard */ = {
+			isa = PBXGroup;
+			children = (
+				D026E9CA1DFBA2B500C563D8 /* MyMembershipCardViewController.h */,
+				D026E9CB1DFBA2B500C563D8 /* MyMembershipCardViewController.m */,
+				D026E9CD1DFBD56D00C563D8 /* MembershipServicesView.h */,
+				D026E9CE1DFBD56D00C563D8 /* MembershipServicesView.m */,
+				D026E9D01DFE438500C563D8 /* MembershipServicesModel.h */,
+				D026E9D11DFE438500C563D8 /* MembershipServicesModel.m */,
+			);
+			path = MyMembershipCard;
+			sourceTree = "<group>";
+		};
 		D032F9DB1DB7652C0052562D /* MVC */ = {
 			isa = PBXGroup;
 			children = (
@@ -981,6 +1003,7 @@
 				D0FA2AED1DCAE46700BCA242 /* CarCoupon */,
 				D003F0951DCC145E003F0A3C /* ExperienceVoucher */,
 				D003F09C1DCC188E003F0A3C /* SellCard */,
+				D026E9C91DFBA28D00C563D8 /* MyMembershipCard */,
 			);
 			path = MVC;
 			sourceTree = "<group>";
@@ -2403,6 +2426,7 @@
 				D0758A621D9C9F300071D8A6 /* StoreCell.m in Sources */,
 				D0A4B49C1DBB4163005C8C79 /* OrderInfoVC.m in Sources */,
 				D0FA2AE41DCAC29400BCA242 /* ExchangePointsVC.m in Sources */,
+				D026E9D21DFE438500C563D8 /* MembershipServicesModel.m in Sources */,
 				D0E8F9DA1D9BA57100582D96 /* ScrollImageView.m in Sources */,
 				D0A4B4A81DBB53EB005C8C79 /* AppointContentInfoView.m in Sources */,
 				D0E8F9EA1D9BC19C00582D96 /* StoresListVC.m in Sources */,
@@ -2411,6 +2435,7 @@
 				D01CB9CE1DA8855600DD5527 /* ProtocolViewController.m in Sources */,
 				D0C5F9F51D9A0F4F00D00B85 /* AboutViewController.m in Sources */,
 				D0FA2AF31DCAE48100BCA242 /* CarCouponVC.m in Sources */,
+				D026E9CF1DFBD56D00C563D8 /* MembershipServicesView.m in Sources */,
 				D0FA2AE71DCAC93A00BCA242 /* ExchangePointsView.m in Sources */,
 				D026E9B91DF7AB3700C563D8 /* HomeModel.m in Sources */,
 				D0629F291DC6CD3400076CF4 /* CompanyCardView.m in Sources */,
@@ -2449,6 +2474,7 @@
 				D09BC15F1DC844C10035DE65 /* PayForFuelCardRechargingVC.m in Sources */,
 				D0EE8AFE1DC1CD3F00468B8A /* CardRechargeMoneyView.m in Sources */,
 				D00F8CD71D9A0A1B00AD7CC8 /* main.m in Sources */,
+				D026E9D51DFE836A00C563D8 /* UIResponder+GetLocalDic.m in Sources */,
 				D01CB9D11DA88DCB00DD5527 /* CardAndCarView.m in Sources */,
 				D0D918B61DA8D1DE003379E3 /* AboutCell.m in Sources */,
 				D0A4B4A51DBB46CF005C8C79 /* OrderStateView.m in Sources */,
@@ -2459,7 +2485,7 @@
 				D0A4B4CC1DBEE514005C8C79 /* CouponItemView.m in Sources */,
 				D0F92F761DD17E5A00BC0302 /* UIResponder+FindResponderVC.m in Sources */,
 				D026E9BC1DF7EA0500C563D8 /* BannerModel.m in Sources */,
-				D026E9B61DF7A23600C563D8 /* UIViewController+GetLocalDic.m in Sources */,
+				D026E9CC1DFBA2B500C563D8 /* MyMembershipCardViewController.m in Sources */,
 				D006C24E1DB8BED60017FCD5 /* ItemAndCountView.m in Sources */,
 				D0758A651D9C9FD80071D8A6 /* StoreModel.m in Sources */,
 				D026E9C51DFA7AF800C563D8 /* OpenCardModel.m in Sources */,

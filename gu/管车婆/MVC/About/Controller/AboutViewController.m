@@ -17,6 +17,7 @@
 #import "CouponViewController.h"
 #import "BalanceViewController.h"
 #import "AboutModel.h"
+#import "MyMembershipCardViewController.h"
 
 #define kSignBtnWidth 60*kRate
 #define kEdgeWidth    (kScreenWidth - 60*kRate*5)/6
@@ -516,6 +517,11 @@
         
         NSLog(@"我的会员卡");
         
+        MyMembershipCardViewController *myMembershipCardVC = [[MyMembershipCardViewController alloc] init];
+        myMembershipCardVC.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:myMembershipCardVC animated:NO];
+        myMembershipCardVC.hidesBottomBarWhenPushed = NO;
+        
     }
     
 }
@@ -567,7 +573,7 @@
     [manager POST:url_post parameters:params progress:NULL success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
         NSDictionary *content = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
-        NSLog(@"思考和广发李伟刚付款时：%@", content);
+//        NSLog(@"思考和广发李伟刚付款时：%@", content);
         
         NSDictionary *jsonDataDic = [content objectForKey:@"jsondata"];
         _aboutModel = [[AboutModel alloc] initWithDic:jsonDataDic];
