@@ -47,6 +47,23 @@
 		D01CB9CE1DA8855600DD5527 /* ProtocolViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D01CB9CD1DA8855600DD5527 /* ProtocolViewController.m */; };
 		D01CB9D11DA88DCB00DD5527 /* CardAndCarView.m in Sources */ = {isa = PBXBuildFile; fileRef = D01CB9D01DA88DCB00DD5527 /* CardAndCarView.m */; };
 		D026E9B31DF56A8D00C563D8 /* UIViewController+ShowAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = D026E9B21DF56A8D00C563D8 /* UIViewController+ShowAlertView.m */; };
+		D026E9B91DF7AB3700C563D8 /* HomeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D026E9B81DF7AB3700C563D8 /* HomeModel.m */; };
+		D026E9BC1DF7EA0500C563D8 /* BannerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D026E9BB1DF7EA0500C563D8 /* BannerModel.m */; };
+		D026E9BF1DF80A8900C563D8 /* ADViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D026E9BE1DF80A8900C563D8 /* ADViewController.m */; };
+		D026E9C21DF8ED5600C563D8 /* ServiceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D026E9C11DF8ED5600C563D8 /* ServiceModel.m */; };
+		D026E9C51DFA7AF800C563D8 /* OpenCardModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D026E9C41DFA7AF800C563D8 /* OpenCardModel.m */; };
+		D026E9C81DFA9D6400C563D8 /* AboutModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D026E9C71DFA9D6400C563D8 /* AboutModel.m */; };
+		D026E9CC1DFBA2B500C563D8 /* MyMembershipCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D026E9CB1DFBA2B500C563D8 /* MyMembershipCardViewController.m */; };
+		D026E9CF1DFBD56D00C563D8 /* MembershipServicesView.m in Sources */ = {isa = PBXBuildFile; fileRef = D026E9CE1DFBD56D00C563D8 /* MembershipServicesView.m */; };
+		D026E9D21DFE438500C563D8 /* MembershipServicesModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D026E9D11DFE438500C563D8 /* MembershipServicesModel.m */; };
+		D026E9D51DFE836A00C563D8 /* UIResponder+GetLocalDic.m in Sources */ = {isa = PBXBuildFile; fileRef = D026E9D41DFE836A00C563D8 /* UIResponder+GetLocalDic.m */; };
+		D026E9E11DFE977500C563D8 /* LWAppointmentVc.m in Sources */ = {isa = PBXBuildFile; fileRef = D026E9E01DFE977500C563D8 /* LWAppointmentVc.m */; };
+		D026E9E41DFE97C500C563D8 /* LWOrderVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D026E9E31DFE97C500C563D8 /* LWOrderVC.m */; };
+		D026E9E71DFE9A2700C563D8 /* AppointOrderView.m in Sources */ = {isa = PBXBuildFile; fileRef = D026E9E61DFE9A2700C563D8 /* AppointOrderView.m */; };
+		D026E9EA1DFF922800C563D8 /* AppointOnLineView.m in Sources */ = {isa = PBXBuildFile; fileRef = D026E9E91DFF922800C563D8 /* AppointOnLineView.m */; };
+		D026E9EE1DFFC4DA00C563D8 /* createQR.png in Resources */ = {isa = PBXBuildFile; fileRef = D026E9EB1DFFC4DA00C563D8 /* createQR.png */; };
+		D026E9EF1DFFC4DA00C563D8 /* scanQR.png in Resources */ = {isa = PBXBuildFile; fileRef = D026E9EC1DFFC4DA00C563D8 /* scanQR.png */; };
+		D026E9F01DFFC4DA00C563D8 /* yanzhengma.png in Resources */ = {isa = PBXBuildFile; fileRef = D026E9ED1DFFC4DA00C563D8 /* yanzhengma.png */; };
 		D032F9DA1DB740B10052562D /* WeatherCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D032F9D91DB740B10052562D /* WeatherCell.m */; };
 		D032F9E21DB765F30052562D /* OrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D032F9E11DB765F30052562D /* OrderViewController.m */; };
 		D032F9E51DB76A400052562D /* OrderListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D032F9E41DB76A400052562D /* OrderListVC.m */; };
@@ -328,6 +345,37 @@
 		D01CB9D01DA88DCB00DD5527 /* CardAndCarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CardAndCarView.m; sourceTree = "<group>"; };
 		D026E9B11DF56A8D00C563D8 /* UIViewController+ShowAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+ShowAlertView.h"; sourceTree = "<group>"; };
 		D026E9B21DF56A8D00C563D8 /* UIViewController+ShowAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+ShowAlertView.m"; sourceTree = "<group>"; };
+		D026E9B71DF7AB3700C563D8 /* HomeModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeModel.h; sourceTree = "<group>"; };
+		D026E9B81DF7AB3700C563D8 /* HomeModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeModel.m; sourceTree = "<group>"; };
+		D026E9BA1DF7EA0500C563D8 /* BannerModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BannerModel.h; sourceTree = "<group>"; };
+		D026E9BB1DF7EA0500C563D8 /* BannerModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BannerModel.m; sourceTree = "<group>"; };
+		D026E9BD1DF80A8900C563D8 /* ADViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADViewController.h; sourceTree = "<group>"; };
+		D026E9BE1DF80A8900C563D8 /* ADViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADViewController.m; sourceTree = "<group>"; };
+		D026E9C01DF8ED5600C563D8 /* ServiceModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceModel.h; sourceTree = "<group>"; };
+		D026E9C11DF8ED5600C563D8 /* ServiceModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceModel.m; sourceTree = "<group>"; };
+		D026E9C31DFA7AF800C563D8 /* OpenCardModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenCardModel.h; sourceTree = "<group>"; };
+		D026E9C41DFA7AF800C563D8 /* OpenCardModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpenCardModel.m; sourceTree = "<group>"; };
+		D026E9C61DFA9D6400C563D8 /* AboutModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutModel.h; sourceTree = "<group>"; };
+		D026E9C71DFA9D6400C563D8 /* AboutModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutModel.m; sourceTree = "<group>"; };
+		D026E9CA1DFBA2B500C563D8 /* MyMembershipCardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyMembershipCardViewController.h; sourceTree = "<group>"; };
+		D026E9CB1DFBA2B500C563D8 /* MyMembershipCardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyMembershipCardViewController.m; sourceTree = "<group>"; };
+		D026E9CD1DFBD56D00C563D8 /* MembershipServicesView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MembershipServicesView.h; sourceTree = "<group>"; };
+		D026E9CE1DFBD56D00C563D8 /* MembershipServicesView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MembershipServicesView.m; sourceTree = "<group>"; };
+		D026E9D01DFE438500C563D8 /* MembershipServicesModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MembershipServicesModel.h; sourceTree = "<group>"; };
+		D026E9D11DFE438500C563D8 /* MembershipServicesModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MembershipServicesModel.m; sourceTree = "<group>"; };
+		D026E9D31DFE836A00C563D8 /* UIResponder+GetLocalDic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIResponder+GetLocalDic.h"; sourceTree = "<group>"; };
+		D026E9D41DFE836A00C563D8 /* UIResponder+GetLocalDic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIResponder+GetLocalDic.m"; sourceTree = "<group>"; };
+		D026E9DF1DFE977500C563D8 /* LWAppointmentVc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LWAppointmentVc.h; sourceTree = "<group>"; };
+		D026E9E01DFE977500C563D8 /* LWAppointmentVc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LWAppointmentVc.m; sourceTree = "<group>"; };
+		D026E9E21DFE97C500C563D8 /* LWOrderVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LWOrderVC.h; sourceTree = "<group>"; };
+		D026E9E31DFE97C500C563D8 /* LWOrderVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LWOrderVC.m; sourceTree = "<group>"; };
+		D026E9E51DFE9A2700C563D8 /* AppointOrderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppointOrderView.h; sourceTree = "<group>"; };
+		D026E9E61DFE9A2700C563D8 /* AppointOrderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppointOrderView.m; sourceTree = "<group>"; };
+		D026E9E81DFF922800C563D8 /* AppointOnLineView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppointOnLineView.h; sourceTree = "<group>"; };
+		D026E9E91DFF922800C563D8 /* AppointOnLineView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppointOnLineView.m; sourceTree = "<group>"; };
+		D026E9EB1DFFC4DA00C563D8 /* createQR.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = createQR.png; sourceTree = "<group>"; };
+		D026E9EC1DFFC4DA00C563D8 /* scanQR.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = scanQR.png; sourceTree = "<group>"; };
+		D026E9ED1DFFC4DA00C563D8 /* yanzhengma.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = yanzhengma.png; sourceTree = "<group>"; };
 		D032F9D81DB740B10052562D /* WeatherCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeatherCell.h; sourceTree = "<group>"; };
 		D032F9D91DB740B10052562D /* WeatherCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeatherCell.m; sourceTree = "<group>"; };
 		D032F9E01DB765F30052562D /* OrderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderViewController.h; sourceTree = "<group>"; };
@@ -450,7 +498,7 @@
 		D0C5F9E71D9A0EDC00D00B85 /* ParentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParentViewController.h; sourceTree = "<group>"; };
 		D0C5F9E81D9A0EDC00D00B85 /* ParentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParentViewController.m; sourceTree = "<group>"; };
 		D0C5F9EA1D9A0F1D00D00B85 /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
-		D0C5F9EB1D9A0F1D00D00B85 /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
+		D0C5F9EB1D9A0F1D00D00B85 /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = HomeViewController.m; sourceTree = "<group>"; };
 		D0C5F9ED1D9A0F2A00D00B85 /* StoresViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoresViewController.h; sourceTree = "<group>"; };
 		D0C5F9EE1D9A0F2A00D00B85 /* StoresViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoresViewController.m; sourceTree = "<group>"; };
 		D0C5F9F01D9A0F4300D00B85 /* CarOwnersViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CarOwnersViewController.h; sourceTree = "<group>"; };
@@ -743,6 +791,8 @@
 		D003F0B31DD05C50003F0A3C /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				D026E9C31DFA7AF800C563D8 /* OpenCardModel.h */,
+				D026E9C41DFA7AF800C563D8 /* OpenCardModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -808,6 +858,8 @@
 				D00F8D091D9A0AEF00AD7CC8 /* MainViewController.m */,
 				D026E9B11DF56A8D00C563D8 /* UIViewController+ShowAlertView.h */,
 				D026E9B21DF56A8D00C563D8 /* UIViewController+ShowAlertView.m */,
+				D026E9D31DFE836A00C563D8 /* UIResponder+GetLocalDic.h */,
+				D026E9D41DFE836A00C563D8 /* UIResponder+GetLocalDic.m */,
 				D0758A771D9CAF710071D8A6 /* Login */,
 				D0C5F9D61D9A0DCA00D00B85 /* MVC */,
 				D00F8CE11D9A0A1B00AD7CC8 /* Assets.xcassets */,
@@ -946,6 +998,73 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		D026E9C91DFBA28D00C563D8 /* MyMembershipCard */ = {
+			isa = PBXGroup;
+			children = (
+				D026E9CA1DFBA2B500C563D8 /* MyMembershipCardViewController.h */,
+				D026E9CB1DFBA2B500C563D8 /* MyMembershipCardViewController.m */,
+				D026E9CD1DFBD56D00C563D8 /* MembershipServicesView.h */,
+				D026E9CE1DFBD56D00C563D8 /* MembershipServicesView.m */,
+				D026E9D01DFE438500C563D8 /* MembershipServicesModel.h */,
+				D026E9D11DFE438500C563D8 /* MembershipServicesModel.m */,
+			);
+			path = MyMembershipCard;
+			sourceTree = "<group>";
+		};
+		D026E9D61DFE94A800C563D8 /* Appointment */ = {
+			isa = PBXGroup;
+			children = (
+				D026E9D81DFE958700C563D8 /* Controller */,
+				D026E9D91DFE958700C563D8 /* View */,
+			);
+			path = Appointment;
+			sourceTree = "<group>";
+		};
+		D026E9D71DFE94A800C563D8 /* Order */ = {
+			isa = PBXGroup;
+			children = (
+				D026E9DA1DFE959100C563D8 /* Controller */,
+				D026E9DB1DFE959100C563D8 /* View */,
+			);
+			path = Order;
+			sourceTree = "<group>";
+		};
+		D026E9D81DFE958700C563D8 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				D026E9DF1DFE977500C563D8 /* LWAppointmentVc.h */,
+				D026E9E01DFE977500C563D8 /* LWAppointmentVc.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		D026E9D91DFE958700C563D8 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				D026E9E51DFE9A2700C563D8 /* AppointOrderView.h */,
+				D026E9E61DFE9A2700C563D8 /* AppointOrderView.m */,
+				D026E9E81DFF922800C563D8 /* AppointOnLineView.h */,
+				D026E9E91DFF922800C563D8 /* AppointOnLineView.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		D026E9DA1DFE959100C563D8 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				D026E9E21DFE97C500C563D8 /* LWOrderVC.h */,
+				D026E9E31DFE97C500C563D8 /* LWOrderVC.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		D026E9DB1DFE959100C563D8 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		D032F9DB1DB7652C0052562D /* MVC */ = {
 			isa = PBXGroup;
 			children = (
@@ -956,6 +1075,7 @@
 				D0FA2AED1DCAE46700BCA242 /* CarCoupon */,
 				D003F0951DCC145E003F0A3C /* ExperienceVoucher */,
 				D003F09C1DCC188E003F0A3C /* SellCard */,
+				D026E9C91DFBA28D00C563D8 /* MyMembershipCard */,
 			);
 			path = MVC;
 			sourceTree = "<group>";
@@ -1081,6 +1201,9 @@
 				D0A4B4CD1DBEF074005C8C79 /* stores_oil.png */,
 				D04C804E1DC0A17100C72829 /* stores_unselect.png */,
 				D04C80501DC0A30500C72829 /* stores_select.png */,
+				D026E9EB1DFFC4DA00C563D8 /* createQR.png */,
+				D026E9EC1DFFC4DA00C563D8 /* scanQR.png */,
+				D026E9ED1DFFC4DA00C563D8 /* yanzhengma.png */,
 			);
 			path = Stores;
 			sourceTree = "<group>";
@@ -1214,6 +1337,8 @@
 			isa = PBXGroup;
 			children = (
 				D0A4B4AE1DBB67DA005C8C79 /* BuyCoupon */,
+				D026E9D61DFE94A800C563D8 /* Appointment */,
+				D026E9D71DFE94A800C563D8 /* Order */,
 			);
 			path = MVC;
 			sourceTree = "<group>";
@@ -1323,6 +1448,8 @@
 		D0C5F9D91D9A0DCA00D00B85 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				D026E9C61DFA9D6400C563D8 /* AboutModel.h */,
+				D026E9C71DFA9D6400C563D8 /* AboutModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1395,6 +1522,8 @@
 			children = (
 				D0C5F9EA1D9A0F1D00D00B85 /* HomeViewController.h */,
 				D0C5F9EB1D9A0F1D00D00B85 /* HomeViewController.m */,
+				D026E9BD1DF80A8900C563D8 /* ADViewController.h */,
+				D026E9BE1DF80A8900C563D8 /* ADViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1402,6 +1531,12 @@
 		D0C5F9E11D9A0DCA00D00B85 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				D026E9B71DF7AB3700C563D8 /* HomeModel.h */,
+				D026E9B81DF7AB3700C563D8 /* HomeModel.m */,
+				D026E9BA1DF7EA0500C563D8 /* BannerModel.h */,
+				D026E9BB1DF7EA0500C563D8 /* BannerModel.m */,
+				D026E9C01DF8ED5600C563D8 /* ServiceModel.h */,
+				D026E9C11DF8ED5600C563D8 /* ServiceModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2139,6 +2274,7 @@
 				D09BC1691DC865740035DE65 /* alipay.png in Resources */,
 				D037E5D01DB07FD9008D14E7 /* home_top_weather.png in Resources */,
 				D006C25E1DB9F30E0017FCD5 /* about_order_head_placeholdre.png in Resources */,
+				D026E9F01DFFC4DA00C563D8 /* yanzhengma.png in Resources */,
 				D00F8CE51D9A0A1B00AD7CC8 /* LaunchScreen.storyboard in Resources */,
 				D0A4B4B61DBD9BDB005C8C79 /* stores_headImg.png in Resources */,
 				D0C5FA001D9A177200D00B85 /* tabbar_about_un@2x.png in Resources */,
@@ -2235,6 +2371,7 @@
 				D0C5FA0D1D9A240500D00B85 /* daohangye1.png in Resources */,
 				D0758AB61D9E17C50071D8A6 /* about_tableview_service.png in Resources */,
 				D0C7A4A81DA9EEE9005FC697 /* weather_smog_bg.png in Resources */,
+				D026E9EF1DFFC4DA00C563D8 /* scanQR.png in Resources */,
 				D003F0A91DD01197003F0A3C /* about_tableview_sellcard_money.png in Resources */,
 				D0E8F9E21D9BA65B00582D96 /* ad_04.png in Resources */,
 				D0C3E9551DB1F6D90084CDA4 /* forth_illegal_car.jpg in Resources */,
@@ -2250,6 +2387,7 @@
 				D0758AAB1D9E17C50071D8A6 /* about_second_completed.png in Resources */,
 				D006C2621DB9F30E0017FCD5 /* about_order_phone.png in Resources */,
 				D0139A901DD5663B005141F2 /* 方正小标宋简体.ttf in Resources */,
+				D026E9EE1DFFC4DA00C563D8 /* createQR.png in Resources */,
 				D0C5FA441D9A5E7000D00B85 /* home_second_jieqimen.png in Resources */,
 				D0A4B4C91DBE097D005C8C79 /* stores_btnBorder_red.png in Resources */,
 				D0758AAC1D9E17C50071D8A6 /* about_second_uncompleted.png in Resources */,
@@ -2346,6 +2484,7 @@
 				D032F9DA1DB740B10052562D /* WeatherCell.m in Sources */,
 				D0139A9F1DD5B7DA005141F2 /* CashWithdrawalVC.m in Sources */,
 				D0758A801D9CB0FB0071D8A6 /* VerificationCodeLoginVC.m in Sources */,
+				D026E9E41DFE97C500C563D8 /* LWOrderVC.m in Sources */,
 				D0758A8D1D9CF0030071D8A6 /* LoginParentVC.m in Sources */,
 				D006C2511DB8C12A0017FCD5 /* OrderModel.m in Sources */,
 				D0A4B4A31DBB46CF005C8C79 /* OrderContentInfoView.m in Sources */,
@@ -2353,6 +2492,7 @@
 				D0FA2AF61DCAE7F400BCA242 /* CarCouponListVC.m in Sources */,
 				D0758A861D9CB1280071D8A6 /* ForgotPasswordVC.m in Sources */,
 				D0A4B4C51DBDFA44005C8C79 /* CouponInfoView.m in Sources */,
+				D026E9C21DF8ED5600C563D8 /* ServiceModel.m in Sources */,
 				D006C2491DB84BD00017FCD5 /* OrderCell.m in Sources */,
 				D0D918D51DA8F432003379E3 /* EnquiryIllegalVC.m in Sources */,
 				D026E9B31DF56A8D00C563D8 /* UIViewController+ShowAlertView.m in Sources */,
@@ -2360,12 +2500,15 @@
 				D0A4B4C21DBDE67F005C8C79 /* MaintainCouponVC.m in Sources */,
 				D0F7808D1DC2FE1900347B21 /* CardCell.m in Sources */,
 				D0D918DB1DA8F46D003379E3 /* RechargeFuelCardVC.m in Sources */,
+				D026E9C81DFA9D6400C563D8 /* AboutModel.m in Sources */,
 				D0139A861DD417F6005141F2 /* LWCouponCell.m in Sources */,
 				D003F0B71DD05E3E003F0A3C /* OpenCardVC.m in Sources */,
 				D0D918BE1DA8E784003379E3 /* FillPhoneChargesVC.m in Sources */,
 				D0758A621D9C9F300071D8A6 /* StoreCell.m in Sources */,
 				D0A4B49C1DBB4163005C8C79 /* OrderInfoVC.m in Sources */,
 				D0FA2AE41DCAC29400BCA242 /* ExchangePointsVC.m in Sources */,
+				D026E9E71DFE9A2700C563D8 /* AppointOrderView.m in Sources */,
+				D026E9D21DFE438500C563D8 /* MembershipServicesModel.m in Sources */,
 				D0E8F9DA1D9BA57100582D96 /* ScrollImageView.m in Sources */,
 				D0A4B4A81DBB53EB005C8C79 /* AppointContentInfoView.m in Sources */,
 				D0E8F9EA1D9BC19C00582D96 /* StoresListVC.m in Sources */,
@@ -2374,10 +2517,13 @@
 				D01CB9CE1DA8855600DD5527 /* ProtocolViewController.m in Sources */,
 				D0C5F9F51D9A0F4F00D00B85 /* AboutViewController.m in Sources */,
 				D0FA2AF31DCAE48100BCA242 /* CarCouponVC.m in Sources */,
+				D026E9CF1DFBD56D00C563D8 /* MembershipServicesView.m in Sources */,
 				D0FA2AE71DCAC93A00BCA242 /* ExchangePointsView.m in Sources */,
+				D026E9B91DF7AB3700C563D8 /* HomeModel.m in Sources */,
 				D0629F291DC6CD3400076CF4 /* CompanyCardView.m in Sources */,
 				D04C804D1DC07C9900C72829 /* MaintainItemCell.m in Sources */,
 				D0C5F9EF1D9A0F2A00D00B85 /* StoresViewController.m in Sources */,
+				D026E9EA1DFF922800C563D8 /* AppointOnLineView.m in Sources */,
 				D032F9E51DB76A400052562D /* OrderListVC.m in Sources */,
 				D0758A7D1D9CB0340071D8A6 /* LoginViewController.m in Sources */,
 				D0139A7D1DD3FC7A005141F2 /* CouponViewController.m in Sources */,
@@ -2411,6 +2557,7 @@
 				D09BC15F1DC844C10035DE65 /* PayForFuelCardRechargingVC.m in Sources */,
 				D0EE8AFE1DC1CD3F00468B8A /* CardRechargeMoneyView.m in Sources */,
 				D00F8CD71D9A0A1B00AD7CC8 /* main.m in Sources */,
+				D026E9D51DFE836A00C563D8 /* UIResponder+GetLocalDic.m in Sources */,
 				D01CB9D11DA88DCB00DD5527 /* CardAndCarView.m in Sources */,
 				D0D918B61DA8D1DE003379E3 /* AboutCell.m in Sources */,
 				D0A4B4A51DBB46CF005C8C79 /* OrderStateView.m in Sources */,
@@ -2420,17 +2567,22 @@
 				D003F0BA1DD06097003F0A3C /* OpenCardCell.m in Sources */,
 				D0A4B4CC1DBEE514005C8C79 /* CouponItemView.m in Sources */,
 				D0F92F761DD17E5A00BC0302 /* UIResponder+FindResponderVC.m in Sources */,
+				D026E9BC1DF7EA0500C563D8 /* BannerModel.m in Sources */,
+				D026E9CC1DFBA2B500C563D8 /* MyMembershipCardViewController.m in Sources */,
 				D006C24E1DB8BED60017FCD5 /* ItemAndCountView.m in Sources */,
 				D0758A651D9C9FD80071D8A6 /* StoreModel.m in Sources */,
+				D026E9C51DFA7AF800C563D8 /* OpenCardModel.m in Sources */,
 				D09BC1621DC844F70035DE65 /* PaymentWayView.m in Sources */,
 				D0A4B4A41DBB46CF005C8C79 /* OrderContentMoreView.m in Sources */,
 				D0C7A4AF1DAA3390005FC697 /* IllegalResultVC.m in Sources */,
 				D0C3E9581DB205570084CDA4 /* IllegalResultAccountView.m in Sources */,
 				D0FA2AF91DCB063500BCA242 /* CarCouponCell.m in Sources */,
+				D026E9BF1DF80A8900C563D8 /* ADViewController.m in Sources */,
 				D0F92F8C1DD1A20100BC0302 /* PayForOpeningCard.m in Sources */,
 				D0A4B4B41DBB6873005C8C79 /* BuyCouponVC.m in Sources */,
 				D0C5FA141D9A254500D00B85 /* NormanGuideViewManager.m in Sources */,
 				D06DEC831DBF5DFD00B8B04D /* MaintainItemsVC.m in Sources */,
+				D026E9E11DFE977500C563D8 /* LWAppointmentVc.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

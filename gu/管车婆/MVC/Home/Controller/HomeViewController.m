@@ -16,6 +16,9 @@
 #import "EnquiryDriverScoresVC.h"
 #import "BuyAutoInsuranceVC.h"
 #import "OpenCardVC.h"
+#import "HomeModel.h"
+#import "ADViewController.h"
+#import "ServiceModel.h"
 
 #define kFirstBtnWidth  kScreenWidth/4
 #define kFirstBtnHeight 80*kRate
@@ -29,11 +32,15 @@
 }
 @property (nonatomic, strong)UIView          *topView;
 @property (nonatomic, strong)ScrollImageView *scrollImageView;//广告轮播图
-@property (nonatomic, strong)UIView          *firstBtnsView;
 @property (nonatomic, strong)UIView          *secondView;
 @property (nonatomic, strong)UIView          *thirdView;
 @property (nonatomic, strong)UIView          *forthView;
 @property (nonatomic, strong)UIImageView     *fifthImgView;
+
+@property (nonatomic, strong)HomeModel       *homeModel;
+
+@property (nonatomic, assign)BOOL             isLoadSuccess;//当网络请求成功时设置其值
+
 @end
 
 @implementation HomeViewController
@@ -47,7 +54,21 @@
     //导航栏
     [self addNavBar];
     
+    //导航栏下面的内容视图
+    [self addContentView];
+    
+    //网络请求数据
+    [self getHomeInfo];
+}
+
+- (void)addContentView
+{
     _scrollView = [[UIScrollView alloc] initWithFrame:[UIScreen mainScreen].bounds];//滑动视图的可视范围
+    if (self.navigationController.navigationBar) {
+        _scrollView.frame = CGRectMake(0, 64, kScreenWidth, kScreenHeight-64-49);
+    } else {
+        _scrollView.frame = [UIScreen mainScreen].bounds;
+    }
     _scrollView.backgroundColor = [UIColor colorWithRed:234/255.0 green:238/255.0 blue:239/255.0 alpha:1];
     _scrollView.showsHorizontalScrollIndicator = NO;
     _scrollView.showsVerticalScrollIndicator = NO;
@@ -73,7 +94,7 @@
     [self addFifthContent];
 }
 
-
+#pragma mark
 #pragma mark ******************      导航引导页      ****************
 - (void)guideView
 {
@@ -188,7 +209,7 @@
     carText.textColor = [UIColor colorWithWhite:0.4 alpha:1];
     carText.shadowColor = [UIColor colorWithWhite:0.4 alpha:1];
     carText.shadowOffset = CGSizeMake(0.3*kRate, 0.3*kRate);
-    carText.text = @"宝马 BMW 4系双门轿跑车121420 18";
+    carText.text = _homeModel.car;
     [_topView addSubview:carText];
     
     //是否适宜洗车
@@ -199,7 +220,7 @@
     UILabel *isSuitable = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(weatherImg.frame), 6*kRate, 70*kRate, 22*kRate)];
     isSuitable.font = [UIFont systemFontOfSize:12.0*kRate];
     isSuitable.textColor = [UIColor colorWithWhite:0.4 alpha:1];
-    isSuitable.text = @"不宜洗车";
+    isSuitable.text = _homeModel.isSuitableForClean;
     [_topView addSubview:isSuitable];
 }
 
@@ -208,10 +229,9 @@
 - (void)addFirstContent
 {
     //按钮上方的轮播图
-    [_scrollView addSubview:self.scrollImageView];
-    
-    //洗车、保养、预约、活动按钮
-    [self addFirstBtns];
+    if (_isLoadSuccess) {
+        [_scrollView addSubview:self.scrollImageView];
+    }
 }
 
 /// 懒加载
@@ -219,9 +239,15 @@
 {
     if (!_scrollImageView) {
         
-        NSArray * dataUrls = @[@"http://",@"http://",@"http://",@"http://"];
+        NSMutableArray * dataUrlsMutable = [NSMutableArray array];
+        for (BannerModel *banner1Model in _homeModel.banner1Models) {
+            [dataUrlsMutable addObject:banner1Model.picUrl];
+        }
+        NSArray *dataUrls = [dataUrlsMutable copy];
+        
         NSArray * dataPics = @[@"ad_01",@"ad_02",@"ad_03",@"ad_04",@"ad_01"];
         _scrollImageView = [[ScrollImageView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_topView.frame), kScreenWidth, 100*kRate) andPictureUrls:dataUrls andPlaceHolderImages:dataPics];
+
         _scrollImageView.delegate = self;
         
     }
@@ -230,132 +256,28 @@
 }
 
 
-///洗车、保养、预约、活动按钮
-- (void)addFirstBtns
-{
-    _firstBtnsView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_scrollImageView.frame), kScreenWidth, kFirstBtnHeight)];
-    _firstBtnsView.backgroundColor = [UIColor whiteColor];
-    [_scrollView addSubview:_firstBtnsView];
-    
-    //洗车
-    [self addWashBtn];
-    
-    //保养
-    [self addMaintenanceBtn];
-    
-    //预约
-    [self addAppointmentBtn];
-    
-    //活动
-    [self addActivityBtn];
-}
-
-//洗车
-- (void)addWashBtn
-{
-    UIButton *washBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, kFirstBtnWidth, kFirstBtnHeight)];
-    [washBtn addTarget:self action:@selector(washBtnAction) forControlEvents:UIControlEventTouchUpInside];
-    
-    [washBtn setImage:[UIImage imageNamed:@"home_first_wash"] forState:UIControlStateNormal];
-    washBtn.imageEdgeInsets = UIEdgeInsetsMake(8*kRate, 25*kRate, 22*kRate, 25*kRate);
-    
-    [washBtn setTitle:@"洗车" forState:UIControlStateNormal];
-    washBtn.titleLabel.font = [UIFont systemFontOfSize:13.0*kRate];
-    washBtn.titleLabel.textAlignment = NSTextAlignmentCenter;
-    [washBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    washBtn.titleEdgeInsets = UIEdgeInsetsMake(kFirstBtnWidth - 45*kRate, -washBtn.titleLabel.bounds.size.width - 98, 5*kRate, 0);
-    
-    
-    [_firstBtnsView addSubview:washBtn];
-}
-
-- (void)washBtnAction
-{
-    NSLog(@"洗车");
-}
-
-//保养
-- (void)addMaintenanceBtn
-{
-    UIButton *maintenanceBtn = [[UIButton alloc] initWithFrame:CGRectMake(kFirstBtnWidth, 0, kFirstBtnWidth, kFirstBtnHeight)];
-    [maintenanceBtn addTarget:self action:@selector(mainTenanceBtnAction) forControlEvents:UIControlEventTouchUpInside];
-    
-    [maintenanceBtn setImage:[UIImage imageNamed:@"home_first_maintenance"] forState:UIControlStateNormal];
-    maintenanceBtn.imageEdgeInsets = UIEdgeInsetsMake(10*kRate, 28*kRate, 22*kRate, 28*kRate);
-    
-    [maintenanceBtn setTitle:@"保养" forState:UIControlStateNormal];
-    maintenanceBtn.titleLabel.font = [UIFont systemFontOfSize:13.0*kRate];
-    maintenanceBtn.titleLabel.textAlignment = NSTextAlignmentCenter;
-    [maintenanceBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    maintenanceBtn.titleEdgeInsets = UIEdgeInsetsMake(kFirstBtnWidth - 45*kRate, -maintenanceBtn.titleLabel.bounds.size.width - 85, 5*kRate, 0);
-    
-    
-    
-    [_firstBtnsView addSubview:maintenanceBtn];
-}
-
-- (void)mainTenanceBtnAction
-{
-    NSLog(@"保养");
-}
-
-
-//预约
-- (void)addAppointmentBtn
-{
-    UIButton *appointmentBtn = [[UIButton alloc] initWithFrame:CGRectMake(kFirstBtnWidth*2, 0, kFirstBtnWidth, kFirstBtnHeight)];
-    [appointmentBtn addTarget:self action:@selector(appointmentBtnAction) forControlEvents:UIControlEventTouchUpInside];
-    
-    [appointmentBtn setImage:[UIImage imageNamed:@"home_first_appointment"] forState:UIControlStateNormal];
-    appointmentBtn.imageEdgeInsets = UIEdgeInsetsMake(10*kRate, 28*kRate, 22*kRate, 28*kRate);
-    
-    [appointmentBtn setTitle:@"预约" forState:UIControlStateNormal];
-    appointmentBtn.titleLabel.font = [UIFont systemFontOfSize:13.0*kRate];
-    appointmentBtn.titleLabel.textAlignment = NSTextAlignmentCenter;
-    [appointmentBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    appointmentBtn.titleEdgeInsets = UIEdgeInsetsMake(kFirstBtnWidth - 45*kRate, -appointmentBtn.titleLabel.bounds.size.width - 85, 5*kRate, 0);
-    
-    [_firstBtnsView addSubview:appointmentBtn];
-}
-
-- (void)appointmentBtnAction
-{
-    NSLog(@"预约");
-}
-
-//活动
-- (void)addActivityBtn
-{
-    UIButton *activityBtn = [[UIButton alloc] initWithFrame:CGRectMake(kFirstBtnWidth*3, 0, kFirstBtnWidth, kFirstBtnHeight)];
-    [activityBtn addTarget:self action:@selector(activitybtnAction) forControlEvents:UIControlEventTouchUpInside];
-    
-    [activityBtn setImage:[UIImage imageNamed:@"home_first_activity"] forState:UIControlStateNormal];
-    activityBtn.imageEdgeInsets = UIEdgeInsetsMake(10*kRate, 28*kRate, 22*kRate, 28*kRate);
-    
-    [activityBtn setTitle:@"活动" forState:UIControlStateNormal];
-    activityBtn.titleLabel.font = [UIFont systemFontOfSize:13.0*kRate];
-    activityBtn.titleLabel.textAlignment = NSTextAlignmentCenter;
-    [activityBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    activityBtn.titleEdgeInsets = UIEdgeInsetsMake(kFirstBtnWidth - 45*kRate, -activityBtn.titleLabel.bounds.size.width - 85, 5*kRate, 0);
-    
-    [_firstBtnsView addSubview:activityBtn];
-}
-
-- (void)activitybtnAction
-{
-    NSLog(@"活动");
-}
 
 #pragma mark ---- scrollImageViewDelegate
 -(void)scrollImageView:(ScrollImageView *)srollImageView didTapImageView:(UIImageView *)image atIndex:(NSInteger)index
 {
-    NSLog(@"轮播图");
+    NSLog(@"点击的是第%zd个图片，该图片是:%@",index+1,image);
+    //在这个方法里面实现点击相应图片后的跳转。
+    
+    BannerModel *currentModel = [[BannerModel alloc] init];
+    currentModel = _homeModel.banner1Models[index];
+    
+    ADViewController *adViewController = [[ADViewController alloc] init];
+    adViewController.linkUrl = currentModel.linkUrl;
+    adViewController.titleStr = currentModel.titleName;
+    [self.navigationController pushViewController:adViewController animated:NO];
+    
+    
 }
 
 #pragma mark ******************      第二块内容      ****************
 - (void)addSecondContend
 {
-    _secondView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_firstBtnsView.frame) + 10*kRate, kScreenWidth, kScreenWidth/4*3)];
+    _secondView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_scrollImageView.frame) + 10*kRate, kScreenWidth, kScreenWidth/4*3)];
     _secondView.backgroundColor = [UIColor whiteColor];
     [_scrollView addSubview:_secondView];
     
@@ -402,174 +324,184 @@
     
     
     
-    //全车镀晶
-    [self addDujingBtn];
+    //上1
+    [self addUp1Btn];
     
-    //清洗节气门
-    [self addJieqimenBtn];
+    //上2
+    [self addUp2Btn];
     
-    //清洗发动机
-    [self addFadongjiBtn];
+    //上3
+    [self addUp3Btn];
     
-    //轮胎检查
-    [self addluntaiBtn];
+    //上4
+    [self addUp4Btn];
     
-    //底盘检查
-    [self addDipanBtn];
+    //中1
+    [self addMedium1Btn];
     
     //广告位
     [self addAdView];
     
-    //空调清洗
-    [self addKongtiaoBtn];
+    //中2
+    [self addMedium2Btn];
     
-    //清洗进气管道
-    [self addJinqiguanBtn];
+    //下1
+    [self addDown1Btn];
     
-    //真皮护理
-    [self addZhenpiBtn];
+    //下2
+    [self addDown2Btn];
     
-    //玻璃镀膜
-    [self addBoliBtn];
+    //下3
+    [self addDown3Btn];
     
-    //更多
-    [self addMoreBtn];
+    //下4
+    [self addDown4Btn];
     
     
 }
 
-//全车镀晶
-- (void)addDujingBtn
+//上1
+- (void)addUp1Btn
 {
-    UIButton *dujingBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, kSecondBtnWidth, kSecondBtnWidth)];
-    [dujingBtn addTarget:self action:@selector(dujingBtnAction) forControlEvents:UIControlEventTouchUpInside];
+    ServiceModel *serviceModel = _homeModel.services[0];
     
-    [dujingBtn setImage:[UIImage imageNamed:@"home_second_dujing"] forState:UIControlStateNormal];
-    dujingBtn.imageEdgeInsets = UIEdgeInsetsMake(20*kRate, 35*kRate, 35*kRate, 30*kRate);
+    UIButton *up1Btn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, kSecondBtnWidth, kSecondBtnWidth)];
+    [up1Btn addTarget:self action:@selector(up1BtnAction) forControlEvents:UIControlEventTouchUpInside];
     
-    [dujingBtn setTitle:@"全车镀晶" forState:UIControlStateNormal];
-    dujingBtn.titleLabel.font = [UIFont systemFontOfSize:12.0*kRate];
-    dujingBtn.titleLabel.textAlignment = NSTextAlignmentCenter;
-    [dujingBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    dujingBtn.titleEdgeInsets = UIEdgeInsetsMake(kSecondBtnWidth - 35*kRate, -dujingBtn.titleLabel.bounds.size.width - 45, 5*kRate, 0);
+    [up1Btn sd_setImageWithURL:serviceModel.serviceImg forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"home_second_dujing"]];
+    up1Btn.imageEdgeInsets = UIEdgeInsetsMake(20*kRate, 30*kRate, 35*kRate, 25*kRate);
     
-    [_secondView addSubview:dujingBtn];
+    [up1Btn setTitle:serviceModel.serviceName forState:UIControlStateNormal];
+    up1Btn.titleLabel.font = [UIFont systemFontOfSize:12.0*kRate];
+    up1Btn.titleLabel.textAlignment = NSTextAlignmentCenter;
+    [up1Btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    up1Btn.titleEdgeInsets = UIEdgeInsetsMake(kSecondBtnWidth - 35*kRate, -up1Btn.titleLabel.bounds.size.width - 70, 5*kRate, 0);
+    
+    [_secondView addSubview:up1Btn];
 }
 
-- (void)dujingBtnAction
+- (void)up1BtnAction
 {
-    NSLog(@"全车镀晶");
+    ServiceModel *serviceModel = _homeModel.services[0];
     
-    [self postNotificationWithIndex:[NSNumber numberWithInt:2]];
-}
-
-
-//清洗节气门
-- (void)addJieqimenBtn
-{
-    UIButton *jieqimenBtn = [[UIButton alloc] initWithFrame:CGRectMake(kSecondBtnWidth, 0, kSecondBtnWidth, kSecondBtnWidth)];
-    [jieqimenBtn addTarget:self action:@selector(jieqimenBtnAction) forControlEvents:UIControlEventTouchUpInside];
-    
-    [jieqimenBtn setImage:[UIImage imageNamed:@"home_second_jieqimen"] forState:UIControlStateNormal];
-    jieqimenBtn.imageEdgeInsets = UIEdgeInsetsMake(20*kRate, 35*kRate, 35*kRate, 30*kRate);
-    
-    [jieqimenBtn setTitle:@"清洗节气门" forState:UIControlStateNormal];
-    jieqimenBtn.titleLabel.font = [UIFont systemFontOfSize:12.0*kRate];
-    jieqimenBtn.titleLabel.textAlignment = NSTextAlignmentCenter;
-    [jieqimenBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    jieqimenBtn.titleEdgeInsets = UIEdgeInsetsMake(kSecondBtnWidth - 35*kRate, -jieqimenBtn.titleLabel.bounds.size.width - 50, 5*kRate, 0);
-    
-    [_secondView addSubview:jieqimenBtn];
-}
-
-- (void)jieqimenBtnAction
-{
-    NSLog(@"清洗节气门");
-    
-    [self postNotificationWithIndex:[NSNumber numberWithInt:1]];
+    NSLog(@"%d", serviceModel.serviceId);
 }
 
 
-//清洗发动机
-- (void)addFadongjiBtn
+//上2
+- (void)addUp2Btn
 {
-    UIButton *fadongjiBtn = [[UIButton alloc] initWithFrame:CGRectMake(kSecondBtnWidth*2, 0, kSecondBtnWidth, kSecondBtnWidth)];
-    [fadongjiBtn addTarget:self action:@selector(fadongjiBtnAction) forControlEvents:UIControlEventTouchUpInside];
+    ServiceModel *serviceModel = _homeModel.services[1];
     
-    [fadongjiBtn setImage:[UIImage imageNamed:@"home_second_fadongji"] forState:UIControlStateNormal];
-    fadongjiBtn.imageEdgeInsets = UIEdgeInsetsMake(20*kRate, 30*kRate, 35*kRate, 25*kRate);
+    UIButton *up2Btn = [[UIButton alloc] initWithFrame:CGRectMake(kSecondBtnWidth, 0, kSecondBtnWidth, kSecondBtnWidth)];
+    [up2Btn addTarget:self action:@selector(up2BtnAction) forControlEvents:UIControlEventTouchUpInside];
     
-    [fadongjiBtn setTitle:@"清洗发动机" forState:UIControlStateNormal];
-    fadongjiBtn.titleLabel.font = [UIFont systemFontOfSize:12.0*kRate];
-    fadongjiBtn.titleLabel.textAlignment = NSTextAlignmentCenter;
-    [fadongjiBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    fadongjiBtn.titleEdgeInsets = UIEdgeInsetsMake(kSecondBtnWidth - 35*kRate, -fadongjiBtn.titleLabel.bounds.size.width - 70, 5*kRate, 0);
+    [up2Btn sd_setImageWithURL:serviceModel.serviceImg forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"home_second_dujing"]];
+    up2Btn.imageEdgeInsets = UIEdgeInsetsMake(20*kRate, 30*kRate, 35*kRate, 25*kRate);
     
-    [_secondView addSubview:fadongjiBtn];
+    [up2Btn setTitle:serviceModel.serviceName forState:UIControlStateNormal];
+    up2Btn.titleLabel.font = [UIFont systemFontOfSize:12.0*kRate];
+    up2Btn.titleLabel.textAlignment = NSTextAlignmentCenter;
+    [up2Btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    up2Btn.titleEdgeInsets = UIEdgeInsetsMake(kSecondBtnWidth - 35*kRate, -up2Btn.titleLabel.bounds.size.width - 70, 5*kRate, 0);
+    
+    [_secondView addSubview:up2Btn];
 }
 
-- (void)fadongjiBtnAction
+- (void)up2BtnAction
 {
-    NSLog(@"清洗发动机");
+    ServiceModel *serviceModel = _homeModel.services[1];
     
-    [self postNotificationWithIndex:[NSNumber numberWithInt:0]];
+    NSLog(@"%d", serviceModel.serviceId);
 }
 
-//轮胎检查
-- (void)addluntaiBtn
+
+//上3
+- (void)addUp3Btn
 {
-    UIButton *luntaiBtn = [[UIButton alloc] initWithFrame:CGRectMake(kSecondBtnWidth*3, 0, kSecondBtnWidth, kSecondBtnWidth)];
-    [luntaiBtn addTarget:self action:@selector(luntaiBtnAction) forControlEvents:UIControlEventTouchUpInside];
+    ServiceModel *serviceModel = _homeModel.services[2];
     
-    [luntaiBtn setImage:[UIImage imageNamed:@"home_second_luntai"] forState:UIControlStateNormal];
-    luntaiBtn.imageEdgeInsets = UIEdgeInsetsMake(20*kRate, 30*kRate, 35*kRate, 25*kRate);
+    UIButton *up3Btn = [[UIButton alloc] initWithFrame:CGRectMake(kSecondBtnWidth*2, 0, kSecondBtnWidth, kSecondBtnWidth)];
+    [up3Btn addTarget:self action:@selector(up3BtnAction) forControlEvents:UIControlEventTouchUpInside];
     
-    [luntaiBtn setTitle:@"轮胎检查" forState:UIControlStateNormal];
-    luntaiBtn.titleLabel.font = [UIFont systemFontOfSize:12.0*kRate];
-    luntaiBtn.titleLabel.textAlignment = NSTextAlignmentCenter;
-    [luntaiBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    luntaiBtn.titleEdgeInsets = UIEdgeInsetsMake(kSecondBtnWidth - 35*kRate, -luntaiBtn.titleLabel.bounds.size.width - 70, 5*kRate, 0);
+    [up3Btn sd_setImageWithURL:serviceModel.serviceImg forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"home_second_dujing"]];
+    up3Btn.imageEdgeInsets = UIEdgeInsetsMake(20*kRate, 30*kRate, 35*kRate, 25*kRate);
     
-    [_secondView addSubview:luntaiBtn];
+    [up3Btn setTitle:serviceModel.serviceName forState:UIControlStateNormal];
+    up3Btn.titleLabel.font = [UIFont systemFontOfSize:12.0*kRate];
+    up3Btn.titleLabel.textAlignment = NSTextAlignmentCenter;
+    [up3Btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    up3Btn.titleEdgeInsets = UIEdgeInsetsMake(kSecondBtnWidth - 35*kRate, -up3Btn.titleLabel.bounds.size.width - 70, 5*kRate, 0);
+    
+    [_secondView addSubview:up3Btn];
 }
 
-- (void)luntaiBtnAction
+- (void)up3BtnAction
 {
-    NSLog(@"轮胎检查");
+    ServiceModel *serviceModel = _homeModel.services[2];
     
-    [self postNotificationWithIndex:[NSNumber numberWithInt:3]];
+    NSLog(@"%d", serviceModel.serviceId);
 }
 
-//底盘检查
-- (void)addDipanBtn
+//上4
+- (void)addUp4Btn
 {
-    UIButton *dipanBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, kSecondBtnWidth, kSecondBtnWidth, kSecondBtnWidth)];
-    [dipanBtn addTarget:self action:@selector(dipanBtnAction) forControlEvents:UIControlEventTouchUpInside];
+    ServiceModel *serviceModel = _homeModel.services[3];
     
-    [dipanBtn setImage:[UIImage imageNamed:@"home_second_dipan"] forState:UIControlStateNormal];
-    dipanBtn.imageEdgeInsets = UIEdgeInsetsMake(20*kRate, 30*kRate, 35*kRate, 25*kRate);
+    UIButton *up4Btn = [[UIButton alloc] initWithFrame:CGRectMake(kSecondBtnWidth*3, 0, kSecondBtnWidth, kSecondBtnWidth)];
+    [up4Btn addTarget:self action:@selector(up4BtnAction) forControlEvents:UIControlEventTouchUpInside];
     
-    [dipanBtn setTitle:@"底盘检查" forState:UIControlStateNormal];
-    dipanBtn.titleLabel.font = [UIFont systemFontOfSize:12.0*kRate];
-    dipanBtn.titleLabel.textAlignment = NSTextAlignmentCenter;
-    [dipanBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    dipanBtn.titleEdgeInsets = UIEdgeInsetsMake(kSecondBtnWidth - 35*kRate, -dipanBtn.titleLabel.bounds.size.width - 75, 5*kRate, 0);
+    [up4Btn sd_setImageWithURL:serviceModel.serviceImg forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"home_second_dujing"]];
+    up4Btn.imageEdgeInsets = UIEdgeInsetsMake(20*kRate, 30*kRate, 35*kRate, 25*kRate);
     
-    [_secondView addSubview:dipanBtn];
+    [up4Btn setTitle:serviceModel.serviceName forState:UIControlStateNormal];
+    up4Btn.titleLabel.font = [UIFont systemFontOfSize:12.0*kRate];
+    up4Btn.titleLabel.textAlignment = NSTextAlignmentCenter;
+    [up4Btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    up4Btn.titleEdgeInsets = UIEdgeInsetsMake(kSecondBtnWidth - 35*kRate, -up4Btn.titleLabel.bounds.size.width - 70, 5*kRate, 0);
+    
+    [_secondView addSubview:up4Btn];
 }
 
-- (void)dipanBtnAction
+- (void)up4BtnAction
 {
-    NSLog(@"底盘检查");
+    ServiceModel *serviceModel = _homeModel.services[3];
     
-    [self postNotificationWithIndex:[NSNumber numberWithInt:2]];
+    NSLog(@"%d", serviceModel.serviceId);
+}
+
+//中1
+- (void)addMedium1Btn
+{
+    ServiceModel *serviceModel = _homeModel.services[4];
+    
+    UIButton *medium1Btn = [[UIButton alloc] initWithFrame:CGRectMake(0, kSecondBtnWidth, kSecondBtnWidth, kSecondBtnWidth)];
+    [medium1Btn addTarget:self action:@selector(medium1BtnAction) forControlEvents:UIControlEventTouchUpInside];
+    
+    [medium1Btn sd_setImageWithURL:serviceModel.serviceImg forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"home_second_dujing"]];
+    medium1Btn.imageEdgeInsets = UIEdgeInsetsMake(20*kRate, 30*kRate, 35*kRate, 25*kRate);
+    
+    [medium1Btn setTitle:serviceModel.serviceName forState:UIControlStateNormal];
+    medium1Btn.titleLabel.font = [UIFont systemFontOfSize:12.0*kRate];
+    medium1Btn.titleLabel.textAlignment = NSTextAlignmentCenter;
+    [medium1Btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    medium1Btn.titleEdgeInsets = UIEdgeInsetsMake(kSecondBtnWidth - 35*kRate, -medium1Btn.titleLabel.bounds.size.width - 75, 5*kRate, 0);
+    
+    [_secondView addSubview:medium1Btn];
+}
+
+- (void)medium1BtnAction
+{
+    ServiceModel *serviceModel = _homeModel.services[4];
+    
+    NSLog(@"%d", serviceModel.serviceId);
 }
 
 //广告位
 - (void)addAdView
 {
-    UIImageView *secondImgView = [[UIImageView alloc] initWithFrame:CGRectMake(kSecondBtnWidth + 10*kRate, kSecondBtnWidth + 15*kRate, 2*kSecondBtnWidth - 20*kRate, kSecondBtnWidth - 30*kRate)];
-    secondImgView.image = [UIImage imageNamed:@"home_second_ad"];
+    UIImageView *secondImgView = [[UIImageView alloc] initWithFrame:CGRectMake(kSecondBtnWidth + 1, kSecondBtnWidth + 1, 2*kSecondBtnWidth - 1, kSecondBtnWidth - 1)];
+    [secondImgView sd_setImageWithURL:[NSURL URLWithString:_homeModel.banner2Model.picUrl] placeholderImage:[UIImage imageNamed:@"home_second_ad"]];
     secondImgView.userInteractionEnabled = YES;
     [_secondView addSubview:secondImgView];
     
@@ -582,143 +514,149 @@
 {
     NSLog(@"中间的广告位");
     
-    [self postNotificationWithIndex:[NSNumber numberWithInt:1]];
+    ADViewController *banner2VC = [[ADViewController alloc] init];
+    banner2VC.titleStr = self.homeModel.banner2Model.titleName;
+    banner2VC.linkUrl = self.homeModel.banner2Model.linkUrl;
+    banner2VC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:banner2VC animated:NO];
+    banner2VC.hidesBottomBarWhenPushed = NO;
 }
 
-//空调清洗
-- (void)addKongtiaoBtn
+//中2
+- (void)addMedium2Btn
 {
-    UIButton *kongtiaoBtn = [[UIButton alloc] initWithFrame:CGRectMake(kSecondBtnWidth*3, kSecondBtnWidth, kSecondBtnWidth, kSecondBtnWidth)];
-    [kongtiaoBtn addTarget:self action:@selector(kongtiaoBtnAction) forControlEvents:UIControlEventTouchUpInside];
+    ServiceModel *serviceModel = _homeModel.services[5];
     
-    [kongtiaoBtn setImage:[UIImage imageNamed:@"home_second_kongtiao"] forState:UIControlStateNormal];
-    kongtiaoBtn.imageEdgeInsets = UIEdgeInsetsMake(20*kRate, 30*kRate, 35*kRate, 25*kRate);
+    UIButton *medium2Btn = [[UIButton alloc] initWithFrame:CGRectMake(kSecondBtnWidth*3, kSecondBtnWidth, kSecondBtnWidth, kSecondBtnWidth)];
+    [medium2Btn addTarget:self action:@selector(medium2BtnAction) forControlEvents:UIControlEventTouchUpInside];
     
-    [kongtiaoBtn setTitle:@"空调清洗" forState:UIControlStateNormal];
-    kongtiaoBtn.titleLabel.font = [UIFont systemFontOfSize:12.0*kRate];
-    kongtiaoBtn.titleLabel.textAlignment = NSTextAlignmentCenter;
-    [kongtiaoBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    kongtiaoBtn.titleEdgeInsets = UIEdgeInsetsMake(kSecondBtnWidth - 35*kRate, -kongtiaoBtn.titleLabel.bounds.size.width - 70, 5*kRate, 0);
+    [medium2Btn sd_setImageWithURL:serviceModel.serviceImg forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"home_second_dujing"]];
+    medium2Btn.imageEdgeInsets = UIEdgeInsetsMake(20*kRate, 30*kRate, 35*kRate, 25*kRate);
     
-    [_secondView addSubview:kongtiaoBtn];
+    [medium2Btn setTitle:serviceModel.serviceName forState:UIControlStateNormal];
+    medium2Btn.titleLabel.font = [UIFont systemFontOfSize:12.0*kRate];
+    medium2Btn.titleLabel.textAlignment = NSTextAlignmentCenter;
+    [medium2Btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    medium2Btn.titleEdgeInsets = UIEdgeInsetsMake(kSecondBtnWidth - 35*kRate, -medium2Btn.titleLabel.bounds.size.width - 70, 5*kRate, 0);
+    
+    [_secondView addSubview:medium2Btn];
 }
 
-- (void)kongtiaoBtnAction
+- (void)medium2BtnAction
 {
-    NSLog(@"空调清洗");
+    ServiceModel *serviceModel = _homeModel.services[5];
     
-    [self postNotificationWithIndex:[NSNumber numberWithInt:0]];
+    NSLog(@"%d", serviceModel.serviceId);
 }
 
-//清洗进气管道
-- (void)addJinqiguanBtn
+//下1
+- (void)addDown1Btn
 {
-    UIButton *jinqiguanBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, kSecondBtnWidth*2, kSecondBtnWidth, kSecondBtnWidth)];
-    [jinqiguanBtn addTarget:self action:@selector(jinqiguanBtnAction) forControlEvents:UIControlEventTouchUpInside];
+    ServiceModel *serviceModel = _homeModel.services[6];
     
-    [jinqiguanBtn setImage:[UIImage imageNamed:@"home_second_jinqiguandao"] forState:UIControlStateNormal];
-    jinqiguanBtn.imageEdgeInsets = UIEdgeInsetsMake(20*kRate, 35*kRate, 35*kRate, 30*kRate);
+    UIButton *down1Btn = [[UIButton alloc] initWithFrame:CGRectMake(0, kSecondBtnWidth*2, kSecondBtnWidth, kSecondBtnWidth)];
+    [down1Btn addTarget:self action:@selector(down1BtnAction) forControlEvents:UIControlEventTouchUpInside];
     
-    [jinqiguanBtn setTitle:@"清洗进气管道" forState:UIControlStateNormal];
-    jinqiguanBtn.titleLabel.font = [UIFont systemFontOfSize:12.0*kRate];
-    jinqiguanBtn.titleLabel.textAlignment = NSTextAlignmentCenter;
-    [jinqiguanBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    jinqiguanBtn.titleEdgeInsets = UIEdgeInsetsMake(kSecondBtnWidth - 35*kRate, -jinqiguanBtn.titleLabel.bounds.size.width - 50, 5*kRate, 0);
+    [down1Btn sd_setImageWithURL:serviceModel.serviceImg forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"home_second_dujing"]];
+    down1Btn.imageEdgeInsets = UIEdgeInsetsMake(20*kRate, 30*kRate, 35*kRate, 25*kRate);
     
-    [_secondView addSubview:jinqiguanBtn];
+    [down1Btn setTitle:serviceModel.serviceName forState:UIControlStateNormal];
+    down1Btn.titleLabel.font = [UIFont systemFontOfSize:12.0*kRate];
+    down1Btn.titleLabel.textAlignment = NSTextAlignmentCenter;
+    [down1Btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    down1Btn.titleEdgeInsets = UIEdgeInsetsMake(kSecondBtnWidth - 35*kRate, -down1Btn.titleLabel.bounds.size.width - 70, 5*kRate, 0);
+    
+    [_secondView addSubview:down1Btn];
 }
 
-- (void)jinqiguanBtnAction
+- (void)down1BtnAction
 {
-    NSLog(@"清洗进气管道");
+    ServiceModel *serviceModel = _homeModel.services[6];
     
-    [self postNotificationWithIndex:[NSNumber numberWithInt:3]];
+    NSLog(@"%d", serviceModel.serviceId);
 }
 
-//真皮护理
-- (void)addZhenpiBtn
+//下2
+- (void)addDown2Btn
 {
-    UIButton *zhenpiBtn = [[UIButton alloc] initWithFrame:CGRectMake(kSecondBtnWidth, kSecondBtnWidth*2, kSecondBtnWidth, kSecondBtnWidth)];
-    [zhenpiBtn addTarget:self action:@selector(zhenpiBtnAction) forControlEvents:UIControlEventTouchUpInside];
+    ServiceModel *serviceModel = _homeModel.services[7];
     
-    [zhenpiBtn setImage:[UIImage imageNamed:@"home_second_zhenpi"] forState:UIControlStateNormal];
-    zhenpiBtn.imageEdgeInsets = UIEdgeInsetsMake(20*kRate, 30*kRate, 35*kRate, 25*kRate);
+    UIButton *down2Btn = [[UIButton alloc] initWithFrame:CGRectMake(kSecondBtnWidth, kSecondBtnWidth*2, kSecondBtnWidth, kSecondBtnWidth)];
+    [down2Btn addTarget:self action:@selector(down2BtnAction) forControlEvents:UIControlEventTouchUpInside];
     
-    [zhenpiBtn setTitle:@"真皮护理" forState:UIControlStateNormal];
-    zhenpiBtn.titleLabel.font = [UIFont systemFontOfSize:12.0*kRate];
-    zhenpiBtn.titleLabel.textAlignment = NSTextAlignmentCenter;
-    [zhenpiBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    zhenpiBtn.titleEdgeInsets = UIEdgeInsetsMake(kSecondBtnWidth - 35*kRate, -zhenpiBtn.titleLabel.bounds.size.width - 60, 5*kRate, 0);
+    [down2Btn sd_setImageWithURL:serviceModel.serviceImg forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"home_second_dujing"]];
+    down2Btn.imageEdgeInsets = UIEdgeInsetsMake(20*kRate, 30*kRate, 35*kRate, 25*kRate);
     
-    [_secondView addSubview:zhenpiBtn];
+    [down2Btn setTitle:serviceModel.serviceName forState:UIControlStateNormal];
+    down2Btn.titleLabel.font = [UIFont systemFontOfSize:12.0*kRate];
+    down2Btn.titleLabel.textAlignment = NSTextAlignmentCenter;
+    [down2Btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    down2Btn.titleEdgeInsets = UIEdgeInsetsMake(kSecondBtnWidth - 35*kRate, -down2Btn.titleLabel.bounds.size.width - 70, 5*kRate, 0);
+    
+    [_secondView addSubview:down2Btn];
 }
 
-- (void)zhenpiBtnAction
+- (void)down2BtnAction
 {
-    NSLog(@"真皮护理");
+    ServiceModel *serviceModel = _homeModel.services[7];
     
-    [self postNotificationWithIndex:[NSNumber numberWithInt:2]];
+    NSLog(@"%d", serviceModel.serviceId);
 }
 
-//玻璃镀膜
-- (void)addBoliBtn
+//下3
+- (void)addDown3Btn
 {
-    UIButton *boliBtn = [[UIButton alloc] initWithFrame:CGRectMake(kSecondBtnWidth*2, kSecondBtnWidth*2, kSecondBtnWidth, kSecondBtnWidth)];
-    [boliBtn addTarget:self action:@selector(boliBtnAction) forControlEvents:UIControlEventTouchUpInside];
+    ServiceModel *serviceModel = _homeModel.services[8];
     
-    [boliBtn setImage:[UIImage imageNamed:@"home_second_boli"] forState:UIControlStateNormal];
-    boliBtn.imageEdgeInsets = UIEdgeInsetsMake(20*kRate, 30*kRate, 35*kRate, 25*kRate);
+    UIButton *down3Btn = [[UIButton alloc] initWithFrame:CGRectMake(kSecondBtnWidth*2, kSecondBtnWidth*2, kSecondBtnWidth, kSecondBtnWidth)];
+    [down3Btn addTarget:self action:@selector(down3BtnAction) forControlEvents:UIControlEventTouchUpInside];
     
-    [boliBtn setTitle:@"玻璃镀膜" forState:UIControlStateNormal];
-    boliBtn.titleLabel.font = [UIFont systemFontOfSize:12.0*kRate];
-    boliBtn.titleLabel.textAlignment = NSTextAlignmentCenter;
-    [boliBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    boliBtn.titleEdgeInsets = UIEdgeInsetsMake(kSecondBtnWidth - 35*kRate, -boliBtn.titleLabel.bounds.size.width - 70, 5*kRate, 0);
+    [down3Btn sd_setImageWithURL:serviceModel.serviceImg forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"home_second_dujing"]];
+    down3Btn.imageEdgeInsets = UIEdgeInsetsMake(20*kRate, 30*kRate, 35*kRate, 25*kRate);
     
-    [_secondView addSubview:boliBtn];
+    [down3Btn setTitle:serviceModel.serviceName forState:UIControlStateNormal];
+    down3Btn.titleLabel.font = [UIFont systemFontOfSize:12.0*kRate];
+    down3Btn.titleLabel.textAlignment = NSTextAlignmentCenter;
+    [down3Btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    down3Btn.titleEdgeInsets = UIEdgeInsetsMake(kSecondBtnWidth - 35*kRate, -down3Btn.titleLabel.bounds.size.width - 70, 5*kRate, 0);
+    
+    [_secondView addSubview:down3Btn];
 }
 
-- (void)boliBtnAction
+- (void)down3BtnAction
 {
-    NSLog(@"玻璃镀膜");
+    ServiceModel *serviceModel = _homeModel.services[8];
     
-    [self postNotificationWithIndex:[NSNumber numberWithInt:1]];
+    NSLog(@"%d", serviceModel.serviceId);
 }
 
-//更多
-- (void)addMoreBtn
+//下4(更多)
+- (void)addDown4Btn
 {
-    UIButton *moreBtn = [[UIButton alloc] initWithFrame:CGRectMake(kSecondBtnWidth*3, kSecondBtnWidth*2, kSecondBtnWidth, kSecondBtnWidth)];
-    [moreBtn addTarget:self action:@selector(moreBtnAction) forControlEvents:UIControlEventTouchUpInside];
+    UIButton *down4Btn = [[UIButton alloc] initWithFrame:CGRectMake(kSecondBtnWidth*3, kSecondBtnWidth*2, kSecondBtnWidth, kSecondBtnWidth)];
+    [down4Btn addTarget:self action:@selector(down4BtnAction) forControlEvents:UIControlEventTouchUpInside];
     
-    [moreBtn setImage:[UIImage imageNamed:@"home_second_more"] forState:UIControlStateNormal];
-    moreBtn.imageEdgeInsets = UIEdgeInsetsMake(20*kRate, 30*kRate, 35*kRate, 25*kRate);
+    [down4Btn setImage:[UIImage imageNamed:@"home_second_more"] forState:UIControlStateNormal];
+    down4Btn.imageEdgeInsets = UIEdgeInsetsMake(20*kRate, 30*kRate, 35*kRate, 25*kRate);
     
-    [moreBtn setTitle:@"更 多>" forState:UIControlStateNormal];
-    moreBtn.titleLabel.font = [UIFont systemFontOfSize:12.0*kRate];
-    moreBtn.titleLabel.textAlignment = NSTextAlignmentCenter;
-    [moreBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    moreBtn.titleEdgeInsets = UIEdgeInsetsMake(kSecondBtnWidth - 35*kRate, -moreBtn.titleLabel.bounds.size.width - 55, 5*kRate, 0);
+    [down4Btn setTitle:@"更 多>" forState:UIControlStateNormal];
+    down4Btn.titleLabel.font = [UIFont systemFontOfSize:12.0*kRate];
+    down4Btn.titleLabel.textAlignment = NSTextAlignmentCenter;
+    [down4Btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    down4Btn.titleEdgeInsets = UIEdgeInsetsMake(kSecondBtnWidth - 35*kRate, -down4Btn.titleLabel.bounds.size.width - 55, 5*kRate, 0);
     
-    [_secondView addSubview:moreBtn];
+    [_secondView addSubview:down4Btn];
 }
 
-- (void)moreBtnAction
+- (void)down4BtnAction
 {
     NSLog(@"更多");
     
-    [self postNotificationWithIndex:[NSNumber numberWithInt:0]];
+    NSArray *newArr = [_homeModel.services subarrayWithRange:NSMakeRange(10, _homeModel.services.count-10)];
+    NSLog(@"%@", newArr);
+    
 }
 
-#pragma mark --- 给ParentVC发送一个通知，将具体显示哪一个页面的参数传过去
-- (void)postNotificationWithIndex:(NSNumber *)index
-{
-    [self.tabBarController setSelectedIndex:1];
-    
-    NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:index, @"index", nil];
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"页面index" object:nil userInfo:dic];
-    
-}
 
 #pragma mark ******************      第三块内容      ****************
 - (void)addThirdContent
@@ -957,7 +895,7 @@
 {
     _fifthImgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_forthView.frame) + 10*kRate, kScreenWidth, 100*kRate)];
     _fifthImgView.userInteractionEnabled = YES;
-    _fifthImgView.image = [UIImage imageNamed:@"ad_01"];
+    [_fifthImgView sd_setImageWithURL:[NSURL URLWithString:_homeModel.banner3Model.picUrl] placeholderImage:[UIImage imageNamed:@"ad_01"]];
     [_scrollView addSubview:_fifthImgView];
     
     UITapGestureRecognizer *fifthTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(fifthTapAction)];
@@ -967,8 +905,58 @@
 - (void)fifthTapAction
 {
     NSLog(@"最下方的广告位");
+    
+    ADViewController *banner3VC = [[ADViewController alloc] init];
+    banner3VC.titleStr = self.homeModel.banner3Model.titleName;
+    banner3VC.linkUrl = self.homeModel.banner3Model.linkUrl;
+    banner3VC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:banner3VC animated:NO];
+    banner3VC.hidesBottomBarWhenPushed = NO;
 }
 
+
+#pragma mark 
+#pragma mark --- 网络请求
+- (void)getHomeInfo
+{
+    NSString *url_post = [NSString stringWithFormat:@"http://%@:8080/zcar/userapp/getIndexInfo.action", kIP];
+    
+    NSDictionary *params = @{
+                             @"phone":[NSString stringWithFormat:@"%@", [[self getLocalDic] objectForKey:@"phone"]],
+                             };
+    
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    
+    AFHTTPResponseSerializer *responseSerializer = [AFHTTPResponseSerializer serializer];
+    
+    manager.responseSerializer = responseSerializer;
+    
+    [manager POST:url_post parameters:params progress:NULL success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        
+        NSDictionary *content = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+        //NSLog(@"首页数据请求成功，请求下来的Json格式的数据是%@", content);
+        
+        _homeModel = [[HomeModel alloc] initWithDic:content];
+        _isLoadSuccess = YES;
+        
+        //刷新UI
+        [_scrollView removeFromSuperview];
+        [self addNavBar];
+        [self addContentView];
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"请求失败， 失败原因是：%@", error);
+        
+        _isLoadSuccess = NO;
+        
+        //当网络请求失败的时候，也刷新一下UI，否则广告视图就会被隐藏
+        [_scrollView removeFromSuperview];
+        [self addNavBar];
+        [self addContentView];
+        
+    }];
+
+}
 
 
 @end

@@ -15,6 +15,7 @@
 {
     UITableView *_tableView;
 }
+@property (nonatomic, assign)long      currentBtnTag;
 @property (nonatomic, strong)NSArray  *servesArr;//细分服务数组
 @property (nonatomic, strong)NSString *selectedServe;//记录选中的服务
 @end
@@ -85,15 +86,13 @@
 - (void)selectDetailServeWithBtn:(UIButton *)btn
 {
     long btnTag = btn.tag - 100;
-    
-    NSLog(@"self.selectedNum:%d, btnTag:%ld", self.selectedNum, btnTag);
 
-    if (self.selectedNum == btnTag) {
+    if (_currentBtnTag == btnTag) {
         _tableView.hidden = !_tableView.hidden;
     } else {
         _tableView.hidden = YES;
     }
-    self.selectedNum = (int)btnTag;
+    _currentBtnTag = (int)btnTag;
 
     
     if (!_tableView.hidden) {

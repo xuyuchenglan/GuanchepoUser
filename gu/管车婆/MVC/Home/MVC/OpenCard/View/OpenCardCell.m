@@ -9,12 +9,14 @@
 #import "OpenCardCell.h"
 #import "PayForOpeningCard.h"
 #import "OpenCardVC.h"
+#import "OpenCardModel.h"
 
 
 #define kCellWidth (kScreenWidth - 15*kRate*2)
 
 @interface OpenCardCell()
 {
+    UIImageView *_cellBgImgView;
     UIImageView *_infoImgView;
     
     UILabel     *_cardTypeLB;
@@ -45,7 +47,8 @@
         
         self.backgroundColor = [UIColor clearColor];
         
-        self.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"home_third_membership_card"]];
+        _cellBgImgView = [[UIImageView alloc] init];
+        self.backgroundView = _cellBgImgView;
         self.backgroundView.frame = CGRectMake(0, 0, kCellWidth, (240-10)*kRate);
         
         _infoImgView = [[UIImageView alloc] init];
@@ -118,9 +121,10 @@
 #pragma mark
 - (void)layoutSubviews
 {
-    _cardTypeLB.text = @"VIP至尊贵宾卡";
-    _chargeLB.text = @"￥ 5000";
-    _servicesLB.text = @"无限次保养+洗车+定期清洗节气门";
+    [_cellBgImgView sd_setImageWithURL:self.openCardModel.picUrl placeholderImage:[UIImage imageNamed:@"home_third_membership_card"]];
+    _cardTypeLB.text = self.openCardModel.name;
+    _chargeLB.text = [NSString stringWithFormat:@"￥ %@", self.openCardModel.price];
+    _servicesLB.text = self.openCardModel.desc;
 }
 
 - (void)setFrame:(CGRect)frame

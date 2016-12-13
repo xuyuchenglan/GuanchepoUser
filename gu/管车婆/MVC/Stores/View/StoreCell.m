@@ -10,6 +10,8 @@
 #import "NormanStarRateView.h"
 #import "BuyCouponVC.h"
 #import "StoresViewController.h"
+#import "LWOrderVC.h"
+#import "LWAppointmentVc.h"
 
 #define kHeadImgWidth kScreenWidth*2/7
 
@@ -271,12 +273,20 @@
 - (void)appointBtnAction
 {
     NSLog(@"预约");
+    
+    LWAppointmentVc *appointmentVC = [[LWAppointmentVc alloc] init];
+    appointmentVC.hidesBottomBarWhenPushed = YES;
+    [[self findResponderVCWith:[[StoresViewController alloc] init]].navigationController pushViewController:appointmentVC animated:NO];
 }
 
 //下单
 - (void)orderBtnAction
 {
     NSLog(@"下单");
+    
+    LWOrderVC *orderVC = [[LWOrderVC alloc] init];
+    orderVC.hidesBottomBarWhenPushed = YES;
+    [[self findResponderVCWith:[[StoresViewController alloc] init]].navigationController pushViewController:orderVC animated:NO];
 }
 
 //买券
