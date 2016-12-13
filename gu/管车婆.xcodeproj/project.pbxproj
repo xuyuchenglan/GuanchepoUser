@@ -57,6 +57,13 @@
 		D026E9CF1DFBD56D00C563D8 /* MembershipServicesView.m in Sources */ = {isa = PBXBuildFile; fileRef = D026E9CE1DFBD56D00C563D8 /* MembershipServicesView.m */; };
 		D026E9D21DFE438500C563D8 /* MembershipServicesModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D026E9D11DFE438500C563D8 /* MembershipServicesModel.m */; };
 		D026E9D51DFE836A00C563D8 /* UIResponder+GetLocalDic.m in Sources */ = {isa = PBXBuildFile; fileRef = D026E9D41DFE836A00C563D8 /* UIResponder+GetLocalDic.m */; };
+		D026E9E11DFE977500C563D8 /* LWAppointmentVc.m in Sources */ = {isa = PBXBuildFile; fileRef = D026E9E01DFE977500C563D8 /* LWAppointmentVc.m */; };
+		D026E9E41DFE97C500C563D8 /* LWOrderVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D026E9E31DFE97C500C563D8 /* LWOrderVC.m */; };
+		D026E9E71DFE9A2700C563D8 /* AppointOrderView.m in Sources */ = {isa = PBXBuildFile; fileRef = D026E9E61DFE9A2700C563D8 /* AppointOrderView.m */; };
+		D026E9EA1DFF922800C563D8 /* AppointOnLineView.m in Sources */ = {isa = PBXBuildFile; fileRef = D026E9E91DFF922800C563D8 /* AppointOnLineView.m */; };
+		D026E9EE1DFFC4DA00C563D8 /* createQR.png in Resources */ = {isa = PBXBuildFile; fileRef = D026E9EB1DFFC4DA00C563D8 /* createQR.png */; };
+		D026E9EF1DFFC4DA00C563D8 /* scanQR.png in Resources */ = {isa = PBXBuildFile; fileRef = D026E9EC1DFFC4DA00C563D8 /* scanQR.png */; };
+		D026E9F01DFFC4DA00C563D8 /* yanzhengma.png in Resources */ = {isa = PBXBuildFile; fileRef = D026E9ED1DFFC4DA00C563D8 /* yanzhengma.png */; };
 		D032F9DA1DB740B10052562D /* WeatherCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D032F9D91DB740B10052562D /* WeatherCell.m */; };
 		D032F9E21DB765F30052562D /* OrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D032F9E11DB765F30052562D /* OrderViewController.m */; };
 		D032F9E51DB76A400052562D /* OrderListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D032F9E41DB76A400052562D /* OrderListVC.m */; };
@@ -358,6 +365,17 @@
 		D026E9D11DFE438500C563D8 /* MembershipServicesModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MembershipServicesModel.m; sourceTree = "<group>"; };
 		D026E9D31DFE836A00C563D8 /* UIResponder+GetLocalDic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIResponder+GetLocalDic.h"; sourceTree = "<group>"; };
 		D026E9D41DFE836A00C563D8 /* UIResponder+GetLocalDic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIResponder+GetLocalDic.m"; sourceTree = "<group>"; };
+		D026E9DF1DFE977500C563D8 /* LWAppointmentVc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LWAppointmentVc.h; sourceTree = "<group>"; };
+		D026E9E01DFE977500C563D8 /* LWAppointmentVc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LWAppointmentVc.m; sourceTree = "<group>"; };
+		D026E9E21DFE97C500C563D8 /* LWOrderVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LWOrderVC.h; sourceTree = "<group>"; };
+		D026E9E31DFE97C500C563D8 /* LWOrderVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LWOrderVC.m; sourceTree = "<group>"; };
+		D026E9E51DFE9A2700C563D8 /* AppointOrderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppointOrderView.h; sourceTree = "<group>"; };
+		D026E9E61DFE9A2700C563D8 /* AppointOrderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppointOrderView.m; sourceTree = "<group>"; };
+		D026E9E81DFF922800C563D8 /* AppointOnLineView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppointOnLineView.h; sourceTree = "<group>"; };
+		D026E9E91DFF922800C563D8 /* AppointOnLineView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppointOnLineView.m; sourceTree = "<group>"; };
+		D026E9EB1DFFC4DA00C563D8 /* createQR.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = createQR.png; sourceTree = "<group>"; };
+		D026E9EC1DFFC4DA00C563D8 /* scanQR.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = scanQR.png; sourceTree = "<group>"; };
+		D026E9ED1DFFC4DA00C563D8 /* yanzhengma.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = yanzhengma.png; sourceTree = "<group>"; };
 		D032F9D81DB740B10052562D /* WeatherCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeatherCell.h; sourceTree = "<group>"; };
 		D032F9D91DB740B10052562D /* WeatherCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeatherCell.m; sourceTree = "<group>"; };
 		D032F9E01DB765F30052562D /* OrderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderViewController.h; sourceTree = "<group>"; };
@@ -993,6 +1011,60 @@
 			path = MyMembershipCard;
 			sourceTree = "<group>";
 		};
+		D026E9D61DFE94A800C563D8 /* Appointment */ = {
+			isa = PBXGroup;
+			children = (
+				D026E9D81DFE958700C563D8 /* Controller */,
+				D026E9D91DFE958700C563D8 /* View */,
+			);
+			path = Appointment;
+			sourceTree = "<group>";
+		};
+		D026E9D71DFE94A800C563D8 /* Order */ = {
+			isa = PBXGroup;
+			children = (
+				D026E9DA1DFE959100C563D8 /* Controller */,
+				D026E9DB1DFE959100C563D8 /* View */,
+			);
+			path = Order;
+			sourceTree = "<group>";
+		};
+		D026E9D81DFE958700C563D8 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				D026E9DF1DFE977500C563D8 /* LWAppointmentVc.h */,
+				D026E9E01DFE977500C563D8 /* LWAppointmentVc.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		D026E9D91DFE958700C563D8 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				D026E9E51DFE9A2700C563D8 /* AppointOrderView.h */,
+				D026E9E61DFE9A2700C563D8 /* AppointOrderView.m */,
+				D026E9E81DFF922800C563D8 /* AppointOnLineView.h */,
+				D026E9E91DFF922800C563D8 /* AppointOnLineView.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		D026E9DA1DFE959100C563D8 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				D026E9E21DFE97C500C563D8 /* LWOrderVC.h */,
+				D026E9E31DFE97C500C563D8 /* LWOrderVC.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		D026E9DB1DFE959100C563D8 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		D032F9DB1DB7652C0052562D /* MVC */ = {
 			isa = PBXGroup;
 			children = (
@@ -1129,6 +1201,9 @@
 				D0A4B4CD1DBEF074005C8C79 /* stores_oil.png */,
 				D04C804E1DC0A17100C72829 /* stores_unselect.png */,
 				D04C80501DC0A30500C72829 /* stores_select.png */,
+				D026E9EB1DFFC4DA00C563D8 /* createQR.png */,
+				D026E9EC1DFFC4DA00C563D8 /* scanQR.png */,
+				D026E9ED1DFFC4DA00C563D8 /* yanzhengma.png */,
 			);
 			path = Stores;
 			sourceTree = "<group>";
@@ -1262,6 +1337,8 @@
 			isa = PBXGroup;
 			children = (
 				D0A4B4AE1DBB67DA005C8C79 /* BuyCoupon */,
+				D026E9D61DFE94A800C563D8 /* Appointment */,
+				D026E9D71DFE94A800C563D8 /* Order */,
 			);
 			path = MVC;
 			sourceTree = "<group>";
@@ -2197,6 +2274,7 @@
 				D09BC1691DC865740035DE65 /* alipay.png in Resources */,
 				D037E5D01DB07FD9008D14E7 /* home_top_weather.png in Resources */,
 				D006C25E1DB9F30E0017FCD5 /* about_order_head_placeholdre.png in Resources */,
+				D026E9F01DFFC4DA00C563D8 /* yanzhengma.png in Resources */,
 				D00F8CE51D9A0A1B00AD7CC8 /* LaunchScreen.storyboard in Resources */,
 				D0A4B4B61DBD9BDB005C8C79 /* stores_headImg.png in Resources */,
 				D0C5FA001D9A177200D00B85 /* tabbar_about_un@2x.png in Resources */,
@@ -2293,6 +2371,7 @@
 				D0C5FA0D1D9A240500D00B85 /* daohangye1.png in Resources */,
 				D0758AB61D9E17C50071D8A6 /* about_tableview_service.png in Resources */,
 				D0C7A4A81DA9EEE9005FC697 /* weather_smog_bg.png in Resources */,
+				D026E9EF1DFFC4DA00C563D8 /* scanQR.png in Resources */,
 				D003F0A91DD01197003F0A3C /* about_tableview_sellcard_money.png in Resources */,
 				D0E8F9E21D9BA65B00582D96 /* ad_04.png in Resources */,
 				D0C3E9551DB1F6D90084CDA4 /* forth_illegal_car.jpg in Resources */,
@@ -2308,6 +2387,7 @@
 				D0758AAB1D9E17C50071D8A6 /* about_second_completed.png in Resources */,
 				D006C2621DB9F30E0017FCD5 /* about_order_phone.png in Resources */,
 				D0139A901DD5663B005141F2 /* 方正小标宋简体.ttf in Resources */,
+				D026E9EE1DFFC4DA00C563D8 /* createQR.png in Resources */,
 				D0C5FA441D9A5E7000D00B85 /* home_second_jieqimen.png in Resources */,
 				D0A4B4C91DBE097D005C8C79 /* stores_btnBorder_red.png in Resources */,
 				D0758AAC1D9E17C50071D8A6 /* about_second_uncompleted.png in Resources */,
@@ -2404,6 +2484,7 @@
 				D032F9DA1DB740B10052562D /* WeatherCell.m in Sources */,
 				D0139A9F1DD5B7DA005141F2 /* CashWithdrawalVC.m in Sources */,
 				D0758A801D9CB0FB0071D8A6 /* VerificationCodeLoginVC.m in Sources */,
+				D026E9E41DFE97C500C563D8 /* LWOrderVC.m in Sources */,
 				D0758A8D1D9CF0030071D8A6 /* LoginParentVC.m in Sources */,
 				D006C2511DB8C12A0017FCD5 /* OrderModel.m in Sources */,
 				D0A4B4A31DBB46CF005C8C79 /* OrderContentInfoView.m in Sources */,
@@ -2426,6 +2507,7 @@
 				D0758A621D9C9F300071D8A6 /* StoreCell.m in Sources */,
 				D0A4B49C1DBB4163005C8C79 /* OrderInfoVC.m in Sources */,
 				D0FA2AE41DCAC29400BCA242 /* ExchangePointsVC.m in Sources */,
+				D026E9E71DFE9A2700C563D8 /* AppointOrderView.m in Sources */,
 				D026E9D21DFE438500C563D8 /* MembershipServicesModel.m in Sources */,
 				D0E8F9DA1D9BA57100582D96 /* ScrollImageView.m in Sources */,
 				D0A4B4A81DBB53EB005C8C79 /* AppointContentInfoView.m in Sources */,
@@ -2441,6 +2523,7 @@
 				D0629F291DC6CD3400076CF4 /* CompanyCardView.m in Sources */,
 				D04C804D1DC07C9900C72829 /* MaintainItemCell.m in Sources */,
 				D0C5F9EF1D9A0F2A00D00B85 /* StoresViewController.m in Sources */,
+				D026E9EA1DFF922800C563D8 /* AppointOnLineView.m in Sources */,
 				D032F9E51DB76A400052562D /* OrderListVC.m in Sources */,
 				D0758A7D1D9CB0340071D8A6 /* LoginViewController.m in Sources */,
 				D0139A7D1DD3FC7A005141F2 /* CouponViewController.m in Sources */,
@@ -2499,6 +2582,7 @@
 				D0A4B4B41DBB6873005C8C79 /* BuyCouponVC.m in Sources */,
 				D0C5FA141D9A254500D00B85 /* NormanGuideViewManager.m in Sources */,
 				D06DEC831DBF5DFD00B8B04D /* MaintainItemsVC.m in Sources */,
+				D026E9E11DFE977500C563D8 /* LWAppointmentVc.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
