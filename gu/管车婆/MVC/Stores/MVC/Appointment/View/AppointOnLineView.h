@@ -8,6 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
+typedef void(^MyBlock)();
+
 @interface AppointOnLineView : UIView
+
+@property (nonatomic, copy)MyBlock myBlock;
+
+- (void)dateBtnActionWithBlock:(MyBlock)block;
 
 @end

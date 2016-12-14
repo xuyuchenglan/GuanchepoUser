@@ -19,6 +19,7 @@
 #import "HomeModel.h"
 #import "ADViewController.h"
 #import "ServiceModel.h"
+#import "MoreViewController.h"
 
 #define kFirstBtnWidth  kScreenWidth/4
 #define kFirstBtnHeight 80*kRate
@@ -354,7 +355,7 @@
     //下3
     [self addDown3Btn];
     
-    //下4
+    //下4(更多)
     [self addDown4Btn];
     
     
@@ -652,8 +653,11 @@
 {
     NSLog(@"更多");
     
-    NSArray *newArr = [_homeModel.services subarrayWithRange:NSMakeRange(10, _homeModel.services.count-10)];
-    NSLog(@"%@", newArr);
+    MoreViewController *moreVC = [[MoreViewController alloc] init];
+    moreVC.services = _homeModel.services;
+    moreVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:moreVC animated:NO];
+    moreVC.hidesBottomBarWhenPushed = NO;
     
 }
 
@@ -919,7 +923,7 @@
 #pragma mark --- 网络请求
 - (void)getHomeInfo
 {
-    NSString *url_post = [NSString stringWithFormat:@"http://%@:8080/zcar/userapp/getIndexInfo.action", kIP];
+    NSString *url_post = [NSString stringWithFormat:@"http://%@:80/zcar/userapp/getIndexInfo.action", kIP];
     
     NSDictionary *params = @{
                              @"phone":[NSString stringWithFormat:@"%@", [[self getLocalDic] objectForKey:@"phone"]],

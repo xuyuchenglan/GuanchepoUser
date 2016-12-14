@@ -7,10 +7,11 @@
 //
 
 #import "AppointOnLineView.h"
+#import "AppointOnLineView+GetCurrentDate.h"
 
 @interface AppointOnLineView() <UITextFieldDelegate>
 {
-    
+    UIButton *_timeBtn;
 }
 @end
 
@@ -51,12 +52,25 @@
         make.top.equalTo(self).with.offset(0);
     }];
     
+    _timeBtn = [[UIButton alloc] init];
+    _timeBtn.backgroundColor = [UIColor orangeColor];
+    [_timeBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    _timeBtn.titleLabel.font = [UIFont systemFontOfSize:15];
+    [_timeBtn setTitle:[self getCurrentDate] forState:UIControlStateNormal];
+    [_timeBtn addTarget:self action:@selector(timeBtnAction) forControlEvents:UIControlEventTouchUpInside];
+    [self addSubview:_timeBtn];
+    [_timeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(150, 40));
+        make.left.equalTo(timeLB.mas_right).with.offset(20);
+        make.top.equalTo(self).with.offset(0);
+    }];
     
     
     UIView *line1 = [[UIView alloc] initWithFrame:CGRectMake(0, 40, kScreenWidth, 0.5)];
     line1.backgroundColor = [UIColor colorWithWhite:0.85 alpha:1];
     [self addSubview:line1];
 }
+
 
 
     //第二行
@@ -154,6 +168,19 @@
     [UIView setAnimationBeginsFromCurrentState:YES];
     self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y + 250, self.frame.size.width, self.frame.size.height);
     [UIView commitAnimations];
+}
+
+#pragma mark --- ButtonAction
+- (void)timeBtnAction
+{
+    if (self.myBlock != nil) {
+        self.myBlock();
+    }
+}
+
+- (void)dateBtnActionWithBlock:(MyBlock)block
+{
+    self.myBlock = block;
 }
 
 @end

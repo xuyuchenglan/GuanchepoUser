@@ -105,7 +105,7 @@
 #pragma mark ****** 网络请求天气数据 ******
 - (void)getWeatherData
 {
-    NSString *url_get = [NSString stringWithFormat:@"http://%@:8080/zcar/userapp/getWeatherDaysDatas.action", kIP];
+    NSString *url_get = [NSString stringWithFormat:@"http://%@:80/zcar/userapp/getWeatherDaysDatas.action", kIP];
     
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];//单例
     

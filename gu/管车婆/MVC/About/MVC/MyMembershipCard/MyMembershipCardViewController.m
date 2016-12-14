@@ -115,7 +115,7 @@
 //会员卡数据
 - (void)getMyCardInfo
 {
-    NSString *url_post = [NSString stringWithFormat:@"http://%@:8080/zcar/userapp/getMyCardInfo.action", kIP];
+    NSString *url_post = [NSString stringWithFormat:@"http://%@:80/zcar/userapp/getMyCardInfo.action", kIP];
     
     NSDictionary *params = @{
                              @"cardno":[[self getLocalDic] objectForKey:@"cardno"],

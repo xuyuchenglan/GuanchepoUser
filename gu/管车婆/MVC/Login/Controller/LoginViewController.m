@@ -230,7 +230,7 @@
 #pragma mark --- 网络请求
 - (void)loginByPhoneAndPwd
 {
-    NSString *url_post = [NSString stringWithFormat:@"http://%@:8080/zcar/userapp/loginByPhoneAndPwd.action", kIP];
+    NSString *url_post = [NSString stringWithFormat:@"http://%@:80/zcar/userapp/loginByPhoneAndPwd.action", kIP];
     
     NSDictionary *params = @{
                              @"phone":_accountStr,

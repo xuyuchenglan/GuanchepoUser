@@ -76,7 +76,12 @@
         make.left.equalTo(self.view).with.offset(0);
         make.top.equalTo(titleLB.mas_bottom).with.offset(0);
     }];
+    [appointOnLineView dateBtnActionWithBlock:^{
+        
+    }];
 }
+
+
 
 
     //下面的两个按钮
