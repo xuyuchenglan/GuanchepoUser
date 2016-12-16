@@ -62,12 +62,16 @@
     
     //配置控制器数组(需要与上面的标题相对应)
     StoresListVC *carServiceVC = [[StoresListVC alloc] init];
+    carServiceVC.vc = self;
     carServiceVC.type = @"0";//汽车服务
     StoresListVC *carBeautyVC = [[StoresListVC alloc] init];
+    carBeautyVC.vc = self;
     carBeautyVC.type = @"1";//汽车美容
     StoresListVC *tyreVC = [[StoresListVC alloc] init];
+    tyreVC.vc = self;
     tyreVC.type = @"2";//轮胎服务
     StoresListVC *mainTenanceVC = [[StoresListVC alloc] init];
+    mainTenanceVC.vc = self;
     mainTenanceVC.type = @"3";//保养服务
     self.controllerArray = [NSArray arrayWithObjects:carServiceVC, carBeautyVC, tyreVC, mainTenanceVC, nil];
 }

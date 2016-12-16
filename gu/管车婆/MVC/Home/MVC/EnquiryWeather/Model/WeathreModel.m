@@ -14,6 +14,10 @@
 {
     if (self = [super init]) {
         
+        _bgImgStr = @"weather_sunny_bg";
+        _weatherImgStr = @"weather_sunny";
+        _isSuitableForWashing = @"适宜洗车";
+        
         _dateStr = [dic objectForKey:@"date"];
         
         NSArray *dayArr = [[dic objectForKey:@"info"] objectForKey:@"day"];

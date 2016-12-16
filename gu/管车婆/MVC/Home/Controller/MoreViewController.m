@@ -8,6 +8,7 @@
 
 #import "MoreViewController.h"
 #import "ServiceModel.h"
+#import "ItemStoresVC.h"
 
 #define kBtnWidth kScreenWidth/4
 
@@ -28,7 +29,7 @@
 
 - (void)setServices:(NSArray *)services
 {
-    NSLog(@"%@", services);
+    _services = services;
     
     //内容
     for (int i = 0; i < services.count; i++) {
@@ -37,8 +38,6 @@
         
         int h = i%4;
         int v = i/4;
-        
-        NSLog(@"h:%d; v:%d.", h, v);
         
         UIButton *itemBtn = [[UIButton alloc] initWithFrame:CGRectMake(kBtnWidth*h, 64+kBtnWidth*v, kBtnWidth, kBtnWidth)];
         itemBtn.tag = 10000 + i;
@@ -62,7 +61,18 @@
 - (void)itemBtnAction:(id)sender
 {
     UIButton *btn = (UIButton *)sender;
-    NSLog(@"btn.tag:%ld", (long)btn.tag);
+    
+    int index = (int)btn.tag - 10000;
+    ServiceModel *currentModel = _services[index];
+    
+    ItemStoresVC *itemStoresVC = [[ItemStoresVC alloc] init];
+    itemStoresVC.sid = currentModel.serviceId;
+    itemStoresVC.sname = currentModel.serviceName;
+    itemStoresVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:itemStoresVC animated:NO];
+    itemStoresVC.hidesBottomBarWhenPushed = NO;
+    
+    
 }
 
 #pragma mark

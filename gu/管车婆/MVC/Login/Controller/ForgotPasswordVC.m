@@ -308,7 +308,7 @@
 //修改密码
 - (void)changePwdPost
 {
-    NSString *url_post = [NSString stringWithFormat:@"http://%@:80/zcar/userapp/regOrRestPwd.action", kIP];
+    NSString *url_post = [NSString stringWithFormat:@"http://%@regOrRestPwd.action", kHead];
     
     NSDictionary *params = @{
                              @"phone":_numberStr,

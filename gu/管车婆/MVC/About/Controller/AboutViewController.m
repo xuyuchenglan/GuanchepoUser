@@ -558,7 +558,7 @@
 //根据uid获取用户数据
 - (void)getUserInfo
 {
-    NSString *url_post = [NSString stringWithFormat:@"http://%@:80/zcar/userapp/getUserByUid.action", kIP];
+    NSString *url_post = [NSString stringWithFormat:@"http://%@getUserByUid.action", kHead];
     
     NSDictionary *params = @{
                              @"uid":[[self getLocalDic] objectForKey:@"uid"],
@@ -593,7 +593,7 @@
 //签到
 - (void)sign
 {
-    NSString *url_post = [NSString stringWithFormat:@"http://%@:80/zcar/userapp/sign.action", kIP];
+    NSString *url_post = [NSString stringWithFormat:@"http://%@:80/zcar/userapp/sign.action", kHead];
     
     NSDictionary *params = @{
                              @"uid":[[self getLocalDic] objectForKey:@"uid"],

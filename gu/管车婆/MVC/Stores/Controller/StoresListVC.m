@@ -9,6 +9,7 @@
 #import "StoresListVC.h"
 #import "StoreCell.h"
 #import "StoreModel.h"
+#import "StoresViewController.h"
 
 #define kHeadImgWidth kScreenWidth*2/7
 
@@ -29,9 +30,13 @@
     //设置tableView上方的显示汽车信息的View
     [self addTopView];
     
+}
+
+- (void)setVc:(UIViewController *)vc
+{
+    _vc = vc;
     //设置tableView
     [self addTableView];
-    
 }
 
 #pragma mark *************** 设置tableView上方的显示汽车信息的View *****************
@@ -107,6 +112,7 @@
     }
     
     cell.storeModel = storeModel;
+    cell.vc = _vc;
     
     return cell;
 }

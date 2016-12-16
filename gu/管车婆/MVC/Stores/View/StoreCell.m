@@ -9,7 +9,7 @@
 #import "StoreCell.h"
 #import "NormanStarRateView.h"
 #import "BuyCouponVC.h"
-#import "StoresViewController.h"
+//#import "StoresViewController.h"
 #import "LWOrderVC.h"
 #import "LWAppointmentVc.h"
 
@@ -276,7 +276,8 @@
     
     LWAppointmentVc *appointmentVC = [[LWAppointmentVc alloc] init];
     appointmentVC.hidesBottomBarWhenPushed = YES;
-    [[self findResponderVCWith:[[StoresViewController alloc] init]].navigationController pushViewController:appointmentVC animated:NO];
+//    [[self findResponderVCWith:[[StoresViewController alloc] init]].navigationController pushViewController:appointmentVC animated:NO];
+    [self.vc.navigationController pushViewController:appointmentVC animated:NO];
 }
 
 //下单
@@ -286,7 +287,8 @@
     
     LWOrderVC *orderVC = [[LWOrderVC alloc] init];
     orderVC.hidesBottomBarWhenPushed = YES;
-    [[self findResponderVCWith:[[StoresViewController alloc] init]].navigationController pushViewController:orderVC animated:NO];
+//    [[self findResponderVCWith:[[StoresViewController alloc] init]].navigationController pushViewController:orderVC animated:NO];
+    [self.vc.navigationController pushViewController:orderVC animated:NO];
 }
 
 //买券
@@ -296,8 +298,8 @@
     
     BuyCouponVC *buyCouponVC = [[BuyCouponVC alloc] init];
     buyCouponVC.hidesBottomBarWhenPushed = YES;
-    [[self findResponderVCWith:[[StoresViewController alloc] init]].navigationController pushViewController:buyCouponVC animated:NO];
-    
+//    [[self findResponderVCWith:[[StoresViewController alloc] init]].navigationController pushViewController:buyCouponVC animated:NO];
+    [self.vc.navigationController pushViewController:buyCouponVC animated:NO];
 }
 
 

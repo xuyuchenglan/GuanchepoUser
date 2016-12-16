@@ -78,6 +78,8 @@
 		D04C80591DC0ABE700C72829 /* carOwners_like.png in Resources */ = {isa = PBXBuildFile; fileRef = D04C80551DC0ABE700C72829 /* carOwners_like.png */; };
 		D04C805A1DC0ABE700C72829 /* carOwners_reading.png in Resources */ = {isa = PBXBuildFile; fileRef = D04C80561DC0ABE700C72829 /* carOwners_reading.png */; };
 		D052B1FD1E00E2C1006E74C1 /* MoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D052B1FC1E00E2C1006E74C1 /* MoreViewController.m */; };
+		D052B2031E00EDA1006E74C1 /* ItemStoresVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D052B2021E00EDA1006E74C1 /* ItemStoresVC.m */; };
+		D052B2061E00FB0E006E74C1 /* ItemStoresListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D052B2051E00FB0E006E74C1 /* ItemStoresListVC.m */; };
 		D0629F291DC6CD3400076CF4 /* CompanyCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = D0629F281DC6CD3400076CF4 /* CompanyCardView.m */; };
 		D06DEC831DBF5DFD00B8B04D /* MaintainItemsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D06DEC821DBF5DFD00B8B04D /* MaintainItemsVC.m */; };
 		D0758A621D9C9F300071D8A6 /* StoreCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D0758A611D9C9F300071D8A6 /* StoreCell.m */; };
@@ -126,6 +128,15 @@
 		D09BC16C1DC865740035DE65 /* pay_unselected.png in Resources */ = {isa = PBXBuildFile; fileRef = D09BC1671DC865740035DE65 /* pay_unselected.png */; };
 		D09BC16D1DC865740035DE65 /* wechat.png in Resources */ = {isa = PBXBuildFile; fileRef = D09BC1681DC865740035DE65 /* wechat.png */; };
 		D09BC1731DC87EC20035DE65 /* RechargeFuelcardInfoContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = D09BC1721DC87EC20035DE65 /* RechargeFuelcardInfoContentView.m */; };
+		D0A1D8101E026BB800BB8D34 /* SYQRCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D0A1D80F1E026BB800BB8D34 /* SYQRCodeViewController.m */; };
+		D0A1D8131E02813D00BB8D34 /* QRCodeView.m in Sources */ = {isa = PBXBuildFile; fileRef = D0A1D8121E02813D00BB8D34 /* QRCodeView.m */; };
+		D0A1D8221E0281D700BB8D34 /* LewPopupBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = D0A1D8161E0281D700BB8D34 /* LewPopupBackgroundView.m */; };
+		D0A1D8231E0281D700BB8D34 /* LewPopupViewAnimationDrop.m in Sources */ = {isa = PBXBuildFile; fileRef = D0A1D8181E0281D700BB8D34 /* LewPopupViewAnimationDrop.m */; };
+		D0A1D8241E0281D700BB8D34 /* LewPopupViewAnimationFade.m in Sources */ = {isa = PBXBuildFile; fileRef = D0A1D81A1E0281D700BB8D34 /* LewPopupViewAnimationFade.m */; };
+		D0A1D8251E0281D700BB8D34 /* LewPopupViewAnimationSlide.m in Sources */ = {isa = PBXBuildFile; fileRef = D0A1D81C1E0281D700BB8D34 /* LewPopupViewAnimationSlide.m */; };
+		D0A1D8261E0281D700BB8D34 /* LewPopupViewAnimationSpring.m in Sources */ = {isa = PBXBuildFile; fileRef = D0A1D81E1E0281D700BB8D34 /* LewPopupViewAnimationSpring.m */; };
+		D0A1D8271E0281D700BB8D34 /* UIViewController+LewPopupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D0A1D8211E0281D700BB8D34 /* UIViewController+LewPopupViewController.m */; };
+		D0A1D8291E02878400BB8D34 /* createQR_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = D0A1D8281E02878400BB8D34 /* createQR_bg.png */; };
 		D0A4B49C1DBB4163005C8C79 /* OrderInfoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D0A4B49B1DBB4163005C8C79 /* OrderInfoVC.m */; };
 		D0A4B4A31DBB46CF005C8C79 /* OrderContentInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = D0A4B49E1DBB46CF005C8C79 /* OrderContentInfoView.m */; };
 		D0A4B4A41DBB46CF005C8C79 /* OrderContentMoreView.m in Sources */ = {isa = PBXBuildFile; fileRef = D0A4B4A01DBB46CF005C8C79 /* OrderContentMoreView.m */; };
@@ -398,6 +409,10 @@
 		D04C80561DC0ABE700C72829 /* carOwners_reading.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = carOwners_reading.png; sourceTree = "<group>"; };
 		D052B1FB1E00E2C1006E74C1 /* MoreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreViewController.h; sourceTree = "<group>"; };
 		D052B1FC1E00E2C1006E74C1 /* MoreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoreViewController.m; sourceTree = "<group>"; };
+		D052B2011E00EDA1006E74C1 /* ItemStoresVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemStoresVC.h; sourceTree = "<group>"; };
+		D052B2021E00EDA1006E74C1 /* ItemStoresVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemStoresVC.m; sourceTree = "<group>"; };
+		D052B2041E00FB0E006E74C1 /* ItemStoresListVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemStoresListVC.h; sourceTree = "<group>"; };
+		D052B2051E00FB0E006E74C1 /* ItemStoresListVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemStoresListVC.m; sourceTree = "<group>"; };
 		D0629F271DC6CD3400076CF4 /* CompanyCardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CompanyCardView.h; sourceTree = "<group>"; };
 		D0629F281DC6CD3400076CF4 /* CompanyCardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CompanyCardView.m; sourceTree = "<group>"; };
 		D06DEC811DBF5DFD00B8B04D /* MaintainItemsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MaintainItemsVC.h; sourceTree = "<group>"; };
@@ -462,6 +477,24 @@
 		D09BC1681DC865740035DE65 /* wechat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wechat.png; sourceTree = "<group>"; };
 		D09BC1711DC87EC20035DE65 /* RechargeFuelcardInfoContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RechargeFuelcardInfoContentView.h; sourceTree = "<group>"; };
 		D09BC1721DC87EC20035DE65 /* RechargeFuelcardInfoContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RechargeFuelcardInfoContentView.m; sourceTree = "<group>"; };
+		D0A1D80E1E026BB800BB8D34 /* SYQRCodeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYQRCodeViewController.h; sourceTree = "<group>"; };
+		D0A1D80F1E026BB800BB8D34 /* SYQRCodeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYQRCodeViewController.m; sourceTree = "<group>"; };
+		D0A1D8111E02813D00BB8D34 /* QRCodeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QRCodeView.h; sourceTree = "<group>"; };
+		D0A1D8121E02813D00BB8D34 /* QRCodeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QRCodeView.m; sourceTree = "<group>"; };
+		D0A1D8151E0281D700BB8D34 /* LewPopupBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LewPopupBackgroundView.h; sourceTree = "<group>"; };
+		D0A1D8161E0281D700BB8D34 /* LewPopupBackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LewPopupBackgroundView.m; sourceTree = "<group>"; };
+		D0A1D8171E0281D700BB8D34 /* LewPopupViewAnimationDrop.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LewPopupViewAnimationDrop.h; sourceTree = "<group>"; };
+		D0A1D8181E0281D700BB8D34 /* LewPopupViewAnimationDrop.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LewPopupViewAnimationDrop.m; sourceTree = "<group>"; };
+		D0A1D8191E0281D700BB8D34 /* LewPopupViewAnimationFade.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LewPopupViewAnimationFade.h; sourceTree = "<group>"; };
+		D0A1D81A1E0281D700BB8D34 /* LewPopupViewAnimationFade.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LewPopupViewAnimationFade.m; sourceTree = "<group>"; };
+		D0A1D81B1E0281D700BB8D34 /* LewPopupViewAnimationSlide.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LewPopupViewAnimationSlide.h; sourceTree = "<group>"; };
+		D0A1D81C1E0281D700BB8D34 /* LewPopupViewAnimationSlide.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LewPopupViewAnimationSlide.m; sourceTree = "<group>"; };
+		D0A1D81D1E0281D700BB8D34 /* LewPopupViewAnimationSpring.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LewPopupViewAnimationSpring.h; sourceTree = "<group>"; };
+		D0A1D81E1E0281D700BB8D34 /* LewPopupViewAnimationSpring.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LewPopupViewAnimationSpring.m; sourceTree = "<group>"; };
+		D0A1D81F1E0281D700BB8D34 /* LewPopupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LewPopupViewController.h; sourceTree = "<group>"; };
+		D0A1D8201E0281D700BB8D34 /* UIViewController+LewPopupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+LewPopupViewController.h"; sourceTree = "<group>"; };
+		D0A1D8211E0281D700BB8D34 /* UIViewController+LewPopupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+LewPopupViewController.m"; sourceTree = "<group>"; };
+		D0A1D8281E02878400BB8D34 /* createQR_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = createQR_bg.png; sourceTree = "<group>"; };
 		D0A4B49A1DBB4163005C8C79 /* OrderInfoVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderInfoVC.h; sourceTree = "<group>"; };
 		D0A4B49B1DBB4163005C8C79 /* OrderInfoVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderInfoVC.m; sourceTree = "<group>"; };
 		D0A4B49D1DBB46CF005C8C79 /* OrderContentInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderContentInfoView.h; sourceTree = "<group>"; };
@@ -1029,6 +1062,7 @@
 		D026E9D71DFE94A800C563D8 /* Order */ = {
 			isa = PBXGroup;
 			children = (
+				D0A1D80D1E026BB800BB8D34 /* SYQRCode */,
 				D026E9DA1DFE959100C563D8 /* Controller */,
 				D026E9DB1DFE959100C563D8 /* View */,
 			);
@@ -1069,6 +1103,8 @@
 		D026E9DB1DFE959100C563D8 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				D0A1D8111E02813D00BB8D34 /* QRCodeView.h */,
+				D0A1D8121E02813D00BB8D34 /* QRCodeView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1160,6 +1196,33 @@
 			path = CarOwners;
 			sourceTree = "<group>";
 		};
+		D052B1FE1E00ED8D006E74C1 /* ItemStores */ = {
+			isa = PBXGroup;
+			children = (
+				D052B1FF1E00ED8D006E74C1 /* Controller */,
+				D052B2001E00ED8D006E74C1 /* View */,
+			);
+			path = ItemStores;
+			sourceTree = "<group>";
+		};
+		D052B1FF1E00ED8D006E74C1 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				D052B2011E00EDA1006E74C1 /* ItemStoresVC.h */,
+				D052B2021E00EDA1006E74C1 /* ItemStoresVC.m */,
+				D052B2041E00FB0E006E74C1 /* ItemStoresListVC.h */,
+				D052B2051E00FB0E006E74C1 /* ItemStoresListVC.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		D052B2001E00ED8D006E74C1 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		D06DEC7D1DBF5DC400B8B04D /* MaintainItems */ = {
 			isa = PBXGroup;
 			children = (
@@ -1212,6 +1275,7 @@
 				D026E9EB1DFFC4DA00C563D8 /* createQR.png */,
 				D026E9EC1DFFC4DA00C563D8 /* scanQR.png */,
 				D026E9ED1DFFC4DA00C563D8 /* yanzhengma.png */,
+				D0A1D8281E02878400BB8D34 /* createQR_bg.png */,
 			);
 			path = Stores;
 			sourceTree = "<group>";
@@ -1339,6 +1403,35 @@
 				D09BC1681DC865740035DE65 /* wechat.png */,
 			);
 			path = PayForFuelcardRecharging;
+			sourceTree = "<group>";
+		};
+		D0A1D80D1E026BB800BB8D34 /* SYQRCode */ = {
+			isa = PBXGroup;
+			children = (
+				D0A1D80E1E026BB800BB8D34 /* SYQRCodeViewController.h */,
+				D0A1D80F1E026BB800BB8D34 /* SYQRCodeViewController.m */,
+			);
+			path = SYQRCode;
+			sourceTree = "<group>";
+		};
+		D0A1D8141E0281D700BB8D34 /* popupViewController */ = {
+			isa = PBXGroup;
+			children = (
+				D0A1D8151E0281D700BB8D34 /* LewPopupBackgroundView.h */,
+				D0A1D8161E0281D700BB8D34 /* LewPopupBackgroundView.m */,
+				D0A1D8171E0281D700BB8D34 /* LewPopupViewAnimationDrop.h */,
+				D0A1D8181E0281D700BB8D34 /* LewPopupViewAnimationDrop.m */,
+				D0A1D8191E0281D700BB8D34 /* LewPopupViewAnimationFade.h */,
+				D0A1D81A1E0281D700BB8D34 /* LewPopupViewAnimationFade.m */,
+				D0A1D81B1E0281D700BB8D34 /* LewPopupViewAnimationSlide.h */,
+				D0A1D81C1E0281D700BB8D34 /* LewPopupViewAnimationSlide.m */,
+				D0A1D81D1E0281D700BB8D34 /* LewPopupViewAnimationSpring.h */,
+				D0A1D81E1E0281D700BB8D34 /* LewPopupViewAnimationSpring.m */,
+				D0A1D81F1E0281D700BB8D34 /* LewPopupViewController.h */,
+				D0A1D8201E0281D700BB8D34 /* UIViewController+LewPopupViewController.h */,
+				D0A1D8211E0281D700BB8D34 /* UIViewController+LewPopupViewController.m */,
+			);
+			path = popupViewController;
 			sourceTree = "<group>";
 		};
 		D0A4B4AD1DBB67DA005C8C79 /* MVC */ = {
@@ -1646,6 +1739,7 @@
 		D0C5FA101D9A254500D00B85 /* Third */ = {
 			isa = PBXGroup;
 			children = (
+				D0A1D8141E0281D700BB8D34 /* popupViewController */,
 				D0C5FA111D9A254500D00B85 /* NormanGuideViewManager */,
 				D0B562C91DAF3B8900C9FACC /* NormanStarRateView */,
 				D0139A8E1DD5663B005141F2 /* NormanFont */,
@@ -1769,6 +1863,7 @@
 		D0D918B71DA8E748003379E3 /* MVC */ = {
 			isa = PBXGroup;
 			children = (
+				D052B1FE1E00ED8D006E74C1 /* ItemStores */,
 				D003F0B11DD05C50003F0A3C /* OpenCard */,
 				D0D918BF1DA8F3E6003379E3 /* EnquiryIllegal */,
 				D0D918C31DA8F3E6003379E3 /* EnquiryWeather */,
@@ -2344,6 +2439,7 @@
 				D0758AB41D9E17C50071D8A6 /* about_tableview_points.png in Resources */,
 				D0758AAD1D9E17C50071D8A6 /* about_second_unevaluated.png in Resources */,
 				D0758AAA1D9E17C50071D8A6 /* about_second_appoint.png in Resources */,
+				D0A1D8291E02878400BB8D34 /* createQR_bg.png in Resources */,
 				D0139A8B1DD41B6A005141F2 /* dazhequan.png in Resources */,
 				D0F4B7581DD6F64900F3CD5F /* icon40.png in Resources */,
 				D0C5FA291D9A5C3400D00B85 /* home_first_activity.png in Resources */,
@@ -2495,6 +2591,7 @@
 				D0139A9F1DD5B7DA005141F2 /* CashWithdrawalVC.m in Sources */,
 				D0758A801D9CB0FB0071D8A6 /* VerificationCodeLoginVC.m in Sources */,
 				D026E9E41DFE97C500C563D8 /* LWOrderVC.m in Sources */,
+				D052B2031E00EDA1006E74C1 /* ItemStoresVC.m in Sources */,
 				D0758A8D1D9CF0030071D8A6 /* LoginParentVC.m in Sources */,
 				D006C2511DB8C12A0017FCD5 /* OrderModel.m in Sources */,
 				D0A4B4A31DBB46CF005C8C79 /* OrderContentInfoView.m in Sources */,
@@ -2523,15 +2620,18 @@
 				D0E8F9DA1D9BA57100582D96 /* ScrollImageView.m in Sources */,
 				D0A4B4A81DBB53EB005C8C79 /* AppointContentInfoView.m in Sources */,
 				D0E8F9EA1D9BC19C00582D96 /* StoresListVC.m in Sources */,
+				D052B2061E00FB0E006E74C1 /* ItemStoresListVC.m in Sources */,
 				D092F7E41DAC750A002581F5 /* PhoneChargesView.m in Sources */,
 				D0139A9C1DD5A20A005141F2 /* BalanceViewController.m in Sources */,
 				D01CB9CE1DA8855600DD5527 /* ProtocolViewController.m in Sources */,
 				D0C5F9F51D9A0F4F00D00B85 /* AboutViewController.m in Sources */,
 				D0FA2AF31DCAE48100BCA242 /* CarCouponVC.m in Sources */,
 				D026E9CF1DFBD56D00C563D8 /* MembershipServicesView.m in Sources */,
+				D0A1D8131E02813D00BB8D34 /* QRCodeView.m in Sources */,
 				D0FA2AE71DCAC93A00BCA242 /* ExchangePointsView.m in Sources */,
 				D026E9B91DF7AB3700C563D8 /* HomeModel.m in Sources */,
 				D0629F291DC6CD3400076CF4 /* CompanyCardView.m in Sources */,
+				D0A1D8241E0281D700BB8D34 /* LewPopupViewAnimationFade.m in Sources */,
 				D04C804D1DC07C9900C72829 /* MaintainItemCell.m in Sources */,
 				D0C5F9EF1D9A0F2A00D00B85 /* StoresViewController.m in Sources */,
 				D026E9EA1DFF922800C563D8 /* AppointOnLineView.m in Sources */,
@@ -2556,6 +2656,7 @@
 				D0A4B4D11DBEF6F7005C8C79 /* CouponItemsView.m in Sources */,
 				D003F0A51DCC2962003F0A3C /* SellCardView.m in Sources */,
 				D0139A831DD4036F005141F2 /* CouponListViewController.m in Sources */,
+				D0A1D8101E026BB800BB8D34 /* SYQRCodeViewController.m in Sources */,
 				D0F92F9F1DD2C96C00BC0302 /* ServiceItemsView.m in Sources */,
 				D09963181DDC2FA800505985 /* CarOwnersModel.m in Sources */,
 				D092F7EA1DACBBAD002581F5 /* CarOwnersCell.m in Sources */,
@@ -2564,6 +2665,7 @@
 				D0F780901DC3374900347B21 /* AddFuelCardVC.m in Sources */,
 				D0F7808A1DC2F39900347B21 /* ChangeFuelcardVC.m in Sources */,
 				D003F09B1DCC1509003F0A3C /* FreeExperienceVoucherVC.m in Sources */,
+				D0A1D8251E0281D700BB8D34 /* LewPopupViewAnimationSlide.m in Sources */,
 				D0E8F9E71D9BBCE700582D96 /* CarOwnersListVC.m in Sources */,
 				D0F4ABB61DDBFC6600416636 /* UIControlFlagView.m in Sources */,
 				D09BC15F1DC844C10035DE65 /* PayForFuelCardRechargingVC.m in Sources */,
@@ -2575,13 +2677,17 @@
 				D0A4B4A51DBB46CF005C8C79 /* OrderStateView.m in Sources */,
 				D0A4B4BC1DBDA357005C8C79 /* CouponCell.m in Sources */,
 				D0D918DE1DA8F485003379E3 /* BuyAutoInsuranceVC.m in Sources */,
+				D0A1D8231E0281D700BB8D34 /* LewPopupViewAnimationDrop.m in Sources */,
 				D09BC1731DC87EC20035DE65 /* RechargeFuelcardInfoContentView.m in Sources */,
 				D003F0BA1DD06097003F0A3C /* OpenCardCell.m in Sources */,
+				D0A1D8261E0281D700BB8D34 /* LewPopupViewAnimationSpring.m in Sources */,
 				D0A4B4CC1DBEE514005C8C79 /* CouponItemView.m in Sources */,
+				D0A1D8271E0281D700BB8D34 /* UIViewController+LewPopupViewController.m in Sources */,
 				D0F92F761DD17E5A00BC0302 /* UIResponder+FindResponderVC.m in Sources */,
 				D026E9BC1DF7EA0500C563D8 /* BannerModel.m in Sources */,
 				D026E9CC1DFBA2B500C563D8 /* MyMembershipCardViewController.m in Sources */,
 				D006C24E1DB8BED60017FCD5 /* ItemAndCountView.m in Sources */,
+				D0A1D8221E0281D700BB8D34 /* LewPopupBackgroundView.m in Sources */,
 				D0758A651D9C9FD80071D8A6 /* StoreModel.m in Sources */,
 				D026E9C51DFA7AF800C563D8 /* OpenCardModel.m in Sources */,
 				D09BC1621DC844F70035DE65 /* PaymentWayView.m in Sources */,
@@ -2740,6 +2846,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = RRJR6A5BF9;
 				GCC_PREFIX_HEADER = "/Users/liwei/Git/GuanchepoUser/gu/管车婆/PrefixHeader.pch";
 				INFOPLIST_FILE = "管车婆/Info.plist";
@@ -2747,6 +2854,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.yuanheng.GuanchepoUser;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 			};
 			name = Debug;
 		};
@@ -2756,6 +2865,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = RRJR6A5BF9;
 				GCC_PREFIX_HEADER = "/Users/liwei/Git/GuanchepoUser/gu/管车婆/PrefixHeader.pch";
 				INFOPLIST_FILE = "管车婆/Info.plist";
@@ -2763,6 +2873,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.yuanheng.GuanchepoUser;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 			};
 			name = Release;
 		};
