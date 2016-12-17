@@ -216,6 +216,9 @@
 		D0D918DB1DA8F46D003379E3 /* RechargeFuelCardVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D0D918DA1DA8F46D003379E3 /* RechargeFuelCardVC.m */; };
 		D0D918DE1DA8F485003379E3 /* BuyAutoInsuranceVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D0D918DD1DA8F485003379E3 /* BuyAutoInsuranceVC.m */; };
 		D0D918E11DA8F4A9003379E3 /* EnquiryDriverScoresVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D0D918E01DA8F4A9003379E3 /* EnquiryDriverScoresVC.m */; };
+		D0E6A7281E03C3AF0080F997 /* StoreServiceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D0E6A7271E03C3AF0080F997 /* StoreServiceModel.m */; };
+		D0E6A72B1E03E3130080F997 /* CarOwnerClassifyModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D0E6A72A1E03E3130080F997 /* CarOwnerClassifyModel.m */; };
+		D0E6A72E1E04D88B0080F997 /* NewsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D0E6A72D1E04D88B0080F997 /* NewsModel.m */; };
 		D0E8F9DA1D9BA57100582D96 /* ScrollImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = D0E8F9D91D9BA57100582D96 /* ScrollImageView.m */; };
 		D0E8F9DF1D9BA65B00582D96 /* ad_01.png in Resources */ = {isa = PBXBuildFile; fileRef = D0E8F9DB1D9BA65B00582D96 /* ad_01.png */; };
 		D0E8F9E01D9BA65B00582D96 /* ad_02.png in Resources */ = {isa = PBXBuildFile; fileRef = D0E8F9DC1D9BA65B00582D96 /* ad_02.png */; };
@@ -608,6 +611,12 @@
 		D0D918DD1DA8F485003379E3 /* BuyAutoInsuranceVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BuyAutoInsuranceVC.m; sourceTree = "<group>"; };
 		D0D918DF1DA8F4A9003379E3 /* EnquiryDriverScoresVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnquiryDriverScoresVC.h; sourceTree = "<group>"; };
 		D0D918E01DA8F4A9003379E3 /* EnquiryDriverScoresVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnquiryDriverScoresVC.m; sourceTree = "<group>"; };
+		D0E6A7261E03C3AF0080F997 /* StoreServiceModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoreServiceModel.h; sourceTree = "<group>"; };
+		D0E6A7271E03C3AF0080F997 /* StoreServiceModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoreServiceModel.m; sourceTree = "<group>"; };
+		D0E6A7291E03E3130080F997 /* CarOwnerClassifyModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CarOwnerClassifyModel.h; sourceTree = "<group>"; };
+		D0E6A72A1E03E3130080F997 /* CarOwnerClassifyModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CarOwnerClassifyModel.m; sourceTree = "<group>"; };
+		D0E6A72C1E04D88B0080F997 /* NewsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsModel.h; sourceTree = "<group>"; };
+		D0E6A72D1E04D88B0080F997 /* NewsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsModel.m; sourceTree = "<group>"; };
 		D0E8F9D81D9BA57100582D96 /* ScrollImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScrollImageView.h; sourceTree = "<group>"; };
 		D0E8F9D91D9BA57100582D96 /* ScrollImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScrollImageView.m; sourceTree = "<group>"; };
 		D0E8F9DB1D9BA65B00582D96 /* ad_01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ad_01.png; sourceTree = "<group>"; };
@@ -1592,6 +1601,10 @@
 			children = (
 				D09963161DDC2FA800505985 /* CarOwnersModel.h */,
 				D09963171DDC2FA800505985 /* CarOwnersModel.m */,
+				D0E6A7291E03E3130080F997 /* CarOwnerClassifyModel.h */,
+				D0E6A72A1E03E3130080F997 /* CarOwnerClassifyModel.m */,
+				D0E6A72C1E04D88B0080F997 /* NewsModel.h */,
+				D0E6A72D1E04D88B0080F997 /* NewsModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1680,6 +1693,8 @@
 			children = (
 				D0758A631D9C9FD80071D8A6 /* StoreModel.h */,
 				D0758A641D9C9FD80071D8A6 /* StoreModel.m */,
+				D0E6A7261E03C3AF0080F997 /* StoreServiceModel.h */,
+				D0E6A7271E03C3AF0080F997 /* StoreServiceModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2607,10 +2622,12 @@
 				D0A4B4C21DBDE67F005C8C79 /* MaintainCouponVC.m in Sources */,
 				D0F7808D1DC2FE1900347B21 /* CardCell.m in Sources */,
 				D052B1FD1E00E2C1006E74C1 /* MoreViewController.m in Sources */,
+				D0E6A72B1E03E3130080F997 /* CarOwnerClassifyModel.m in Sources */,
 				D0D918DB1DA8F46D003379E3 /* RechargeFuelCardVC.m in Sources */,
 				D026E9C81DFA9D6400C563D8 /* AboutModel.m in Sources */,
 				D0139A861DD417F6005141F2 /* LWCouponCell.m in Sources */,
 				D003F0B71DD05E3E003F0A3C /* OpenCardVC.m in Sources */,
+				D0E6A7281E03C3AF0080F997 /* StoreServiceModel.m in Sources */,
 				D0D918BE1DA8E784003379E3 /* FillPhoneChargesVC.m in Sources */,
 				D0758A621D9C9F300071D8A6 /* StoreCell.m in Sources */,
 				D0A4B49C1DBB4163005C8C79 /* OrderInfoVC.m in Sources */,
@@ -2662,6 +2679,7 @@
 				D092F7EA1DACBBAD002581F5 /* CarOwnersCell.m in Sources */,
 				D0C7A49B1DA9DC18005FC697 /* WeathreModel.m in Sources */,
 				D0C3E95B1DB215F60084CDA4 /* IllegalCell.m in Sources */,
+				D0E6A72E1E04D88B0080F997 /* NewsModel.m in Sources */,
 				D0F780901DC3374900347B21 /* AddFuelCardVC.m in Sources */,
 				D0F7808A1DC2F39900347B21 /* ChangeFuelcardVC.m in Sources */,
 				D003F09B1DCC1509003F0A3C /* FreeExperienceVoucherVC.m in Sources */,

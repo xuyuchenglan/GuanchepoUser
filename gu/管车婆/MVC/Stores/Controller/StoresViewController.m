@@ -8,6 +8,7 @@
 
 #import "StoresViewController.h"
 #import "StoresListVC.h"
+#import "StoreServiceModel.h"
 
 #define kDetailServeCellHeight 40*kRate
 
@@ -18,6 +19,7 @@
 @property (nonatomic, assign)long      currentBtnTag;
 @property (nonatomic, strong)NSArray  *servesArr;//细分服务数组
 @property (nonatomic, strong)NSString *selectedServe;//记录选中的服务
+@property (nonatomic, copy)NSArray    *models;
 @end
 
 @implementation StoresViewController
@@ -33,6 +35,9 @@
     
     //选择细分服务视图
     [self addDetailServeTableView];
+    
+    //网络请求门店列表数据
+    [self getServices];
     
 }
 
@@ -58,22 +63,22 @@
     NSLog(@"设置同步滑动视图");
     
     //配置按钮标题数组
-    self.titleArray = [NSArray arrayWithObjects:@"汽车服务", @"汽车美容", @"轮胎服务", @"保养服务", nil];
+    self.titleArray = [NSArray arrayWithObjects:@"汽车服务", @"保养服务", @"汽车美容", @"其他服务", nil];
     
     //配置控制器数组(需要与上面的标题相对应)
     StoresListVC *carServiceVC = [[StoresListVC alloc] init];
     carServiceVC.vc = self;
     carServiceVC.type = @"0";//汽车服务
+    StoresListVC *maintenanceVC = [[StoresListVC alloc] init];
+    maintenanceVC.vc = self;
+    maintenanceVC.type = @"1";//保养服务
     StoresListVC *carBeautyVC = [[StoresListVC alloc] init];
     carBeautyVC.vc = self;
-    carBeautyVC.type = @"1";//汽车美容
-    StoresListVC *tyreVC = [[StoresListVC alloc] init];
-    tyreVC.vc = self;
-    tyreVC.type = @"2";//轮胎服务
-    StoresListVC *mainTenanceVC = [[StoresListVC alloc] init];
-    mainTenanceVC.vc = self;
-    mainTenanceVC.type = @"3";//保养服务
-    self.controllerArray = [NSArray arrayWithObjects:carServiceVC, carBeautyVC, tyreVC, mainTenanceVC, nil];
+    carBeautyVC.type = @"2";//汽车美容
+    StoresListVC *otherVC = [[StoresListVC alloc] init];
+    otherVC.vc = self;
+    otherVC.type = @"3";//其他服务
+    self.controllerArray = [NSArray arrayWithObjects:carServiceVC, maintenanceVC, carBeautyVC, otherVC, nil];
 }
 
 #pragma mark ******************   复写父视图中展示选择细分服务的视图   ****************
@@ -85,7 +90,6 @@
     [self.view addSubview:_tableView];
     _tableView.hidden = YES;
 }
-
 
 - (void)selectDetailServeWithBtn:(UIButton *)btn
 {
@@ -101,16 +105,9 @@
     
     if (!_tableView.hidden) {
         
-        if (btnTag == 0) {
-            _servesArr = [NSArray arrayWithObjects:@"洗车-1座", @"洗车-2座", @"洗车-3座", @"洗车-4座", @"洗车-5座", @"洗车-6座", nil];
-        } else if (btnTag == 1) {
-            _servesArr = [NSArray arrayWithObjects:@"汽车美容1", @"汽车美容2", @"汽车美容3", @"汽车美容4", @"汽车美容5", @"汽车美容6", @"汽车美容7", @"汽车美容8", nil];
-        } else if (btnTag == 2) {
-            _servesArr = [NSArray arrayWithObjects:@"轮胎服务1", @"轮胎服务2", @"轮胎服务3", @"轮胎服务4", @"轮胎服务5", @"轮胎服务6", @"轮胎服务7", nil];
-        } else {
-            _servesArr = [NSArray arrayWithObjects:@"保养服务1", @"保养服务2", @"保养服务3", @"保养服务4", @"保养服务5", @"保养服务6", nil];
-        }
-
+        int index = (int)btnTag;
+        _servesArr = _models[index];
+        
         _tableView.frame = CGRectMake(0, 100, kScreenWidth, kDetailServeCellHeight*_servesArr.count);
         [_tableView reloadData];
     }
@@ -124,9 +121,11 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    StoreServiceModel *currentModel = _servesArr[indexPath.row];
+    
     UITableViewCell *cell = [[UITableViewCell alloc] init];
     
-    cell.textLabel.text = _servesArr[indexPath.row];
+    cell.textLabel.text = currentModel.name;
     cell.textLabel.font = [UIFont systemFontOfSize:15.0*kRate];
     
     return cell;
@@ -148,6 +147,64 @@
     //给StoresListVC发送一个通知，让他改变topView上的显示内容
     NSDictionary *infoDic = [NSDictionary dictionaryWithObjectsAndKeys:_selectedServe, @"selectedServe", nil];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"showSelectedServe" object:nil userInfo:infoDic];
+}
+
+#pragma mark
+#pragma mark 网络请求
+- (void)getServices
+{
+    NSString *url_get = [NSString stringWithFormat:@"http://%@getServicesBySType.action", kHead];
+    
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];//单例
+    
+    manager.requestSerializer = [AFHTTPRequestSerializer serializer];
+    
+    manager.responseSerializer = [AFJSONResponseSerializer serializer];
+    
+    [manager GET:url_get parameters:nil progress:NULL success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        
+        NSArray *arr1 = [responseObject objectForKey:@"1"];
+        NSArray *arr2 = [responseObject objectForKey:@"2"];
+        NSArray *arr3 = [responseObject objectForKey:@"3"];
+        NSArray *arr4 = [responseObject objectForKey:@"4"];
+        
+        NSMutableArray *modelArr1 = [NSMutableArray array];
+        NSMutableArray *modelArr2 = [NSMutableArray array];
+        NSMutableArray *modelArr3 = [NSMutableArray array];
+        NSMutableArray *modelArr4 = [NSMutableArray array];
+        
+        for (NSDictionary *dic in arr1) {
+            StoreServiceModel *model = [[StoreServiceModel alloc] initWithDic:dic];
+            [modelArr1 addObject:model];
+        }
+        
+        for (NSDictionary *dic in arr2) {
+            StoreServiceModel *model = [[StoreServiceModel alloc] initWithDic:dic];
+            [modelArr2 addObject:model];
+        }
+        
+        for (NSDictionary *dic in arr3) {
+            StoreServiceModel *model = [[StoreServiceModel alloc] initWithDic:dic];
+            [modelArr3 addObject:model];
+        }
+        
+        for (NSDictionary *dic in arr4) {
+            StoreServiceModel *model = [[StoreServiceModel alloc] initWithDic:dic];
+            [modelArr4 addObject:model];
+        }
+        
+        _models = [NSArray arrayWithObjects:modelArr1, modelArr2, modelArr3, modelArr4, nil];
+        
+        //刷新UI
+        [_tableView reloadData];
+        
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+        NSLog(@"请求失败，原因是%@", error);
+        
+    }];
+
 }
 
 #pragma mark

@@ -8,7 +8,7 @@
 
 #import "MovableParentVC.h"
 
-#define kTitleWidth kScreenWidth/4
+#define kTitleWidth kScreenWidth/3
 #define kTitleHeight 45*kRate
 #define kTitleBgColor [UIColor colorWithWhite:0.300 alpha:1.000]
 
@@ -156,6 +156,9 @@
     [UIView animateWithDuration:0 animations:^{
         _scrollView.contentOffset = CGPointMake(kScreenWidth * (btn.tag-100), 0);
     }];
+    
+    //进行相应网络请求并刷新页面
+    [self getCarFamilyAndUpdateUIWithBtn:btn];
 }
 
 //选择某个标题按钮（小滑块随之滑动，按钮颜色改变）
@@ -187,7 +190,11 @@
     [self selectButton:index];
 }
 
-
+//进行相应网络请求并刷新页面
+- (void)getCarFamilyAndUpdateUIWithBtn:(UIButton *)btn
+{
+    NSLog(@"//进行相应网络请求并刷新页面");
+}
 
 #pragma mark ----设置标题按钮对应的视图控制器
 

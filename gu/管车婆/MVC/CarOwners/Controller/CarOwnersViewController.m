@@ -8,8 +8,12 @@
 
 #import "CarOwnersViewController.h"
 #import "CarOwnersListVC.h"
+#import "CarOwnerClassifyModel.h"
+#import "NewsModel.h"
 
 @interface CarOwnersViewController ()
+
+@property (nonatomic, strong)NSMutableArray *titleModels;
 
 @end
 
@@ -18,11 +22,16 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    _titleModels = [NSMutableArray array];
+    
     //设置导航栏
     [self addNavBar];
     
+    //网络申请种类数据
+    [self getClasstypeAction];
+    
     //设置下面的同步滑动视图
-    [self addSyncScrollView];
+    //同步滑动视图是在网络请求成功以后进行设置的
 }
 
 #pragma mark ******************      设置导航栏      ****************
@@ -39,29 +48,104 @@
 #pragma mark ******************  设置同步滑动视图  ****************
 - (void)addSyncScrollView
 {
-    //配置按钮标题数组
-    self.titleArray = [NSArray arrayWithObjects:@"保养常识", @"驾驶技巧", @"汽车大全", @"保养常识", @"驾驶技巧", @"汽车大全", @"保养常识", @"驾驶技巧", @"汽车大全", nil];
+    NSMutableArray *titleArr = [NSMutableArray array];
+    NSMutableArray *controllerArr = [NSMutableArray array];
     
-    //配置控制器数组(需要与上面的标题相对应)
-    CarOwnersListVC *commonSenseVC = [[CarOwnersListVC alloc] init];
-    commonSenseVC.type = @"1";//保养常识
-    CarOwnersListVC *skillsVC = [[CarOwnersListVC alloc] init];
-    skillsVC.type = @"2";//驾驶技巧
-    CarOwnersListVC *everythingVC = [[CarOwnersListVC alloc] init];
-    everythingVC.type = @"3";//汽车大全
-    CarOwnersListVC *commonSenseVC1 = [[CarOwnersListVC alloc] init];
-    commonSenseVC.type = @"1";//保养常识
-    CarOwnersListVC *skillsVC1 = [[CarOwnersListVC alloc] init];
-    skillsVC.type = @"2";//驾驶技巧
-    CarOwnersListVC *everythingVC1 = [[CarOwnersListVC alloc] init];
-    everythingVC.type = @"3";//汽车大全
-    CarOwnersListVC *commonSenseVC2 = [[CarOwnersListVC alloc] init];
-    commonSenseVC.type = @"1";//保养常识
-    CarOwnersListVC *skillsVC2 = [[CarOwnersListVC alloc] init];
-    skillsVC.type = @"2";//驾驶技巧
-    CarOwnersListVC *everythingVC2 = [[CarOwnersListVC alloc] init];
-    everythingVC.type = @"3";//汽车大全
-    self.controllerArray = [NSArray arrayWithObjects:commonSenseVC, skillsVC, everythingVC, commonSenseVC1, skillsVC1, everythingVC1, commonSenseVC2, skillsVC2, everythingVC2, nil];
+    for (CarOwnerClassifyModel *currentModel in _titleModels) {
+        NSString *title = currentModel.classifyname;
+        [titleArr addObject:title];
+        
+        CarOwnersListVC *vc = [[CarOwnersListVC alloc] init];
+        vc.type = currentModel.classifyid;
+        vc.vc = self;
+        [controllerArr addObject:vc];
+    }
+    
+    self.titleArray = [titleArr copy];
+    self.controllerArray = [controllerArr copy];
+    
+}
+
+//点击标题按钮后进行相关网络请求并更新页面
+- (void)getCarFamilyAndUpdateUIWithBtn:(UIButton *)btn
+{
+    int index = (int)btn.tag - 100;
+    
+    CarOwnerClassifyModel *currentModel = _titleModels[index];
+    NSLog(@"%@", currentModel.classifyid);
+    
+    NSString *url_post = [NSString stringWithFormat:@"http://%@getCarFamily.action", kHead];
+    
+    
+    NSDictionary *params = @{
+                             @"type":currentModel.classifyid,
+                             @"currsize":@"0",
+                             @"pagesize":@"10"
+                             };
+    
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    
+    AFHTTPResponseSerializer *responseSerializer = [AFHTTPResponseSerializer serializer];
+    
+    manager.responseSerializer = responseSerializer;
+    
+    [manager POST:url_post parameters:params progress:NULL success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        
+        NSDictionary *content = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+        
+        NSMutableArray *newsModelsMu = [NSMutableArray array];
+        
+        NSArray *jsondataArr = [content objectForKey:@"jsondata"];
+        for (NSDictionary *dic in jsondataArr) {
+            NewsModel *model = [[NewsModel alloc] initWithDic:dic];
+            [newsModelsMu addObject:model];
+        }
+        
+        //给CarOwnersListVC发送一个通知，使相关页面更新UI
+        NSDictionary *notificationDic = @{
+                                          @"type":currentModel.classifyid,
+                                          @"models":newsModelsMu
+                                          };
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadCarOwnersListVC" object:nil userInfo:notificationDic];
+        
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"请求失败， 失败原因是：%@", error);
+    }];
+
+}
+
+#pragma mark 
+#pragma mark 网络请求
+//网络请求各个类别
+- (void)getClasstypeAction
+{
+    NSString *url_get = [NSString stringWithFormat:@"http://%@getClassType.action", kHead];
+    
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];//单例
+    
+    manager.requestSerializer = [AFHTTPRequestSerializer serializer];
+    
+    manager.responseSerializer = [AFJSONResponseSerializer serializer];
+    
+    [manager GET:url_get parameters:nil progress:NULL success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        
+        NSArray *jsondataArr = [responseObject objectForKey:@"jsondata"];
+        
+        for (NSDictionary *dic in jsondataArr) {
+            CarOwnerClassifyModel *model = [[CarOwnerClassifyModel alloc] initWithDic:dic];
+            [_titleModels addObject:model];
+        }
+        
+        //设置下面的同步滑动视图
+        [self addSyncScrollView];
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+        NSLog(@"请求失败，原因是%@", error);
+        
+    }];
+
 }
 
 @end

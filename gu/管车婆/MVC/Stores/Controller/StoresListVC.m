@@ -30,13 +30,9 @@
     //设置tableView上方的显示汽车信息的View
     [self addTopView];
     
-}
-
-- (void)setVc:(UIViewController *)vc
-{
-    _vc = vc;
     //设置tableView
     [self addTableView];
+    
 }
 
 #pragma mark *************** 设置tableView上方的显示汽车信息的View *****************

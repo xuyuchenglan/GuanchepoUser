@@ -12,4 +12,6 @@
 
 @property (nonatomic, strong)NSString *type;
 
+@property (nonatomic, weak)UIViewController *vc;//目的在于找到能够执行push页面跳转的响应者
+
 @end

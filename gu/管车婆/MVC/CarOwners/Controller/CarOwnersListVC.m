@@ -8,22 +8,42 @@
 
 #import "CarOwnersListVC.h"
 #import "CarOwnersCell.h"
+#import "ADViewController.h"
 
 @interface CarOwnersListVC ()<UITableViewDelegate, UITableViewDataSource>
 {
     UITableView *_tableView;
 }
-
+@property (nonatomic, copy)NSArray *models;
 @end
 
 @implementation CarOwnersListVC
+
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        //监听CarOwnersViewController中请求完当前页面的新闻列表的数据后发送过来的通知，以更新UI
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadCarOwnersListVC:) name:@"reloadCarOwnersListVC" object:nil];
+    }
+    return self;
+}
+
+- (void) reloadCarOwnersListVC:(NSNotification *)info
+{
+    NSString *type = info.userInfo[@"type"];
+    
+    if ([type isEqualToString: self.type]) {
+        _models = info.userInfo[@"models"];
+        [_tableView reloadData];
+    }
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     //设置tableView
     [self addTableView];
-    
     
 }
 
@@ -48,7 +68,7 @@
 #pragma mark UITableViewDelegate && UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 20;
+    return _models.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -64,25 +84,28 @@
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
-    CarOwnersModel *newModel = [[CarOwnersModel alloc] init];
-    switch (indexPath.row) {
-        case 0:
-            newModel.flag = FlagModelNO;
-            break;
-            
-        case 1:
-            newModel.flag = FlagModelYES;
-            break;
-            
-        case 2:
-            newModel.flag = FlagModelNO;
-            break;
-            
-        default:
-            newModel.flag = FlagModelYES;
-            break;
-    }
-    cell.carOwnersModel = newModel;
+//    CarOwnersModel *newModel = [[CarOwnersModel alloc] init];
+//    switch (indexPath.row) {
+//        case 0:
+//            newModel.flag = FlagModelNO;
+//            break;
+//            
+//        case 1:
+//            newModel.flag = FlagModelYES;
+//            break;
+//            
+//        case 2:
+//            newModel.flag = FlagModelNO;
+//            break;
+//            
+//        default:
+//            newModel.flag = FlagModelYES;
+//            break;
+//    }
+//    cell.carOwnersModel = newModel;
+    
+    NewsModel *currentModel = _models[indexPath.row];
+    cell.newsModel = currentModel;
     
     return cell;
 }
@@ -94,12 +117,25 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    NewsModel *currentModel = _models[indexPath.row];
     
+    ADViewController *adViewController = [[ADViewController alloc] init];
+    adViewController.linkUrl = [NSString stringWithFormat:@"%@", currentModel.linkUrl];
+    adViewController.titleStr = currentModel.titleStr;
+    adViewController.hidesBottomBarWhenPushed = YES;
+    [self.vc.navigationController pushViewController:adViewController animated:NO];
+    adViewController.hidesBottomBarWhenPushed = NO;
+
     
 }
 
 
-
+#pragma mark
+#pragma mark 复写deallock,移除通知观察者
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 
 
 @end

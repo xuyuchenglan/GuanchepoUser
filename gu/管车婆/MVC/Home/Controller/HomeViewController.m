@@ -271,8 +271,9 @@
     ADViewController *adViewController = [[ADViewController alloc] init];
     adViewController.linkUrl = currentModel.linkUrl;
     adViewController.titleStr = currentModel.titleName;
+    adViewController.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:adViewController animated:NO];
-    
+    adViewController.hidesBottomBarWhenPushed = NO;
     
 }
 
