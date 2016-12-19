@@ -126,6 +126,8 @@
         _conditionLB.textColor = [UIColor colorWithRed:203/255.0 green:96/255.0 blue:252/255.0 alpha:1];
     }
     
+    
+    
     _couponTypeLB.text = @"管车婆打折券";
 //    _conditionLB.text = @"仅限保养美容项目";
     _conditionLB.text = [NSString stringWithFormat:@"仅限%@%@项目", _aboutCouponModel.supername, _aboutCouponModel.sname];
