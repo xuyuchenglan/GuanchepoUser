@@ -7,6 +7,7 @@
 //
 
 #import "LWCouponCell.h"
+#import "AboutCouponModel.h"
 
 #define kCellWidth (kScreenWidth - 10*kRate*2)
 
@@ -126,9 +127,10 @@
     }
     
     _couponTypeLB.text = @"管车婆打折券";
-    _conditionLB.text = @"仅限保养美容项目";
-    _timeLB.text = @"使用时间：截止2016-09-30";
-    _lb.text = @"9折";
+//    _conditionLB.text = @"仅限保养美容项目";
+    _conditionLB.text = [NSString stringWithFormat:@"仅限%@%@项目", _aboutCouponModel.supername, _aboutCouponModel.sname];
+    _timeLB.text = [NSString stringWithFormat:@"使用时间：截止%@", _aboutCouponModel.overdate];
+    _lb.text = [NSString stringWithFormat:@"%@折", _aboutCouponModel.discount];
 }
 
 

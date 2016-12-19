@@ -219,6 +219,7 @@
 		D0E6A7281E03C3AF0080F997 /* StoreServiceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D0E6A7271E03C3AF0080F997 /* StoreServiceModel.m */; };
 		D0E6A72B1E03E3130080F997 /* CarOwnerClassifyModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D0E6A72A1E03E3130080F997 /* CarOwnerClassifyModel.m */; };
 		D0E6A72E1E04D88B0080F997 /* NewsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D0E6A72D1E04D88B0080F997 /* NewsModel.m */; };
+		D0E6A7341E0778310080F997 /* AboutCouponModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D0E6A7331E0778310080F997 /* AboutCouponModel.m */; };
 		D0E8F9DA1D9BA57100582D96 /* ScrollImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = D0E8F9D91D9BA57100582D96 /* ScrollImageView.m */; };
 		D0E8F9DF1D9BA65B00582D96 /* ad_01.png in Resources */ = {isa = PBXBuildFile; fileRef = D0E8F9DB1D9BA65B00582D96 /* ad_01.png */; };
 		D0E8F9E01D9BA65B00582D96 /* ad_02.png in Resources */ = {isa = PBXBuildFile; fileRef = D0E8F9DC1D9BA65B00582D96 /* ad_02.png */; };
@@ -617,6 +618,8 @@
 		D0E6A72A1E03E3130080F997 /* CarOwnerClassifyModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CarOwnerClassifyModel.m; sourceTree = "<group>"; };
 		D0E6A72C1E04D88B0080F997 /* NewsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsModel.h; sourceTree = "<group>"; };
 		D0E6A72D1E04D88B0080F997 /* NewsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsModel.m; sourceTree = "<group>"; };
+		D0E6A7321E0778310080F997 /* AboutCouponModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutCouponModel.h; sourceTree = "<group>"; };
+		D0E6A7331E0778310080F997 /* AboutCouponModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutCouponModel.m; sourceTree = "<group>"; };
 		D0E8F9D81D9BA57100582D96 /* ScrollImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScrollImageView.h; sourceTree = "<group>"; };
 		D0E8F9D91D9BA57100582D96 /* ScrollImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScrollImageView.m; sourceTree = "<group>"; };
 		D0E8F9DB1D9BA65B00582D96 /* ad_01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ad_01.png; sourceTree = "<group>"; };
@@ -971,6 +974,8 @@
 		D0139A791DD3FC1F005141F2 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				D0E6A7321E0778310080F997 /* AboutCouponModel.h */,
+				D0E6A7331E0778310080F997 /* AboutCouponModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2706,6 +2711,7 @@
 				D026E9CC1DFBA2B500C563D8 /* MyMembershipCardViewController.m in Sources */,
 				D006C24E1DB8BED60017FCD5 /* ItemAndCountView.m in Sources */,
 				D0A1D8221E0281D700BB8D34 /* LewPopupBackgroundView.m in Sources */,
+				D0E6A7341E0778310080F997 /* AboutCouponModel.m in Sources */,
 				D0758A651D9C9FD80071D8A6 /* StoreModel.m in Sources */,
 				D026E9C51DFA7AF800C563D8 /* OpenCardModel.m in Sources */,
 				D09BC1621DC844F70035DE65 /* PaymentWayView.m in Sources */,

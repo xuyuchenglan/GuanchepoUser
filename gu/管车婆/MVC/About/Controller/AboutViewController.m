@@ -29,6 +29,7 @@
     //第一块内容
     UIView *_up_bgView;
     UIButton *_signInBtn;
+    CardAndCarView *_cardView;
     CardAndCarView *_carView;
     
     //第二块内容
@@ -36,7 +37,6 @@
     //第三块内容
     UITableView *_tableView;
 }
-@property (nonatomic, strong) AboutModel *aboutModel;
 @end
 
 @implementation AboutViewController
@@ -95,8 +95,7 @@
     
     //积分
     UILabel *pointsLabel = [[UILabel alloc] initWithFrame:CGRectMake(kScreenWidth - 100*kRate, 30*kRate, 80*kRate, 20*kRate)];
-//    pointsLabel.text = @"积分：188";
-    pointsLabel.text = [NSString stringWithFormat:@"积分：%@", _aboutModel.scores];
+    pointsLabel.text = [NSString stringWithFormat:@"积分：%@", [[self getLocalDic] objectForKey:@"score"]];
     pointsLabel.textColor = [UIColor whiteColor];
     pointsLabel.font = [UIFont systemFontOfSize:14.0*kRate];
     [_up_bgView addSubview:pointsLabel];
@@ -110,8 +109,7 @@
     
     //账号
     UILabel *accountLabel = [[UILabel alloc] initWithFrame:CGRectMake(kScreenWidth/2 - 75*kRate, CGRectGetMaxY(headImgView.frame)+10*kRate, 150*kRate, 20*kRate)];
-//    accountLabel.text = @"王一旭18653400191";
-    accountLabel.text = [NSString stringWithFormat:@"%@%@", self.aboutModel.realName, self.aboutModel.phoneNumber];
+    accountLabel.text = [NSString stringWithFormat:@"%@%@", [[self getLocalDic] objectForKey:@"realname"], [[self getLocalDic] objectForKey:@"phone"]];
     accountLabel.textColor = [UIColor whiteColor];
     accountLabel.textAlignment = NSTextAlignmentCenter;
     accountLabel.font = [UIFont systemFontOfSize:14.0*kRate];
@@ -120,7 +118,7 @@
     
     //余额
     UIButton *balanceBtn = [[UIButton alloc] initWithFrame:CGRectMake(kScreenWidth/2 - 75*kRate, CGRectGetMaxY(accountLabel.frame), 150*kRate, 20*kRate)];
-    [balanceBtn setTitle:[NSString stringWithFormat:@"余额：%@元", self.aboutModel.balance] forState:UIControlStateNormal];
+    [balanceBtn setTitle:[NSString stringWithFormat:@"余额：%@元", [[self getLocalDic] objectForKey:@"carbrand"]] forState:UIControlStateNormal];
     balanceBtn.titleLabel.textColor = [UIColor whiteColor];
     balanceBtn.titleLabel.font = [UIFont systemFontOfSize:14.0*kRate];
     [balanceBtn addTarget:self action:@selector(balanceBtnAction) forControlEvents:UIControlEventTouchUpInside];
@@ -137,28 +135,28 @@
     [_signInBtn setTitleColor:[UIColor colorWithRed:0 green:126/255.0 blue:1 alpha:1] forState:UIControlStateNormal];
     _signInBtn.titleLabel.font = [UIFont systemFontOfSize:14.0*kRate];
     [_signInBtn addTarget:self action:@selector(signInBtnAction) forControlEvents:UIControlEventTouchUpInside];
-    [_scrollView addSubview:_signInBtn];
+    [_scrollView insertSubview:_signInBtn aboveSubview:_carView];//确保无论怎么更新UI都不会使签到按钮被覆盖
 }
 
 //下面的优惠券和我的爱车
 - (void)addFirstDown
 {
     //优惠券
-    CardAndCarView *cardView = [[CardAndCarView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_up_bgView.frame), kScreenWidth/2 - 1, kScreenWidth*0.15)];
-    cardView.title = @"优惠券";
-    cardView.imgName = @"about_first_coupon";
-    cardView.subTitle = @"免洗券发放中";
-    cardView.backgroundColor = [UIColor whiteColor];
-    [_scrollView addSubview:cardView];
+    _cardView = [[CardAndCarView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_up_bgView.frame), kScreenWidth/2 - 1, kScreenWidth*0.15)];
+    _cardView.title = @"优惠券";
+    _cardView.imgName = @"about_first_coupon";
+    _cardView.subTitle = @"免洗券发放中";
+    _cardView.backgroundColor = [UIColor whiteColor];
+    [_scrollView addSubview:_cardView];
     
     UITapGestureRecognizer *cardTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(cardTapAction:)];
-    [cardView addGestureRecognizer:cardTap];
+    [_cardView addGestureRecognizer:cardTap];
     
     //我的爱车
-    _carView = [[CardAndCarView alloc] initWithFrame:CGRectMake(kScreenWidth/2, CGRectGetMinY(cardView.frame), kScreenWidth/2, kScreenWidth*0.15)];
+    _carView = [[CardAndCarView alloc] initWithFrame:CGRectMake(kScreenWidth/2, CGRectGetMinY(_cardView.frame), kScreenWidth/2, kScreenWidth*0.15)];
     _carView.title = @"我的爱车(11)";
     _carView.imgName = @"about_first_car";
-    _carView.subTitle = self.aboutModel.carNo;
+    _carView.subTitle = [[self getLocalDic] objectForKey:@"carno"];
     _carView.backgroundColor = [UIColor whiteColor];
     [_scrollView addSubview:_carView];
     
@@ -181,13 +179,14 @@
 {
     NSLog(@"签到");
     
-//    [self sign];//签到的网络请求
+    [self sign];//签到的网络请求
     
     _signInBtn.alpha = 0;
     [UIView animateWithDuration:0.6 animations:^{
         [_signInBtn setTitle:@"已签到" forState:UIControlStateNormal];
         _signInBtn.alpha = 1;
     }];
+
 }
 
 - (void)cardTapAction:(UITapGestureRecognizer *)gesture
@@ -573,16 +572,14 @@
     [manager POST:url_post parameters:params progress:NULL success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
         NSDictionary *content = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
-//        NSLog(@"思考和广发李伟刚付款时：%@", content);
         
         NSDictionary *jsonDataDic = [content objectForKey:@"jsondata"];
-        _aboutModel = [[AboutModel alloc] initWithDic:jsonDataDic];
-        
-        //更新UI
-        [self updateUI];
         
         //更新缓存的数据
+        [self saveDataToPlistWithDic:jsonDataDic];
         
+        //更新UI(UI所需的数据是从缓存中取出来的，所以先更新缓存)
+        [self updateUI];
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"请求失败， 失败原因是：%@", error);
@@ -593,7 +590,7 @@
 //签到
 - (void)sign
 {
-    NSString *url_post = [NSString stringWithFormat:@"http://%@:80/zcar/userapp/sign.action", kHead];
+    NSString *url_post = [NSString stringWithFormat:@"http://%@sign.action", kHead];
     
     NSDictionary *params = @{
                              @"uid":[[self getLocalDic] objectForKey:@"uid"],
@@ -613,8 +610,8 @@
         
         if ([result isEqualToString:@"success"]) {
             
-            //更新UI
-            
+            //签到成功后，重新请求数据并保存到本地，然后更新UI
+            [self getUserInfo];
             
         } else {
             
@@ -636,8 +633,22 @@
 {
     [_up_bgView removeFromSuperview];
     [self addFirstUp];
+    
+    [_cardView removeFromSuperview];
+    [_carView removeFromSuperview];
+    [self addFirstDown];
+    
+    [_signInBtn removeFromSuperview];
+    [self addFirstMedium];
 }
 
 //更新缓存的数据
-
+- (void)saveDataToPlistWithDic:(NSDictionary *)contentDic
+{
+    //将请求下来的数据中的data对应的字典保存到沙盒的自己创建的plist文件中
+    NSArray *paths=NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask,YES);
+    NSString *plistPath1 = [paths objectAtIndex:0];
+    NSString *filename=[plistPath1 stringByAppendingPathComponent:@"my.plist"];
+    [contentDic  writeToFile:filename atomically:YES];
+}
 @end

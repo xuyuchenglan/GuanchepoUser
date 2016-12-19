@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
+@class AboutCouponModel;
 @interface CouponListViewController : UIViewController
 
 @property (nonatomic, strong)NSString *type;

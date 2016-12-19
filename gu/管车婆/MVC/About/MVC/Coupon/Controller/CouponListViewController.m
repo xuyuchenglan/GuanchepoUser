@@ -8,6 +8,7 @@
 
 #import "CouponListViewController.h"
 #import "LWCouponCell.h"
+#import "AboutCouponModel.h"
 
 #define kCellWidth (kScreenWidth - 10*kRate*2)
 
@@ -15,12 +16,15 @@
 {
     UITableView *_tableView;
 }
+@property (nonatomic, strong)NSMutableArray *aboutCouponModels;
 @end
 
 @implementation CouponListViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    _aboutCouponModels = [NSMutableArray array];
     
     _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 10, kScreenWidth, kScreenHeight - 64 - 10*kRate - 45*kRate)];
     _tableView.delegate = self;
@@ -33,10 +37,18 @@
     
 }
 
+- (void)setType:(NSString *)type
+{
+    _type = type;
+    
+    //网络获取优惠券列表
+    [self getYouhuiquan];
+}
+
 #pragma mark UITableViewDelegate && UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 6;
+    return _aboutCouponModels.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -57,6 +69,9 @@
         cell.type = @"tiyanquan";
     }
     
+    AboutCouponModel *currentModel = _aboutCouponModels[indexPath.row];
+    cell.aboutCouponModel = currentModel;
+    
     return cell;
 }
 
@@ -76,6 +91,51 @@
     [_tableView deselectRowAtIndexPath:[_tableView indexPathForSelectedRow] animated:YES];
 }
 
+
+#pragma mark
+#pragma mark 网络获取优惠券列表
+- (void)getYouhuiquan
+{
+    NSLog(@"网络请求优惠券列表");
+    
+    NSString *url_post = [NSString stringWithFormat:@"http://%@getYouhuiquan.action", kHead];
+    
+//    NSDictionary *params = @{
+//                             @"uid":[[self getLocalDic] objectForKey:@"uid"],
+//                             @"type":_type
+//                             };
+    
+    NSDictionary *params = @{
+                             @"uid":@"f1c94e63ae3343eb9b044333d8c12c79",
+                             @"type":_type
+                             };
+    
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    
+    AFHTTPResponseSerializer *responseSerializer = [AFHTTPResponseSerializer serializer];
+    
+    manager.responseSerializer = responseSerializer;
+    
+    [manager POST:url_post parameters:params progress:NULL success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        
+        NSDictionary *content = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+        
+        NSArray *jsondataArr = [content objectForKey:@"jsondata"];
+        
+        for (NSDictionary *dic in jsondataArr) {
+            AboutCouponModel *model = [[AboutCouponModel alloc] initWithDic:dic];
+            [_aboutCouponModels addObject:model];
+        }
+        
+        //刷新UI
+        [_tableView reloadData];
+        
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"请求失败， 失败原因是：%@", error);
+    }];
+
+}
 
 
 @end
