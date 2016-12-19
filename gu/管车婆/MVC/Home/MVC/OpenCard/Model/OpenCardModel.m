@@ -14,7 +14,7 @@
 {
     if (self = [super init]) {
         
-        self.picUrl = [NSURL URLWithString:[NSString stringWithFormat:@"http://%@:8080%@", kIP, [dic objectForKey:@"cpic"]]];
+        self.picUrl = [NSURL URLWithString:[NSString stringWithFormat:@"http://%@%@", kIP, [dic objectForKey:@"cpic"]]];
         
         self.name = [dic objectForKey:@"cname"];
         

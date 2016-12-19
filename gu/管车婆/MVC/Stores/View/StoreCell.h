@@ -13,4 +13,6 @@
 
 @property (nonatomic, strong)StoreModel *storeModel;
 
+@property (nonatomic, weak)UIViewController *vc;
+
 @end

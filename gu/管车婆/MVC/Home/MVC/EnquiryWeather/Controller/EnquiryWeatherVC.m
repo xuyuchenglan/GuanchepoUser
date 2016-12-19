@@ -24,6 +24,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.view.backgroundColor = [UIColor colorWithRed:233/255.0 green:239/255.0 blue:239/255.0 alpha:1];
+    
     //设置导航栏
     [self addNavBar];
     
@@ -58,6 +60,7 @@
     _weatherModels = [NSMutableArray array];
     
     _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64 + 12*kRate, kScreenWidth, kScreenHeight - 64 - 12*kRate) style:UITableViewStylePlain];
+    _tableView.backgroundColor = [UIColor colorWithRed:233/255.0 green:239/255.0 blue:239/255.0 alpha:1];
     _tableView.delegate = self;
     _tableView.dataSource = self;
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -105,7 +108,7 @@
 #pragma mark ****** 网络请求天气数据 ******
 - (void)getWeatherData
 {
-    NSString *url_get = [NSString stringWithFormat:@"http://%@:8080/zcar/userapp/getWeatherDaysDatas.action", kIP];
+    NSString *url_get = [NSString stringWithFormat:@"http://%@getWeatherDaysDatas.action", kHead];
     
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];//单例
     

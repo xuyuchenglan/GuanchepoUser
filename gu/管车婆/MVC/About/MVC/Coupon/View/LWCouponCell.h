@@ -8,8 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
+@class AboutCouponModel;
 @interface LWCouponCell : UITableViewCell
 
 @property (nonatomic, strong)NSString *type;
+
+@property(nonatomic, strong)AboutCouponModel *aboutCouponModel;
 
 @end

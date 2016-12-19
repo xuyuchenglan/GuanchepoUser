@@ -88,7 +88,7 @@
 //获得卡片列表
 - (void)getCardList
 {
-    NSString *url_get = [NSString stringWithFormat:@"http://%@:8080/zcar/userapp/getCardTypeList.action", kIP];
+    NSString *url_get = [NSString stringWithFormat:@"http://%@getCardTypeList.action", kHead];
     
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];//单例
     

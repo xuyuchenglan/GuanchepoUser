@@ -23,6 +23,7 @@
     
     //设置下面的同步滑动视图
     [self addSyncScrollView];
+    
 }
 
 #pragma mark ******************      导航栏      ****************
@@ -37,17 +38,19 @@
 - (void)addSyncScrollView
 {
     //配置按钮标题数组
-    self.titleArray = [NSArray arrayWithObjects:@"可使用", @"已使用", @"已过期", nil];
+    self.titleArray = [NSArray arrayWithObjects:@"未使用", @"已使用", @"已过期", nil];
     
     //配置控制器数组(需要与上面的标题相对应)
     CouponListViewController *usableVC = [[CouponListViewController alloc] init];
-    usableVC.type = @"usable";
+    usableVC.type = @"1";
     CouponListViewController *usedVC = [[CouponListViewController alloc] init];
-    usedVC.type = @"used";
+    usedVC.type = @"2";
     CouponListViewController *expiredVC = [[CouponListViewController alloc] init];
-    expiredVC.type = @"expired";
+    expiredVC.type = @"3";
     self.controllerArray = [NSArray arrayWithObjects:usableVC, usedVC, expiredVC, nil];
     
 }
+
+
 
 @end

@@ -8,9 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "CarOwnersModel.h"
+#import "NewsModel.h"
 
 @interface CarOwnersCell : UITableViewCell
 
 @property (nonatomic, strong)CarOwnersModel *carOwnersModel;
+@property (nonatomic, strong)NewsModel      *newsModel;
 
 @end

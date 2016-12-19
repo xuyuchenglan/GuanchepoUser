@@ -125,7 +125,6 @@
     
     [_secondView addSubview:engineNumberTF];
     
-    
     //车架号
     UILabel *chassisNumberLabel = [[UILabel alloc] initWithFrame:CGRectMake(30*kRate, 100*kRate, 80*kRate, 50*kRate)];
     chassisNumberLabel.text = @"车架号";

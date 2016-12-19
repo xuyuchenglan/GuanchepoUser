@@ -19,6 +19,8 @@
 #import "HomeModel.h"
 #import "ADViewController.h"
 #import "ServiceModel.h"
+#import "MoreViewController.h"
+#import "ItemStoresVC.h"
 
 #define kFirstBtnWidth  kScreenWidth/4
 #define kFirstBtnHeight 80*kRate
@@ -269,8 +271,9 @@
     ADViewController *adViewController = [[ADViewController alloc] init];
     adViewController.linkUrl = currentModel.linkUrl;
     adViewController.titleStr = currentModel.titleName;
+    adViewController.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:adViewController animated:NO];
-    
+    adViewController.hidesBottomBarWhenPushed = NO;
     
 }
 
@@ -354,7 +357,7 @@
     //下3
     [self addDown3Btn];
     
-    //下4
+    //下4(更多)
     [self addDown4Btn];
     
     
@@ -384,7 +387,14 @@
 {
     ServiceModel *serviceModel = _homeModel.services[0];
     
-    NSLog(@"%d", serviceModel.serviceId);
+    NSLog(@"%@", serviceModel.serviceId);
+    
+    ItemStoresVC *itemStoresVC = [[ItemStoresVC alloc] init];
+    itemStoresVC.sid = serviceModel.serviceId;
+    itemStoresVC.sname = serviceModel.serviceName;
+    itemStoresVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:itemStoresVC animated:NO];
+    itemStoresVC.hidesBottomBarWhenPushed = NO;
 }
 
 
@@ -412,7 +422,14 @@
 {
     ServiceModel *serviceModel = _homeModel.services[1];
     
-    NSLog(@"%d", serviceModel.serviceId);
+    NSLog(@"%@", serviceModel.serviceId);
+    
+    ItemStoresVC *itemStoresVC = [[ItemStoresVC alloc] init];
+    itemStoresVC.sid = serviceModel.serviceId;
+    itemStoresVC.sname = serviceModel.serviceName;
+    itemStoresVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:itemStoresVC animated:NO];
+    itemStoresVC.hidesBottomBarWhenPushed = NO;
 }
 
 
@@ -440,7 +457,14 @@
 {
     ServiceModel *serviceModel = _homeModel.services[2];
     
-    NSLog(@"%d", serviceModel.serviceId);
+    NSLog(@"%@", serviceModel.serviceId);
+    
+    ItemStoresVC *itemStoresVC = [[ItemStoresVC alloc] init];
+    itemStoresVC.sid = serviceModel.serviceId;
+    itemStoresVC.sname = serviceModel.serviceName;
+    itemStoresVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:itemStoresVC animated:NO];
+    itemStoresVC.hidesBottomBarWhenPushed = NO;
 }
 
 //上4
@@ -467,7 +491,14 @@
 {
     ServiceModel *serviceModel = _homeModel.services[3];
     
-    NSLog(@"%d", serviceModel.serviceId);
+    NSLog(@"%@", serviceModel.serviceId);
+    
+    ItemStoresVC *itemStoresVC = [[ItemStoresVC alloc] init];
+    itemStoresVC.sid = serviceModel.serviceId;
+    itemStoresVC.sname = serviceModel.serviceName;
+    itemStoresVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:itemStoresVC animated:NO];
+    itemStoresVC.hidesBottomBarWhenPushed = NO;
 }
 
 //中1
@@ -494,7 +525,14 @@
 {
     ServiceModel *serviceModel = _homeModel.services[4];
     
-    NSLog(@"%d", serviceModel.serviceId);
+    NSLog(@"%@", serviceModel.serviceId);
+    
+    ItemStoresVC *itemStoresVC = [[ItemStoresVC alloc] init];
+    itemStoresVC.sid = serviceModel.serviceId;
+    itemStoresVC.sname = serviceModel.serviceName;
+    itemStoresVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:itemStoresVC animated:NO];
+    itemStoresVC.hidesBottomBarWhenPushed = NO;
 }
 
 //广告位
@@ -546,7 +584,14 @@
 {
     ServiceModel *serviceModel = _homeModel.services[5];
     
-    NSLog(@"%d", serviceModel.serviceId);
+    NSLog(@"%@", serviceModel.serviceId);
+    
+    ItemStoresVC *itemStoresVC = [[ItemStoresVC alloc] init];
+    itemStoresVC.sid = serviceModel.serviceId;
+    itemStoresVC.sname = serviceModel.serviceName;
+    itemStoresVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:itemStoresVC animated:NO];
+    itemStoresVC.hidesBottomBarWhenPushed = NO;
 }
 
 //下1
@@ -573,7 +618,14 @@
 {
     ServiceModel *serviceModel = _homeModel.services[6];
     
-    NSLog(@"%d", serviceModel.serviceId);
+    NSLog(@"%@", serviceModel.serviceId);
+    
+    ItemStoresVC *itemStoresVC = [[ItemStoresVC alloc] init];
+    itemStoresVC.sid = serviceModel.serviceId;
+    itemStoresVC.sname = serviceModel.serviceName;
+    itemStoresVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:itemStoresVC animated:NO];
+    itemStoresVC.hidesBottomBarWhenPushed = NO;
 }
 
 //下2
@@ -600,7 +652,14 @@
 {
     ServiceModel *serviceModel = _homeModel.services[7];
     
-    NSLog(@"%d", serviceModel.serviceId);
+    NSLog(@"%@", serviceModel.serviceId);
+    
+    ItemStoresVC *itemStoresVC = [[ItemStoresVC alloc] init];
+    itemStoresVC.sid = serviceModel.serviceId;
+    itemStoresVC.sname = serviceModel.serviceName;
+    itemStoresVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:itemStoresVC animated:NO];
+    itemStoresVC.hidesBottomBarWhenPushed = NO;
 }
 
 //下3
@@ -627,7 +686,16 @@
 {
     ServiceModel *serviceModel = _homeModel.services[8];
     
-    NSLog(@"%d", serviceModel.serviceId);
+    NSLog(@"%@", serviceModel.serviceId);
+    
+    ItemStoresVC *itemStoresVC = [[ItemStoresVC alloc] init];
+    itemStoresVC.sid = serviceModel.serviceId;
+    itemStoresVC.sname = serviceModel.serviceName;
+    itemStoresVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:itemStoresVC animated:NO];
+    itemStoresVC.hidesBottomBarWhenPushed = NO;
+    
+    
 }
 
 //下4(更多)
@@ -652,9 +720,11 @@
 {
     NSLog(@"更多");
     
-    NSArray *newArr = [_homeModel.services subarrayWithRange:NSMakeRange(10, _homeModel.services.count-10)];
-    NSLog(@"%@", newArr);
-    
+    MoreViewController *moreVC = [[MoreViewController alloc] init];
+    moreVC.services = _homeModel.services;
+    moreVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:moreVC animated:NO];
+    moreVC.hidesBottomBarWhenPushed = NO;
 }
 
 
@@ -919,7 +989,7 @@
 #pragma mark --- 网络请求
 - (void)getHomeInfo
 {
-    NSString *url_post = [NSString stringWithFormat:@"http://%@:8080/zcar/userapp/getIndexInfo.action", kIP];
+    NSString *url_post = [NSString stringWithFormat:@"http://%@getIndexInfo.action", kHead];
     
     NSDictionary *params = @{
                              @"phone":[NSString stringWithFormat:@"%@", [[self getLocalDic] objectForKey:@"phone"]],
@@ -934,7 +1004,6 @@
     [manager POST:url_post parameters:params progress:NULL success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
         NSDictionary *content = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
-        //NSLog(@"首页数据请求成功，请求下来的Json格式的数据是%@", content);
         
         _homeModel = [[HomeModel alloc] initWithDic:content];
         _isLoadSuccess = YES;

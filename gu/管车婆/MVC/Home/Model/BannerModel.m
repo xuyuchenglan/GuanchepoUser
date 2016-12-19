@@ -15,7 +15,7 @@
     if (self = [super init]) {
         
         //banner
-        self.picUrl = [NSString stringWithFormat:@"http://%@:8080%@", kIP, [dic objectForKey:@"pic"]];
+        self.picUrl = [NSString stringWithFormat:@"http://%@%@", kIP, [dic objectForKey:@"pic"]];
         self.linkUrl = [dic objectForKey:@"linkurl"];
         self.bid = [[dic objectForKey:@"bid"] intValue];
         self.titleName = [dic objectForKey:@"name"];

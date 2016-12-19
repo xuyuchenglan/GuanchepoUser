@@ -20,6 +20,10 @@
     UIView       *accountView;
     
     UIControlFlagView *_flagView;//点赞按钮
+    
+    UILabel *_readingAccountLB;//阅读数
+    UILabel *_commentAccountLB;//评论数
+    UILabel *_likeAccountLB;//点赞数
 }
 @end
 
@@ -80,22 +84,20 @@
     [readingBtn addTarget:self action:@selector(readingBtnAction) forControlEvents:UIControlEventTouchUpInside];
     [accountView addSubview:readingBtn];
     
-    UILabel *readingAccountLB = [[UILabel alloc] initWithFrame:CGRectMake(15*kRate, 0, 20*kRate, 15*kRate)];
-    readingAccountLB.text = @"66";
-    readingAccountLB.font = [UIFont systemFontOfSize:10.0*kRate];
-    [accountView addSubview:readingAccountLB];
+    _readingAccountLB = [[UILabel alloc] initWithFrame:CGRectMake(15*kRate, 0, 20*kRate, 15*kRate)];
+    _readingAccountLB.font = [UIFont systemFontOfSize:10.0*kRate];
+    [accountView addSubview:_readingAccountLB];
     
     
     //中间，评论
-    UIButton *commentBtn = [[UIButton alloc] initWithFrame:CGRectMake(35*kRate, 0, 15*kRate, 15*kRate)];
-    [commentBtn setImage:[UIImage imageNamed:@"carOwners_comment"] forState:UIControlStateNormal];
-    [commentBtn addTarget:self action:@selector(commentBtnAction) forControlEvents:UIControlEventTouchUpInside];
-    [accountView addSubview:commentBtn];
+    UIButton *_commentBtn = [[UIButton alloc] initWithFrame:CGRectMake(35*kRate, 0, 15*kRate, 15*kRate)];
+    [_commentBtn setImage:[UIImage imageNamed:@"carOwners_comment"] forState:UIControlStateNormal];
+    [_commentBtn addTarget:self action:@selector(commentBtnAction) forControlEvents:UIControlEventTouchUpInside];
+    [accountView addSubview:_commentBtn];
     
-    UILabel *commentAccountLB = [[UILabel alloc] initWithFrame:CGRectMake(50*kRate, 0, 20*kRate, 15*kRate)];
-    commentAccountLB.text = @"666";
-    commentAccountLB.font = [UIFont systemFontOfSize:9.0*kRate];
-    [accountView addSubview:commentAccountLB];
+    _commentAccountLB = [[UILabel alloc] initWithFrame:CGRectMake(50*kRate, 0, 20*kRate, 15*kRate)];
+    _commentAccountLB.font = [UIFont systemFontOfSize:9.0*kRate];
+    [accountView addSubview:_commentAccountLB];
     
     //最右边，点赞
     _flagView = [[UIControlFlagView alloc] initWithFrame:CGRectMake(70*kRate, 0, 15*kRate, 15*kRate)];
@@ -108,21 +110,22 @@
     UITapGestureRecognizer *likeTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(likeTapAction)];
     [_flagView addGestureRecognizer:likeTap];
     
-    UILabel *likeAccountLB = [[UILabel alloc] initWithFrame:CGRectMake(85*kRate, 0, 20*kRate, 15*kRate)];
-    likeAccountLB.text = @"66";
-    likeAccountLB.font = [UIFont systemFontOfSize:10.0*kRate];
-    [accountView addSubview:likeAccountLB];
+    _likeAccountLB = [[UILabel alloc] initWithFrame:CGRectMake(85*kRate, 0, 20*kRate, 15*kRate)];
+    _likeAccountLB.font = [UIFont systemFontOfSize:10.0*kRate];
+    [accountView addSubview:_likeAccountLB];
 
 }
 
 - (void)layoutSubviews
 {
-    imgView.image = [UIImage imageNamed:@"carOwners_img"];
-    dateLabel.text = @"2016-10-11";
-    titleLabel.text = @"汽车驾驶之新手攻略";
-    subTitleLabel.text = @"由驾校为您提供的强大驾驶技巧";
+    [imgView sd_setImageWithURL:self.newsModel.imgUrl placeholderImage:[UIImage imageNamed:@"carOwners_img"]];
+    dateLabel.text = self.newsModel.timeStr;
+    titleLabel.text = self.newsModel.titleStr;
+    subTitleLabel.text = self.newsModel.contentStr;
     
-    
+    _readingAccountLB.text = [self.newsModel.readCount stringValue];
+    _commentAccountLB.text = [self.newsModel.evaluateCount  stringValue];
+    _likeAccountLB.text = [self.newsModel.likeCount stringValue];
 }
 
 
@@ -186,7 +189,7 @@
 {
     
     if (_carOwnersModel.flag != carOwnersModel.flag) {
-        NSLog(@"属性被修改");
+        
         
     }
     

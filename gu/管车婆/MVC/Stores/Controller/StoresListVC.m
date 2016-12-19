@@ -9,6 +9,7 @@
 #import "StoresListVC.h"
 #import "StoreCell.h"
 #import "StoreModel.h"
+#import "StoresViewController.h"
 
 #define kHeadImgWidth kScreenWidth*2/7
 
@@ -107,6 +108,7 @@
     }
     
     cell.storeModel = storeModel;
+    cell.vc = _vc;
     
     return cell;
 }

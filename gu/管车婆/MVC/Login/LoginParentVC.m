@@ -105,7 +105,7 @@
 #pragma mark --- 手机号登录（在验证码登录、修改密码、注册三个页面中会用到）
 - (void)loginByNumber:(NSString *)number
 {
-    NSString *url_post = [NSString stringWithFormat:@"http://%@:8080/zcar/userapp/loginByPhone.action", kIP];
+    NSString *url_post = [NSString stringWithFormat:@"http://%@loginByPhone.action", kHead];
     
     NSDictionary *params = @{
                              @"phone":number
@@ -148,7 +148,7 @@
 //获取手机验证码
 - (void)getVerificationCodePostWithNumber:(NSString *)number
 {
-    NSString *url_post = [NSString stringWithFormat:@"http://%@:8080/zcar/userapp/getSmsAlidayu.action", kIP];
+    NSString *url_post = [NSString stringWithFormat:@"http://%@getSmsAlidayu.action", kHead];
     
     NSDictionary *params = @{
                              @"phone":number

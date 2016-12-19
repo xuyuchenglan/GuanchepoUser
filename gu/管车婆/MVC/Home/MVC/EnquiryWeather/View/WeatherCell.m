@@ -44,19 +44,21 @@
         [self.contentView addSubview:bgImgView];
 
         dateLabel = [[UILabel alloc] initWithFrame:CGRectMake(30*kRate, 10*kRate, 100*kRate, 20*kRate)];
-        dateLabel.textColor = [UIColor blackColor];
-        dateLabel.font = [UIFont systemFontOfSize:14.0*kRate];
+        dateLabel.textColor = [UIColor whiteColor];
+        dateLabel.font = [UIFont systemFontOfSize:16.0*kRate];
         [bgImgView addSubview:dateLabel];
 
-        weatherLabel = [[UILabel alloc] initWithFrame:CGRectMake(30*kRate, 40*kRate, 50*kRate, 20*kRate)];
-        weatherLabel.textColor = [UIColor blackColor];
-        weatherLabel.font = [UIFont systemFontOfSize:14.0*kRate];
+        weatherLabel = [[UILabel alloc] initWithFrame:CGRectMake(30*kRate, 40*kRate, 70*kRate, 20*kRate)];
+        weatherLabel.textAlignment = NSTextAlignmentCenter;
+        weatherLabel.adjustsFontSizeToFitWidth = YES;
+        weatherLabel.textColor = [UIColor whiteColor];
+        weatherLabel.font = [UIFont systemFontOfSize:16.0*kRate];
         weatherLabel.textAlignment = NSTextAlignmentCenter;
         [bgImgView addSubview:weatherLabel];
         
         temperatureRangeLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(weatherLabel.frame) + 20*kRate, 40*kRate, 100*kRate, 20*kRate)];
-        temperatureRangeLabel.textColor = [UIColor blackColor];
-        temperatureRangeLabel.font = [UIFont systemFontOfSize:14.0*kRate];
+        temperatureRangeLabel.textColor = [UIColor whiteColor];
+        temperatureRangeLabel.font = [UIFont systemFontOfSize:16.0*kRate];
         [bgImgView addSubview:temperatureRangeLabel];
         
         isSuitableForWashingLabel = [[UILabel alloc] initWithFrame:CGRectMake(kScreenWidth - 140*kRate, 40*kRate, 70*kRate, 20*kRate)];

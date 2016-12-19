@@ -230,7 +230,7 @@
 #pragma mark --- 网络请求
 - (void)loginByPhoneAndPwd
 {
-    NSString *url_post = [NSString stringWithFormat:@"http://%@:8080/zcar/userapp/loginByPhoneAndPwd.action", kIP];
+    NSString *url_post = [NSString stringWithFormat:@"http://%@loginByPhoneAndPwd.action", kHead];
     
     NSDictionary *params = @{
                              @"phone":_accountStr,
@@ -262,7 +262,7 @@
             [self presentViewController:[[MainViewController alloc] init] animated:NO completion:nil];
             
         } else {
-            NSLog(@"账号密码验证失败");
+            [self showAlertViewWithTitle:@"提示" WithMessage:@"账号密码验证失败"];
         }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
