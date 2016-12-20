@@ -371,7 +371,7 @@
     UIButton *up1Btn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, kSecondBtnWidth, kSecondBtnWidth)];
     [up1Btn addTarget:self action:@selector(up1BtnAction) forControlEvents:UIControlEventTouchUpInside];
     
-    [up1Btn sd_setImageWithURL:serviceModel.serviceImg forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"home_second_dujing"]];
+    [up1Btn sd_setImageWithURL:serviceModel.serviceImg_home forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"home_second_dujing"]];
     up1Btn.imageEdgeInsets = UIEdgeInsetsMake(20*kRate, 30*kRate, 35*kRate, 25*kRate);
     
     [up1Btn setTitle:serviceModel.serviceName forState:UIControlStateNormal];
@@ -406,7 +406,7 @@
     UIButton *up2Btn = [[UIButton alloc] initWithFrame:CGRectMake(kSecondBtnWidth, 0, kSecondBtnWidth, kSecondBtnWidth)];
     [up2Btn addTarget:self action:@selector(up2BtnAction) forControlEvents:UIControlEventTouchUpInside];
     
-    [up2Btn sd_setImageWithURL:serviceModel.serviceImg forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"home_second_dujing"]];
+    [up2Btn sd_setImageWithURL:serviceModel.serviceImg_home forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"home_second_dujing"]];
     up2Btn.imageEdgeInsets = UIEdgeInsetsMake(20*kRate, 30*kRate, 35*kRate, 25*kRate);
     
     [up2Btn setTitle:serviceModel.serviceName forState:UIControlStateNormal];
@@ -441,7 +441,7 @@
     UIButton *up3Btn = [[UIButton alloc] initWithFrame:CGRectMake(kSecondBtnWidth*2, 0, kSecondBtnWidth, kSecondBtnWidth)];
     [up3Btn addTarget:self action:@selector(up3BtnAction) forControlEvents:UIControlEventTouchUpInside];
     
-    [up3Btn sd_setImageWithURL:serviceModel.serviceImg forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"home_second_dujing"]];
+    [up3Btn sd_setImageWithURL:serviceModel.serviceImg_home forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"home_second_dujing"]];
     up3Btn.imageEdgeInsets = UIEdgeInsetsMake(20*kRate, 30*kRate, 35*kRate, 25*kRate);
     
     [up3Btn setTitle:serviceModel.serviceName forState:UIControlStateNormal];
@@ -475,7 +475,7 @@
     UIButton *up4Btn = [[UIButton alloc] initWithFrame:CGRectMake(kSecondBtnWidth*3, 0, kSecondBtnWidth, kSecondBtnWidth)];
     [up4Btn addTarget:self action:@selector(up4BtnAction) forControlEvents:UIControlEventTouchUpInside];
     
-    [up4Btn sd_setImageWithURL:serviceModel.serviceImg forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"home_second_dujing"]];
+    [up4Btn sd_setImageWithURL:serviceModel.serviceImg_home forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"home_second_dujing"]];
     up4Btn.imageEdgeInsets = UIEdgeInsetsMake(20*kRate, 30*kRate, 35*kRate, 25*kRate);
     
     [up4Btn setTitle:serviceModel.serviceName forState:UIControlStateNormal];
@@ -509,7 +509,7 @@
     UIButton *medium1Btn = [[UIButton alloc] initWithFrame:CGRectMake(0, kSecondBtnWidth, kSecondBtnWidth, kSecondBtnWidth)];
     [medium1Btn addTarget:self action:@selector(medium1BtnAction) forControlEvents:UIControlEventTouchUpInside];
     
-    [medium1Btn sd_setImageWithURL:serviceModel.serviceImg forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"home_second_dujing"]];
+    [medium1Btn sd_setImageWithURL:serviceModel.serviceImg_home forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"home_second_dujing"]];
     medium1Btn.imageEdgeInsets = UIEdgeInsetsMake(20*kRate, 30*kRate, 35*kRate, 25*kRate);
     
     [medium1Btn setTitle:serviceModel.serviceName forState:UIControlStateNormal];
@@ -568,7 +568,7 @@
     UIButton *medium2Btn = [[UIButton alloc] initWithFrame:CGRectMake(kSecondBtnWidth*3, kSecondBtnWidth, kSecondBtnWidth, kSecondBtnWidth)];
     [medium2Btn addTarget:self action:@selector(medium2BtnAction) forControlEvents:UIControlEventTouchUpInside];
     
-    [medium2Btn sd_setImageWithURL:serviceModel.serviceImg forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"home_second_dujing"]];
+    [medium2Btn sd_setImageWithURL:serviceModel.serviceImg_home forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"home_second_dujing"]];
     medium2Btn.imageEdgeInsets = UIEdgeInsetsMake(20*kRate, 30*kRate, 35*kRate, 25*kRate);
     
     [medium2Btn setTitle:serviceModel.serviceName forState:UIControlStateNormal];
@@ -602,7 +602,7 @@
     UIButton *down1Btn = [[UIButton alloc] initWithFrame:CGRectMake(0, kSecondBtnWidth*2, kSecondBtnWidth, kSecondBtnWidth)];
     [down1Btn addTarget:self action:@selector(down1BtnAction) forControlEvents:UIControlEventTouchUpInside];
     
-    [down1Btn sd_setImageWithURL:serviceModel.serviceImg forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"home_second_dujing"]];
+    [down1Btn sd_setImageWithURL:serviceModel.serviceImg_home forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"home_second_dujing"]];
     down1Btn.imageEdgeInsets = UIEdgeInsetsMake(20*kRate, 30*kRate, 35*kRate, 25*kRate);
     
     [down1Btn setTitle:serviceModel.serviceName forState:UIControlStateNormal];
@@ -636,7 +636,7 @@
     UIButton *down2Btn = [[UIButton alloc] initWithFrame:CGRectMake(kSecondBtnWidth, kSecondBtnWidth*2, kSecondBtnWidth, kSecondBtnWidth)];
     [down2Btn addTarget:self action:@selector(down2BtnAction) forControlEvents:UIControlEventTouchUpInside];
     
-    [down2Btn sd_setImageWithURL:serviceModel.serviceImg forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"home_second_dujing"]];
+    [down2Btn sd_setImageWithURL:serviceModel.serviceImg_home forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"home_second_dujing"]];
     down2Btn.imageEdgeInsets = UIEdgeInsetsMake(20*kRate, 30*kRate, 35*kRate, 25*kRate);
     
     [down2Btn setTitle:serviceModel.serviceName forState:UIControlStateNormal];
@@ -670,7 +670,7 @@
     UIButton *down3Btn = [[UIButton alloc] initWithFrame:CGRectMake(kSecondBtnWidth*2, kSecondBtnWidth*2, kSecondBtnWidth, kSecondBtnWidth)];
     [down3Btn addTarget:self action:@selector(down3BtnAction) forControlEvents:UIControlEventTouchUpInside];
     
-    [down3Btn sd_setImageWithURL:serviceModel.serviceImg forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"home_second_dujing"]];
+    [down3Btn sd_setImageWithURL:serviceModel.serviceImg_home forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"home_second_dujing"]];
     down3Btn.imageEdgeInsets = UIEdgeInsetsMake(20*kRate, 30*kRate, 35*kRate, 25*kRate);
     
     [down3Btn setTitle:serviceModel.serviceName forState:UIControlStateNormal];
@@ -1004,6 +1004,7 @@
     [manager POST:url_post parameters:params progress:NULL success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
         NSDictionary *content = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+//        NSLog(@"%@", content);
         
         _homeModel = [[HomeModel alloc] initWithDic:content];
         _isLoadSuccess = YES;

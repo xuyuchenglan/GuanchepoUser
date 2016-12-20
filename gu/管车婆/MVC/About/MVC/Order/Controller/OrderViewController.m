@@ -38,7 +38,7 @@
 - (void)addOrderList
 {
     //配置按钮标题数组
-    self.titleArray = [NSArray arrayWithObjects:@"全部", @"已预约", @"未完成", @"待评价", @"已完成", nil];
+    self.titleArray = [NSArray arrayWithObjects:@"全部", @"已预约", @"未完成", @"已完成", @"已评价", nil];
     
     //配置控制器数组(需要与上面的标题相对应)
     OrderListVC *allVC = [[OrderListVC alloc] init];
@@ -48,9 +48,9 @@
     OrderListVC *unCompletedVC = [[OrderListVC alloc] init];
     unCompletedVC.type = @"2";//未完成
     OrderListVC *unEvaluatedVC = [[OrderListVC alloc] init];
-    unEvaluatedVC.type = @"3";//待评价
+    unEvaluatedVC.type = @"3";//已完成
     OrderListVC *completedVC = [[OrderListVC alloc] init];
-    completedVC.type = @"4";//已完成
+    completedVC.type = @"4";//已评价
     
     self.controllerArray = [NSArray arrayWithObjects:allVC, appointedVC, unCompletedVC, unEvaluatedVC, completedVC, nil];
     

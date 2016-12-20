@@ -128,13 +128,12 @@
 
 - (void)layoutSubviews
 {
-    _headView.image = [UIImage imageNamed:@"about_order_head"];
-    _nameLabel.text = @"李叔家的洗车店";
-    _dataLabel_type.text = @"白银会员";
-    _dataLabel_item.text = @"保养";
-    _dataLabel_user.text = @"李大伟";
-    _dataLabel_fee.text = @"666元";
-    
+    [_headView sd_setImageWithURL:_orderModel.headImgUrl placeholderImage:[UIImage imageNamed:@"about_order_head"]];
+    _nameLabel.text = _orderModel.nameStr;
+    _dataLabel_type.text = _orderModel.cardName;
+    _dataLabel_item.text = _orderModel.serviceName;
+    _dataLabel_user.text = _orderModel.urealname;
+    _dataLabel_fee.text = [NSString stringWithFormat:@"%@元", _orderModel.fee];
 }
 
 @end

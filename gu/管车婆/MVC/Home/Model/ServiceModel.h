@@ -13,6 +13,7 @@
 //service
 @property (nonatomic, strong) NSString *serviceName;
 @property (nonatomic, strong) NSURL    *serviceImg;
+@property (nonatomic, strong) NSURL    *serviceImg_home;
 @property (nonatomic, strong) NSString *serviceId;
 
 

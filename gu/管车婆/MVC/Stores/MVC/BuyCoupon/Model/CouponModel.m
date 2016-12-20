@@ -10,4 +10,16 @@
 
 @implementation CouponModel
 
+- (instancetype)initWithDic:(NSDictionary *)dic
+{
+    if (self = [super init]) {
+        
+        self.title = [dic objectForKey:@"name"];
+        
+        
+    }
+    
+    return self;
+}
+
 @end

@@ -215,11 +215,14 @@
 
 - (void)layoutSubviews
 {
-    _headImgView.image = [UIImage imageNamed:@"about_order_head"];
-    _nameLB.text = @"德州市经济开发区小拇指汽修店";
+//    _headImgView.image = [UIImage imageNamed:@"about_order_head"];
+    [_headImgView sd_setImageWithURL:self.orderModel.headImgUrl placeholderImage:[UIImage imageNamed:@"about_order_head"]];
+//    _nameLB.text = @"德州市经济开发区小拇指汽修店";
+    _nameLB.text = self.orderModel.nameStr;
     _stateLabel.text = @"交易成功";
     _orderWay.text = @"下单方式：扫码下单";
-    _addressLB.text = @"德州经济开发区体育中心对过";
+//    _addressLB.text = @"德州经济开发区体育中心对过";
+    _addressLB.text = self.orderModel.addressStr;
     
 }
 

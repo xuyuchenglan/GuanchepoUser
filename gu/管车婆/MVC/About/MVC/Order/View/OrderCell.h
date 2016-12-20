@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "OrderModel.h"
 
 @interface OrderCell : UITableViewCell
+
+@property (nonatomic, strong)OrderModel *orderModel;
 
 @end

@@ -20,4 +20,6 @@
 @property (nonatomic, strong)NSString   *itemCharge;
 @property (nonatomic, strong)NSString   *itemCount;
 
+- (instancetype) initWithDic:(NSDictionary *)dic;
+
 @end

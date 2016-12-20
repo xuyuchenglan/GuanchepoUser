@@ -295,6 +295,7 @@
 //生成商户二维码需要传入的字符串
 - (NSString *)creatQRStr
 {
+    NSLog(@"ajsfg");
     NSString *head = @"jnzddevqrcode-com.gcp0534://";
     
     NSString *uid = [[self getLocalDic] objectForKey:@"uid"];
@@ -308,6 +309,7 @@
     
     NSString *qrStr = [NSString stringWithFormat:@"%@%@,%@,%@", head, uid, superID, dateString];
     NSLog(@"%@", qrStr);
+    
     return qrStr;
 }
 

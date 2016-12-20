@@ -108,9 +108,9 @@
 
 - (void)layoutSubviews
 {
-    _dataLabel_number.text = @"201610261026666";
-    _dataLabel_time.text = @"2016-10-26 10:26";
-    _dataLabel_xiadanWay.text = @"商家扫码";
+    _dataLabel_number.text = _orderModel.orderID;
+    _dataLabel_time.text = _orderModel.ordeTime;
+    _dataLabel_xiadanWay.text = _orderModel.orderWay;
 }
 
 @end

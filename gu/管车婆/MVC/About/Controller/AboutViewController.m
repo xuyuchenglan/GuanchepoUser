@@ -287,35 +287,35 @@
     
     [_secondView addSubview:uncompletedBtn];
     
-    //待评价
-    UIButton *unevaluatedBtn = [[UIButton alloc] initWithFrame:CGRectMake(kEdgeWidth*4 + 60*kRate*3, 40*kRate, 60*kRate, 60*kRate)];
-    [unevaluatedBtn addTarget:self action:@selector(unevaluatedBtnAction) forControlEvents:UIControlEventTouchUpInside];
-    
-    [unevaluatedBtn setImage:[UIImage imageNamed:@"about_second_unevaluated"] forState:UIControlStateNormal];
-    unevaluatedBtn.imageEdgeInsets = UIEdgeInsetsMake(10*kRate, 21.5*kRate, 30*kRate, 21.5*kRate);
-    
-    [unevaluatedBtn setTitle:@"待评价" forState:UIControlStateNormal];
-    unevaluatedBtn.titleLabel.font = [UIFont systemFontOfSize:13.0*kRate];
-    [unevaluatedBtn setTitleColor:[UIColor colorWithWhite:0.3 alpha:1] forState:UIControlStateNormal];
-    unevaluatedBtn.titleLabel.textAlignment = NSTextAlignmentCenter;
-    unevaluatedBtn.titleEdgeInsets = UIEdgeInsetsMake(25*kRate, -unevaluatedBtn.titleLabel.bounds.size.width - 45, 0, 0);
-    
-    [_secondView addSubview:unevaluatedBtn];
-    
     //已完成
-    UIButton *completedBtn = [[UIButton alloc] initWithFrame:CGRectMake(kEdgeWidth*5 + 60*kRate*4, 40*kRate, 60*kRate, 60*kRate)];
-    [completedBtn addTarget:self action:@selector(completedBtnAction) forControlEvents:UIControlEventTouchUpInside];
+    UIButton *completedBtn = [[UIButton alloc] initWithFrame:CGRectMake(kEdgeWidth*4 + 60*kRate*3, 40*kRate, 60*kRate, 60*kRate)];
+    [completedBtn addTarget:self action:@selector(unevaluatedBtnAction) forControlEvents:UIControlEventTouchUpInside];
     
-    [completedBtn setImage:[UIImage imageNamed:@"about_second_completed"] forState:UIControlStateNormal];
-    completedBtn.imageEdgeInsets = UIEdgeInsetsMake(10*kRate, 22.5*kRate, 30*kRate, 22.5*kRate);
+    [completedBtn setImage:[UIImage imageNamed:@"about_second_unevaluated"] forState:UIControlStateNormal];
+    completedBtn.imageEdgeInsets = UIEdgeInsetsMake(10*kRate, 21.5*kRate, 30*kRate, 21.5*kRate);
     
     [completedBtn setTitle:@"已完成" forState:UIControlStateNormal];
     completedBtn.titleLabel.font = [UIFont systemFontOfSize:13.0*kRate];
     [completedBtn setTitleColor:[UIColor colorWithWhite:0.3 alpha:1] forState:UIControlStateNormal];
     completedBtn.titleLabel.textAlignment = NSTextAlignmentCenter;
-    completedBtn.titleEdgeInsets = UIEdgeInsetsMake(25*kRate, -completedBtn.titleLabel.bounds.size.width - 30, 0, 0);
+    completedBtn.titleEdgeInsets = UIEdgeInsetsMake(25*kRate, -completedBtn.titleLabel.bounds.size.width - 45, 0, 0);
     
     [_secondView addSubview:completedBtn];
+    
+    //已评价
+    UIButton *evaluatedBtn = [[UIButton alloc] initWithFrame:CGRectMake(kEdgeWidth*5 + 60*kRate*4, 40*kRate, 60*kRate, 60*kRate)];
+    [evaluatedBtn addTarget:self action:@selector(completedBtnAction) forControlEvents:UIControlEventTouchUpInside];
+    
+    [evaluatedBtn setImage:[UIImage imageNamed:@"about_second_completed"] forState:UIControlStateNormal];
+    evaluatedBtn.imageEdgeInsets = UIEdgeInsetsMake(10*kRate, 22.5*kRate, 30*kRate, 22.5*kRate);
+    
+    [evaluatedBtn setTitle:@"已评价" forState:UIControlStateNormal];
+    evaluatedBtn.titleLabel.font = [UIFont systemFontOfSize:13.0*kRate];
+    [evaluatedBtn setTitleColor:[UIColor colorWithWhite:0.3 alpha:1] forState:UIControlStateNormal];
+    evaluatedBtn.titleLabel.textAlignment = NSTextAlignmentCenter;
+    evaluatedBtn.titleEdgeInsets = UIEdgeInsetsMake(25*kRate, -evaluatedBtn.titleLabel.bounds.size.width - 30, 0, 0);
+    
+    [_secondView addSubview:evaluatedBtn];
 }
 
 #pragma mark --- 第二块内容的各个按钮Action

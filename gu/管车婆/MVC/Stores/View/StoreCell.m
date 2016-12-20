@@ -274,10 +274,20 @@
 {
     NSLog(@"预约");
     
-    LWAppointmentVc *appointmentVC = [[LWAppointmentVc alloc] init];
-    appointmentVC.hidesBottomBarWhenPushed = YES;
-//    [[self findResponderVCWith:[[StoresViewController alloc] init]].navigationController pushViewController:appointmentVC animated:NO];
-    [self.vc.navigationController pushViewController:appointmentVC animated:NO];
+    NSString *cardno = [[self getLocalDic] objectForKey:@"cardno"];
+    if (cardno.length > 0) {
+        
+        LWAppointmentVc *appointmentVC = [[LWAppointmentVc alloc] init];
+        appointmentVC.hidesBottomBarWhenPushed = YES;
+        [self.vc.navigationController pushViewController:appointmentVC animated:NO];
+        
+    } else {
+        
+        [self.vc showAlertViewWithTitle:nil WithMessage:@"您还不是管车婆的持卡会员，不能享受免费服务，您可以购买汽车券或者办理管车婆超值会员卡享受全年免费服务！"];
+        
+    }
+    
+    
 }
 
 //下单
@@ -285,11 +295,20 @@
 {
     NSLog(@"下单");
     
-    LWOrderVC *orderVC = [[LWOrderVC alloc] init];
-    orderVC.hidesBottomBarWhenPushed = YES;
-//    [[self findResponderVCWith:[[StoresViewController alloc] init]].navigationController pushViewController:orderVC animated:NO];
-    [self.vc.navigationController pushViewController:orderVC animated:NO];
-}
+    NSString *cardno = [[self getLocalDic] objectForKey:@"cardno"];
+    if (cardno.length > 0) {
+        
+        LWOrderVC *orderVC = [[LWOrderVC alloc] init];
+        orderVC.hidesBottomBarWhenPushed = YES;
+        [self.vc.navigationController pushViewController:orderVC animated:NO];
+        
+    } else {
+        
+        [self.vc showAlertViewWithTitle:nil WithMessage:@"您还不是管车婆的持卡会员，不能享受免费服务，您可以购买汽车券或者办理管车婆超值会员卡享受全年免费服务！"];
+        
+    }
+    
+    }
 
 //买券
 - (void)buycouponBtnAction

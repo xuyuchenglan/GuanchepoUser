@@ -9,6 +9,7 @@
 #import "OrderListVC.h"
 #import "OrderCell.h"
 #import "OrderInfoVC.h"
+#import "OrderModel.h"
 
 #define kTitleHeight 45*kRate
 
@@ -16,12 +17,15 @@
 {
     UITableView *_tableView;
 }
+@property (nonatomic, strong)NSMutableArray *orderModels;
 @end
 
 @implementation OrderListVC
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    _orderModels = [NSMutableArray array];
     
     _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 10*kRate, kScreenWidth, kScreenHeight - 64 - kTitleHeight - 49*kRate - 10*kRate)];
     _tableView.backgroundColor = [UIColor colorWithRed:234/255.0 green:238/255.0 blue:239/255.0 alpha:1];
@@ -31,14 +35,21 @@
     _tableView.separatorColor = [UIColor clearColor];
     [self.view addSubview:_tableView];
     
-    
-    
 }
 
+- (void)setType:(NSString *)type
+{
+    _type = type;
+    
+    //网络请求订单列表数据
+    [self getOrder];
+}
+
+#pragma mark
 #pragma mark UITableViewDelegate && UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 6;
+    return _orderModels.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -53,6 +64,9 @@
         
     }
     
+    OrderModel *currentModel = _orderModels[indexPath.row];
+    cell.orderModel = currentModel;
+    
     return cell;
 }
 
@@ -63,10 +77,13 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    OrderModel *currentModel = _orderModels[indexPath.row];
+    
     OrderInfoVC *orderInfoVC = [[OrderInfoVC alloc] init];
     if ([_type isEqual:@"1"]) {
         orderInfoVC.isAppoint = @"yes";
     }
+    orderInfoVC.orderModel = currentModel;
     [[self findResponderVC].navigationController pushViewController:orderInfoVC animated:NO];
     
     
@@ -94,5 +111,43 @@
     return vc;
 }
 
-
+#pragma mark
+#pragma mark 网络请求订单列表数据
+- (void)getOrder
+{
+    NSString *url_post = [NSString stringWithFormat:@"http://%@getOrder.action", kHead];
+    
+    
+    NSDictionary *params = @{
+                             @"uid":@"68ccfcb1c3cc483fb01b4fc3e430b834",
+                             @"type":_type,
+                             @"currsize":@"0",
+                             @"pagesize":@"10"
+                             };
+    
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    
+    AFHTTPResponseSerializer *responseSerializer = [AFHTTPResponseSerializer serializer];
+    
+    manager.responseSerializer = responseSerializer;
+    
+    [manager POST:url_post parameters:params progress:NULL success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        
+        NSDictionary *content = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+        
+        NSArray *jsondatArr = [content objectForKey:@"jsondata"];
+        for (NSDictionary *dic in jsondatArr) {
+            
+            OrderModel *model = [[OrderModel alloc] initWithDic:dic];
+            [_orderModels addObject:model];
+            
+        }
+        
+        //刷新UI
+        [_tableView reloadData];
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"请求失败， 失败原因是：%@", error);
+    }];
+}
 @end

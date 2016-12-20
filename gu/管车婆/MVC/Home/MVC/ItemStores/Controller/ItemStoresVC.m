@@ -36,13 +36,16 @@
     //配置控制器数组(需要与上面的标题相对应)
     ItemStoresListVC *distanceVC = [[ItemStoresListVC alloc] init];
     distanceVC.vc = self;
-    distanceVC.type = @"distance";//距离
+    distanceVC.superID = _sid;
+    distanceVC.type = @"1";//距离
     ItemStoresListVC *salesVC = [[ItemStoresListVC alloc] init];
     salesVC.vc = self;
-    salesVC.type = @"sales";//销量
+    salesVC.superID = _sid;
+    salesVC.type = @"2";//销量
     ItemStoresListVC *praiseVC = [[ItemStoresListVC alloc] init];
     praiseVC.vc = self;
-    praiseVC.type = @"praise";//好评
+    praiseVC.superID = _sid;
+    praiseVC.type = @"3";//好评
     
     
     self.controllerArray = [NSArray arrayWithObjects:distanceVC, salesVC, praiseVC, nil];

@@ -21,8 +21,8 @@
 #define kSelfHeight self.frame.size.height
 
 #define kRate kScreenWidth/414  //iPhone7 Plus运行的时候需要用到该比例,414是iPhone 7 Plus的屏幕宽度
-#define kHead @"192.168.1.146:80/zcar/userapp/"
-#define kIP   @"192.168.1.146:80"
+#define kHead @"192.168.1.155:8080/zcar/userapp/"
+#define kIP   @"192.168.1.155:8080"
 
 #import "Masonry.h"
 #import "UIResponder+FindResponderVC.h"

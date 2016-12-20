@@ -16,6 +16,7 @@
         
         //service
         self.serviceImg = [NSURL URLWithString:[NSString stringWithFormat:@"http://%@%@", kIP, [dic objectForKey:@"wxuimore_img"]]];
+        self.serviceImg_home = [NSURL URLWithString:[NSString stringWithFormat:@"http://%@%@", kIP, [dic objectForKey:@"userapp_img"]]];
         self.serviceName = [dic objectForKey:@"name"];
         self.serviceId = [NSString stringWithFormat:@"%@", [dic objectForKey:@"sid"]];
         

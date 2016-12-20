@@ -84,6 +84,7 @@
     //内容
     OrderContentMoreView *contentView = [[OrderContentMoreView alloc] initWithFrame:CGRectMake(0, 40*kRate, kScreenWidth, 155*kRate)];
     contentView.backgroundColor = [UIColor whiteColor];
+    contentView.orderModel = _orderModel;
     [_moreView addSubview:contentView];
 }
 
@@ -108,14 +109,16 @@
     //内容
     if ([_isAppoint isEqual:@"yes"]) {
         AppointContentInfoView *contentView = [[AppointContentInfoView alloc] initWithFrame:CGRectMake(0, 40*kRate, kScreenWidth, 120*kRate)];
-
         contentView.backgroundColor = [UIColor whiteColor];
+        contentView.orderModel = _orderModel;
         [_infoView addSubview:contentView];
     } else {
         OrderContentInfoView *contentView = [[OrderContentInfoView alloc] initWithFrame:CGRectMake(0, 40*kRate, kScreenWidth, 90*kRate)];
         contentView.backgroundColor = [UIColor whiteColor];
+        contentView.orderModel = _orderModel;
         [_infoView addSubview:contentView];
     }
+    
     
 }
 

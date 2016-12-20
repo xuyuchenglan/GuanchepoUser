@@ -7,9 +7,12 @@
 //
 
 #import "ParentViewController.h"
+#import "OrderModel.h"
 
 @interface OrderInfoVC : ParentViewController
 
 @property (nonatomic, strong)NSString *isAppoint;
+
+@property (nonatomic, strong)OrderModel *orderModel;
 
 @end

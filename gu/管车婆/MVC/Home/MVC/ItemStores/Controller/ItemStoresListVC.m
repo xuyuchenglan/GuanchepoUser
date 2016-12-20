@@ -22,15 +22,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    
-}
-
-- (void)setVc:(UIViewController *)vc
-{
-    _vc = vc;
-    
     //设置tableView
     [self addTableView];
+    
+    //网络请求商户列表数据
+    [self getStores];
+    
 }
 
 
@@ -84,5 +81,40 @@
     
 }
 
+
+#pragma mark 
+#pragma mark 网络请求
+//获取商户列表
+- (void)getStores
+{
+    NSString *url_post = [NSString stringWithFormat:@"http://%@getMerchant.action", kHead];
+    
+    NSLog(@"_superID:%@,_type:%@", _superID, _type);
+    
+    NSDictionary *params = @{
+                             @"superid":_superID,
+                             @"orderby":_type,//按距离、单量还是好评
+                             @"location":@"116.365825000,37.441313000",
+                             @"currsize":@"0",
+                             @"pagesize":@"10"
+                             };
+    
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    
+    AFHTTPResponseSerializer *responseSerializer = [AFHTTPResponseSerializer serializer];
+    
+    manager.responseSerializer = responseSerializer;
+    
+    [manager POST:url_post parameters:params progress:NULL success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        
+        NSDictionary *content = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+        
+        NSLog(@"%@", content);
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"请求失败， 失败原因是：%@", error);
+    }];
+
+}
 
 @end

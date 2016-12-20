@@ -10,13 +10,24 @@
 
 @interface OrderModel : NSObject
 
-@property (nonatomic, strong)NSString       *headImgStr;
-@property (nonatomic, strong)NSString       *nameStr;
-@property (nonatomic, strong)NSString       *stateStr;
-@property (nonatomic, copy)  NSArray        *itemArr;
+@property (nonatomic, strong)NSURL          *headImgUrl;//车行头像URL
+@property (nonatomic, strong)NSString       *nameStr;//车行名字
+@property (nonatomic, strong)NSString       *stateStr;//
+@property (nonatomic, copy)  NSArray        *itemArr;//
+@property (nonatomic, strong)NSString       *addressStr;//车行地址
+@property (nonatomic, strong)NSString       *cardName;//用户开的卡的名称
+@property (nonatomic, strong)NSString       *serviceName;//服务项目
+@property (nonatomic, strong)NSString       *fee;//费用
+@property (nonatomic, strong)NSString       *urealname;//用户的姓名
+
+@property (nonatomic, strong)NSString       *orderID;//订单号
+@property (nonatomic, strong)NSString       *ordeTime;//
+@property (nonatomic, strong)NSString       *orderWay;//下单方式
 
 
-@property (nonatomic, strong)NSString *itemStr;
-@property (nonatomic, strong)NSString *itemCount;
+@property (nonatomic, strong)NSString *itemStr;//
+@property (nonatomic, strong)NSString *itemCount;//
+
+- (instancetype)initWithDic:(NSDictionary *)dic;
 
 @end

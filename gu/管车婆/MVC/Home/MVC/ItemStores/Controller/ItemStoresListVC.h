@@ -10,6 +10,8 @@
 
 @interface ItemStoresListVC : UIViewController
 
+@property (nonatomic, strong)NSString *superID;
+
 @property (nonatomic, strong)NSString *type;
 
 @property (nonatomic, weak)UIViewController *vc;
