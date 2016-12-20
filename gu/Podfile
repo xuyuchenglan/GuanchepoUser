@@ -1,5 +1,6 @@
 platform :ios, '8.0'
 target '管车婆' do
+  pod 'AMapLocation'
   pod 'SDWebImage'
   pod 'Masonry'
   pod 'AFNetworking'

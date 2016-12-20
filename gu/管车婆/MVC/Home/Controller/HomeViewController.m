@@ -22,6 +22,8 @@
 #import "MoreViewController.h"
 #import "ItemStoresVC.h"
 
+#import <AMapLocationKit/AMapLocationKit.h>//定位SDK头文件
+
 #define kFirstBtnWidth  kScreenWidth/4
 #define kFirstBtnHeight 80*kRate
 #define kSecondBtnWidth kScreenWidth/4
@@ -32,6 +34,8 @@
     UIScrollView *_scrollView;//滑动视图（所有的控件都加在这上面）
     
 }
+@property (nonatomic, strong)AMapLocationManager *locationManager;
+
 @property (nonatomic, strong)UIView          *topView;
 @property (nonatomic, strong)ScrollImageView *scrollImageView;//广告轮播图
 @property (nonatomic, strong)UIView          *secondView;
@@ -61,6 +65,9 @@
     
     //网络请求数据
     [self getHomeInfo];
+    
+    //获取当前定位信息，并存入本地数据库
+    [self getCurrentLocation];
 }
 
 - (void)addContentView
@@ -1028,5 +1035,74 @@
 
 }
 
+
+#pragma mark
+#pragma mark 获取当前定位
+- (void)getCurrentLocation
+{
+    _locationManager = [[AMapLocationManager alloc] init];
+    
+    // 带逆地理信息的一次定位（返回坐标和地址信息）
+    [_locationManager setDesiredAccuracy:kCLLocationAccuracyBest];
+    
+    //   定位超时时间，最低2s，此处设置为11s
+    _locationManager.locationTimeout =11;
+    
+    //   逆地理请求超时时间，最低2s，此处设置为12s
+    _locationManager.reGeocodeTimeout = 12;
+    
+    // 带逆地理（返回坐标和地址信息）。将下面代码中的YES改成NO，则不会返回地址信息。
+    [_locationManager requestLocationWithReGeocode:YES completionBlock:^(CLLocation *location, AMapLocationReGeocode *regeocode, NSError *error) {
+        
+        if (error)
+        {
+            NSLog(@"locError:{%ld - %@};", (long)error.code, error.localizedDescription);
+            
+            if (error.code == AMapLocationErrorLocateFailed)
+            {
+                return;
+            }
+        }
+        
+        
+        NSString *latitude = [NSString stringWithFormat:@"%f", location.coordinate.latitude];
+        NSString *longitude = [NSString stringWithFormat:@"%f", location.coordinate.longitude];
+        
+        //往本地plist文件中增加数据
+        [self addValueToLocalPlistWithValue:latitude AndKey:@"latitude"];
+        [self addValueToLocalPlistWithValue:longitude AndKey:@"longitude"];
+        
+        if (regeocode)
+        {
+            NSString *district = regeocode.district;
+            NSString *township = regeocode.township;
+            
+            NSString *showAddress = [[NSString alloc] init];
+            
+            if (township.length>0) {
+                showAddress = township;
+            } else {
+                showAddress = district;
+            }
+            
+            //往本地plist文件中增加数据
+            [self addValueToLocalPlistWithValue:showAddress AndKey:@"showAddress"];
+        }
+        
+    }];
+}
+
+//往本地plist文件中增加数据
+- (void)addValueToLocalPlistWithValue:(NSString *)value AndKey:(NSString *)key
+{
+    NSArray *paths=NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask,YES);
+    NSString *plistPath1 = [paths objectAtIndex:0];
+    NSString *filename=[plistPath1 stringByAppendingPathComponent:@"my.plist"];
+    NSDictionary *dic6 = [NSDictionary dictionaryWithContentsOfFile:filename];
+    
+    [dic6 setValue:value forKey:key];
+    
+    [dic6 writeToFile:filename atomically:YES];
+}
 
 @end

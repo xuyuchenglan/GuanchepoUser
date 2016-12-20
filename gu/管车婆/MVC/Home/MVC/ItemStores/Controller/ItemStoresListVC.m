@@ -9,6 +9,7 @@
 #import "ItemStoresListVC.h"
 #import "StoreCell.h"
 
+
 #define kHeadImgWidth kScreenWidth*2/7
 
 @interface ItemStoresListVC ()<UITableViewDelegate, UITableViewDataSource>
@@ -80,6 +81,7 @@
 {
     
 }
+
 
 
 #pragma mark 

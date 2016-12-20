@@ -9,6 +9,12 @@
 #import "AppDelegate.h"
 #import "MainViewController.h"
 #import "LoginViewController.h"
+#import <AMapLocationKit/AMapLocationKit.h>//定位SDK头文件
+#import <AMapFoundationKit/AMapFoundationKit.h>
+
+
+#define AMapKey @"9cb391853ef6652d8a67f4d571d4169f"
+
 
 @interface AppDelegate ()
 
@@ -21,6 +27,8 @@
     
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     self.window.backgroundColor = [UIColor whiteColor];
+    
+    [AMapServices sharedServices].apiKey = (NSString *)AMapKey;//高德Key
     
     BOOL isLogin = [self isLogin];
     
