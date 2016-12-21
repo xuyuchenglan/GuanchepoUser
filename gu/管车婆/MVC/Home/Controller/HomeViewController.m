@@ -32,7 +32,6 @@
 @interface HomeViewController ()<UIScrollViewDelegate, ScrollImageViewDelegate>
 {
     UIScrollView *_scrollView;//滑动视图（所有的控件都加在这上面）
-    
 }
 @property (nonatomic, strong)AMapLocationManager *locationManager;
 
@@ -125,8 +124,8 @@
 #pragma mark ******************      导航栏      ****************
 - (void)addNavBar
 {
-    //左侧定位按钮
-    [self setNavItemLocationBtn];
+//    //左侧定位按钮
+//    [self setNavItemLocationBtn];
     
     //中间的title
     [self setNavigationItemTitleWithImage:@"home_navbar_title"];
@@ -139,19 +138,21 @@
 //定位按钮
 - (void)setNavItemLocationBtn
 {
-    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-    btn.frame = CGRectMake(15*kRate, 15*kRate, 25*kRate, 25*kRate);
+    UIButton *locationBtn = [[UIButton alloc] initWithFrame:CGRectMake(15*kRate, 15*kRate, 90*kRate, 25*kRate)];
+    [locationBtn setImage:[UIImage imageNamed:@"home_navbar_location"] forState:UIControlStateNormal];
+    locationBtn.imageEdgeInsets = UIEdgeInsetsMake(0*kRate, 0*kRate, 0*kRate, 65*kRate);
     
-    [btn setImage:[UIImage imageNamed:@"home_navbar_location"] forState:UIControlStateNormal];
+    [locationBtn setTitle:[[self getLocalDic] objectForKey:@"showAddress"]forState:UIControlStateNormal];
+    locationBtn.titleLabel.font = [UIFont systemFontOfSize:14.0*kRate];
+    locationBtn.titleLabel.textAlignment = NSTextAlignmentCenter;
+    locationBtn.titleLabel.adjustsFontSizeToFitWidth = YES;
+    [locationBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    locationBtn.titleEdgeInsets = UIEdgeInsetsMake(0, -locationBtn.titleLabel.bounds.size.width - 20*kRate, 0, 0);
     
-    [btn addTarget: self action: @selector(locationBtnAction) forControlEvents: UIControlEventTouchUpInside];
-    UIBarButtonItem *location = [[UIBarButtonItem alloc] initWithCustomView:btn];
-    self.navigationItem.leftBarButtonItem = location;
-}
+    UIBarButtonItem *locationBtnItem = [[UIBarButtonItem alloc] initWithCustomView:locationBtn];
+    
+    self.navigationItem.leftBarButtonItem = locationBtnItem;
 
-- (void)locationBtnAction
-{
-    NSLog(@"定位");
 }
 
 //导航栏标题（图片）
@@ -1079,7 +1080,7 @@
             
             NSString *showAddress = [[NSString alloc] init];
             
-            if (township.length>0) {
+            if (township.length > 0) {
                 showAddress = township;
             } else {
                 showAddress = district;
@@ -1087,6 +1088,9 @@
             
             //往本地plist文件中增加数据
             [self addValueToLocalPlistWithValue:showAddress AndKey:@"showAddress"];
+            
+            //左侧定位按钮
+            [self setNavItemLocationBtn];
         }
         
     }];

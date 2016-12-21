@@ -28,7 +28,7 @@
     
     
     //设置下面的订单列表同步滑动视图
-//    [self addOrderList];
+    [self addOrderList];
 
 }
 

@@ -90,13 +90,15 @@
 - (void)getStores
 {
     NSString *url_post = [NSString stringWithFormat:@"http://%@getMerchant.action", kHead];
+
+    NSString *locationStr = [NSString stringWithFormat:@"%@,%@", [[self getLocalDic] objectForKey:@"longitude"], [[self getLocalDic] objectForKey:@"phone"]];
     
-    NSLog(@"_superID:%@,_type:%@", _superID, _type);
+    NSLog(@"_superID:%@,_type:%@,location:%@", _superID, _type, locationStr);
     
     NSDictionary *params = @{
                              @"superid":_superID,
                              @"orderby":_type,//按距离、单量还是好评
-                             @"location":@"116.365825000,37.441313000",
+                             @"location":locationStr,
                              @"currsize":@"0",
                              @"pagesize":@"10"
                              };
