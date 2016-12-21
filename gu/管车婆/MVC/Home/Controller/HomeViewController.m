@@ -80,7 +80,7 @@
     _scrollView.backgroundColor = [UIColor colorWithRed:234/255.0 green:238/255.0 blue:239/255.0 alpha:1];
     _scrollView.showsHorizontalScrollIndicator = NO;
     _scrollView.showsVerticalScrollIndicator = NO;
-    _scrollView.contentSize = CGSizeMake(kScreenWidth, 880*kRate);
+    _scrollView.contentSize = CGSizeMake(kScreenWidth, 920*kRate);
     [self.view addSubview:_scrollView];
     
     //最上方的显示车辆信息以及是否适宜洗车的视图
@@ -124,7 +124,7 @@
 #pragma mark ******************      导航栏      ****************
 - (void)addNavBar
 {
-//    //左侧定位按钮
+//    //左侧定位按钮(在获取定位成功后展示)
 //    [self setNavItemLocationBtn];
     
     //中间的title
@@ -256,7 +256,7 @@
         NSArray *dataUrls = [dataUrlsMutable copy];
         
         NSArray * dataPics = @[@"ad_01",@"ad_02",@"ad_03",@"ad_04",@"ad_01"];
-        _scrollImageView = [[ScrollImageView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_topView.frame), kScreenWidth, 100*kRate) andPictureUrls:dataUrls andPlaceHolderImages:dataPics];
+        _scrollImageView = [[ScrollImageView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_topView.frame), kScreenWidth, kScreenWidth*0.42) andPictureUrls:dataUrls andPlaceHolderImages:dataPics];
 
         _scrollImageView.delegate = self;
         
@@ -379,7 +379,7 @@
     UIButton *up1Btn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, kSecondBtnWidth, kSecondBtnWidth)];
     [up1Btn addTarget:self action:@selector(up1BtnAction) forControlEvents:UIControlEventTouchUpInside];
     
-    [up1Btn sd_setImageWithURL:serviceModel.serviceImg_home forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"home_second_dujing"]];
+    [up1Btn sd_setImageWithURL:serviceModel.serviceImg_home forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"home_second_dujing"] options:SDWebImageRefreshCached];
     up1Btn.imageEdgeInsets = UIEdgeInsetsMake(20*kRate, 30*kRate, 35*kRate, 25*kRate);
     
     [up1Btn setTitle:serviceModel.serviceName forState:UIControlStateNormal];
@@ -414,7 +414,7 @@
     UIButton *up2Btn = [[UIButton alloc] initWithFrame:CGRectMake(kSecondBtnWidth, 0, kSecondBtnWidth, kSecondBtnWidth)];
     [up2Btn addTarget:self action:@selector(up2BtnAction) forControlEvents:UIControlEventTouchUpInside];
     
-    [up2Btn sd_setImageWithURL:serviceModel.serviceImg_home forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"home_second_dujing"]];
+    [up2Btn sd_setImageWithURL:serviceModel.serviceImg_home forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"home_second_dujing"] options:SDWebImageRefreshCached];
     up2Btn.imageEdgeInsets = UIEdgeInsetsMake(20*kRate, 30*kRate, 35*kRate, 25*kRate);
     
     [up2Btn setTitle:serviceModel.serviceName forState:UIControlStateNormal];
@@ -449,7 +449,7 @@
     UIButton *up3Btn = [[UIButton alloc] initWithFrame:CGRectMake(kSecondBtnWidth*2, 0, kSecondBtnWidth, kSecondBtnWidth)];
     [up3Btn addTarget:self action:@selector(up3BtnAction) forControlEvents:UIControlEventTouchUpInside];
     
-    [up3Btn sd_setImageWithURL:serviceModel.serviceImg_home forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"home_second_dujing"]];
+    [up3Btn sd_setImageWithURL:serviceModel.serviceImg_home forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"home_second_dujing"] options:SDWebImageRefreshCached];
     up3Btn.imageEdgeInsets = UIEdgeInsetsMake(20*kRate, 30*kRate, 35*kRate, 25*kRate);
     
     [up3Btn setTitle:serviceModel.serviceName forState:UIControlStateNormal];
@@ -483,7 +483,7 @@
     UIButton *up4Btn = [[UIButton alloc] initWithFrame:CGRectMake(kSecondBtnWidth*3, 0, kSecondBtnWidth, kSecondBtnWidth)];
     [up4Btn addTarget:self action:@selector(up4BtnAction) forControlEvents:UIControlEventTouchUpInside];
     
-    [up4Btn sd_setImageWithURL:serviceModel.serviceImg_home forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"home_second_dujing"]];
+    [up4Btn sd_setImageWithURL:serviceModel.serviceImg_home forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"home_second_dujing"] options:SDWebImageRefreshCached];
     up4Btn.imageEdgeInsets = UIEdgeInsetsMake(20*kRate, 30*kRate, 35*kRate, 25*kRate);
     
     [up4Btn setTitle:serviceModel.serviceName forState:UIControlStateNormal];
@@ -517,7 +517,7 @@
     UIButton *medium1Btn = [[UIButton alloc] initWithFrame:CGRectMake(0, kSecondBtnWidth, kSecondBtnWidth, kSecondBtnWidth)];
     [medium1Btn addTarget:self action:@selector(medium1BtnAction) forControlEvents:UIControlEventTouchUpInside];
     
-    [medium1Btn sd_setImageWithURL:serviceModel.serviceImg_home forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"home_second_dujing"]];
+    [medium1Btn sd_setImageWithURL:serviceModel.serviceImg_home forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"home_second_dujing"] options:SDWebImageRefreshCached];
     medium1Btn.imageEdgeInsets = UIEdgeInsetsMake(20*kRate, 30*kRate, 35*kRate, 25*kRate);
     
     [medium1Btn setTitle:serviceModel.serviceName forState:UIControlStateNormal];
@@ -547,7 +547,7 @@
 - (void)addAdView
 {
     UIImageView *secondImgView = [[UIImageView alloc] initWithFrame:CGRectMake(kSecondBtnWidth + 1, kSecondBtnWidth + 1, 2*kSecondBtnWidth - 1, kSecondBtnWidth - 1)];
-    [secondImgView sd_setImageWithURL:[NSURL URLWithString:_homeModel.banner2Model.picUrl] placeholderImage:[UIImage imageNamed:@"home_second_ad"]];
+    [secondImgView sd_setImageWithURL:[NSURL URLWithString:_homeModel.banner2Model.picUrl] placeholderImage:[UIImage imageNamed:@"home_second_ad"] options:SDWebImageRefreshCached];
     secondImgView.userInteractionEnabled = YES;
     [_secondView addSubview:secondImgView];
     
@@ -576,7 +576,7 @@
     UIButton *medium2Btn = [[UIButton alloc] initWithFrame:CGRectMake(kSecondBtnWidth*3, kSecondBtnWidth, kSecondBtnWidth, kSecondBtnWidth)];
     [medium2Btn addTarget:self action:@selector(medium2BtnAction) forControlEvents:UIControlEventTouchUpInside];
     
-    [medium2Btn sd_setImageWithURL:serviceModel.serviceImg_home forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"home_second_dujing"]];
+    [medium2Btn sd_setImageWithURL:serviceModel.serviceImg_home forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"home_second_dujing"] options:SDWebImageRefreshCached];
     medium2Btn.imageEdgeInsets = UIEdgeInsetsMake(20*kRate, 30*kRate, 35*kRate, 25*kRate);
     
     [medium2Btn setTitle:serviceModel.serviceName forState:UIControlStateNormal];
@@ -610,7 +610,7 @@
     UIButton *down1Btn = [[UIButton alloc] initWithFrame:CGRectMake(0, kSecondBtnWidth*2, kSecondBtnWidth, kSecondBtnWidth)];
     [down1Btn addTarget:self action:@selector(down1BtnAction) forControlEvents:UIControlEventTouchUpInside];
     
-    [down1Btn sd_setImageWithURL:serviceModel.serviceImg_home forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"home_second_dujing"]];
+    [down1Btn sd_setImageWithURL:serviceModel.serviceImg_home forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"home_second_dujing"] options:SDWebImageRefreshCached];
     down1Btn.imageEdgeInsets = UIEdgeInsetsMake(20*kRate, 30*kRate, 35*kRate, 25*kRate);
     
     [down1Btn setTitle:serviceModel.serviceName forState:UIControlStateNormal];
@@ -644,7 +644,7 @@
     UIButton *down2Btn = [[UIButton alloc] initWithFrame:CGRectMake(kSecondBtnWidth, kSecondBtnWidth*2, kSecondBtnWidth, kSecondBtnWidth)];
     [down2Btn addTarget:self action:@selector(down2BtnAction) forControlEvents:UIControlEventTouchUpInside];
     
-    [down2Btn sd_setImageWithURL:serviceModel.serviceImg_home forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"home_second_dujing"]];
+    [down2Btn sd_setImageWithURL:serviceModel.serviceImg_home forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"home_second_dujing"] options:SDWebImageRefreshCached];
     down2Btn.imageEdgeInsets = UIEdgeInsetsMake(20*kRate, 30*kRate, 35*kRate, 25*kRate);
     
     [down2Btn setTitle:serviceModel.serviceName forState:UIControlStateNormal];
@@ -678,7 +678,7 @@
     UIButton *down3Btn = [[UIButton alloc] initWithFrame:CGRectMake(kSecondBtnWidth*2, kSecondBtnWidth*2, kSecondBtnWidth, kSecondBtnWidth)];
     [down3Btn addTarget:self action:@selector(down3BtnAction) forControlEvents:UIControlEventTouchUpInside];
     
-    [down3Btn sd_setImageWithURL:serviceModel.serviceImg_home forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"home_second_dujing"]];
+    [down3Btn sd_setImageWithURL:serviceModel.serviceImg_home forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"home_second_dujing"] options:SDWebImageRefreshCached];
     down3Btn.imageEdgeInsets = UIEdgeInsetsMake(20*kRate, 30*kRate, 35*kRate, 25*kRate);
     
     [down3Btn setTitle:serviceModel.serviceName forState:UIControlStateNormal];
@@ -713,7 +713,7 @@
     [down4Btn addTarget:self action:@selector(down4BtnAction) forControlEvents:UIControlEventTouchUpInside];
     
     [down4Btn setImage:[UIImage imageNamed:@"home_second_more"] forState:UIControlStateNormal];
-    down4Btn.imageEdgeInsets = UIEdgeInsetsMake(20*kRate, 30*kRate, 35*kRate, 25*kRate);
+    down4Btn.imageEdgeInsets = UIEdgeInsetsMake(25*kRate, 35*kRate, 40*kRate, 30*kRate);
     
     [down4Btn setTitle:@"更 多>" forState:UIControlStateNormal];
     down4Btn.titleLabel.font = [UIFont systemFontOfSize:12.0*kRate];
@@ -971,9 +971,9 @@
 #pragma mark ******************      第五块内容      ****************
 - (void)addFifthContent
 {
-    _fifthImgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_forthView.frame) + 10*kRate, kScreenWidth, 100*kRate)];
+    _fifthImgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_forthView.frame) + 10*kRate, kScreenWidth, kScreenWidth*0.267)];
     _fifthImgView.userInteractionEnabled = YES;
-    [_fifthImgView sd_setImageWithURL:[NSURL URLWithString:_homeModel.banner3Model.picUrl] placeholderImage:[UIImage imageNamed:@"ad_01"]];
+    [_fifthImgView sd_setImageWithURL:[NSURL URLWithString:_homeModel.banner3Model.picUrl] placeholderImage:[UIImage imageNamed:@"ad_01"] options:SDWebImageRefreshCached];
     [_scrollView addSubview:_fifthImgView];
     
     UITapGestureRecognizer *fifthTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(fifthTapAction)];
@@ -1012,7 +1012,6 @@
     [manager POST:url_post parameters:params progress:NULL success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
         NSDictionary *content = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
-//        NSLog(@"%@", content);
         
         _homeModel = [[HomeModel alloc] initWithDic:content];
         _isLoadSuccess = YES;

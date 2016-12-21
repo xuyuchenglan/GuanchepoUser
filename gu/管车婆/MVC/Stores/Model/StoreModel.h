@@ -10,4 +10,16 @@
 
 @interface StoreModel : NSObject
 
+@property(nonatomic, strong) NSURL    *headUrl;
+@property(nonatomic, strong) NSString *mname;
+@property(nonatomic, strong) NSString *maddress;
+@property(nonatomic, strong) NSString *mphone;
+@property(nonatomic, strong) NSString *orderCount;
+@property(nonatomic, strong) NSString *evaluateCount;
+
+@property(nonatomic, assign) float     starPercent;
+@property(nonatomic, strong) NSString *starCount;
+
+- (instancetype)initWithDic:(NSDictionary *)dic;
+
 @end

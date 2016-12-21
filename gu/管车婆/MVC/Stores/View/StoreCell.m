@@ -120,7 +120,6 @@
 - (void)addStarRateView
 {
     _starRateView = [[NormanStarRateView alloc] initWithFrame:CGRectMake(kScreenWidth - 15*kRate - 50*kRate - 20*kRate, 15*kRate, 50*kRate, 20*kRate) numberOfStars:5];
-    _starRateView.scorePercent = 0.88;//设置初始评分(其实是个比例，范围是0-1)
     _starRateView.allowIncompleteStar = YES;//是否允许评分为小数
     _starRateView.allowTouch = NO;//是否允许点击星星视图
     _starRateView.hasAnimation = YES;
@@ -128,6 +127,7 @@
     
     _scoreLB = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(_starRateView.frame) + 2*kRate, 15*kRate, 20*kRate, 20*kRate)];
     _scoreLB.font = [UIFont systemFontOfSize:10*kRate];
+    _scoreLB.adjustsFontSizeToFitWidth = YES;
     _scoreLB.textColor = [UIColor colorWithWhite:0.3 alpha:1];
     [self.contentView addSubview:_scoreLB];
     
@@ -236,13 +236,14 @@
 
 - (void)layoutSubviews
 {
-    _headImgView.image = [UIImage imageNamed:@"home_third_coupon"];
-    _nameLB.text = @"德州市经济开发区小拇指汽修店";
-    _scoreLB.text = @"4.4";
-    _addressLB.text = @"地址：德州经济开发区体育中心对过";
-    _phoneNumberLB.text = @"电话：13345254555";
-    _orderAccountLB.text = @"213单";
-    _commentAccountLB.text = @"17评论";
+    [_headImgView sd_setImageWithURL:_storeModel.headUrl placeholderImage:[UIImage imageNamed:@"home_third_coupon"] options:SDWebImageRefreshCached];
+    _nameLB.text = _storeModel.mname;
+    _scoreLB.text = _storeModel.starCount;
+    _addressLB.text = [NSString stringWithFormat:@"地址：%@", _storeModel.maddress];
+    _phoneNumberLB.text = [NSString stringWithFormat:@"电话：%@", _storeModel.mphone];
+    _starRateView.scorePercent = _storeModel.starPercent;//设置初始评分(其实是个比例，范围是0-1)
+    _orderAccountLB.text = [NSString stringWithFormat:@"%@单", _storeModel.orderCount];
+    _commentAccountLB.text = [NSString stringWithFormat:@"%@评论", _storeModel.evaluateCount];
     
 }
 

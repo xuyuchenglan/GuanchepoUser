@@ -8,7 +8,7 @@
 
 #import "ItemStoresListVC.h"
 #import "StoreCell.h"
-
+#import "StoreModel.h"
 
 #define kHeadImgWidth kScreenWidth*2/7
 
@@ -16,12 +16,15 @@
 {
     UITableView *_tableView;
 }
+@property (nonatomic, strong)NSMutableArray *storeModels;
 @end
 
 @implementation ItemStoresListVC
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    _storeModels = [NSMutableArray array];
     
     //设置tableView
     [self addTableView];
@@ -51,7 +54,7 @@
 #pragma mark UITableViewDelegate && UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 6;
+    return _storeModels.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -60,13 +63,15 @@
     
     StoreCell *cell = (StoreCell *)[tableView dequeueReusableCellWithIdentifier:identifier];
     
-    StoreModel *storeModel = [[StoreModel alloc] init];
-    
     if (!cell) {
         cell = [[StoreCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
     }
     
-    cell.storeModel = storeModel;
+    if (_storeModels.count > indexPath.row) {
+        StoreModel *currentModel = _storeModels[indexPath.row];
+        cell.storeModel = currentModel;
+    }
+    
     cell.vc = self.vc;
     
     return cell;
@@ -113,7 +118,15 @@
         
         NSDictionary *content = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
         
-        NSLog(@"%@", content);
+        NSArray *jsondataArr = [content objectForKey:@"jsondata"];
+        for (NSDictionary *jsondataDic in jsondataArr) {
+            StoreModel *storeModel = [[StoreModel alloc] initWithDic:jsondataDic];
+            [_storeModels addObject:storeModel];
+        }
+        
+        //刷新tableView
+        [_tableView reloadData];
+        
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"请求失败， 失败原因是：%@", error);

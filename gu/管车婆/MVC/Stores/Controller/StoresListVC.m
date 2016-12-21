@@ -19,13 +19,15 @@
     UITableView *_tableView;
     UILabel     *_carInfoLB;
 }
-//@property (nonatomic, strong)NSString *currentType;
+@property (nonatomic, strong)NSMutableArray *storeModels;
 @end
 
 @implementation StoresListVC
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    _storeModels = [NSMutableArray array];
     
     //设置tableView上方的显示汽车信息的View
     [self addTopView];
@@ -57,19 +59,8 @@
     NSDictionary *selectedServeDic = [notification userInfo];
     _carInfoLB.text = [selectedServeDic objectForKey:@"selectedServe"];
     
-//    NSLog(@"%@", [selectedServeDic objectForKey:@"type"]);
-    
-//    _currentType = [[selectedServeDic objectForKey:@"type"] string];
-//    
-//    NSLog(@"_currentType:%@,_type:%@", _currentType, _type);
-    
-//    if ([_currentType isEqualToString:_type]) {
-//        _carInfoLB.text = [selectedServeDic objectForKey:@"selectedServe"];
-//    } else {
-//        
-//    }
-    
-    
+    //网络请求商户列表
+    [self getStoresWithSuperid:[selectedServeDic objectForKey:@"sid"]];
     
 }
 
@@ -92,7 +83,7 @@
 #pragma mark UITableViewDelegate && UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 6;
+    return _storeModels.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -101,13 +92,14 @@
     
     StoreCell *cell = (StoreCell *)[tableView dequeueReusableCellWithIdentifier:identifier];
     
-    StoreModel *storeModel = [[StoreModel alloc] init];
-    
     if (!cell) {
         cell = [[StoreCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
     }
     
-    cell.storeModel = storeModel;
+    if (_storeModels.count > indexPath.row) {
+        cell.storeModel = _storeModels[indexPath.row];
+    }
+    
     cell.vc = _vc;
     
     return cell;
@@ -120,7 +112,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-
+    
 }
 
 #pragma mark
@@ -130,5 +122,51 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
+#pragma mark 
+#pragma mark 网络请求
+//获取商户列表
+- (void)getStoresWithSuperid:(NSString *)superid
+{
+    NSString *url_post = [NSString stringWithFormat:@"http://%@getMerchant.action", kHead];
+    
+    NSString *locationStr = [NSString stringWithFormat:@"%@,%@", [[self getLocalDic] objectForKey:@"longitude"], [[self getLocalDic] objectForKey:@"phone"]];
+    
+    NSLog(@"_superID:%@,_type:%@", superid, _type);
+    
+    NSDictionary *params = @{
+                             @"superid":superid,
+                             @"orderby":@"1",//固定为1，按距离
+                             @"location":locationStr,
+                             @"currsize":@"0",
+                             @"pagesize":@"10"
+                             };
+    
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    
+    AFHTTPResponseSerializer *responseSerializer = [AFHTTPResponseSerializer serializer];
+    
+    manager.responseSerializer = responseSerializer;
+    
+    [manager POST:url_post parameters:params progress:NULL success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        
+        NSDictionary *content = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+        
+        NSArray *jsondataArr = [content objectForKey:@"jsondata"];
+        
+        for (NSDictionary *jsondataDic in jsondataArr) {
+            StoreModel *storeModel = [[StoreModel alloc] initWithDic:jsondataDic];
+            [_storeModels addObject:storeModel];
+        }
+        
+        NSLog(@"%@", _storeModels);
+        //刷新tableView
+        [_tableView reloadData];
+        
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"请求失败， 失败原因是：%@", error);
+    }];
+    
+}
 
 @end

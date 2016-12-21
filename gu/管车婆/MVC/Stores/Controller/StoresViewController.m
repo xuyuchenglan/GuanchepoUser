@@ -140,12 +140,19 @@
 {
     tableView.hidden = YES;
     
-    UITableViewCell *currentCell = [tableView cellForRowAtIndexPath:indexPath];
     
-    _selectedServe = currentCell.textLabel.text;
+    StoreServiceModel *currentModel = _servesArr[indexPath.row];
+    
+    _selectedServe = currentModel.name;
+    
+    NSString *sid = currentModel.sid;
     
     //给StoresListVC发送一个通知，让他改变topView上的显示内容
-    NSDictionary *infoDic = [NSDictionary dictionaryWithObjectsAndKeys:_selectedServe, @"selectedServe", nil];
+//    NSDictionary *infoDic = [NSDictionary dictionaryWithObjectsAndKeys:_selectedServe, sid, @"selectedServe", @"sid", nil];
+    NSDictionary *infoDic = @{
+                              @"selectedServe":_selectedServe,
+                              @"sid":sid
+                              };
     [[NSNotificationCenter defaultCenter] postNotificationName:@"showSelectedServe" object:nil userInfo:infoDic];
 }
 
