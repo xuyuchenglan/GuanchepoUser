@@ -35,6 +35,9 @@
     //设置tableView
     [self addTableView];
     
+    //在刚进入页面的时候先来一波默认的网络请求，以免一开始进来的时候没有数据
+    [self getStoresWithSuperid:_sid];
+    
 }
 
 #pragma mark *************** 设置tableView上方的显示汽车信息的View *****************
@@ -50,18 +53,23 @@
     _carInfoLB = [[UILabel alloc] initWithFrame:CGRectMake(20*kRate, 5*kRate, 100*kRate, 25*kRate)];
     _carInfoLB.font = [UIFont systemFontOfSize:14.0*kRate];
     _carInfoLB.textColor = [UIColor colorWithWhite:0.3 alpha:1];
-    _carInfoLB.text = @"洗车—5座";
+    _carInfoLB.text = _name;//默认的二级细分服务
     [_topView addSubview:_carInfoLB];
 }
 
 - (void)updateCarInfoLB:(NSNotification *)notification
 {
     NSDictionary *selectedServeDic = [notification userInfo];
-    _carInfoLB.text = [selectedServeDic objectForKey:@"selectedServe"];
     
-    //网络请求商户列表
-    [self getStoresWithSuperid:[selectedServeDic objectForKey:@"sid"]];
+    NSString *type = [selectedServeDic objectForKey:@"type"];
     
+    if ([type isEqualToString:_type]) {//确保只有相应的页面才会做改变，而非所有的页面都改变
+        
+        _carInfoLB.text = [selectedServeDic objectForKey:@"selectedServe"];
+        
+        //网络请求商户列表
+        [self getStoresWithSuperid:[selectedServeDic objectForKey:@"sid"]];
+    }
 }
 
 #pragma  mark *****************  设置tableView  ****************
@@ -131,8 +139,6 @@
     
     NSString *locationStr = [NSString stringWithFormat:@"%@,%@", [[self getLocalDic] objectForKey:@"longitude"], [[self getLocalDic] objectForKey:@"phone"]];
     
-    NSLog(@"_superID:%@,_type:%@", superid, _type);
-    
     NSDictionary *params = @{
                              @"superid":superid,
                              @"orderby":@"1",//固定为1，按距离
@@ -153,6 +159,7 @@
         
         NSArray *jsondataArr = [content objectForKey:@"jsondata"];
         
+        [_storeModels removeAllObjects];
         for (NSDictionary *jsondataDic in jsondataArr) {
             StoreModel *storeModel = [[StoreModel alloc] initWithDic:jsondataDic];
             [_storeModels addObject:storeModel];
