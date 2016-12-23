@@ -213,7 +213,137 @@
     }
 }
 
+#pragma mark --- UIImagePickerControllerDelegate
 
+//当完成图片获取时的操作
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info
+{
+    [picker dismissViewControllerAnimated:YES completion:NULL];
+    
+    //上传图片至服务器
+    UIImage *img = [info objectForKey:UIImagePickerControllerEditedImage];
+    //UIImage *img1 = [self imageWithImageSimple:img scaledToSize:CGSizeMake(700, 700)];//对选取的图片进行大小上的压缩
+    [self transportImgToServerWithImg:img];
+    
+}
+
+//当取消图片获取时的操作
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
+{
+    [picker dismissViewControllerAnimated:YES completion:nil];
+    NSLog(@"取消获取图片");
+}
+
+//按固定尺寸格式压缩图片
+- (UIImage*)imageWithImageSimple:(UIImage*)image scaledToSize:(CGSize)newSize
+{
+    UIGraphicsBeginImageContext(newSize);
+    
+    [image drawInRect:CGRectMake(0,0,newSize.width,newSize.height)];
+    
+    UIImage* newImage = UIGraphicsGetImageFromCurrentImageContext();
+    
+    UIGraphicsEndImageContext();
+    
+    return newImage;
+}
+
+//上传图片至服务器后台
+- (void)transportImgToServerWithImg:(UIImage *)img
+{
+    NSData *imageData;
+    NSString *mimetype;
+    if (UIImagePNGRepresentation(img) != nil) {
+        mimetype = @"image/png";
+        imageData = UIImagePNGRepresentation(img);
+        
+    }else{
+        mimetype = @"image/jpeg";
+        imageData = UIImageJPEGRepresentation(img, 1.0);
+        
+    }
+    
+    NSString *uploadUrl = [NSString stringWithFormat:@"http://%@/zcar/upload.do", kIP];
+    
+    NSDictionary *params = @{
+                             @"optype":@"pzupload",
+                             @"oid":self.orderModel.orderID,
+                             @"km":@"666"
+                             };
+    
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    manager.requestSerializer.timeoutInterval =15;
+    
+    [manager POST:uploadUrl parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+        
+        /**
+         *在网络开发中，上传文件时，是文件不允许被覆盖、文件重名
+         *要解决此问题，
+         *可以在上传时使用当前的系统时间作为文件名(当然如果有需要还可以拼接更多需要的比如用户ID)
+         */
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        formatter.dateFormat =@"yyyyMMddHHmmss";
+        NSString *str = [formatter stringFromDate:[NSDate date]];
+        //NSLog(@"当前时间%@", str);
+        
+        NSString *fileName = [[NSString alloc] init];
+        if (UIImagePNGRepresentation(img) != nil) {
+            
+            fileName = [NSString stringWithFormat:@"%@.png", str];
+            
+        }else{
+            
+            fileName = [NSString stringWithFormat:@"%@.jpg", str];
+            
+        }
+        
+        // 上传图片，以文件流的格式
+        /**
+         *filedata : 图片的data
+         *name     : 后台的提供的字段
+         *mimeType : 类型
+         */
+        [formData appendPartWithFileData:imageData name:str fileName:fileName mimeType:mimetype];
+        
+    } progress:NULL success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        
+        NSDictionary *content = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+        //NSLog(@"凭证上传：%@", content);
+        
+        NSString *result = [content objectForKey:@"result"];
+        
+        if ([result isEqual:@"success"]) {
+            
+            NSLog(@"上传凭证成功");
+            //把刚刚上传的凭证显示出来，两种方式，直接根据返回的url加载，或者刷新一下UI
+            //给OrderInfoVC页面发送一个通知,刷新UI
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadOrderInfoView" object:self];
+            
+        } else {
+            
+            //弹框显示为什么上传凭证失败
+            NSString *msg_title = [content objectForKey:@"errormsg"];
+            [self showAlertWithTitle:msg_title];
+            
+        }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+        NSLog(@"上传图片失败，失败原因是:%@", error);
+        
+    }];
+}
+
+- (void)showAlertWithTitle:(NSString *)title
+{
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title message:@"您的凭证上传已超过限定时间，请联系客服解决" preferredStyle:UIAlertControllerStyleAlert];//上拉菜单样式
+    
+    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"好的" style:UIAlertActionStyleDefault handler:nil];//好的按钮
+    [alertController addAction:okAction];
+    
+    [[self findResponderVC] presentViewController:alertController animated:YES completion:nil];//这种弹出方式会在原来视图的背景下弹出一个视图。
+}
 
 
 

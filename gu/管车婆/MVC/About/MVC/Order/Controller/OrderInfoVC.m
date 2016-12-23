@@ -11,6 +11,7 @@
 #import "OrderContentMoreView.h"
 #import "OrderStateView.h"
 #import "AppointContentInfoView.h"
+#import "VoucherModel.h"
 
 #define kImgWidth (kScreenWidth - 30*kRate)
 
@@ -19,9 +20,10 @@
     UIView *_moreView;
     UIView *_infoView;
     UIView *_stateView;
+    UIView *_voucherView;
 }
 @property (nonatomic, strong)UIScrollView *scrollView;
-
+@property (nonatomic, strong)NSMutableArray *voucherModels;
 @end
 
 @implementation OrderInfoVC
@@ -29,11 +31,16 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    _voucherModels = [NSMutableArray array];
+    
     _scrollView = [[UIScrollView alloc] initWithFrame:[UIScreen mainScreen].bounds];
     _scrollView.backgroundColor = [UIColor colorWithRed:248/255.0 green:249/255.0 blue:250/255.0 alpha:1];
     _scrollView.contentSize = CGSizeMake(kScreenWidth, 1000 + kImgWidth * 2);
     _scrollView.showsVerticalScrollIndicator = NO;
     [self.view addSubview:_scrollView];
+    
+    //添加观察者，接收OrderStateView发送过来的通知,在上传凭证成功以后刷新UI以显示上传的凭证
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getOrderDetail) name:@"reloadOrderInfoView" object:nil];
     
     //设置导航栏
     [self addNavBar];
@@ -61,9 +68,18 @@
     //订单信息
     [self addInfoView];
     
+    //订单状态
     if (![_isAppoint isEqual:@"yes"]) {
         //订单状态
         [self addStateView];
+    }
+    
+    if ([_orderModel.isVoucherUp isEqual:@"已上传"]) {
+        //网络请求保养凭证
+        [self getVoucherSessionRequest];
+        
+    } else if ([_orderModel.isVoucherUp isEqual:@"未上传"]) {
+        
     }
     
 }
@@ -140,6 +156,128 @@
     contentView.backgroundColor = [UIColor whiteColor];
     contentView.orderModel = _orderModel;
     [_stateView addSubview:contentView];
+}
+
+//保养凭证
+- (void)addVoucherView
+{
+    _voucherView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_stateView.frame), kScreenWidth, 200)];
+    [_scrollView addSubview:_voucherView];
+    
+    //标题
+    UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(30, 10, kScreenWidth - 40, 20)];
+    titleLabel.text = @"保养凭证";
+    titleLabel.font = [UIFont systemFontOfSize:15.0];
+    titleLabel.textAlignment = NSTextAlignmentLeft;
+    [_voucherView addSubview:titleLabel];
+    
+    //内容
+    if (_voucherModels.count > 0) {
+        
+        for (int i = 0; i < _voucherModels.count; i++) {
+            
+            VoucherModel *currentVoucherModel = (VoucherModel *)_voucherModels[i];
+            UIImageView *contentView = [[UIImageView alloc] initWithFrame:CGRectMake(15, CGRectGetMaxY(titleLabel.frame) + (kImgWidth + 10)*i + 10, kImgWidth, kImgWidth)];
+            
+            [contentView sd_setImageWithURL:currentVoucherModel.voucherUrl];
+            [_voucherView addSubview:contentView];
+            
+            
+        }
+        
+    }
+    
+}
+
+
+#pragma mark
+#pragma mark 网络请求
+//网络请求保养凭证
+- (void)getVoucherSessionRequest
+{
+    NSString *url_post = [NSString stringWithFormat:@"http://%@getOrderPz.action", kHead];
+    
+    NSDictionary *params = @{
+                             @"oid":_orderModel.orderID
+                             };
+    
+    
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    AFHTTPResponseSerializer *responseSerializer = [AFHTTPResponseSerializer serializer];
+    manager.responseSerializer = responseSerializer;
+    
+    [manager POST:url_post parameters:params progress:NULL success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        
+        NSDictionary *content = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+        
+        [_voucherModels removeAllObjects];
+
+        NSArray *jsondataArr = [content objectForKey:@"jsondata"];
+        for (NSDictionary *picDic in jsondataArr) {
+            VoucherModel *voucherModel = [[VoucherModel alloc] initWithDic:picDic];
+            [_voucherModels addObject:voucherModel];
+        }
+        
+        _scrollView.contentSize = CGSizeMake(kScreenWidth, 1000 + kImgWidth * _voucherModels.count);
+        
+        //添加VoucherView
+        [self addVoucherView];
+        
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"请求失败， 失败原因是：%@", error);
+    }];
+    
+}
+
+
+//获取订单详情数据，刷新UI
+- (void)getOrderDetail
+{
+    NSString *url_post = [NSString stringWithFormat:@"http://%@getOrderDetail.action", kHead];
+    
+    NSDictionary *params = @{
+                             @"oid"     :  _orderModel.orderID
+                             };
+    
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    AFHTTPResponseSerializer *responseSerializer = [AFHTTPResponseSerializer serializer];
+    manager.responseSerializer = responseSerializer;
+    [manager POST:url_post parameters:params progress:NULL success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        
+        NSDictionary *content = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+        NSDictionary *jsondataDic = [content objectForKey:@"jsondata"];
+        
+        _orderModel = [[OrderModel alloc] initWithDic:jsondataDic];
+
+        //刷新UI
+        [self updateOrderInfoView];
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"请求失败， 失败原因是：%@", error);
+    }];
+    
+}
+
+//刷新UI
+- (void)updateOrderInfoView
+{
+    [_moreView removeFromSuperview];
+    [_infoView removeFromSuperview];
+    [_stateView removeFromSuperview];
+    [_voucherView removeFromSuperview];
+    
+    [self addContentView];
+}
+
+
+
+
+#pragma mark
+#pragma mark 移除观察者
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 @end

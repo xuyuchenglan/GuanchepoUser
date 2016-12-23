@@ -116,6 +116,7 @@
 		D0758AB61D9E17C50071D8A6 /* about_tableview_service.png in Resources */ = {isa = PBXBuildFile; fileRef = D0758AA31D9E17C50071D8A6 /* about_tableview_service.png */; };
 		D0758AB71D9E17C50071D8A6 /* about_tableview_membership.png in Resources */ = {isa = PBXBuildFile; fileRef = D0758AA41D9E17C50071D8A6 /* about_tableview_membership.png */; };
 		D0758AB91D9E18090071D8A6 /* rightArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = D0758AB81D9E18090071D8A6 /* rightArrow.png */; };
+		D092004E1E0D0356006CF7EB /* VoucherModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D092004D1E0D0356006CF7EB /* VoucherModel.m */; };
 		D092F7E41DAC750A002581F5 /* PhoneChargesView.m in Sources */ = {isa = PBXBuildFile; fileRef = D092F7E31DAC750A002581F5 /* PhoneChargesView.m */; };
 		D092F7E71DAC9775002581F5 /* MovableParentVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D092F7E61DAC9775002581F5 /* MovableParentVC.m */; };
 		D092F7EA1DACBBAD002581F5 /* CarOwnersCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D092F7E91DACBBAD002581F5 /* CarOwnersCell.m */; };
@@ -462,6 +463,8 @@
 		D0758AA31D9E17C50071D8A6 /* about_tableview_service.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = about_tableview_service.png; sourceTree = "<group>"; };
 		D0758AA41D9E17C50071D8A6 /* about_tableview_membership.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = about_tableview_membership.png; sourceTree = "<group>"; };
 		D0758AB81D9E18090071D8A6 /* rightArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rightArrow.png; sourceTree = "<group>"; };
+		D092004C1E0D0356006CF7EB /* VoucherModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VoucherModel.h; sourceTree = "<group>"; };
+		D092004D1E0D0356006CF7EB /* VoucherModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VoucherModel.m; sourceTree = "<group>"; };
 		D092F7E21DAC750A002581F5 /* PhoneChargesView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhoneChargesView.h; sourceTree = "<group>"; };
 		D092F7E31DAC750A002581F5 /* PhoneChargesView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhoneChargesView.m; sourceTree = "<group>"; };
 		D092F7E51DAC9775002581F5 /* MovableParentVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MovableParentVC.h; sourceTree = "<group>"; };
@@ -1166,6 +1169,8 @@
 			children = (
 				D006C24F1DB8C12A0017FCD5 /* OrderModel.h */,
 				D006C2501DB8C12A0017FCD5 /* OrderModel.m */,
+				D092004C1E0D0356006CF7EB /* VoucherModel.h */,
+				D092004D1E0D0356006CF7EB /* VoucherModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2628,6 +2633,7 @@
 				D0F7808D1DC2FE1900347B21 /* CardCell.m in Sources */,
 				D052B1FD1E00E2C1006E74C1 /* MoreViewController.m in Sources */,
 				D0E6A72B1E03E3130080F997 /* CarOwnerClassifyModel.m in Sources */,
+				D092004E1E0D0356006CF7EB /* VoucherModel.m in Sources */,
 				D0D918DB1DA8F46D003379E3 /* RechargeFuelCardVC.m in Sources */,
 				D026E9C81DFA9D6400C563D8 /* AboutModel.m in Sources */,
 				D0139A861DD417F6005141F2 /* LWCouponCell.m in Sources */,
