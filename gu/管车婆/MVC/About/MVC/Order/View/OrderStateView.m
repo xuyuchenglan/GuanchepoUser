@@ -100,16 +100,15 @@
 
 - (void)layoutSubviews
 {
-    _dataLabel_orderState.text = @"已完成";
-    _dataLabel_pjState.text = @"已评价";
+    _dataLabel_orderState.text = self.orderModel.state;
+    _dataLabel_pjState.text = self.orderModel.pjState;
     _dataLabel_isVoucherUp.text = @"无需上传";
 
     //不需要上传凭证的时候隐藏凭证栏,需要上传凭证的时候才会显示上传凭证按钮
-//    if ([self.orderModel.voucher isEqual:@"1"]) {
-//        _dataLabel_isVoucherUp.text = self.orderModel.isVoucherUp;
-//        [self addVoucherUpBtn];
-//    }
-    [self addVoucherUpBtn];
+    if ([self.orderModel.voucher isEqual:@"1"]) {
+        _dataLabel_isVoucherUp.text = self.orderModel.isVoucherUp;
+        [self addVoucherUpBtn];
+    }
     
 }
 

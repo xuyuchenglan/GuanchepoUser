@@ -25,6 +25,12 @@
 @property (nonatomic, strong)NSString       *orderWay;//下单方式
 
 
+@property (nonatomic, strong)NSString       *pjState;//评论状态
+@property (nonatomic, strong)NSString       *voucher;//是否需要上传凭证，0代表不需要，1代表需要
+@property (nonatomic, strong)NSString       *isVoucherUp;//凭证是否已上传
+
+@property (nonatomic, strong)NSString       *state;//交易状态
+
 @property (nonatomic, strong)NSString *itemStr;//
 @property (nonatomic, strong)NSString *itemCount;//
 

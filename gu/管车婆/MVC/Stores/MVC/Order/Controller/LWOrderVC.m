@@ -128,7 +128,7 @@
     
 }
 
-//发送手机验证码
+//输入商户手机验证码
 - (void)createYanzhengma
 {
     UIButton *createYanzhengmaBtn = [[UIButton alloc] initWithFrame:CGRectMake(kEdgeWidth*3 + 200, 0, 100, 100)];
@@ -137,7 +137,7 @@
     [createYanzhengmaBtn setImage:[UIImage imageNamed:@"yanzhengma"] forState:UIControlStateNormal];
     createYanzhengmaBtn.imageEdgeInsets = UIEdgeInsetsMake(10, 25, 40, 25);
     
-    [createYanzhengmaBtn setTitle:@"发送手机验证码" forState:UIControlStateNormal];
+    [createYanzhengmaBtn setTitle:@"输入商户验证码" forState:UIControlStateNormal];
     createYanzhengmaBtn.titleLabel.font = [UIFont systemFontOfSize:12.0];
     createYanzhengmaBtn.titleLabel.textAlignment = NSTextAlignmentCenter;
     [createYanzhengmaBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
@@ -209,7 +209,7 @@
                              @"superid":_sid,//一级服务id,sid
                              @"urealname":uname,//用户名字
                              @"uphone":uphone,//用户电话
-                             @"oway":@"2",//下单方式，写死传2（商户扫码）
+                             @"oway":@"1",//下单方式，写死传1（用户扫码）
                              @"cartype":cartype,
                              @"pictime":pictime//二维码时间
                              };
@@ -399,11 +399,11 @@ void ProviderReleaseData (void *info, const void *data, size_t size){
 
 
 
-#pragma mark ------ <3>生成验证码~
-//发送手机验证码
+#pragma mark ------ <3>输入验证码~
+//输入商户手机验证码下单
 - (void)createYanzhengmaBtnAction
 {
-    NSLog(@"发送手机验证码");
+    NSLog(@"输入商户手机验证码");
 }
 
 #pragma  mark --  注意事项

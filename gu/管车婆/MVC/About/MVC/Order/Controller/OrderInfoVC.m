@@ -138,6 +138,7 @@
     //内容
     OrderStateView *contentView = [[OrderStateView alloc] initWithFrame:CGRectMake(0, 40*kRate, kScreenWidth, 90*kRate)];
     contentView.backgroundColor = [UIColor whiteColor];
+    contentView.orderModel = _orderModel;
     [_stateView addSubview:contentView];
 }
 

@@ -117,9 +117,8 @@
 {
     NSString *url_post = [NSString stringWithFormat:@"http://%@getOrder.action", kHead];
     
-    
     NSDictionary *params = @{
-                             @"uid":@"68ccfcb1c3cc483fb01b4fc3e430b834",
+                             @"uid":[[self getLocalDic] objectForKey:@"uid"],
                              @"type":_type,
                              @"currsize":@"0",
                              @"pagesize":@"10"
@@ -134,6 +133,8 @@
     [manager POST:url_post parameters:params progress:NULL success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
         NSDictionary *content = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+        
+        NSLog(@"content%@", content);
         
         NSArray *jsondatArr = [content objectForKey:@"jsondata"];
         for (NSDictionary *dic in jsondatArr) {
