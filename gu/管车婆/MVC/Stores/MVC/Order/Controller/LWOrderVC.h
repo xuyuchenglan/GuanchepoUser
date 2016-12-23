@@ -7,7 +7,12 @@
 //
 
 #import "ParentViewController.h"
+#import "StoreModel.h"
 
 @interface LWOrderVC : ParentViewController
+
+@property (nonatomic, strong)StoreModel *storeModel;
+
+@property (nonatomic, strong)NSString   *sid;
 
 @end

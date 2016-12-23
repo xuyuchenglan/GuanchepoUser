@@ -17,6 +17,7 @@
         self.headUrl = [NSURL URLWithString:[NSString stringWithFormat:@"http://%@%@", kIP, [dic objectForKey:@"mpic"]]];
         self.mname = [dic objectForKey:@"mname"];
         self.maddress = [dic objectForKey:@"maddr"];
+        self.mdesc = [dic objectForKey:@"mdesc"];
         self.mphone = [dic objectForKey:@"mphone"];
         self.orderCount = [dic objectForKey:@"ordercount"];
         self.evaluateCount = [dic objectForKey:@"pj_count"];

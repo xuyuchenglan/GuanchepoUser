@@ -15,4 +15,6 @@
 
 @property (nonatomic, weak)UIViewController *vc;
 
+@property (nonatomic, strong)NSString *sid;
+
 @end

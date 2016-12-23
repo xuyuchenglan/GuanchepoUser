@@ -207,12 +207,12 @@
 #pragma mark
 - (void)layoutSubviews
 {
-    _titleLB.text = @"德州市经济开发区小拇指汽修店";
-    _starRateView.scorePercent = 0.88;//设置初始评分(其实是个比例，范围是0-1)
-    _scoreLB.text = @"4.5";
-    _orderCountLB.text = @"213单";
-    [_commentCountBtn setTitle:@"17评论>" forState:UIControlStateNormal];
-    _descriptionLB.text = @"一百多年以来，德尔福始终致力于发展技术，是汽车能够更好、更有效率的运行，将这些创新带到售后市场。";
-    _addressLB.text = @"德州经济开发区体育中心对过";
+    _titleLB.text = _storeModel.mname;
+    _starRateView.scorePercent = _storeModel.starPercent;//设置初始评分(其实是个比例，范围是0-1)
+    _scoreLB.text = _storeModel.starCount;
+    _orderCountLB.text = [NSString stringWithFormat:@"%@单", _storeModel.orderCount];
+    [_commentCountBtn setTitle:[NSString stringWithFormat:@"%@评论>", _storeModel.evaluateCount] forState:UIControlStateNormal];
+    _descriptionLB.text = _storeModel.mdesc;
+    _addressLB.text = _storeModel.maddress;
 }
 @end

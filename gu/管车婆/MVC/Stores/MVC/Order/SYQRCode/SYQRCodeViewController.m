@@ -69,7 +69,7 @@ static const float kReaderViewHeight = 200;
     [self.view addSubview:bgView];
     
     UILabel *titleLab = [[UILabel alloc] initWithFrame:CGRectMake(kScreenWidth/2 - 70, 20, 140, 44)];
-    titleLab.text = @"扫描客户二维码";
+    titleLab.text = @"扫描商家二维码";
     titleLab.font = [UIFont boldSystemFontOfSize:18.0];
     titleLab.textColor = [UIColor colorWithRed:62/255.0 green:124/255.0 blue:254/255.0 alpha:1];
     titleLab.textAlignment = NSTextAlignmentCenter;

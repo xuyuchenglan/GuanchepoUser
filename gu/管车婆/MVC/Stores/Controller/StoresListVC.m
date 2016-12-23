@@ -165,7 +165,6 @@
             [_storeModels addObject:storeModel];
         }
         
-        NSLog(@"%@", _storeModels);
         //刷新tableView
         [_tableView reloadData];
         

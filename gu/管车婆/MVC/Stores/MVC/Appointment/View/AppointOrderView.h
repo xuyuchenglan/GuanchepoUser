@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "StoreModel.h"
 
 @interface AppointOrderView : UIView
+
+@property (nonatomic, strong)StoreModel *storeModel;
 
 @end

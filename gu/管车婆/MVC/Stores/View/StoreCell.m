@@ -236,7 +236,7 @@
 
 - (void)layoutSubviews
 {
-    [_headImgView sd_setImageWithURL:_storeModel.headUrl placeholderImage:[UIImage imageNamed:@"home_third_coupon"] options:SDWebImageRefreshCached];
+    [_headImgView sd_setImageWithURL:_storeModel.headUrl placeholderImage:[UIImage imageNamed:@"stores_headImg"] options:SDWebImageRefreshCached];
     _nameLB.text = _storeModel.mname;
     _scoreLB.text = _storeModel.starCount;
     _addressLB.text = [NSString stringWithFormat:@"地址：%@", _storeModel.maddress];
@@ -300,6 +300,8 @@
     if (cardno.length > 0) {
         
         LWOrderVC *orderVC = [[LWOrderVC alloc] init];
+        orderVC.storeModel = _storeModel;
+        orderVC.sid = _sid;
         orderVC.hidesBottomBarWhenPushed = YES;
         [self.vc.navigationController pushViewController:orderVC animated:NO];
         

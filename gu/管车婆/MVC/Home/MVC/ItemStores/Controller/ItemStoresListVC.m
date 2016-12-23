@@ -73,6 +73,7 @@
     }
     
     cell.vc = self.vc;
+    cell.sid = _superID;
     
     return cell;
 }
