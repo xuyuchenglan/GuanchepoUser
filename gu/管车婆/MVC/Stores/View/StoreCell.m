@@ -279,6 +279,7 @@
     if (cardno.length > 0) {
         
         LWAppointmentVc *appointmentVC = [[LWAppointmentVc alloc] init];
+        appointmentVC.storeModel = _storeModel;
         appointmentVC.hidesBottomBarWhenPushed = YES;
         [self.vc.navigationController pushViewController:appointmentVC animated:NO];
         

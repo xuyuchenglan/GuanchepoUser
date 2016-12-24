@@ -53,8 +53,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    NSLog(@"%@", [self getLocalDic]);
-    
     //导航引导页
     [self guideView];
     

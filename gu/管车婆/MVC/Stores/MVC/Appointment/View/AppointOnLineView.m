@@ -96,10 +96,10 @@
     nameTF.clearButtonMode = UITextFieldViewModeWhileEditing;
     nameTF.text = [[self getLocalDic] objectForKey:@"realname"];
     nameTF.font = [UIFont systemFontOfSize:15.0];
-    nameTF.keyboardType = UIKeyboardTypePhonePad;
+    nameTF.keyboardType = UIKeyboardTypeDefault;
     [self addSubview:nameTF];
     [nameTF mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(150, 39));
+        make.size.mas_equalTo(CGSizeMake(250, 39));
         make.left.equalTo(nameLB.mas_right).with.offset(20);
         make.top.equalTo(self).with.offset(41);
     }];
@@ -136,7 +136,7 @@
     phoneTF.keyboardType = UIKeyboardTypePhonePad;
     [self addSubview:phoneTF];
     [phoneTF mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(150, 39));
+        make.size.mas_equalTo(CGSizeMake(250, 39));
         make.left.equalTo(phoneLB.mas_right).with.offset(20);
         make.top.equalTo(self).with.offset(81);
     }];
@@ -145,29 +145,20 @@
 #pragma mark --- UITextFieldDelegate 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
-    [textField resignFirstResponder];
+//    [textField resignFirstResponder];
+    [self endEditing:YES];//令键盘消失
     
     return YES;
 }
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
-    //键盘出现时，让视图上升
-    [UIView beginAnimations:@"animation" context:nil];
-    [UIView setAnimationDuration:0.2];
-    [UIView setAnimationBeginsFromCurrentState:YES];
-    self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y - 250, self.frame.size.width, self.frame.size.height);
-    [UIView commitAnimations];
+    
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField
 {
-    //键盘消失时，试图恢复原样
-    [UIView beginAnimations:@"animation" context:nil];
-    [UIView setAnimationDuration:0.2];
-    [UIView setAnimationBeginsFromCurrentState:YES];
-    self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y + 250, self.frame.size.width, self.frame.size.height);
-    [UIView commitAnimations];
+    
 }
 
 #pragma mark --- ButtonAction

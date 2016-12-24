@@ -134,8 +134,6 @@
         
         NSDictionary *content = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
         
-        NSLog(@"content%@", content);
-        
         NSArray *jsondatArr = [content objectForKey:@"jsondata"];
         for (NSDictionary *dic in jsondatArr) {
             
