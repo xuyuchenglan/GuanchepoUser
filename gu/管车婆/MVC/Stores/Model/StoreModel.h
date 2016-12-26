@@ -17,6 +17,7 @@
 @property(nonatomic, strong) NSString *mphone;
 @property(nonatomic, strong) NSString *orderCount;
 @property(nonatomic, strong) NSString *evaluateCount;
+@property(nonatomic, strong) NSString *mid;
 
 @property(nonatomic, assign) float     starPercent;
 @property(nonatomic, strong) NSString *starCount;

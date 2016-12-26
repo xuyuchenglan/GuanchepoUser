@@ -24,6 +24,7 @@
         
         self.orderID = [dic objectForKey:@"oid"];
         self.ordeTime = [dic objectForKey:@"otime"];
+        self.appointTime = [dic objectForKey:@"yy_start"];
         
         NSString *oWay = [NSString stringWithFormat:@"%@", [dic objectForKey:@"oway"]];
         if ([oWay isEqual:@"1"]) {
@@ -32,6 +33,8 @@
             self.orderWay = @"商户扫码下单";//下单方式
         } else if ([oWay isEqual:@"3"]) {
             self.orderWay = @"用户输入商户随机数下单";//下单方式
+        } else if ([oWay isEqual:@"0"]) {
+            self.orderWay = @"预约订单";//下单方式
         }
         
         //评价状态
@@ -62,6 +65,10 @@
                 self.state = @"待传凭证";
             }
         }
+        
+        //订单详情中使用的
+        self.merchantname = [dic objectForKey:@"merchantname"];
+        self.merchantUrl = [NSURL URLWithString:[NSString stringWithFormat:@"http://%@%@", kIP, [dic objectForKey:@"merchantpic"]]];
 
     }
     

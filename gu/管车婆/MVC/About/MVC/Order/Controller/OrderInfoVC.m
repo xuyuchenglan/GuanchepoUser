@@ -47,6 +47,9 @@
     
     //设置下面的内容视图
     [self addContentView];
+    
+    //请求订单详情数据
+    [self getOrderDetail];
 }
 
 #pragma mark ******   设置导航栏   ******
@@ -77,8 +80,6 @@
     if ([_orderModel.isVoucherUp isEqual:@"已上传"]) {
         //网络请求保养凭证
         [self getVoucherSessionRequest];
-        
-    } else if ([_orderModel.isVoucherUp isEqual:@"未上传"]) {
         
     }
     
@@ -247,6 +248,7 @@
         
         NSDictionary *content = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
         NSDictionary *jsondataDic = [content objectForKey:@"jsondata"];
+        NSLog(@"订单详情:%@", jsondataDic);
         
         _orderModel = [[OrderModel alloc] initWithDic:jsondataDic];
 

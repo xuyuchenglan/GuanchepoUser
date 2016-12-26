@@ -280,6 +280,7 @@
         
         LWAppointmentVc *appointmentVC = [[LWAppointmentVc alloc] init];
         appointmentVC.storeModel = _storeModel;
+        appointmentVC.sid = _sid;
         appointmentVC.hidesBottomBarWhenPushed = YES;
         [self.vc.navigationController pushViewController:appointmentVC animated:NO];
         

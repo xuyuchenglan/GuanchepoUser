@@ -137,6 +137,7 @@
         NSArray *jsondatArr = [content objectForKey:@"jsondata"];
         for (NSDictionary *dic in jsondatArr) {
             
+            NSLog(@"订单列表:%@", dic);
             OrderModel *model = [[OrderModel alloc] initWithDic:dic];
             [_orderModels addObject:model];
             

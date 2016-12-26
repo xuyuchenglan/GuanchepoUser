@@ -16,4 +16,9 @@ typedef void(^MyBlock)();
 
 - (void)dateBtnActionWithBlock:(MyBlock)block;
 
+
+@property (nonatomic, strong)UIButton    *timeBtn;
+@property (nonatomic, strong)UITextField *nameTF;
+@property (nonatomic, strong)UITextField *phoneTF;
+
 @end

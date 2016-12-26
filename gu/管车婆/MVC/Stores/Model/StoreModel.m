@@ -21,6 +21,7 @@
         self.mphone = [dic objectForKey:@"mphone"];
         self.orderCount = [dic objectForKey:@"ordercount"];
         self.evaluateCount = [dic objectForKey:@"pj_count"];
+        self.mid = [dic objectForKey:@"mid"];
         
         float pj_avg = [[dic objectForKey:@"pj_avg"] floatValue];
         self.starPercent = pj_avg / 5;

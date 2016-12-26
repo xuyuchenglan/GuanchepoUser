@@ -12,5 +12,6 @@
 @interface LWAppointmentVc : ParentViewController
 
 @property (nonatomic, strong)StoreModel *storeModel;
+@property (nonatomic, strong)NSString   *sid;
 
 @end

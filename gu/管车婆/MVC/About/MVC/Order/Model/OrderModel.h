@@ -21,7 +21,8 @@
 @property (nonatomic, strong)NSString       *urealname;//用户的姓名
 
 @property (nonatomic, strong)NSString       *orderID;//订单号
-@property (nonatomic, strong)NSString       *ordeTime;//
+@property (nonatomic, strong)NSString       *ordeTime;//下单时间
+@property (nonatomic, strong)NSString       *appointTime;//下单时间
 @property (nonatomic, strong)NSString       *orderWay;//下单方式
 
 
@@ -33,6 +34,13 @@
 
 @property (nonatomic, strong)NSString *itemStr;//
 @property (nonatomic, strong)NSString *itemCount;//
+
+
+#pragma mark --- 以下属性是订单详情中使用的
+@property (nonatomic, strong)NSString       *merchantname;//商户名字
+@property (nonatomic, strong)NSURL          *merchantUrl;//车行头像URL
+
+
 
 - (instancetype)initWithDic:(NSDictionary *)dic;
 
