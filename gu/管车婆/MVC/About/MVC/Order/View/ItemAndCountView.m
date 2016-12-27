@@ -9,41 +9,58 @@
 #import "ItemAndCountView.h"
 #import "OrderModel.h"
 
+@interface ItemAndCountView()
+{
+    UILabel *_label;
+}
+@end
 
 @implementation ItemAndCountView
 
-
-- (void)setModelsArr:(NSArray *)modelsArr
+- (instancetype)init
 {
-    for (int i = 0; i < modelsArr.count; i++) {
-        
-        OrderModel *currentModel = modelsArr[i];
-        
-        UILabel *itemLB = [[UILabel alloc] init];
-        itemLB.text = currentModel.itemStr;
-        itemLB.font = [UIFont systemFontOfSize:13.0*kRate];
-        itemLB.textColor = [UIColor colorWithWhite:0.25 alpha:1];
-        [self addSubview:itemLB];
-        [itemLB mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(200*kRate, 20*kRate));
-            make.top.mas_equalTo(20*kRate*i);
-            make.left.equalTo(self).with.offset(0);
-        }];
-        
-        UILabel *itemCountLB = [[UILabel alloc] init];
-        itemCountLB.text = currentModel.itemCount;
-        itemCountLB.font = [UIFont systemFontOfSize:13.0*kRate];
-        itemCountLB.textColor = [UIColor colorWithWhite:0.25 alpha:1];
-        itemCountLB.textAlignment = NSTextAlignmentRight;
-        [self addSubview:itemCountLB];
-        [itemCountLB mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(50*kRate, 20*kRate));
-            make.top.mas_equalTo(20*kRate*i);
-            make.right.equalTo(self).with.offset(0);
-        }];
+    self = [super init];
+    if (self) {
+        _label = [[UILabel alloc] init];
+        _label.numberOfLines = 0;
+        [self addSubview:_label];
     }
+    return self;
 }
 
+- (void)setItems:(NSArray *)items
+{
+    _items = items;
 
+    _label.attributedText = [self getAttributedStringWithItems:items];
+    [_label mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(300*kRate, 20*items.count*kRate));
+        make.top.mas_equalTo(0);
+        make.left.equalTo(self).with.offset(0);
+    }];
+}
+
+-(NSMutableAttributedString *)getAttributedStringWithItems:(NSArray *)items
+{
+    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+    [paragraphStyle setLineSpacing:5.0*kRate];//调整行间距
+    
+    NSMutableAttributedString *mutaAttStr = [[NSMutableAttributedString alloc] init];
+    for (int i = 0; i < items.count; i++) {
+        
+        NSDictionary *currentDic = items[i];
+        
+        NSMutableAttributedString *itemStr = [[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"%@                                                  ",[currentDic objectForKey:@"itemStr"]] attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:13*kRate],NSForegroundColorAttributeName:[UIColor colorWithWhite:0.4 alpha:1],NSParagraphStyleAttributeName:paragraphStyle}];
+        [mutaAttStr appendAttributedString:itemStr];
+        
+        NSMutableAttributedString *itemCount = [[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"%@\n",[currentDic objectForKey:@"itemCount"]] attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:13*kRate],NSForegroundColorAttributeName:[UIColor colorWithWhite:0.4 alpha:1],NSParagraphStyleAttributeName:paragraphStyle}];
+        [mutaAttStr appendAttributedString:itemCount];
+
+        
+    }
+    
+    return mutaAttStr;
+    
+}
 
 @end

@@ -78,6 +78,7 @@
 		D04C80581DC0ABE700C72829 /* carOwners_img.png in Resources */ = {isa = PBXBuildFile; fileRef = D04C80541DC0ABE700C72829 /* carOwners_img.png */; };
 		D04C80591DC0ABE700C72829 /* carOwners_like.png in Resources */ = {isa = PBXBuildFile; fileRef = D04C80551DC0ABE700C72829 /* carOwners_like.png */; };
 		D04C805A1DC0ABE700C72829 /* carOwners_reading.png in Resources */ = {isa = PBXBuildFile; fileRef = D04C80561DC0ABE700C72829 /* carOwners_reading.png */; };
+		D04F2B821E1102600085F879 /* EvaluationVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D04F2B811E1102600085F879 /* EvaluationVC.m */; };
 		D052B1FD1E00E2C1006E74C1 /* MoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D052B1FC1E00E2C1006E74C1 /* MoreViewController.m */; };
 		D052B2031E00EDA1006E74C1 /* ItemStoresVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D052B2021E00EDA1006E74C1 /* ItemStoresVC.m */; };
 		D052B2061E00FB0E006E74C1 /* ItemStoresListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D052B2051E00FB0E006E74C1 /* ItemStoresListVC.m */; };
@@ -415,6 +416,8 @@
 		D04C80541DC0ABE700C72829 /* carOwners_img.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = carOwners_img.png; sourceTree = "<group>"; };
 		D04C80551DC0ABE700C72829 /* carOwners_like.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = carOwners_like.png; sourceTree = "<group>"; };
 		D04C80561DC0ABE700C72829 /* carOwners_reading.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = carOwners_reading.png; sourceTree = "<group>"; };
+		D04F2B801E1102600085F879 /* EvaluationVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EvaluationVC.h; sourceTree = "<group>"; };
+		D04F2B811E1102600085F879 /* EvaluationVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EvaluationVC.m; sourceTree = "<group>"; };
 		D052B1FB1E00E2C1006E74C1 /* MoreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreViewController.h; sourceTree = "<group>"; };
 		D052B1FC1E00E2C1006E74C1 /* MoreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoreViewController.m; sourceTree = "<group>"; };
 		D052B2011E00EDA1006E74C1 /* ItemStoresVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemStoresVC.h; sourceTree = "<group>"; };
@@ -1165,6 +1168,8 @@
 				D032F9E41DB76A400052562D /* OrderListVC.m */,
 				D0A4B49A1DBB4163005C8C79 /* OrderInfoVC.h */,
 				D0A4B49B1DBB4163005C8C79 /* OrderInfoVC.m */,
+				D04F2B801E1102600085F879 /* EvaluationVC.h */,
+				D04F2B811E1102600085F879 /* EvaluationVC.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -2706,6 +2711,7 @@
 				D09BC15F1DC844C10035DE65 /* PayForFuelCardRechargingVC.m in Sources */,
 				D0EE8AFE1DC1CD3F00468B8A /* CardRechargeMoneyView.m in Sources */,
 				D00F8CD71D9A0A1B00AD7CC8 /* main.m in Sources */,
+				D04F2B821E1102600085F879 /* EvaluationVC.m in Sources */,
 				D026E9D51DFE836A00C563D8 /* UIResponder+GetLocalDic.m in Sources */,
 				D01CB9D11DA88DCB00DD5527 /* CardAndCarView.m in Sources */,
 				D0D918B61DA8D1DE003379E3 /* AboutCell.m in Sources */,

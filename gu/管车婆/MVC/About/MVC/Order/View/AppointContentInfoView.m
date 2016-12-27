@@ -127,7 +127,7 @@
     _dataLabel_number.text = _orderModel.orderID;
     _dataLabel_time.text = _orderModel.ordeTime;
     _dataLabel_xiadanWay.text = _orderModel.orderWay;
-    _dataLabel_appointTime.text = _orderModel.appointTime;
+    _dataLabel_appointTime.text = _orderModel.appointTime_start;
 }
 
 @end

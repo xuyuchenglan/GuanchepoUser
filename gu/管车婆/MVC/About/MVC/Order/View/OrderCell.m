@@ -9,6 +9,7 @@
 #import "OrderCell.h"
 #import "ItemAndCountView.h"
 #import "OrderModel.h"
+#import "EvaluationVC.h"
 
 @interface OrderCell()
 {
@@ -103,22 +104,13 @@
 - (void)addSecondContent
 {
     //服务项目及其数量
-    OrderModel *orderModel = [[OrderModel alloc] init];
-    orderModel.itemStr = @"会员银卡&全方位洗车";
-    orderModel.itemCount = @"x 1";
-    
-    NSArray *arr = [NSArray arrayWithObjects:orderModel, orderModel, orderModel, nil];
     
     _itemAndCountView = [[ItemAndCountView alloc] init];
     [self.contentView addSubview:_itemAndCountView];
-    [_itemAndCountView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(kScreenWidth - 10*kRate - 50*kRate - 6*kRate - 30*kRate, 20*kRate * arr.count));
-        make.top.equalTo(_line1.mas_bottom).with.offset(5*kRate);
-        make.left.equalTo(_headImgView.mas_right).with.offset(6*kRate);
-    }];
-    _itemAndCountView.modelsArr = arr;
     
-    //下单方式
+    
+    //下单方式，或者预约时间
+    
     _orderWay = [[UILabel alloc] init];
     _orderWay.textAlignment = NSTextAlignmentRight;
     _orderWay.font = [UIFont systemFontOfSize:13.0*kRate];
@@ -133,7 +125,7 @@
 }
 
 
-//第三部分：下单方式、第二条分割线、地址、导航、电话、再来一单、评论
+//第三部分：第二条分割线、地址、导航、电话、再来一单、评论
 - (void)addThirdContent
 {
     _line2 = [[UILabel alloc] init];
@@ -213,13 +205,38 @@
     }];
 }
 
-- (void)layoutSubviews
+//- (void)layoutSubviews
+//{
+//    [_headImgView sd_setImageWithURL:self.orderModel.headImgUrl placeholderImage:[UIImage imageNamed:@"about_order_head"]];
+//    _nameLB.text = self.orderModel.nameStr;
+//    _stateLabel.text = self.orderModel.state;
+//    _orderWay.text = [NSString stringWithFormat:@"下单方式：%@", self.orderModel.orderWay];
+//    _addressLB.text = self.orderModel.addressStr;
+//    
+//    _itemAndCountView.items = _orderModel.items;
+//    [_itemAndCountView mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.size.mas_equalTo(CGSizeMake(kScreenWidth - 10*kRate - 50*kRate - 6*kRate - 30*kRate, 20*kRate * _orderModel.items.count));
+//        make.top.equalTo(_line1.mas_bottom).with.offset(5*kRate);
+//        make.left.equalTo(_headImgView.mas_right).with.offset(6*kRate);
+//    }];
+//}
+
+- (void)setOrderModel:(OrderModel *)orderModel
 {
+    _orderModel = orderModel;
+    
     [_headImgView sd_setImageWithURL:self.orderModel.headImgUrl placeholderImage:[UIImage imageNamed:@"about_order_head"]];
     _nameLB.text = self.orderModel.nameStr;
     _stateLabel.text = self.orderModel.state;
     _orderWay.text = [NSString stringWithFormat:@"下单方式：%@", self.orderModel.orderWay];
     _addressLB.text = self.orderModel.addressStr;
+    
+    _itemAndCountView.items = _orderModel.items;
+    [_itemAndCountView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(kScreenWidth - 10*kRate - 50*kRate - 6*kRate - 30*kRate, 20*kRate * _orderModel.items.count));
+        make.top.equalTo(_line1.mas_bottom).with.offset(5*kRate);
+        make.left.equalTo(_headImgView.mas_right).with.offset(6*kRate);
+    }];
     
 }
 
@@ -253,6 +270,8 @@
 - (void)commentBtnAction
 {
     NSLog(@"评论");
+    EvaluationVC *evaluationVC = [[EvaluationVC alloc] init];
+    [self.vc.navigationController pushViewController:evaluationVC animated:NO];
 }
 
 @end

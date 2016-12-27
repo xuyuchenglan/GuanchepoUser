@@ -154,7 +154,7 @@
         if ([result isEqual:@"success"]) {
             
             //提示下单成功
-            [self showAlertViewWithTitle:@"预约成功" WithMessage:@"请在您预约的时间到店进行消费~"];
+            [self showAlertViewWithTitle:@"预约成功" WithMessage:@"请在您预约的时间到店进行消费~你可以在“我的”页面查看你的订单信息"];
             
         } else if ([result isEqual:@"fail"]) {
             

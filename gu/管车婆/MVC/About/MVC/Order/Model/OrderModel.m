@@ -24,7 +24,8 @@
         
         self.orderID = [dic objectForKey:@"oid"];
         self.ordeTime = [dic objectForKey:@"otime"];
-        self.appointTime = [dic objectForKey:@"yy_start"];
+        self.appointTime_start = [dic objectForKey:@"yy_start"];
+        self.appointTime_end = [dic objectForKey:@"yy_end"];
         
         NSString *oWay = [NSString stringWithFormat:@"%@", [dic objectForKey:@"oway"]];
         if ([oWay isEqual:@"1"]) {
@@ -69,7 +70,13 @@
         //订单详情中使用的
         self.merchantname = [dic objectForKey:@"merchantname"];
         self.merchantUrl = [NSURL URLWithString:[NSString stringWithFormat:@"http://%@%@", kIP, [dic objectForKey:@"merchantpic"]]];
-
+        
+        //服务项目和数量
+        NSDictionary *itemDic = @{
+                                  @"itemStr":[NSString stringWithFormat:@"%@&%@", self.cardName, self.serviceName],
+                                  @"itemCount":@"x 1"
+                                  };
+        self.items = [NSArray arrayWithObjects:itemDic, nil];
     }
     
     return self;

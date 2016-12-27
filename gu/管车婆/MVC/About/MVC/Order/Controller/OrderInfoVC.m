@@ -21,6 +21,8 @@
     UIView *_infoView;
     UIView *_stateView;
     UIView *_voucherView;
+    
+    BOOL _isAppointment;//是否为预约订单
 }
 @property (nonatomic, strong)UIScrollView *scrollView;
 @property (nonatomic, strong)NSMutableArray *voucherModels;
@@ -45,8 +47,8 @@
     //设置导航栏
     [self addNavBar];
     
-    //设置下面的内容视图
-    [self addContentView];
+    //设置下面的内容视图(在订单详情数据请求成功之后进行加载)
+    //[self addContentView];
     
     //请求订单详情数据
     [self getOrderDetail];
@@ -65,6 +67,9 @@
 
 - (void)addContentView
 {
+    NSString *appointTime_start = _orderModel.appointTime_start;
+    _isAppointment = appointTime_start.length>0?YES:NO;
+    
     //订单详情
     [self addMoreView];
     
@@ -72,7 +77,7 @@
     [self addInfoView];
     
     //订单状态
-    if (![_isAppoint isEqual:@"yes"]) {
+    if (!_isAppointment) {
         //订单状态
         [self addStateView];
     }
@@ -108,7 +113,7 @@
 //订单信息
 - (void)addInfoView
 {
-    if ([_isAppoint isEqual:@"yes"]) {
+    if (_isAppointment) {
         _infoView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_moreView.frame), kScreenWidth, 160*kRate)];
     } else {
         _infoView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_moreView.frame), kScreenWidth, 130*kRate)];
@@ -124,7 +129,7 @@
     [_infoView addSubview:titleLabel];
     
     //内容
-    if ([_isAppoint isEqual:@"yes"]) {
+    if (_isAppointment) {
         AppointContentInfoView *contentView = [[AppointContentInfoView alloc] initWithFrame:CGRectMake(0, 40*kRate, kScreenWidth, 120*kRate)];
         contentView.backgroundColor = [UIColor whiteColor];
         contentView.orderModel = _orderModel;

@@ -66,13 +66,15 @@
     
     OrderModel *currentModel = _orderModels[indexPath.row];
     cell.orderModel = currentModel;
+    cell.vc = _vc;
     
     return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return (120 + 20*3 + 5)*kRate;
+    OrderModel *currentModel = _orderModels[indexPath.row];
+    return (120 + 20*currentModel.items.count + 5)*kRate;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -80,9 +82,6 @@
     OrderModel *currentModel = _orderModels[indexPath.row];
     
     OrderInfoVC *orderInfoVC = [[OrderInfoVC alloc] init];
-    if ([_type isEqual:@"1"]) {
-        orderInfoVC.isAppoint = @"yes";
-    }
     orderInfoVC.orderModel = currentModel;
     [[self findResponderVC].navigationController pushViewController:orderInfoVC animated:NO];
     
@@ -137,7 +136,6 @@
         NSArray *jsondatArr = [content objectForKey:@"jsondata"];
         for (NSDictionary *dic in jsondatArr) {
             
-            NSLog(@"订单列表:%@", dic);
             OrderModel *model = [[OrderModel alloc] initWithDic:dic];
             [_orderModels addObject:model];
             
