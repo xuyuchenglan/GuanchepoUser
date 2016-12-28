@@ -12,5 +12,8 @@
 @interface OrderCell : UITableViewCell
 
 @property (nonatomic, strong)OrderModel *orderModel;
+@property (nonatomic, strong)UIViewController *vc;
+
+
 
 @end

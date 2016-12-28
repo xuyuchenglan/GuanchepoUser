@@ -9,7 +9,10 @@
 #import "ItemStoresVC.h"
 #import "ItemStoresListVC.h"
 
+
 @interface ItemStoresVC ()
+
+
 
 @end
 
@@ -21,6 +24,8 @@
     //导航栏
     [self setNavigationItemTitle:self.sname];
     [self setBackButtonWithImageName:@"back"];
+    
+    
     
     //设置下面的订单列表同步滑动视图
     [self addOrderList];
@@ -51,6 +56,8 @@
     self.controllerArray = [NSArray arrayWithObjects:distanceVC, salesVC, praiseVC, nil];
 
 }
+
+
 
 
 @end

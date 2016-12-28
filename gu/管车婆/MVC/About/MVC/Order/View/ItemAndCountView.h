@@ -11,6 +11,6 @@
 
 @interface ItemAndCountView : UIView
 
-@property (nonatomic, strong)NSArray *modelsArr;
+@property (nonatomic, copy)NSArray *items;
 
 @end

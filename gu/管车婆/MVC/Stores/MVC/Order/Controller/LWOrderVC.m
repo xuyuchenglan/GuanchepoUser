@@ -51,11 +51,12 @@
 {
     //店铺大头照
     UIImageView *headImgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 64, kScreenWidth, 225*kRate)];
-    headImgView.image = [UIImage imageNamed:@"stores_headImg"];
+    [headImgView sd_setImageWithURL:_storeModel.headUrl placeholderImage:[UIImage imageNamed:@"stores_headImg"] options:SDWebImageRefreshCached];
     [self.view addSubview:headImgView];
     
     //店铺各种详细信息
     _appointOrderView = [[AppointOrderView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(headImgView.frame), kScreenWidth, 140)];
+    _appointOrderView.storeModel = _storeModel;
     [self.view addSubview:_appointOrderView];
     
     //二维码、验证码
@@ -106,6 +107,8 @@
     [_qrView addSubview:scanQRBtn];
 }
 
+
+
 //生成客户二维码
 - (void)createQR
 {
@@ -125,7 +128,7 @@
     
 }
 
-//发送手机验证码
+//输入商户手机验证码
 - (void)createYanzhengma
 {
     UIButton *createYanzhengmaBtn = [[UIButton alloc] initWithFrame:CGRectMake(kEdgeWidth*3 + 200, 0, 100, 100)];
@@ -134,7 +137,7 @@
     [createYanzhengmaBtn setImage:[UIImage imageNamed:@"yanzhengma"] forState:UIControlStateNormal];
     createYanzhengmaBtn.imageEdgeInsets = UIEdgeInsetsMake(10, 25, 40, 25);
     
-    [createYanzhengmaBtn setTitle:@"发送手机验证码" forState:UIControlStateNormal];
+    [createYanzhengmaBtn setTitle:@"输入商户验证码" forState:UIControlStateNormal];
     createYanzhengmaBtn.titleLabel.font = [UIFont systemFontOfSize:12.0];
     createYanzhengmaBtn.titleLabel.textAlignment = NSTextAlignmentCenter;
     [createYanzhengmaBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
@@ -184,8 +187,6 @@
 {
     NSLog(@"网络下单");
     
-    NSLog(@"sjgfaksj:%@", [self getLocalDic]);
-    
     //截取扫描到的客户二维码的字符串,获取到mid、pictime
     NSString *bodyStr = [qrString substringFromIndex:28];
     NSArray *arr = [bodyStr componentsSeparatedByString:@","];//根据逗号截取字符串
@@ -205,14 +206,15 @@
                              @"uid":uid,//用户id
                              @"mid":mID,//商户id
                              @"otype":@"2",//1预约订单，2正式订单，写死传2
-                             @"superid":@"*1*",//一级服务id,sid
+                             @"superid":_sid,//一级服务id,sid
                              @"urealname":uname,//用户名字
                              @"uphone":uphone,//用户电话
-                             @"oway":@"2",//下单方式，写死传2（商户扫码）
+                             @"oway":@"1",//下单方式，写死传1（用户扫码）
                              @"cartype":cartype,
                              @"pictime":pictime//二维码时间
                              };
     
+    NSLog(@"%@?uid=%@&mid=%@&otype=2&superid=%@&mname=%@&mphone=%@&oway=2&pictime=%@", url_post, uid, mID, _sid, uname, uphone, pictime);
     
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     AFHTTPResponseSerializer *responseSerializer = [AFHTTPResponseSerializer serializer];
@@ -295,7 +297,6 @@
 //生成商户二维码需要传入的字符串
 - (NSString *)creatQRStr
 {
-    NSLog(@"ajsfg");
     NSString *head = @"jnzddevqrcode-com.gcp0534://";
     
     NSString *uid = [[self getLocalDic] objectForKey:@"uid"];
@@ -398,11 +399,11 @@ void ProviderReleaseData (void *info, const void *data, size_t size){
 
 
 
-#pragma mark ------ <3>生成验证码~
-//发送手机验证码
+#pragma mark ------ <3>输入验证码~
+//输入商户手机验证码下单
 - (void)createYanzhengmaBtnAction
 {
-    NSLog(@"发送手机验证码");
+    NSLog(@"输入商户手机验证码");
 }
 
 #pragma  mark --  注意事项

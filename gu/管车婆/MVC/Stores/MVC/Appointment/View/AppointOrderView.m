@@ -36,12 +36,12 @@
         //车行名字
         _titleLB = [[UILabel alloc] init];
         _titleLB.adjustsFontSizeToFitWidth = YES;
-        _titleLB.font = [UIFont systemFontOfSize:18.0];
+        _titleLB.font = [UIFont systemFontOfSize:18.0*kRate];
         [self addSubview:_titleLB];
         [_titleLB mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(260, 20));
-            make.top.equalTo(self).with.offset(15);
-            make.left.equalTo(self).with.offset(15);
+            make.size.mas_equalTo(CGSizeMake(260*kRate, 20*kRate));
+            make.top.equalTo(self).with.offset(15*kRate);
+            make.left.equalTo(self).with.offset(15*kRate);
         }];
         
         //星星评分视图
@@ -52,13 +52,13 @@
 
         //描述
         _descriptionLB = [[UILabel alloc] init];
-        _descriptionLB.font = [UIFont systemFontOfSize:15.0];
+        _descriptionLB.font = [UIFont systemFontOfSize:15.0*kRate];
         _descriptionLB.numberOfLines = 2;
         _descriptionLB.textColor = [UIColor colorWithWhite:0.4 alpha:1];
         [self addSubview:_descriptionLB];
         [_descriptionLB mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(kScreenWidth-30, 60));
-            make.left.equalTo(self).with.offset(15);
+            make.size.mas_equalTo(CGSizeMake(kScreenWidth-30*kRate, 60*kRate));
+            make.left.equalTo(self).with.offset(15*kRate);
             make.top.equalTo(_orderCountLB.mas_bottom).with.offset(0);
         }];
         
@@ -67,21 +67,21 @@
         line.backgroundColor = [UIColor colorWithWhite:0.85 alpha:1];
         [self addSubview:line];
         [line mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(kScreenWidth, 1));
+            make.size.mas_equalTo(CGSizeMake(kScreenWidth, 1*kRate));
             make.left.equalTo(self).with.offset(0);
             make.top.equalTo(_descriptionLB.mas_bottom).with.offset(0);
         }];
         
         //地址
         _addressLB = [[UILabel alloc] init];
-        _addressLB.font = [UIFont systemFontOfSize:13.0];
+        _addressLB.font = [UIFont systemFontOfSize:13.0*kRate];
         _addressLB.textColor = [UIColor colorWithWhite:0.5 alpha:1];
         _addressLB.adjustsFontSizeToFitWidth = YES;
         [self addSubview:_addressLB];
         [_addressLB mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(200, 20));
-            make.left.equalTo(self).with.offset(15);
-            make.top.equalTo(line.mas_bottom).with.offset(5);
+            make.size.mas_equalTo(CGSizeMake(200*kRate, 20*kRate));
+            make.left.equalTo(self).with.offset(15*kRate);
+            make.top.equalTo(line.mas_bottom).with.offset(5*kRate);
         }];
         
         //电话按钮
@@ -99,7 +99,7 @@
 //星星评分视图
 - (void)addStarRateView
 {
-    _starRateView = [[NormanStarRateView alloc] initWithFrame:CGRectMake(kScreenWidth-95, 10, 60*kRate, 20*kRate) numberOfStars:5];
+    _starRateView = [[NormanStarRateView alloc] initWithFrame:CGRectMake(kScreenWidth-95*kRate, 10*kRate, 60*kRate, 20*kRate) numberOfStars:5];
     _starRateView.allowIncompleteStar = YES;//是否允许评分为小数
     _starRateView.allowTouch = NO;//是否允许点击星星视图
     _starRateView.hasAnimation = YES;
@@ -132,7 +132,7 @@
     _commentCountBtn = [[UIButton alloc] initWithFrame:CGRectMake(35*kRate, 0, 45*kRate, 20*kRate)];
     [_commentCountBtn addTarget:self action:@selector(commentBtnAction) forControlEvents:UIControlEventTouchUpInside];
     [_commentCountBtn setTitleColor:[UIColor colorWithRed:22/255.0 green:129/255.0 blue:252/255.0 alpha:1] forState:UIControlStateNormal];
-    _commentCountBtn.titleLabel.font = [UIFont systemFontOfSize:11.0];
+    _commentCountBtn.titleLabel.font = [UIFont systemFontOfSize:11.0*kRate];
     _commentCountBtn.titleLabel.textAlignment = NSTextAlignmentRight;
     _commentCountBtn.titleLabel.adjustsFontSizeToFitWidth = YES;
     [_countView addSubview:_commentCountBtn];
@@ -169,7 +169,7 @@
     [_navBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(50*kRate, 20*kRate));
 //        make.right.equalTo(@(-15*kRate));
-        make.right.equalTo(_phoneBtn.mas_left).with.offset(-20);
+        make.right.equalTo(_phoneBtn.mas_left).with.offset(-20*kRate);
         make.top.equalTo(_addressLB.mas_top).with.offset(0);
     }];
     
@@ -207,12 +207,12 @@
 #pragma mark
 - (void)layoutSubviews
 {
-    _titleLB.text = @"德州市经济开发区小拇指汽修店";
-    _starRateView.scorePercent = 0.88;//设置初始评分(其实是个比例，范围是0-1)
-    _scoreLB.text = @"4.5";
-    _orderCountLB.text = @"213单";
-    [_commentCountBtn setTitle:@"17评论>" forState:UIControlStateNormal];
-    _descriptionLB.text = @"一百多年以来，德尔福始终致力于发展技术，是汽车能够更好、更有效率的运行，将这些创新带到售后市场。";
-    _addressLB.text = @"德州经济开发区体育中心对过";
+    _titleLB.text = _storeModel.mname;
+    _starRateView.scorePercent = _storeModel.starPercent;//设置初始评分(其实是个比例，范围是0-1)
+    _scoreLB.text = _storeModel.starCount;
+    _orderCountLB.text = [NSString stringWithFormat:@"%@单", _storeModel.orderCount];
+    [_commentCountBtn setTitle:[NSString stringWithFormat:@"%@评论>", _storeModel.evaluateCount] forState:UIControlStateNormal];
+    _descriptionLB.text = _storeModel.mdesc;
+    _addressLB.text = _storeModel.maddress;
 }
 @end

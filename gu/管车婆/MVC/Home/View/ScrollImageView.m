@@ -49,7 +49,7 @@
     //第一张图片(向前拖拽，为了循环，第一张图应该和显示的最后一张图一样)
     UIImageView *firstImg = [[UIImageView alloc] initWithFrame:CGRectMake(0, 100, kSelfWidth, kSelfHeight)];
     firstImg.userInteractionEnabled = YES;
-    [firstImg sd_setImageWithURL:[NSURL URLWithString:[_dataSourceUrls firstObject]] placeholderImage:[UIImage imageNamed:[_dataSourcePlaceImages firstObject]]];
+    [firstImg sd_setImageWithURL:[NSURL URLWithString:[_dataSourceUrls firstObject]] placeholderImage:[UIImage imageNamed:[_dataSourcePlaceImages firstObject]] options:SDWebImageRefreshCached];
     firstImg.tag = 11;
     [self.scrollView addSubview:firstImg];
     
@@ -58,7 +58,7 @@
     
     //最后一张图片(向后拖拽，为了循环，最后一张图应该和显示的第一张图一样)
     UIImageView *lastImg = [[UIImageView alloc] initWithFrame:CGRectMake((_imageCount + 1) * kSelfWidth, 0, kSelfWidth, kSelfHeight)];
-    [lastImg sd_setImageWithURL:[NSURL URLWithString:[_dataSourceUrls lastObject]] placeholderImage:[UIImage imageNamed:[_dataSourcePlaceImages lastObject]]];
+    [lastImg sd_setImageWithURL:[NSURL URLWithString:[_dataSourceUrls lastObject]] placeholderImage:[UIImage imageNamed:[_dataSourcePlaceImages lastObject]] options:SDWebImageRefreshCached];
     lastImg.tag = 22;
     [self.scrollView addSubview:lastImg];
     
@@ -70,7 +70,7 @@
     NSArray * array = _dataSourcePlaceImages.count<_dataSourceUrls.count?_dataSourcePlaceImages:_dataSourceUrls;
     for (NSInteger i = 0; i < array.count; i++) {
         UIImageView *imageView = [[UIImageView alloc] init];
-        [imageView sd_setImageWithURL:[NSURL URLWithString:_dataSourceUrls[i]] placeholderImage:[UIImage imageNamed:_dataSourcePlaceImages[i]]];
+        [imageView sd_setImageWithURL:[NSURL URLWithString:_dataSourceUrls[i]] placeholderImage:[UIImage imageNamed:_dataSourcePlaceImages[i]] options:SDWebImageRefreshCached];
         imageView.frame = CGRectMake(kSelfWidth * (i + 1), 0, kSelfWidth, kSelfHeight);
         imageView.userInteractionEnabled = YES;
         imageView.tag = i + 33;

@@ -11,5 +11,6 @@
 @interface OrderListVC : UIViewController
 
 @property (nonatomic, strong)NSString *type;
+@property (nonatomic, strong)UIViewController *vc;
 
 @end

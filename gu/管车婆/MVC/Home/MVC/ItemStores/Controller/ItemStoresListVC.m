@@ -8,6 +8,7 @@
 
 #import "ItemStoresListVC.h"
 #import "StoreCell.h"
+#import "StoreModel.h"
 
 #define kHeadImgWidth kScreenWidth*2/7
 
@@ -15,12 +16,15 @@
 {
     UITableView *_tableView;
 }
+@property (nonatomic, strong)NSMutableArray *storeModels;
 @end
 
 @implementation ItemStoresListVC
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    _storeModels = [NSMutableArray array];
     
     //设置tableView
     [self addTableView];
@@ -50,7 +54,7 @@
 #pragma mark UITableViewDelegate && UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 6;
+    return _storeModels.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -59,14 +63,17 @@
     
     StoreCell *cell = (StoreCell *)[tableView dequeueReusableCellWithIdentifier:identifier];
     
-    StoreModel *storeModel = [[StoreModel alloc] init];
-    
     if (!cell) {
         cell = [[StoreCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
     }
     
-    cell.storeModel = storeModel;
+    if (_storeModels.count > indexPath.row) {
+        StoreModel *currentModel = _storeModels[indexPath.row];
+        cell.storeModel = currentModel;
+    }
+    
     cell.vc = self.vc;
+    cell.sid = _superID;
     
     return cell;
 }
@@ -82,19 +89,22 @@
 }
 
 
+
 #pragma mark 
 #pragma mark 网络请求
 //获取商户列表
 - (void)getStores
 {
     NSString *url_post = [NSString stringWithFormat:@"http://%@getMerchant.action", kHead];
+
+    NSString *locationStr = [NSString stringWithFormat:@"%@,%@", [[self getLocalDic] objectForKey:@"longitude"], [[self getLocalDic] objectForKey:@"phone"]];
     
-    NSLog(@"_superID:%@,_type:%@", _superID, _type);
+    NSLog(@"_superID:%@,_type:%@,location:%@", _superID, _type, locationStr);
     
     NSDictionary *params = @{
                              @"superid":_superID,
                              @"orderby":_type,//按距离、单量还是好评
-                             @"location":@"116.365825000,37.441313000",
+                             @"location":locationStr,
                              @"currsize":@"0",
                              @"pagesize":@"10"
                              };
@@ -109,7 +119,15 @@
         
         NSDictionary *content = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
         
-        NSLog(@"%@", content);
+        NSArray *jsondataArr = [content objectForKey:@"jsondata"];
+        for (NSDictionary *jsondataDic in jsondataArr) {
+            StoreModel *storeModel = [[StoreModel alloc] initWithDic:jsondataDic];
+            [_storeModels addObject:storeModel];
+        }
+        
+        //刷新tableView
+        [_tableView reloadData];
+        
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"请求失败， 失败原因是：%@", error);

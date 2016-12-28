@@ -128,8 +128,8 @@
 
 - (void)layoutSubviews
 {
-    [_headView sd_setImageWithURL:_orderModel.headImgUrl placeholderImage:[UIImage imageNamed:@"about_order_head"]];
-    _nameLabel.text = _orderModel.nameStr;
+    [_headView sd_setImageWithURL:_orderModel.merchantUrl placeholderImage:[UIImage imageNamed:@"about_order_head"]];
+    _nameLabel.text = _orderModel.merchantname;
     _dataLabel_type.text = _orderModel.cardName;
     _dataLabel_item.text = _orderModel.serviceName;
     _dataLabel_user.text = _orderModel.urealname;

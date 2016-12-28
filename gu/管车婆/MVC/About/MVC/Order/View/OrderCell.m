@@ -8,7 +8,7 @@
 
 #import "OrderCell.h"
 #import "ItemAndCountView.h"
-#import "OrderModel.h"
+#import "EvaluationVC.h"
 
 @interface OrderCell()
 {
@@ -29,16 +29,6 @@
 
 @implementation OrderCell
 
-- (void)awakeFromNib {
-    [super awakeFromNib];
-    // Initialization code
-}
-
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
-}
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -103,22 +93,12 @@
 - (void)addSecondContent
 {
     //服务项目及其数量
-    OrderModel *orderModel = [[OrderModel alloc] init];
-    orderModel.itemStr = @"会员银卡&全方位洗车";
-    orderModel.itemCount = @"x 1";
-    
-    NSArray *arr = [NSArray arrayWithObjects:orderModel, orderModel, orderModel, nil];
     
     _itemAndCountView = [[ItemAndCountView alloc] init];
     [self.contentView addSubview:_itemAndCountView];
-    [_itemAndCountView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(kScreenWidth - 10*kRate - 50*kRate - 6*kRate - 30*kRate, 20*kRate * arr.count));
-        make.top.equalTo(_line1.mas_bottom).with.offset(5*kRate);
-        make.left.equalTo(_headImgView.mas_right).with.offset(6*kRate);
-    }];
-    _itemAndCountView.modelsArr = arr;
     
-    //下单方式
+    
+    //下单方式，或者预约时间
     _orderWay = [[UILabel alloc] init];
     _orderWay.textAlignment = NSTextAlignmentRight;
     _orderWay.font = [UIFont systemFontOfSize:13.0*kRate];
@@ -133,7 +113,7 @@
 }
 
 
-//第三部分：下单方式、第二条分割线、地址、导航、电话、再来一单、评论
+//第三部分：第二条分割线、地址、导航、电话、再来一单、评论
 - (void)addThirdContent
 {
     _line2 = [[UILabel alloc] init];
@@ -213,16 +193,29 @@
     }];
 }
 
-- (void)layoutSubviews
+
+- (void)setOrderModel:(OrderModel *)orderModel
 {
-//    _headImgView.image = [UIImage imageNamed:@"about_order_head"];
+    _orderModel = orderModel;
+    
     [_headImgView sd_setImageWithURL:self.orderModel.headImgUrl placeholderImage:[UIImage imageNamed:@"about_order_head"]];
-//    _nameLB.text = @"德州市经济开发区小拇指汽修店";
     _nameLB.text = self.orderModel.nameStr;
-    _stateLabel.text = @"交易成功";
-    _orderWay.text = @"下单方式：扫码下单";
-//    _addressLB.text = @"德州经济开发区体育中心对过";
+    _stateLabel.text = self.orderModel.state;
+    _orderWay.text = [NSString stringWithFormat:@"下单方式：%@", self.orderModel.orderWay];
     _addressLB.text = self.orderModel.addressStr;
+    
+    _itemAndCountView.items = _orderModel.items;
+    [_itemAndCountView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(kScreenWidth - 10*kRate - 50*kRate - 6*kRate - 30*kRate, 20*kRate * _orderModel.items.count));
+        make.top.equalTo(_line1.mas_bottom).with.offset(5*kRate);
+        make.left.equalTo(_headImgView.mas_right).with.offset(6*kRate);
+    }];
+    
+    if ([orderModel.pjState isEqualToString:@"未评价"]) {
+        [_commentBtn setTitle:@"评论" forState:UIControlStateNormal];
+    } else if ([orderModel.pjState isEqualToString:@"已评价"]) {
+        [_commentBtn setTitle:@"查看评论" forState:UIControlStateNormal];
+    }
     
 }
 
@@ -255,7 +248,19 @@
 //评论
 - (void)commentBtnAction
 {
-    NSLog(@"评论");
+    if ([_orderModel.pjState isEqualToString:@"未评价"]) {
+        
+        NSLog(@"评论");
+        EvaluationVC *evaluationVC = [[EvaluationVC alloc] init];
+        [self.vc.navigationController pushViewController:evaluationVC animated:NO];
+        
+    } else if ([_orderModel.pjState isEqualToString:@"已评价"]) {
+        
+        NSLog(@"查看评论");
+        
+    }
+    
+    
 }
 
 @end

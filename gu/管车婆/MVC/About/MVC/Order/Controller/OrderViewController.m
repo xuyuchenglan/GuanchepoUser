@@ -42,17 +42,21 @@
     
     //配置控制器数组(需要与上面的标题相对应)
     OrderListVC *allVC = [[OrderListVC alloc] init];
+    allVC.vc = self;
     allVC.type = @"0";//全部
     OrderListVC *appointedVC = [[OrderListVC alloc] init];
+    appointedVC.vc = self;
     appointedVC.type = @"1";//已预约
     OrderListVC *unCompletedVC = [[OrderListVC alloc] init];
+    unCompletedVC.vc = self;
     unCompletedVC.type = @"2";//未完成
-    OrderListVC *unEvaluatedVC = [[OrderListVC alloc] init];
-    unEvaluatedVC.type = @"3";//已完成
     OrderListVC *completedVC = [[OrderListVC alloc] init];
-    completedVC.type = @"4";//已评价
-    
-    self.controllerArray = [NSArray arrayWithObjects:allVC, appointedVC, unCompletedVC, unEvaluatedVC, completedVC, nil];
+    completedVC.vc = self;
+    completedVC.type = @"3";//已完成
+    OrderListVC *evaluatedVC = [[OrderListVC alloc] init];
+    evaluatedVC.type = @"4";//已评价
+    evaluatedVC.vc = self;
+    self.controllerArray = [NSArray arrayWithObjects:allVC, appointedVC, unCompletedVC, completedVC, evaluatedVC, nil];
     
 }
 
