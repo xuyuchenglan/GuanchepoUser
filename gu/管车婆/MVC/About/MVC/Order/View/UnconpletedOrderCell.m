@@ -1,16 +1,15 @@
 //
-//  OrderCell.m
+//  UnconpletedOrderCell.m
 //  管车婆
 //
-//  Created by 李伟 on 16/10/20.
-//  Copyright © 2016年 Norman Lee. All rights reserved.
+//  Created by 李伟 on 16/12/28.
+//  Copyright © 2016年 远恒网络科技有限公司. All rights reserved.
 //
 
-#import "OrderCell.h"
+#import "UnconpletedOrderCell.h"
 #import "ItemAndCountView.h"
-#import "EvaluationVC.h"
 
-@interface OrderCell()
+@interface UnconpletedOrderCell()<UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 {
     UIImageView         *_headImgView;//门店快照
     UILabel             *_nameLB;//店名
@@ -23,12 +22,11 @@
     UIButton            *_navBtn;//导航按钮
     UIButton            *_phoneBtn;//电话按钮
     UIButton            *_oneMoreOrderBtn;//再来一单按钮
-    UIButton            *_commentBtn;//评论按钮
+    UIButton            *_uoloadDocumentsBtn;//上传凭证按钮
 }
 @end
 
-@implementation OrderCell
-
+@implementation UnconpletedOrderCell
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -161,19 +159,13 @@
         make.top.equalTo(_line2.mas_bottom).with.offset(8*kRate);
     }];
     
-    _commentBtn = [[UIButton alloc] init];
-    [_commentBtn addTarget:self action:@selector(commentBtnAction) forControlEvents:UIControlEventTouchUpInside];
-    [_commentBtn setBackgroundImage:[UIImage imageNamed:@"about_order_comment"] forState:UIControlStateNormal];
-    [_commentBtn setBackgroundImage:[UIImage imageNamed:@"about_order_comment_selected"] forState:UIControlStateHighlighted];
-    [_commentBtn setTitle:@"评论" forState:UIControlStateNormal];
-    _commentBtn.titleLabel.font = [UIFont systemFontOfSize:13.0*kRate];
-    [_commentBtn setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
-    [_commentBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
-    _commentBtn.titleLabel.textColor = [UIColor redColor];
-    [self.contentView addSubview:_commentBtn];
-    [_commentBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(60*kRate, 22*kRate));
-        make.right.equalTo(self.contentView).with.offset(-10*kRate);
+    _uoloadDocumentsBtn = [[UIButton alloc] init];
+    [_uoloadDocumentsBtn addTarget:self action:@selector(uploadDocumentsBtnAction:) forControlEvents:UIControlEventTouchUpInside];
+    [_uoloadDocumentsBtn setImage:[UIImage imageNamed:@"about_order_camera"] forState:UIControlStateNormal];
+    [self.contentView addSubview:_uoloadDocumentsBtn];
+    [_uoloadDocumentsBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(26*kRate, 22*kRate));
+        make.right.equalTo(self.contentView).with.offset(-15*kRate);
         make.top.equalTo(_line2.mas_bottom).with.offset(8*kRate);
     }];
     
@@ -188,7 +180,7 @@
     [self.contentView addSubview:_oneMoreOrderBtn];
     [_oneMoreOrderBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(60*kRate, 22*kRate));
-        make.right.equalTo(_commentBtn.mas_left).with.offset(-10*kRate);
+        make.right.equalTo(_uoloadDocumentsBtn.mas_left).with.offset(-15*kRate);
         make.top.equalTo(_line2.mas_bottom).with.offset(8*kRate);
     }];
 }
@@ -210,12 +202,6 @@
         make.top.equalTo(_line1.mas_bottom).with.offset(5*kRate);
         make.left.equalTo(_headImgView.mas_right).with.offset(6*kRate);
     }];
-    
-    if ([orderModel.pjState isEqualToString:@"未评价"]) {
-        [_commentBtn setTitle:@"评论" forState:UIControlStateNormal];
-    } else if ([orderModel.pjState isEqualToString:@"已评价"]) {
-        [_commentBtn setTitle:@"查看评论" forState:UIControlStateNormal];
-    }
     
 }
 
@@ -245,22 +231,203 @@
     NSLog(@"再来一单");
 }
 
-//评论
-- (void)commentBtnAction
+#pragma mark --- 上传凭证BtnAction
+- (void)uploadDocumentsBtnAction:(id)sender
 {
-    if ([_orderModel.pjState isEqualToString:@"未评价"]) {
+    NSLog(@"上传凭证");
+    
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    
+    UIAlertAction *cancleAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
+    [alertController addAction:cancleAction];
+    
+    //从相册选取
+    UIAlertAction *cameraAction = [UIAlertAction actionWithTitle:@"从相册选取" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         
-        NSLog(@"评论");
-        EvaluationVC *evaluationVC = [[EvaluationVC alloc] init];
-        [self.vc.navigationController pushViewController:evaluationVC animated:NO];
+        //NSLog(@"从相册选取");
+        [self photosLibrary];
         
-    } else if ([_orderModel.pjState isEqualToString:@"已评价"]) {
+    }];
+    [alertController addAction:cameraAction];
+    
+    //直接拍照
+    UIAlertAction *takePhotoAction = [UIAlertAction actionWithTitle:@"拍照" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         
-        NSLog(@"查看评论");
+        //NSLog(@"直接拍照");
+        [self takePhotos];
+        
+    }];
+    [alertController addAction:takePhotoAction];
+    
+    [self.vc presentViewController:alertController animated:YES completion:nil];
+    
+    UIPopoverPresentationController *popover = alertController.popoverPresentationController;
+    if (popover) {
+        popover.sourceView = sender;
+        popover.permittedArrowDirections = UIPopoverArrowDirectionAny;
+    }
+}
+
+//从相册选取
+- (void)photosLibrary
+{
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary])
+    {
+        UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+        picker.delegate = self;
+        picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+        picker.allowsEditing = YES;
+        [self.vc presentViewController:picker animated:YES completion:NULL];
+    }
+}
+
+//直接拍照
+- (void)takePhotos
+{
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])
+    {
+        UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+        picker.delegate = self;
+        picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+        picker.allowsEditing = YES;
+        [self.vc presentViewController:picker animated:YES completion:NULL];
+    } else
+    {
+        NSLog(@"摄像头不可用");
+    }
+}
+
+#pragma mark --- UIImagePickerControllerDelegate
+
+//当完成图片获取时的操作
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info
+{
+    [picker dismissViewControllerAnimated:YES completion:NULL];
+    
+    //上传图片至服务器
+    UIImage *img = [info objectForKey:UIImagePickerControllerEditedImage];
+    //UIImage *img1 = [self imageWithImageSimple:img scaledToSize:CGSizeMake(700, 700)];//对选取的图片进行大小上的压缩
+    [self transportImgToServerWithImg:img];
+    
+}
+
+//当取消图片获取时的操作
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
+{
+    [picker dismissViewControllerAnimated:YES completion:nil];
+    NSLog(@"取消获取图片");
+}
+
+//按固定尺寸格式压缩图片
+- (UIImage*)imageWithImageSimple:(UIImage*)image scaledToSize:(CGSize)newSize
+{
+    UIGraphicsBeginImageContext(newSize);
+    
+    [image drawInRect:CGRectMake(0,0,newSize.width,newSize.height)];
+    
+    UIImage* newImage = UIGraphicsGetImageFromCurrentImageContext();
+    
+    UIGraphicsEndImageContext();
+    
+    return newImage;
+}
+
+//上传图片至服务器后台
+- (void)transportImgToServerWithImg:(UIImage *)img
+{
+    NSData *imageData;
+    NSString *mimetype;
+    if (UIImagePNGRepresentation(img) != nil) {
+        mimetype = @"image/png";
+        imageData = UIImagePNGRepresentation(img);
+        
+    }else{
+        mimetype = @"image/jpeg";
+        imageData = UIImageJPEGRepresentation(img, 1.0);
         
     }
     
+    NSString *uploadUrl = [NSString stringWithFormat:@"http://%@/zcar/upload.do", kIP];
     
+    NSDictionary *params = @{
+                             @"optype":@"pzupload",
+                             @"oid":self.orderModel.orderID,
+                             @"km":@"666"
+                             };
+    
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    manager.requestSerializer.timeoutInterval =15;
+    
+    [manager POST:uploadUrl parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+        
+        /**
+         *在网络开发中，上传文件时，是文件不允许被覆盖、文件重名
+         *要解决此问题，
+         *可以在上传时使用当前的系统时间作为文件名(当然如果有需要还可以拼接更多需要的比如用户ID)
+         */
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        formatter.dateFormat =@"yyyyMMddHHmmss";
+        NSString *str = [formatter stringFromDate:[NSDate date]];
+        //NSLog(@"当前时间%@", str);
+        
+        NSString *fileName = [[NSString alloc] init];
+        if (UIImagePNGRepresentation(img) != nil) {
+            
+            fileName = [NSString stringWithFormat:@"%@.png", str];
+            
+        }else{
+            
+            fileName = [NSString stringWithFormat:@"%@.jpg", str];
+            
+        }
+        
+        // 上传图片，以文件流的格式
+        /**
+         *filedata : 图片的data
+         *name     : 后台的提供的字段
+         *mimeType : 类型
+         */
+        [formData appendPartWithFileData:imageData name:str fileName:fileName mimeType:mimetype];
+        
+    } progress:NULL success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        
+        NSDictionary *content = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+        //NSLog(@"凭证上传：%@", content);
+        
+        NSString *result = [content objectForKey:@"result"];
+        
+        if ([result isEqual:@"success"]) {
+            
+            NSLog(@"上传凭证成功");
+            //把刚刚上传的凭证显示出来，两种方式，直接根据返回的url加载，或者刷新一下UI
+            //给OrderInfoVC页面发送一个通知,刷新UI
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadOrderInfoView" object:self];
+            
+        } else {
+            
+            //弹框显示为什么上传凭证失败
+            NSString *msg_title = [content objectForKey:@"errormsg"];
+            [self showAlertWithTitle:msg_title];
+            
+        }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+        NSLog(@"上传图片失败，失败原因是:%@", error);
+        
+    }];
 }
+
+- (void)showAlertWithTitle:(NSString *)title
+{
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title message:@"您的凭证上传已超过限定时间，请联系客服解决" preferredStyle:UIAlertControllerStyleAlert];//上拉菜单样式
+    
+    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"好的" style:UIAlertActionStyleDefault handler:nil];//好的按钮
+    [alertController addAction:okAction];
+    
+    [self.vc presentViewController:alertController animated:YES completion:nil];//这种弹出方式会在原来视图的背景下弹出一个视图。
+}
+
 
 @end

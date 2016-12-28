@@ -10,6 +10,8 @@
 #import "OrderCell.h"
 #import "OrderInfoVC.h"
 #import "OrderModel.h"
+#import "LWAppointmentCell.h"
+#import "UnconpletedOrderCell.h"
 
 #define kTitleHeight 45*kRate
 
@@ -21,6 +23,7 @@
 @end
 
 @implementation OrderListVC
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -41,6 +44,10 @@
 {
     _type = type;
     
+    if ([_type isEqualToString:@"0"] || [_type isEqualToString:@"1"]) {//监听取消预约时发送过来的通知,以刷新“全部”和“已预约”页面
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getOrder) name:@"cancelAppointment" object:nil];
+    }
+    
     //网络请求订单列表数据
     [self getOrder];
 }
@@ -54,21 +61,50 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *identify = @"ordercell";
+    OrderModel *currentModel = _orderModels[indexPath.row];
     
-    OrderCell *cell = (OrderCell *)[tableView dequeueReusableCellWithIdentifier:identify];
-    
-    if (!cell) {
+    if (currentModel.appointTime_start.length > 0) {//预约订单
         
-        cell = [[OrderCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identify];
+        static NSString *appointID = @"appointID";
+        LWAppointmentCell *cell = (LWAppointmentCell *)[tableView dequeueReusableCellWithIdentifier:appointID];
+        if (!cell) {
+            cell = [[LWAppointmentCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:appointID];
+        }
+        cell.orderModel = currentModel;
+        cell.vc = _vc;
+        
+        return cell;
+        
+    } else {
+        
+        if ([currentModel.voucher isEqualToString:@"1"] && [currentModel.isVoucherUp isEqualToString:@"未上传"]) {//待传凭证
+            
+            static NSString *identify = @"uncompleted";
+            UnconpletedOrderCell *cell = (UnconpletedOrderCell *)[tableView dequeueReusableCellWithIdentifier:identify];
+            if (!cell) {
+                cell = [[UnconpletedOrderCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identify];
+            }
+            cell.orderModel = currentModel;
+            cell.vc = _vc;
+            
+            return cell;
+            
+        } else {
+            
+            static NSString *identify = @"ordercell";
+            OrderCell *cell = (OrderCell *)[tableView dequeueReusableCellWithIdentifier:identify];
+            if (!cell) {
+                cell = [[OrderCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identify];
+            }
+            cell.orderModel = currentModel;
+            cell.vc = _vc;
+            
+            return cell;
+            
+        }
         
     }
     
-    OrderModel *currentModel = _orderModels[indexPath.row];
-    cell.orderModel = currentModel;
-    cell.vc = _vc;
-    
-    return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -120,7 +156,7 @@
                              @"uid":[[self getLocalDic] objectForKey:@"uid"],
                              @"type":_type,
                              @"currsize":@"0",
-                             @"pagesize":@"10"
+                             @"pagesize":@"20"
                              };
     
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
@@ -132,8 +168,9 @@
     [manager POST:url_post parameters:params progress:NULL success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
         NSDictionary *content = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
-        
         NSArray *jsondatArr = [content objectForKey:@"jsondata"];
+        
+        [_orderModels removeAllObjects];
         for (NSDictionary *dic in jsondatArr) {
             
             OrderModel *model = [[OrderModel alloc] initWithDic:dic];
@@ -147,5 +184,11 @@
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"请求失败， 失败原因是：%@", error);
     }];
+}
+
+#pragma mark
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 @end

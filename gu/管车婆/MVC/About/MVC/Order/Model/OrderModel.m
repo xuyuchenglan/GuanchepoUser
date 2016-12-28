@@ -45,6 +45,7 @@
         } else if ([pjStateStr isEqual:@"1"]) {
             self.pjState = @"已评价";
         }
+//        self.pjState = @"已评价";
         
         //凭证是否已上传
         NSString *isVoucherUpStr = [NSString stringWithFormat:@"%@", [dic objectForKey:@"voucher_up"]];
@@ -57,15 +58,24 @@
         self.voucher = [NSString stringWithFormat:@"%@", [dic objectForKey:@"voucher"]];//是否需要上传凭证
         
         //订单列表中显示的订单状态
-        if ([self.voucher isEqual:@"0"]) {
-            self.state = @"交易成功";
-        } else if ([self.voucher isEqual:@"1"]) {
-            if ([self.isVoucherUp isEqual:@"已上传"]) {
+        if (self.appointTime_start.length > 0) {//预约订单
+            
+            self.state = @"预约成功";
+            
+        } else {//直接下的订单
+            
+            if ([self.voucher isEqual:@"0"]) {
                 self.state = @"交易成功";
-            } else if ([self.isVoucherUp isEqual:@"未上传"]) {
-                self.state = @"待传凭证";
+            } else if ([self.voucher isEqual:@"1"]) {
+                if ([self.isVoucherUp isEqual:@"已上传"]) {
+                    self.state = @"交易成功";
+                } else if ([self.isVoucherUp isEqual:@"未上传"]) {
+                    self.state = @"待传凭证";
+                }
             }
+            
         }
+        
         
         //订单详情中使用的
         self.merchantname = [dic objectForKey:@"merchantname"];

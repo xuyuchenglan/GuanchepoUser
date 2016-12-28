@@ -1,34 +1,31 @@
 //
-//  OrderCell.m
+//  LWAppointmentCell.m
 //  管车婆
 //
-//  Created by 李伟 on 16/10/20.
-//  Copyright © 2016年 Norman Lee. All rights reserved.
+//  Created by 李伟 on 16/12/27.
+//  Copyright © 2016年 远恒网络科技有限公司. All rights reserved.
 //
 
-#import "OrderCell.h"
+#import "LWAppointmentCell.h"
 #import "ItemAndCountView.h"
-#import "EvaluationVC.h"
 
-@interface OrderCell()
+@interface LWAppointmentCell()
 {
     UIImageView         *_headImgView;//门店快照
     UILabel             *_nameLB;//店名
     UILabel             *_stateLabel;//交易状态
     UIView              *_line1;//第一条分割线
     ItemAndCountView    *_itemAndCountView;//服务项目和数量
-    UILabel             *_orderWay;//下单方式
+    UILabel             *_appointmentTime;//预约时间
     UIView              *_line2;//第二条分割线
     UILabel             *_addressLB;//地址
     UIButton            *_navBtn;//导航按钮
     UIButton            *_phoneBtn;//电话按钮
-    UIButton            *_oneMoreOrderBtn;//再来一单按钮
-    UIButton            *_commentBtn;//评论按钮
+    UIButton            *_cancelBtn;//取消预约按钮
 }
 @end
 
-@implementation OrderCell
-
+@implementation LWAppointmentCell
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -39,10 +36,10 @@
         //第一部分：头像、店名、交易状态、第一条分割线
         [self addFirstContent];
         
-        //第二部分：服务项目、服务项目数量
+        //第二部分：服务项目、服务项目数量、预约时间
         [self addSecondContent];
         
-        //第三部分：下单方式、第二条分割线、地址、导航、电话、再来一单、评论
+        //第三部分：第二条分割线、地址、导航、电话
         [self addThirdContent];
         
     }
@@ -99,11 +96,11 @@
     
     
     //下单方式，或者预约时间
-    _orderWay = [[UILabel alloc] init];
-    _orderWay.textAlignment = NSTextAlignmentRight;
-    _orderWay.font = [UIFont systemFontOfSize:13.0*kRate];
-    [self.contentView addSubview:_orderWay];
-    [_orderWay mas_makeConstraints:^(MASConstraintMaker *make) {
+    _appointmentTime = [[UILabel alloc] init];
+    _appointmentTime.textAlignment = NSTextAlignmentRight;
+    _appointmentTime.font = [UIFont systemFontOfSize:13.0*kRate];
+    [self.contentView addSubview:_appointmentTime];
+    [_appointmentTime mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(kScreenWidth - 10*kRate, 20*kRate));
         make.top.equalTo(_itemAndCountView.mas_bottom).with.offset(10*kRate);
         make.right.equalTo(self.contentView).with.offset(-10*kRate);
@@ -113,7 +110,7 @@
 }
 
 
-//第三部分：第二条分割线、地址、导航、电话、再来一单、评论
+//第三部分：第二条分割线、地址、导航、电话、取消预约
 - (void)addThirdContent
 {
     _line2 = [[UILabel alloc] init];
@@ -121,7 +118,7 @@
     [self.contentView addSubview:_line2];
     [_line2 mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(kScreenWidth, 1*kRate));
-        make.top.equalTo(_orderWay.mas_bottom).with.offset(5*kRate);
+        make.top.equalTo(_appointmentTime.mas_bottom).with.offset(5*kRate);
         
     }];
     
@@ -161,34 +158,17 @@
         make.top.equalTo(_line2.mas_bottom).with.offset(8*kRate);
     }];
     
-    _commentBtn = [[UIButton alloc] init];
-    [_commentBtn addTarget:self action:@selector(commentBtnAction) forControlEvents:UIControlEventTouchUpInside];
-    [_commentBtn setBackgroundImage:[UIImage imageNamed:@"about_order_comment"] forState:UIControlStateNormal];
-    [_commentBtn setBackgroundImage:[UIImage imageNamed:@"about_order_comment_selected"] forState:UIControlStateHighlighted];
-    [_commentBtn setTitle:@"评论" forState:UIControlStateNormal];
-    _commentBtn.titleLabel.font = [UIFont systemFontOfSize:13.0*kRate];
-    [_commentBtn setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
-    [_commentBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
-    _commentBtn.titleLabel.textColor = [UIColor redColor];
-    [self.contentView addSubview:_commentBtn];
-    [_commentBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+    _cancelBtn = [[UIButton alloc] init];
+    [_cancelBtn addTarget:self action:@selector(cancelBtnAction) forControlEvents:UIControlEventTouchUpInside];
+    [_cancelBtn setTitle:@"取消预约" forState:UIControlStateNormal];
+    _cancelBtn.titleLabel.font = [UIFont systemFontOfSize:12*kRate];
+    [_cancelBtn setBackgroundColor:[UIColor grayColor]];
+    _cancelBtn.layer.cornerRadius = 5.0*kRate;
+    _cancelBtn.titleLabel.textColor = [UIColor colorWithWhite:0.3 alpha:1];
+    [self.contentView addSubview:_cancelBtn];
+    [_cancelBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(60*kRate, 22*kRate));
-        make.right.equalTo(self.contentView).with.offset(-10*kRate);
-        make.top.equalTo(_line2.mas_bottom).with.offset(8*kRate);
-    }];
-    
-    _oneMoreOrderBtn = [[UIButton alloc] init];
-    [_oneMoreOrderBtn addTarget:self action:@selector(oneMoreOrderBtnAction) forControlEvents:UIControlEventTouchUpInside];
-    [_oneMoreOrderBtn setBackgroundImage:[UIImage imageNamed:@"about_order_oneMoreOrder"] forState:UIControlStateNormal];
-    [_oneMoreOrderBtn setBackgroundImage:[UIImage imageNamed:@"about_order_oneMoreOrder_selected"] forState:UIControlStateHighlighted];
-    [_oneMoreOrderBtn setTitle:@"再来一单" forState:UIControlStateNormal];
-    _oneMoreOrderBtn.titleLabel.font = [UIFont systemFontOfSize:13.0*kRate];
-    [_oneMoreOrderBtn setTitleColor:[UIColor colorWithWhite:0.3 alpha:1] forState:UIControlStateNormal];
-    [_oneMoreOrderBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
-    [self.contentView addSubview:_oneMoreOrderBtn];
-    [_oneMoreOrderBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(60*kRate, 22*kRate));
-        make.right.equalTo(_commentBtn.mas_left).with.offset(-10*kRate);
+        make.right.equalTo(self.contentView).with.offset(-15*kRate);
         make.top.equalTo(_line2.mas_bottom).with.offset(8*kRate);
     }];
 }
@@ -201,7 +181,12 @@
     [_headImgView sd_setImageWithURL:self.orderModel.headImgUrl placeholderImage:[UIImage imageNamed:@"about_order_head"]];
     _nameLB.text = self.orderModel.nameStr;
     _stateLabel.text = self.orderModel.state;
-    _orderWay.text = [NSString stringWithFormat:@"下单方式：%@", self.orderModel.orderWay];
+    
+    NSMutableAttributedString *attributedStr = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"预约时间：%@", self.orderModel.appointTime_start]];
+    NSRange blueRange = NSMakeRange(4, [attributedStr string].length-4);
+    [attributedStr addAttribute:NSForegroundColorAttributeName value:[UIColor blueColor] range:blueRange];
+    [_appointmentTime setAttributedText:attributedStr];
+    
     _addressLB.text = self.orderModel.addressStr;
     
     _itemAndCountView.items = _orderModel.items;
@@ -210,12 +195,6 @@
         make.top.equalTo(_line1.mas_bottom).with.offset(5*kRate);
         make.left.equalTo(_headImgView.mas_right).with.offset(6*kRate);
     }];
-    
-    if ([orderModel.pjState isEqualToString:@"未评价"]) {
-        [_commentBtn setTitle:@"评论" forState:UIControlStateNormal];
-    } else if ([orderModel.pjState isEqualToString:@"已评价"]) {
-        [_commentBtn setTitle:@"查看评论" forState:UIControlStateNormal];
-    }
     
 }
 
@@ -239,28 +218,49 @@
     NSLog(@"电话");
 }
 
-//再来一单
-- (void)oneMoreOrderBtnAction
+//取消预约
+- (void)cancelBtnAction
 {
-    NSLog(@"再来一单");
-}
-
-//评论
-- (void)commentBtnAction
-{
-    if ([_orderModel.pjState isEqualToString:@"未评价"]) {
-        
-        NSLog(@"评论");
-        EvaluationVC *evaluationVC = [[EvaluationVC alloc] init];
-        [self.vc.navigationController pushViewController:evaluationVC animated:NO];
-        
-    } else if ([_orderModel.pjState isEqualToString:@"已评价"]) {
-        
-        NSLog(@"查看评论");
-        
-    }
+    NSLog(@"取消预约");
+    
+    NSString *url_post = [NSString stringWithFormat:@"http://%@cancelOrder.action", kHead];
+    
+    NSDictionary *params = @{
+                             @"oid"     :  _orderModel.orderID
+                             };
     
     
-}
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    AFHTTPResponseSerializer *responseSerializer = [AFHTTPResponseSerializer serializer];
+    manager.responseSerializer = responseSerializer;
+    [manager POST:url_post parameters:params progress:NULL success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        
+        NSDictionary *content = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+        NSLog(@"%@", content);
+        
+        NSString *result = [content objectForKey:@"result"];
+        
+        NSString *errCode = [content objectForKey:@"errCode"];
+        NSString *errStr = [[NSString alloc] init];
+        if ([errCode isEqualToString:@"o_404"]) {
+            errStr = @"该订单不存在";
+        } else if ([errCode isEqualToString:@"o_1"]) {
+            errStr = @"该订单不是预约订单";
+        }
+        
+        if ([result isEqualToString:@"success"]) {
+            [self.vc showAlertViewWithTitle:@"取消预约成功" WithMessage:@"您的预约已取消"];
+            
+            //刷新UI
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"cancelAppointment" object:nil];//给“全部”和“已预约”两个页面发送通知，只刷新这两个页面
+            
+        } else {
+            [self.vc showAlertViewWithTitle:@"取消预约失败" WithMessage:errStr];
+        }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"请求失败， 失败原因是：%@", error);
+    }];
 
+}
 @end
