@@ -56,7 +56,7 @@
     [super viewDidLoad];
     
     _scrollView = [[UIScrollView alloc] initWithFrame:[UIScreen mainScreen].bounds];//滑动视图的可视范围
-    _scrollView.backgroundColor = [UIColor colorWithRed:234/255.0 green:238/255.0 blue:239/255.0 alpha:1];
+    _scrollView.backgroundColor = kRGBColor(234, 238, 239);
     _scrollView.showsHorizontalScrollIndicator = NO;
     _scrollView.showsVerticalScrollIndicator = NO;
     _scrollView.contentSize = CGSizeMake(kScreenWidth, 800);
@@ -90,7 +90,7 @@
 {
     _up_bgView
     = [[UIView alloc] initWithFrame:CGRectMake(0, -20, kScreenWidth, 200*kRate)];
-    _up_bgView.backgroundColor = [UIColor colorWithRed:22/255.0 green:129/255.0 blue:251/255.0 alpha:1];
+    _up_bgView.backgroundColor = kRGBColor(22, 129, 251);
     [_scrollView addSubview:_up_bgView];
     
     //积分
@@ -132,7 +132,7 @@
     _signInBtn = [[UIButton alloc] initWithFrame:CGRectMake(kScreenWidth/2 - kSignBtnWidth/2, CGRectGetMaxY(_up_bgView.frame) - kSignBtnWidth/2, kSignBtnWidth, kSignBtnWidth)];
     [_signInBtn setBackgroundImage:[UIImage imageNamed:@"about_first_circle"] forState:UIControlStateNormal];
     [_signInBtn setTitle:@"签到" forState:UIControlStateNormal];
-    [_signInBtn setTitleColor:[UIColor colorWithRed:0 green:126/255.0 blue:1 alpha:1] forState:UIControlStateNormal];
+    [_signInBtn setTitleColor:kRGBColor(0, 126, 255) forState:UIControlStateNormal];
     _signInBtn.titleLabel.font = [UIFont systemFontOfSize:14.0*kRate];
     [_signInBtn addTarget:self action:@selector(signInBtnAction) forControlEvents:UIControlEventTouchUpInside];
     [_scrollView insertSubview:_signInBtn aboveSubview:_carView];//确保无论怎么更新UI都不会使签到按钮被覆盖
@@ -383,7 +383,7 @@
     _tableView.dataSource = self;
     _tableView.scrollEnabled = NO;//表视图不能滑动
     _tableView.tableFooterView = [[UIView alloc] init];
-    _tableView.backgroundColor = [UIColor colorWithRed:232/255.0 green:233/255.0 blue:234/255.0 alpha:1];
+    _tableView.backgroundColor = kRGBColor(232, 233, 234);
     [_scrollView addSubview:_tableView];
 
 }

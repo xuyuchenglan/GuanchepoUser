@@ -7,9 +7,11 @@
 //
 
 #import "NormanStarRateView.h"
-
+//
 #define kForegroundStarImageName @"stores_star_red"
 #define kBackgroundStarImageName @"stores_star_gray"
+#define kForegroundStarImageName_evaluate @"about_order_star_red"
+#define kBackgroundStarImageName_evaluate @"about_order_star_gray"
 #define kDefaultStarNumber 5
 #define kAnimationTimeInterval 0.2
 
@@ -48,9 +50,15 @@
 - (instancetype)initWithFrame:(CGRect)frame numberOfStars:(NSInteger)numberOfStars {
     if (self = [super initWithFrame:frame]) {
         _numberOfStars = numberOfStars;
-        [self buildDataAndUI];
     }
     return self;
+}
+
+- (void)setIsEvaluating:(BOOL)isEvaluating
+{
+    _isEvaluating = isEvaluating;
+    
+    [self buildDataAndUI];
 }
 
 #pragma mark - Private Methods
@@ -61,8 +69,14 @@
     _allowIncompleteStar = NO;//默认为NO
     _allowTouch = YES;
     
-    self.foregroundStarView = [self createStarViewWithImage:kForegroundStarImageName];
-    self.backgroundStarView = [self createStarViewWithImage:kBackgroundStarImageName];
+    if (_isEvaluating) {//评分和展示评分的星星是不一样的
+        self.foregroundStarView = [self createStarViewWithImage:kForegroundStarImageName_evaluate];
+        self.backgroundStarView = [self createStarViewWithImage:kBackgroundStarImageName_evaluate];
+    } else {
+        self.foregroundStarView = [self createStarViewWithImage:kForegroundStarImageName];
+        self.backgroundStarView = [self createStarViewWithImage:kBackgroundStarImageName];
+    }
+    
     
     [self addSubview:self.backgroundStarView];
     [self addSubview:self.foregroundStarView];

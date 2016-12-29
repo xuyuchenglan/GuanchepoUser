@@ -37,7 +37,7 @@
 #pragma mark ******  设置导航栏  ******
 - (void)addNavBar
 {
-    self.view.backgroundColor = [UIColor colorWithRed:233/255.0 green:233/255.0 blue:233/255.0 alpha:1];
+    self.view.backgroundColor = kRGBColor(233, 233, 233);
     
     [self setBackButtonWithImageName:@"back"];
     [self setNavigationItemTitle:@"预约"];
@@ -102,7 +102,7 @@
     [appointImmediatelyBtn setTitle:@"立即预约" forState:UIControlStateNormal];
     [appointImmediatelyBtn addTarget:self action:@selector(appointImmediatelyBtnAction) forControlEvents:UIControlEventTouchUpInside];
     appointImmediatelyBtn.titleLabel.font = [UIFont systemFontOfSize:24.0*kRate];
-    appointImmediatelyBtn.backgroundColor = [UIColor colorWithRed:33/255.0 green:105/255.0 blue:250/255.0 alpha:1];
+    appointImmediatelyBtn.backgroundColor = kRGBColor(33, 105, 250);
     [self.view addSubview:appointImmediatelyBtn];
     [appointImmediatelyBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(kScreenWidth*0.6, 50*kRate));
@@ -114,7 +114,7 @@
     [myAppointmentBtn setTitle:@"我的预约" forState:UIControlStateNormal];
     [myAppointmentBtn addTarget:self action:@selector(myAppointmentBtnAction) forControlEvents:UIControlEventTouchUpInside];
     myAppointmentBtn.titleLabel.font = [UIFont systemFontOfSize:24.0*kRate];
-    myAppointmentBtn.backgroundColor = [UIColor colorWithRed:249/255.0 green:14/255.0 blue:27/255.0 alpha:1];
+    myAppointmentBtn.backgroundColor = kRGBColor(249, 14, 27);
     [self.view addSubview:myAppointmentBtn];
     [myAppointmentBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(kScreenWidth*0.4, 50*kRate));

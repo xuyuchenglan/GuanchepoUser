@@ -44,7 +44,7 @@
 - (void)addContentView
 {
     _scrollView = [[UIScrollView alloc] initWithFrame:[UIScreen mainScreen].bounds];
-    _scrollView.backgroundColor = [UIColor colorWithRed:233/255.0 green:239/255.0 blue:239/255.0 alpha:1];
+    _scrollView.backgroundColor = kRGBColor(233, 239, 239);
     [self.view addSubview:_scrollView];
     
     //总违章数、扣分数以及需缴纳罚款数
@@ -125,7 +125,7 @@
     NSUInteger startLoc = [[attributedStr string] rangeOfString:@"计"].location + 1;
     NSUInteger endLoc = [[attributedStr string] rangeOfString:@"代"].location;
     NSRange blueRange = NSMakeRange(startLoc, endLoc - startLoc);
-    [attributedStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:22/255.0 green:129/255.0 blue:251/255.0 alpha:1] range:blueRange];
+    [attributedStr addAttribute:NSForegroundColorAttributeName value:kRGBColor(22, 129, 251) range:blueRange];
     [resultLB setAttributedText:attributedStr];
 
 }
@@ -134,7 +134,7 @@
 - (void)addGotoPayBtn
 {
     UIButton *goToPayBtn = [[UIButton alloc] init];
-    goToPayBtn.backgroundColor = [UIColor colorWithRed:22/255.0 green:129/255.0 blue:251/255.0 alpha:1];
+    goToPayBtn.backgroundColor = kRGBColor(22, 129, 251);
     goToPayBtn.titleLabel.font = [UIFont systemFontOfSize:18.0*kRate];
     [goToPayBtn setTitle:@"去缴费" forState:UIControlStateNormal];
     goToPayBtn.layer.cornerRadius = 8.0*kRate;
@@ -152,7 +152,7 @@
 - (void)addTableView
 {
     _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_accountView.frame) + 16*kRate, kScreenWidth, kScreenHeight - CGRectGetMaxY(_accountView.frame) - 16*kRate - 80*kRate)];
-    _tableView.backgroundColor = [UIColor colorWithRed:233/255.0 green:239/255.0 blue:239/255.0 alpha:1];
+    _tableView.backgroundColor = kRGBColor(233, 239, 239);
     _tableView.delegate = self;
     _tableView.dataSource = self;
     [self.view addSubview:_tableView];

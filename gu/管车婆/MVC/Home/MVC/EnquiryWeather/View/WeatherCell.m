@@ -62,7 +62,7 @@
         [bgImgView addSubview:temperatureRangeLabel];
         
         isSuitableForWashingLabel = [[UILabel alloc] initWithFrame:CGRectMake(kScreenWidth - 140*kRate, 40*kRate, 70*kRate, 20*kRate)];
-        isSuitableForWashingLabel.textColor = [UIColor colorWithRed:1 green:214/255.0 blue:0 alpha:1];
+        isSuitableForWashingLabel.textColor = kRGBColor(255, 124, 0);
         isSuitableForWashingLabel.font = [UIFont systemFontOfSize:14.0*kRate];
         [bgImgView addSubview:isSuitableForWashingLabel];
         

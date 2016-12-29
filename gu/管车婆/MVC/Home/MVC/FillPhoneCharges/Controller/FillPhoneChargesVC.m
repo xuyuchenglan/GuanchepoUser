@@ -25,7 +25,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor colorWithRed:233/255.0 green:239/255.0 blue:239/255.0 alpha:1];
+    self.view.backgroundColor = kRGBColor(233, 239, 239);
     
     //设置导航栏
     [self addNavBar];
@@ -78,7 +78,7 @@
     
     //更换号码按钮
     _changeNumberBtn = [[UIButton alloc] initWithFrame:CGRectMake(CGRectGetMaxX(_numberTF.frame) + 10*kRate, CGRectGetMinY(_numberTF.frame), 70*kRate, 40*kRate)];
-    _changeNumberBtn.backgroundColor = [UIColor colorWithRed:64/255.0 green:129/255.0 blue:251/255.0 alpha:1];
+    _changeNumberBtn.backgroundColor = kRGBColor(64, 129, 251);
     _changeNumberBtn.layer.cornerRadius = 8.0*kRate;
     [_changeNumberBtn setTitle:@"更换号码" forState:UIControlStateNormal];
     _changeNumberBtn.titleLabel.font = [UIFont systemFontOfSize:13.0*kRate];
@@ -136,7 +136,7 @@
 - (void)addSubmitBtn
 {
     _submitBtn = [[UIButton alloc] initWithFrame:CGRectMake(20*kRate, CGRectGetMaxY(_secondView.frame) + 20*kRate, kScreenWidth - 40*kRate, 40*kRate)];
-    _submitBtn.backgroundColor = [UIColor colorWithRed:64/255.0 green:129/255.0 blue:251/255.0 alpha:1];
+    _submitBtn.backgroundColor = kRGBColor(64, 129, 251);
     _submitBtn.layer.cornerRadius = 8.0*kRate;
     [_submitBtn setTitle:@"确定充值" forState:UIControlStateNormal];
     _submitBtn.titleLabel.font = [UIFont systemFontOfSize:14.0*kRate];

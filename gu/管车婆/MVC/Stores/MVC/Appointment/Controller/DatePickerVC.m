@@ -31,7 +31,7 @@
     [commitBtn addTarget:self action:@selector(commitBtnAction) forControlEvents:UIControlEventTouchUpInside];
     commitBtn.layer.cornerRadius = 5.0*kRate;
     [commitBtn setTitle:@"完成" forState:UIControlStateNormal];
-    commitBtn.backgroundColor = [UIColor colorWithRed:22/255.0 green:129/255.0 blue:252/255.0 alpha:1];
+    commitBtn.backgroundColor = kRGBColor(22, 129, 251);
     [self.view addSubview:commitBtn];
     [commitBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(kScreenWidth - 100*kRate, 50*kRate));

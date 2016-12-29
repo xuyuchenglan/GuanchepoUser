@@ -126,7 +126,7 @@
         
         if (i == 0) {
             selectButton = titleBtn;
-            [selectButton setTitleColor:[UIColor colorWithRed:0 green:126/255.0 blue:1 alpha:1] forState:UIControlStateNormal];//按钮选中状态下的颜色
+            [selectButton setTitleColor:kRGBColor(0, 126, 255) forState:UIControlStateNormal];//按钮选中状态下的颜色
         }
         
         [_buttonArray addObject:titleBtn];
@@ -134,7 +134,7 @@
     
     //底部蓝色小滑块
     UIView *sliderV = [[UIView alloc] initWithFrame:CGRectMake(0, kTitleHeight - 0.5, kTitleWidth, 0.5)];
-    sliderV.backgroundColor = [UIColor colorWithRed:0 green:126/255.0 blue:1 alpha:1];
+    sliderV.backgroundColor = kRGBColor(0, 126, 255);
     [titleView addSubview:sliderV];
     _sliderView = sliderV;
 }
@@ -160,7 +160,7 @@
 {
     [selectButton setTitleColor:kTitleBgColor forState:UIControlStateNormal];
     selectButton = _buttonArray[index];
-    [selectButton setTitleColor:[UIColor colorWithRed:0 green:126/255.0 blue:1 alpha:1] forState:UIControlStateNormal];//按钮选中状态下变为蓝色
+    [selectButton setTitleColor:kRGBColor(0, 126, 255) forState:UIControlStateNormal];//按钮选中状态下变为蓝色
     [UIView animateWithDuration:0.3 animations:^{
         _sliderView.frame = CGRectMake(kTitleWidth * index, kTitleHeight - 0.5, kTitleWidth, 0.5);
     }];

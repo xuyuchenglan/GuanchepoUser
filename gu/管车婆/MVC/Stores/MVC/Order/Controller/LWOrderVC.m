@@ -40,7 +40,7 @@
 #pragma mark ******  设置导航栏  ******
 - (void)addNavBar
 {
-    self.view.backgroundColor = [UIColor colorWithRed:233/255.0 green:233/255.0 blue:233/255.0 alpha:1];
+    self.view.backgroundColor = kRGBColor(233, 233, 233);
     
     [self setBackButtonWithImageName:@"back"];
     [self setNavigationItemTitle:@"下单"];

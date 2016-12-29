@@ -32,13 +32,13 @@
         originalPriceLB = [[UILabel alloc] initWithFrame:CGRectMake(0, 5*kRate, kSelfWidth, kSelfHeight/2 - 5*kRate)];
         originalPriceLB.textAlignment = NSTextAlignmentCenter;
         originalPriceLB.font = [UIFont systemFontOfSize:22*kRate];
-        originalPriceLB.textColor = [UIColor colorWithRed:64/255.0 green:129/255.0 blue:251/255.0 alpha:1];
+        originalPriceLB.textColor = kRGBColor(64, 129, 251);
         [self addSubview:originalPriceLB];
         
         discountedPriceLB = [[UILabel alloc] initWithFrame:CGRectMake(0, kSelfHeight/2, kSelfWidth, kSelfHeight/2 - 5*kRate)];
         discountedPriceLB.textAlignment = NSTextAlignmentCenter;
         discountedPriceLB.font = [UIFont systemFontOfSize:16.0*kRate];
-        discountedPriceLB.textColor = [UIColor colorWithRed:64/255.0 green:129/255.0 blue:251/255.0 alpha:1];
+        discountedPriceLB.textColor = kRGBColor(64, 129, 251);
         [self addSubview:discountedPriceLB];
         
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAction)];
@@ -66,8 +66,8 @@
         
         NSLog(@"未选中");
         [bgView setImage:[UIImage imageNamed:@"home_forth_phonecharge.png"]];
-        originalPriceLB.textColor = [UIColor colorWithRed:64/255.0 green:129/255.0 blue:251/255.0 alpha:1];
-        discountedPriceLB.textColor = [UIColor colorWithRed:64/255.0 green:129/255.0 blue:251/255.0 alpha:1];
+        originalPriceLB.textColor = kRGBColor(64, 129, 251);
+        discountedPriceLB.textColor = kRGBColor(64, 129, 251);
         
     }
 }

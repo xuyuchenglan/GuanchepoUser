@@ -99,7 +99,7 @@
     
     _isDealedWithLB = [[UILabel alloc] init];
     _isDealedWithLB.font = [UIFont systemFontOfSize:15.0*kRate];
-    _isDealedWithLB.textColor = [UIColor colorWithRed:22/255.0 green:129/255.0 blue:252/255.0 alpha:1];
+    _isDealedWithLB.textColor = kRGBColor(22, 129, 251);
     [self.contentView addSubview:_isDealedWithLB];
     [_isDealedWithLB mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(60*kRate, 20*kRate));
@@ -168,7 +168,7 @@
     
     _fineLB_account = [[UILabel alloc] init];
     _fineLB_account.font = [UIFont systemFontOfSize:15.0*kRate];
-    _fineLB_account.textColor = [UIColor colorWithRed:22/255.0 green:129/255.0 blue:252/255.0 alpha:1];
+    _fineLB_account.textColor = kRGBColor(22, 129, 251);
     [self.contentView addSubview:_fineLB_account];
     [_fineLB_account mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(60*kRate, 20*kRate));
@@ -180,7 +180,7 @@
     _payBtn.layer.cornerRadius = 6*kRate;
     _payBtn.titleLabel.font = [UIFont systemFontOfSize:13.0*kRate];
     [_payBtn setTitleColor:[UIColor colorWithWhite:0.3 alpha:1] forState:UIControlStateNormal];
-    _payBtn.backgroundColor = [UIColor colorWithRed:228/255.0 green:229/255.0 blue:230/255.0 alpha:1];
+    _payBtn.backgroundColor = kRGBColor(228, 229, 230);
     [self.contentView addSubview:_payBtn];
     [_payBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(80*kRate, 23*kRate));

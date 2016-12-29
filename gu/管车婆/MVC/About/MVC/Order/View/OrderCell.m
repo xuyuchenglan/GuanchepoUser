@@ -93,7 +93,6 @@
 - (void)addSecondContent
 {
     //服务项目及其数量
-    
     _itemAndCountView = [[ItemAndCountView alloc] init];
     [self.contentView addSubview:_itemAndCountView];
     
@@ -252,7 +251,10 @@
         
         NSLog(@"评论");
         EvaluationVC *evaluationVC = [[EvaluationVC alloc] init];
+        evaluationVC.orderModel = _orderModel;
+        evaluationVC.hidesBottomBarWhenPushed = YES;
         [self.vc.navigationController pushViewController:evaluationVC animated:NO];
+        evaluationVC.hidesBottomBarWhenPushed = NO;
         
     } else if ([_orderModel.pjState isEqualToString:@"已评价"]) {
         

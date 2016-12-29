@@ -117,13 +117,13 @@
 {
     if ([_type isEqualToString:@"jianmianquan"]) {
         _bgImgView.image = [UIImage imageNamed:@"jianmianquan"];
-        _conditionLB.textColor = [UIColor colorWithRed:254/255.0 green:197/255.0 blue:46/255.0 alpha:1];
+        _conditionLB.textColor = kRGBColor(254, 197, 46);
     } else if ([_type isEqualToString:@"dazhequan"]) {
         _bgImgView.image = [UIImage imageNamed:@"dazhequan"];
-        _conditionLB.textColor = [UIColor colorWithRed:250/255.0 green:81/255.0 blue:31/255.0 alpha:1];
+        _conditionLB.textColor = kRGBColor(250, 81, 31);
     } else if ([_type isEqualToString:@"tiyanquan"]) {
         _bgImgView.image = [UIImage imageNamed:@"tiyanquan"];
-        _conditionLB.textColor = [UIColor colorWithRed:203/255.0 green:96/255.0 blue:252/255.0 alpha:1];
+        _conditionLB.textColor = kRGBColor(203, 96, 252);
     }
     
     

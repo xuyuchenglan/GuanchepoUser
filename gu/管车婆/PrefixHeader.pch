@@ -24,6 +24,8 @@
 #define kHead @"192.168.1.155:8080/zcar/userapp/"
 #define kIP   @"192.168.1.155:8080"
 
+#define kRGBColor(r,g,b) [UIColor colorWithRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:1]
+
 #import "Masonry.h"
 #import "UIResponder+FindResponderVC.h"
 #import "AFNetworking.h"

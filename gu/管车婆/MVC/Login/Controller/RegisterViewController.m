@@ -55,7 +55,7 @@
 - (void)addContentView
 {
     UIView *contentView = [[UIView alloc] initWithFrame:CGRectMake(0, 65, kScreenWidth, kScreenHeight - 65)];
-    contentView.backgroundColor = [UIColor colorWithRed:249/255.0 green:249/255.0 blue:249/255.0 alpha:1];
+    contentView.backgroundColor = kRGBColor(249, 249, 249);
     [self.view addSubview:contentView];
     
     //手机号输入框
@@ -81,7 +81,7 @@
     
     //发送验证码按钮
     getVerCodeBtn = [[UIButton alloc] initWithFrame:CGRectMake(CGRectGetMaxX(numberTF.frame) + 10*kRate, CGRectGetMinY(numberTF.frame), 70*kRate, 40*kRate)];
-    getVerCodeBtn.backgroundColor = [UIColor colorWithRed:64/255.0 green:129/255.0 blue:251/255.0 alpha:1];
+    getVerCodeBtn.backgroundColor = kRGBColor(64, 129, 251);
     getVerCodeBtn.layer.cornerRadius = 6.0*kRate;
     [getVerCodeBtn setTitle:@"获取验证码" forState:UIControlStateNormal];
     getVerCodeBtn.titleLabel.font = [UIFont systemFontOfSize:13.0*kRate];
@@ -137,7 +137,7 @@
     
     protocolBtn = [[UIButton alloc] initWithFrame:CGRectMake(CGRectGetMaxX(protocolLabel.frame), CGRectGetMinY(protocolLabel.frame), 140*kRate, 20*kRate)];
     [protocolBtn setTitle:@"《管车婆用户服务协议》" forState:UIControlStateNormal];
-    [protocolBtn setTitleColor:[UIColor colorWithRed:61/255.0 green:124/255.0 blue:1 alpha:1] forState:UIControlStateNormal];
+    [protocolBtn setTitleColor:kRGBColor(61, 124, 255) forState:UIControlStateNormal];
     [protocolBtn setTitleColor:[UIColor colorWithWhite:0.5 alpha:1] forState:UIControlStateHighlighted];
     protocolBtn.titleLabel.font = [UIFont systemFontOfSize:12.0*kRate];
     [protocolBtn addTarget:self action:@selector(protocolBtnAction) forControlEvents:UIControlEventTouchUpInside];
@@ -147,7 +147,7 @@
     
     //注册并登录按钮
     registerBtn = [[UIButton alloc] initWithFrame:CGRectMake(40*kRate, CGRectGetMaxY(protocolBtn.frame) + 30*kRate, kScreenWidth - 80*kRate, 40*kRate)];
-    [registerBtn setBackgroundColor:[UIColor colorWithRed:64/255.0 green:129/255.0 blue:251/255.0 alpha:1]];
+    [registerBtn setBackgroundColor:kRGBColor(64, 129, 251)];
     [registerBtn setTitle:@"注册并登录" forState:UIControlStateNormal];
     registerBtn.titleLabel.font = [UIFont systemFontOfSize:18.0*kRate];
     [registerBtn setTitleColor:[UIColor colorWithWhite:0.5 alpha:1] forState:UIControlStateHighlighted];
@@ -195,7 +195,7 @@
         [timer invalidate];
         getVerCodeBtn.enabled = YES;
         [getVerCodeBtn setTitle:@"获取验证码" forState:UIControlStateNormal];
-        getVerCodeBtn.backgroundColor = [UIColor colorWithRed:64/255.0 green:129/255.0 blue:251/255.0 alpha:1];
+        getVerCodeBtn.backgroundColor = kRGBColor(64, 129, 251);
     }
 }
 

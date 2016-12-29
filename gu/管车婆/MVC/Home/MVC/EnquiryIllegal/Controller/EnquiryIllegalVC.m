@@ -20,7 +20,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor colorWithRed:233/255.0 green:239/255.0 blue:239/255.0 alpha:1];
+    self.view.backgroundColor = kRGBColor(233, 239, 239);
     
     //设置导航栏
     [self addNavBar];
@@ -49,7 +49,7 @@
     
     //第三行，“立即查询”按钮
     UIButton *selectNowBtn = [[UIButton alloc] initWithFrame:CGRectMake(30*kRate, CGRectGetMaxY(_secondView.frame) + 50*kRate, kScreenWidth - 60*kRate, 40*kRate)];
-    [selectNowBtn setBackgroundColor:[UIColor colorWithRed:22/255.0 green:129/255.0 blue:251/255.0 alpha:1]];
+    [selectNowBtn setBackgroundColor:kRGBColor(22, 129, 251)];
     selectNowBtn.titleLabel.font = [UIFont systemFontOfSize:18*kRate];
     selectNowBtn.layer.cornerRadius = 5.0*kRate;
     [selectNowBtn setTitle:@"立即查询" forState:UIControlStateNormal];

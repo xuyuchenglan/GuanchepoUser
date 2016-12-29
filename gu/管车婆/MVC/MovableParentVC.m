@@ -132,7 +132,7 @@
         
         if (i == _selectedNum) {
             selectButton = titleBtn;
-            [selectButton setTitleColor:[UIColor colorWithRed:0 green:126/255.0 blue:1 alpha:1] forState:UIControlStateNormal];
+            [selectButton setTitleColor:kRGBColor(0, 126, 255) forState:UIControlStateNormal];
         }
         
         [_buttonArray addObject:titleBtn];
@@ -140,7 +140,7 @@
     
     //底部蓝色小滑块
     UIView *sliderV = [[UIView alloc] initWithFrame:CGRectMake(kTitleWidth*_selectedNum, kTitleHeight - 0.5, kTitleWidth, 0.5)];
-    sliderV.backgroundColor = [UIColor colorWithRed:0 green:126/255.0 blue:1 alpha:1];
+    sliderV.backgroundColor = kRGBColor(0, 126, 255);
     [scroll addSubview:sliderV];
     _sliderView = sliderV;
 
@@ -166,7 +166,7 @@
 {
     [selectButton setTitleColor:kTitleBgColor forState:UIControlStateNormal];
     selectButton = _buttonArray[index];
-    [selectButton setTitleColor:[UIColor colorWithRed:0 green:126/255.0 blue:1 alpha:1] forState:UIControlStateNormal];
+    [selectButton setTitleColor:kRGBColor(0, 126, 255) forState:UIControlStateNormal];
     CGRect rect = [selectButton.superview convertRect:selectButton.frame toView:self.view];
     [UIView animateWithDuration:0.2 animations:^{
         _sliderView.frame = CGRectMake(kTitleWidth * index, kTitleHeight - 0.5, kTitleWidth, 0.5);

@@ -46,7 +46,7 @@
     
     titleLabel.backgroundColor = [UIColor clearColor];  //设置Label背景透明
     titleLabel.font            = [UIFont boldSystemFontOfSize:18*kRate];  //设置文本字体与大小
-    titleLabel.textColor       = [UIColor colorWithRed:0 green:126/255.0 blue:1 alpha:1];  //设置文本颜色
+    titleLabel.textColor       = kRGBColor(0, 126, 255);  //设置文本颜色
     titleLabel.textAlignment   = NSTextAlignmentCenter;
     [_titleView addSubview:titleLabel];
 }

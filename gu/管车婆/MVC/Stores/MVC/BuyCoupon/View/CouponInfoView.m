@@ -72,7 +72,7 @@
     editBtn = [[UIButton alloc] init];
     [editBtn setBackgroundImage:[UIImage imageNamed:@"stores_btnBorder_blue"] forState:UIControlStateNormal];
     [editBtn setTitle:@"编辑" forState:UIControlStateNormal];
-    [editBtn setTitleColor:[UIColor colorWithRed:22/255.0 green:129/255.0 blue:252/255.0 alpha:1] forState:UIControlStateNormal];
+    [editBtn setTitleColor:kRGBColor(22, 129, 251) forState:UIControlStateNormal];
     editBtn.titleLabel.font = [UIFont systemFontOfSize:15.0*kRate];
     [editBtn addTarget:self action:@selector(editBtnAction) forControlEvents:UIControlEventTouchUpInside];
     [contentScrollView addSubview:editBtn];

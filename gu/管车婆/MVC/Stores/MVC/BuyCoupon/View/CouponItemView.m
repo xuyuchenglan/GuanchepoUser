@@ -100,7 +100,7 @@
         deleteBtn = [[UIButton alloc] init];
         [deleteBtn setBackgroundImage:[UIImage imageNamed:@"stores_btnBorder_blue"] forState:UIControlStateNormal];
         [deleteBtn setTitle:@"删除" forState:UIControlStateNormal];
-        [deleteBtn setTitleColor:[UIColor colorWithRed:22/255.0 green:129/255.0 blue:252/255.0 alpha:1] forState:UIControlStateNormal];
+        [deleteBtn setTitleColor:kRGBColor(22, 129, 251) forState:UIControlStateNormal];
         deleteBtn.titleLabel.font = [UIFont systemFontOfSize:15.0*kRate];
         [deleteBtn addTarget:self action:@selector(deleteBtnAction) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:deleteBtn];

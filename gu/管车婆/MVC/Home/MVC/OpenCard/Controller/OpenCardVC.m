@@ -43,7 +43,7 @@
 - (void)addTableView
 {
     _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 10*kRate, kScreenWidth, kScreenHeight-10*kRate)];
-    _tableView.backgroundColor = [UIColor colorWithRed:230/255.0 green:236/255.0 blue:236/255.0 alpha:1];
+    _tableView.backgroundColor = kRGBColor(230, 236, 236);
     _tableView.delegate = self;
     _tableView.dataSource = self;
     _tableView.separatorColor = [UIColor clearColor];

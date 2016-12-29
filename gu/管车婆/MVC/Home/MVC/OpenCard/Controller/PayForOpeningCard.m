@@ -46,7 +46,7 @@
 - (void)addContentView
 {
     _scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
-    _scrollView.backgroundColor = [UIColor colorWithRed:233/255.0 green:239/255.0 blue:239/255.0 alpha:1];
+    _scrollView.backgroundColor = kRGBColor(233, 239, 239);
     _scrollView.showsVerticalScrollIndicator = NO;
     _scrollView.contentSize = CGSizeMake(kScreenWidth, kScreenHeight + 200);
     [self.view addSubview:_scrollView];
@@ -148,7 +148,7 @@
     
     UILabel *titleLB = [[UILabel alloc] init];
     titleLB.text = @"推荐人推荐码";
-    titleLB.textColor = [UIColor colorWithRed:22/255.0 green:129/255.0 blue:251/255.0 alpha:1];
+    titleLB.textColor = kRGBColor(22, 129, 251);
     titleLB.font = [UIFont systemFontOfSize:13.5*kRate];
     [_thirdView addSubview:titleLB];
     [titleLB mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -241,7 +241,7 @@
     _openCardBtn = [[UIButton alloc] init];
     [_openCardBtn addTarget:self action:@selector(openCardBtnAction) forControlEvents:UIControlEventTouchUpInside];
     [_openCardBtn setTitle:@"立 即 开 卡" forState:UIControlStateNormal];
-    [_openCardBtn setBackgroundColor:[UIColor colorWithRed:22/255.0 green:129/255.0 blue:251/255.0 alpha:1]];
+    [_openCardBtn setBackgroundColor:kRGBColor(22, 129, 251)];
     _openCardBtn.titleLabel.font = [UIFont systemFontOfSize:20.0*kRate];
     _openCardBtn.layer.cornerRadius = 5.0*kRate;
     [_scrollView addSubview:_openCardBtn];

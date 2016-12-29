@@ -60,7 +60,7 @@
     
     UIButton * selectItemsBtn = [[UIButton alloc] init];
     [selectItemsBtn setTitle:@"剩余可选项目x14>" forState:UIControlStateNormal];
-    [selectItemsBtn setTitleColor:[UIColor colorWithRed:22/255.0 green:129/255.0 blue:252/255.0 alpha:1] forState:UIControlStateNormal];
+    [selectItemsBtn setTitleColor:kRGBColor(22, 129, 252) forState:UIControlStateNormal];
     selectItemsBtn.titleLabel.font = [UIFont systemFontOfSize:15.0*kRate];
     [selectItemsBtn addTarget:self action:@selector(selectItemsBtnAction) forControlEvents:UIControlEventTouchUpInside];
     [firstView addSubview:selectItemsBtn];
@@ -109,7 +109,7 @@
     UIButton *payBtn = [[UIButton alloc] initWithFrame:CGRectMake(kScreenWidth/3*2, 0, kScreenWidth/3, kBottomViewHeight)];
     payBtn.titleLabel.font = [UIFont systemFontOfSize:18.0*kRate];
     [payBtn setTitle:@"去结算" forState:UIControlStateNormal];
-    payBtn.backgroundColor = [UIColor colorWithRed:22/255.0 green:129/255.0 blue:250/255.0 alpha:1];
+    payBtn.backgroundColor = kRGBColor(22, 129, 250);
     [payBtn addTarget:self action:@selector(payBtnAction) forControlEvents:UIControlEventTouchUpInside];
     [bottomView addSubview:payBtn];
 }

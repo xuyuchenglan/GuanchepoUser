@@ -7,7 +7,10 @@
 //
 
 #import "ParentViewController.h"
+#import "OrderModel.h"
 
 @interface EvaluationVC : ParentViewController
+
+@property (nonatomic, strong)OrderModel *orderModel;
 
 @end

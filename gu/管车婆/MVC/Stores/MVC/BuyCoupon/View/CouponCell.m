@@ -66,7 +66,7 @@
         _payBtn = [[UIButton alloc] init];
         [_payBtn setTitle:@"购买" forState:UIControlStateNormal];
         _payBtn.titleLabel.font = [UIFont systemFontOfSize:15.0*kRate];
-        _payBtn.backgroundColor = [UIColor colorWithRed:22/255.0 green:129/255.0 blue:252/255.0 alpha:1];
+        _payBtn.backgroundColor = kRGBColor(22, 129, 251);
         _payBtn.layer.cornerRadius = 6.0*kRate;
         [self.contentView addSubview:_payBtn];
         [_payBtn mas_makeConstraints:^(MASConstraintMaker *make) {

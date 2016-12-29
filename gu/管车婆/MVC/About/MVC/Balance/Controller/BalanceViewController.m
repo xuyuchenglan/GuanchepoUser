@@ -20,7 +20,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.view.backgroundColor = [UIColor colorWithRed:233/255.0 green:239/255.0 blue:239/255.0 alpha:1];
+    self.view.backgroundColor = kRGBColor(233, 239, 239);
     
     //设置导航栏
     [self addNavBar];
@@ -84,7 +84,7 @@
     
     //提现按钮
     UIButton *cashWithdrawalBtn = [[UIButton alloc] init];
-    [cashWithdrawalBtn setBackgroundColor:[UIColor colorWithRed:22/255.0 green:129/255.0 blue:251/255.0 alpha:1]];
+    [cashWithdrawalBtn setBackgroundColor:kRGBColor(22, 129, 251)];
     cashWithdrawalBtn.layer.cornerRadius = 5.0*kRate;
     cashWithdrawalBtn.titleLabel.font = [UIFont systemFontOfSize:20.0*kRate weight:0];
     [cashWithdrawalBtn setTitle:@"提 现" forState:UIControlStateNormal];

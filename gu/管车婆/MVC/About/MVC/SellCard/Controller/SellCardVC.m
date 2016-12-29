@@ -18,7 +18,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.view.backgroundColor = [UIColor colorWithRed:233/255.0 green:239/255.0 blue:239/255.0 alpha:1];
+    self.view.backgroundColor = kRGBColor(233, 239, 239);
     
     //设置导航栏
     [self addNavBar];
@@ -62,7 +62,7 @@
     invatationCodeLB_value.textAlignment = NSTextAlignmentCenter;
     invatationCodeLB_value.text = @"WDMAC2583";
     invatationCodeLB_value.font = [UIFont systemFontOfSize:35 weight:0];
-    invatationCodeLB_value.textColor = [UIColor colorWithRed:248/255.0 green:161/255.0 blue:31/255.0 alpha:1];
+    invatationCodeLB_value.textColor = kRGBColor(248, 161, 31);
     [self.view addSubview:invatationCodeLB_value];
     [invatationCodeLB_value mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(kScreenWidth, 40));

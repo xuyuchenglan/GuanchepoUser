@@ -121,13 +121,13 @@
 - (void)layoutSubviews
 {
     if ([_type isEqualToString:@"洗车券"]) {
-        _upView.backgroundColor = [UIColor colorWithRed:170/255.0 green:213/255.0 blue:253/255.0 alpha:1];
+        _upView.backgroundColor = kRGBColor(170, 213, 253);
         _couponNameLB.text = @"洗车券";
     } else if ([_type isEqualToString:@"保养券"]) {
-        _upView.backgroundColor = [UIColor colorWithRed:251/255.0 green:184/255.0 blue:172/255.0 alpha:1];
+        _upView.backgroundColor = kRGBColor(251, 184, 172);
         _couponNameLB.text = @"保养券";
     } else if ([_type isEqualToString:@"美容券"]) {
-        _upView.backgroundColor = [UIColor colorWithRed:253/255.0 green:233/255.0 blue:174/255.0 alpha:1];
+        _upView.backgroundColor = kRGBColor(253, 233, 174);
         _couponNameLB.text = @"美容券";
     }
     

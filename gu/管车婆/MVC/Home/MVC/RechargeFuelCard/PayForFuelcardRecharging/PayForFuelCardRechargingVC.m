@@ -22,7 +22,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.view.backgroundColor = [UIColor colorWithRed:233/255.0 green:239/255.0 blue:239/255.0 alpha:1];
+    self.view.backgroundColor = kRGBColor(233, 239, 239);
     
     //设置导航栏
     [self addNavBar];
@@ -167,7 +167,7 @@
 - (void)addMoneyBtn
 {
     UIButton *moneyBtn = [[UIButton alloc] init];
-    [moneyBtn setBackgroundColor:[UIColor colorWithRed:22/255.0 green:130/255.0 blue:251/255.0 alpha:1]];
+    [moneyBtn setBackgroundColor:kRGBColor(22, 130, 251)];
     [moneyBtn setTitle:@"需支付88元" forState:UIControlStateNormal];
     moneyBtn.titleLabel.font = [UIFont systemFontOfSize:20.0*kRate];
     moneyBtn.layer.cornerRadius = 3.0*kRate;

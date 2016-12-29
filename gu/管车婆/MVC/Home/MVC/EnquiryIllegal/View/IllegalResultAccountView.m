@@ -27,7 +27,7 @@
         _accountLB = [[UILabel alloc] initWithFrame:CGRectMake(0, kSelfHeight/4 + 3*kRate, kSelfWidth, kSelfHeight/4)];
         _accountLB.textAlignment = NSTextAlignmentCenter;
         _accountLB.font = [UIFont systemFontOfSize:14.0*kRate];
-        _accountLB.textColor = [UIColor colorWithRed:22/255.0 green:129/255.0 blue:251/255.0 alpha:1];
+        _accountLB.textColor = kRGBColor(22, 129, 251);
         [self addSubview:_accountLB];
         
         _titleLB = [[UILabel alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_accountLB.frame) + 5, kSelfWidth, kSelfHeight/4)];

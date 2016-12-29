@@ -47,7 +47,7 @@
         
         cardNumberLB = [[UILabel alloc] init];
         cardNumberLB.adjustsFontSizeToFitWidth = YES;
-        cardNumberLB.textColor = [UIColor colorWithRed:22/255.0 green:129/255.0 blue:251/255.0 alpha:1];
+        cardNumberLB.textColor = kRGBColor(22, 129, 251);
         [self addSubview:cardNumberLB];
         [cardNumberLB mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(220*kRate, 20*kRate));

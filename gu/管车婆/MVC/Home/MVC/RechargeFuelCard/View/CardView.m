@@ -46,7 +46,7 @@
         
         cardNumberLB = [[UILabel alloc] init];
         cardNumberLB.adjustsFontSizeToFitWidth = YES;
-        cardNumberLB.textColor = [UIColor colorWithRed:22/255.0 green:129/255.0 blue:251/255.0 alpha:1];
+        cardNumberLB.textColor = kRGBColor(22, 129, 251);
         [self addSubview:cardNumberLB];
         [cardNumberLB mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(220*kRate, 20*kRate));
@@ -64,7 +64,7 @@
         }];
         
         changeBtn = [[UIButton alloc] init];
-        changeBtn.backgroundColor = [UIColor colorWithRed:22/255.0 green:129/255.0 blue:251/255.0 alpha:1];
+        changeBtn.backgroundColor = kRGBColor(22, 129, 251);
         changeBtn.layer.cornerRadius = 3.0*kRate;
         [changeBtn setTitle:@"更换" forState:UIControlStateNormal];
         changeBtn.titleLabel.font = [UIFont systemFontOfSize:16.0*kRate];

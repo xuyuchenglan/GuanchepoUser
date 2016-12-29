@@ -131,7 +131,7 @@
     
     _commentCountBtn = [[UIButton alloc] initWithFrame:CGRectMake(35*kRate, 0, 45*kRate, 20*kRate)];
     [_commentCountBtn addTarget:self action:@selector(commentBtnAction) forControlEvents:UIControlEventTouchUpInside];
-    [_commentCountBtn setTitleColor:[UIColor colorWithRed:22/255.0 green:129/255.0 blue:252/255.0 alpha:1] forState:UIControlStateNormal];
+    [_commentCountBtn setTitleColor:kRGBColor(22, 129, 252) forState:UIControlStateNormal];
     _commentCountBtn.titleLabel.font = [UIFont systemFontOfSize:11.0*kRate];
     _commentCountBtn.titleLabel.textAlignment = NSTextAlignmentRight;
     _commentCountBtn.titleLabel.adjustsFontSizeToFitWidth = YES;

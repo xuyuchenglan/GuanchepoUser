@@ -49,7 +49,7 @@
         
         _bottomLabel = [[UILabel alloc] initWithFrame:CGRectMake(kScreenWidth/2 - 100*kRate, 10*kRate, 200*kRate, 20*kRate)];
         _bottomLabel.textAlignment = NSTextAlignmentCenter;
-        _bottomLabel.textColor = [UIColor colorWithRed:16/255.0 green:92/255.0 blue:1.0 alpha:1];
+        _bottomLabel.textColor = kRGBColor(16, 92, 255);
         _bottomLabel.font = [UIFont systemFontOfSize:16.0*kRate];
         [self.contentView addSubview:_bottomLabel];
     }

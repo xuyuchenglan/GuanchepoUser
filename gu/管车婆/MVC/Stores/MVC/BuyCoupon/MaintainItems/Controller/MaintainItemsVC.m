@@ -39,7 +39,7 @@
 - (void)addTableView
 {
     _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 15*kRate, kScreenWidth, kScreenHeight - 64)];
-    _tableView.backgroundColor = [UIColor colorWithRed:233/255.0 green:239/255.0 blue:239/255.0 alpha:1];
+    _tableView.backgroundColor = kRGBColor(233, 239, 239);
     _tableView.delegate = self;
     _tableView.dataSource = self;
     _tableView.tableFooterView = [UIView new];

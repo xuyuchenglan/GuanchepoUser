@@ -26,7 +26,7 @@
     _tableView.dataSource = self;
     _tableView.tableFooterView = [[UIView alloc] init];
     [_tableView setSeparatorColor:[UIColor clearColor]];//去除单元格之间的分割线
-    _tableView.backgroundColor = [UIColor colorWithRed:233/255.0 green:233/255.0 blue:233/255.0 alpha:1];
+    _tableView.backgroundColor = kRGBColor(233, 233, 233);
     _tableView.showsVerticalScrollIndicator = NO;
     [self.view addSubview:_tableView];
     

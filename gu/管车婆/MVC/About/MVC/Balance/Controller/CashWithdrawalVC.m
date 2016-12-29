@@ -21,7 +21,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.view.backgroundColor = [UIColor colorWithRed:233/255.0 green:239/255.0 blue:239/255.0 alpha:1];
+    self.view.backgroundColor = kRGBColor(233, 239, 239);
     
     //设置导航栏
     [self addNavBar];
@@ -60,7 +60,7 @@
     
     //确认提现按钮
     UIButton *submitBtn = [[UIButton alloc] init];
-    [submitBtn setBackgroundColor:[UIColor colorWithRed:22/255.0 green:129/255.0 blue:251/255.0 alpha:1]];
+    [submitBtn setBackgroundColor:kRGBColor(22, 129, 251)];
     submitBtn.layer.cornerRadius = 5.0*kRate;
     submitBtn.titleLabel.font = [UIFont systemFontOfSize:20.0*kRate weight:0];
     [submitBtn setTitle:@"确认提现" forState:UIControlStateNormal];

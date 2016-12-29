@@ -120,9 +120,10 @@
 - (void)addStarRateView
 {
     _starRateView = [[NormanStarRateView alloc] initWithFrame:CGRectMake(kScreenWidth - 15*kRate - 50*kRate - 20*kRate, 15*kRate, 50*kRate, 20*kRate) numberOfStars:5];
+    _starRateView.isEvaluating = NO;//不是正在评分，是展示评分
     _starRateView.allowIncompleteStar = YES;//是否允许评分为小数
     _starRateView.allowTouch = NO;//是否允许点击星星视图
-    _starRateView.hasAnimation = YES;
+    _starRateView.hasAnimation = NO;
     [self.contentView addSubview:_starRateView];
     
     _scoreLB = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(_starRateView.frame) + 2*kRate, 15*kRate, 20*kRate, 20*kRate)];
@@ -219,7 +220,7 @@
     
     _orderBtn = [[UIButton alloc] initWithFrame:CGRectMake(CGRectGetMaxX(_appointBtn.frame) + 10*kRate, 0, 50*kRate, 20*kRate)];
     [_orderBtn addTarget:self action:@selector(orderBtnAction) forControlEvents:UIControlEventTouchUpInside];
-    _orderBtn.backgroundColor = [UIColor colorWithRed:22/255.0 green:128/255.0 blue:251/255.0 alpha:1];
+    _orderBtn.backgroundColor = kRGBColor(22, 129, 251);
     [_orderBtn setTitle:@"下单" forState:UIControlStateNormal];
     _orderBtn.titleLabel.font = [UIFont systemFontOfSize:14.0*kRate];
     _orderBtn.layer.cornerRadius = 5*kRate;
@@ -227,7 +228,7 @@
     
     _buyCouponBtn = [[UIButton alloc] initWithFrame:CGRectMake(CGRectGetMaxX(_orderBtn.frame) + 10*kRate, 0, 50*kRate, 20*kRate)];
     [_buyCouponBtn addTarget:self action:@selector(buycouponBtnAction) forControlEvents:UIControlEventTouchUpInside];
-    _buyCouponBtn.backgroundColor = [UIColor colorWithRed:128/255.0 green:129/255.0 blue:130/255.0 alpha:1];
+    _buyCouponBtn.backgroundColor = kRGBColor(128, 129, 130);
     [_buyCouponBtn setTitle:@"买券" forState:UIControlStateNormal];
     _buyCouponBtn.titleLabel.font = [UIFont systemFontOfSize:14.0*kRate];
     _buyCouponBtn.layer.cornerRadius = 5*kRate;

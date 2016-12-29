@@ -77,7 +77,7 @@
     } else {
         _scrollView.frame = [UIScreen mainScreen].bounds;
     }
-    _scrollView.backgroundColor = [UIColor colorWithRed:234/255.0 green:238/255.0 blue:239/255.0 alpha:1];
+    _scrollView.backgroundColor = kRGBColor(234, 238, 239);
     _scrollView.showsHorizontalScrollIndicator = NO;
     _scrollView.showsVerticalScrollIndicator = NO;
     _scrollView.contentSize = CGSizeMake(kScreenWidth, 920*kRate);

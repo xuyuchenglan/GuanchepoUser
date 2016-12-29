@@ -21,7 +21,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.view.backgroundColor = [UIColor colorWithRed:233/255.0 green:239/255.0 blue:239/255.0 alpha:1];
+    self.view.backgroundColor = kRGBColor(233, 239, 239);
     
     //设置导航栏
     [self addNavBar];
@@ -44,7 +44,7 @@
 {
     //加油卡列表
     _tableView = [[UITableView alloc] init];
-    _tableView.backgroundColor = [UIColor colorWithRed:233/255.0 green:239/255.0 blue:239/255.0 alpha:1];
+    _tableView.backgroundColor = kRGBColor(233, 239, 239);
     _tableView.tableFooterView = [UIView new];
     _tableView.separatorColor = [UIColor clearColor];
     _tableView.delegate = self;
@@ -60,7 +60,7 @@
     [addFuelCardBtn setTitle:@"添 加 加 油 卡" forState:UIControlStateNormal];
     addFuelCardBtn.layer.cornerRadius = 5.0*kRate;
     addFuelCardBtn.titleLabel.font = [UIFont systemFontOfSize:18.0*kRate];
-    [addFuelCardBtn setBackgroundColor:[UIColor colorWithRed:22/255.0 green:129/255.0 blue:251/255.0 alpha:1]];
+    [addFuelCardBtn setBackgroundColor:kRGBColor(22, 129, 251)];
     [addFuelCardBtn addTarget:self action:@selector(addFuelCardBtnAction) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:addFuelCardBtn];
     [addFuelCardBtn mas_makeConstraints:^(MASConstraintMaker *make) {

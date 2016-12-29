@@ -31,7 +31,7 @@
     _orderModels = [NSMutableArray array];
     
     _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 10*kRate, kScreenWidth, kScreenHeight - 64 - kTitleHeight - 49*kRate - 10*kRate)];
-    _tableView.backgroundColor = [UIColor colorWithRed:234/255.0 green:238/255.0 blue:239/255.0 alpha:1];
+    _tableView.backgroundColor = kRGBColor(234, 238, 239);
     _tableView.delegate = self;
     _tableView.dataSource = self;
     _tableView.tableFooterView = [UIView new];
@@ -46,6 +46,10 @@
     
     if ([_type isEqualToString:@"0"] || [_type isEqualToString:@"1"]) {//监听取消预约时发送过来的通知,以刷新“全部”和“已预约”页面
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getOrder) name:@"cancelAppointment" object:nil];
+    }
+    
+    if ([_type isEqualToString:@"3"] || [_type isEqualToString:@"4"]) {//监听评论完成时发送过来的通知,以刷新“已完成”和“已评价”页面
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getOrder) name:@"completeComment" object:nil];
     }
     
     //网络请求订单列表数据

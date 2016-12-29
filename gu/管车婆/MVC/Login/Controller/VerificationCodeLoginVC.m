@@ -54,13 +54,13 @@
 - (void)addContentView
 {
     UIView *contentView = [[UIView alloc] initWithFrame:CGRectMake(0, 65, kScreenWidth, kScreenHeight - 65)];
-    contentView.backgroundColor = [UIColor colorWithRed:249/255.0 green:249/255.0 blue:249/255.0 alpha:1];
+    contentView.backgroundColor = kRGBColor(249, 249, 249);
     [self.view addSubview:contentView];
     
     //账号密码登录
     accountPWBtn = [[UIButton alloc] initWithFrame:CGRectMake(kScreenWidth - 130*kRate, 10*kRate, 100*kRate, 25*kRate)];
     [accountPWBtn setTitle:@"账号密码登录>" forState:UIControlStateNormal];
-    [accountPWBtn setTitleColor:[UIColor colorWithRed:0 green:126/255.0 blue:1 alpha:1] forState:UIControlStateNormal];
+    [accountPWBtn setTitleColor:kRGBColor(0, 126, 255) forState:UIControlStateNormal];
     accountPWBtn.titleLabel.font = [UIFont systemFontOfSize:14.0*kRate];
     [accountPWBtn addTarget:self action:@selector(accountPSBtnAction) forControlEvents:UIControlEventTouchUpInside];
     [contentView addSubview:accountPWBtn];
@@ -93,7 +93,7 @@
     
     //发送验证码按钮
     getVerCodeBtn = [[UIButton alloc] initWithFrame:CGRectMake(CGRectGetMaxX(numberTF.frame) + 10*kRate, CGRectGetMinY(numberTF.frame), 70*kRate, 40*kRate)];
-    getVerCodeBtn.backgroundColor = [UIColor colorWithRed:64/255.0 green:129/255.0 blue:251/255.0 alpha:1];
+    getVerCodeBtn.backgroundColor = kRGBColor(64, 129, 251);
     getVerCodeBtn.layer.cornerRadius = 6.0*kRate;
     [getVerCodeBtn setTitle:@"获取验证码" forState:UIControlStateNormal];
     getVerCodeBtn.titleLabel.font = [UIFont systemFontOfSize:13.0*kRate];
@@ -123,7 +123,7 @@
     
     //登录按钮
     loginBtn = [[UIButton alloc] initWithFrame:CGRectMake(40*kRate, CGRectGetMaxY(verificationCodeTF.frame) + 30*kRate, kScreenWidth - 80*kRate, 40*kRate)];
-    [loginBtn setBackgroundColor:[UIColor colorWithRed:64/255.0 green:129/255.0 blue:251/255.0 alpha:1]];
+    [loginBtn setBackgroundColor:kRGBColor(64, 129, 251)];
     loginBtn.titleLabel.font = [UIFont systemFontOfSize:18.0*kRate];
     loginBtn.layer.cornerRadius = 6.0*kRate;
     [loginBtn setTitle:@"登 录" forState:UIControlStateNormal];
@@ -203,7 +203,7 @@
         [timer invalidate];
         getVerCodeBtn.enabled = YES;
         [getVerCodeBtn setTitle:@"获取验证码" forState:UIControlStateNormal];
-        getVerCodeBtn.backgroundColor = [UIColor colorWithRed:64/255.0 green:129/255.0 blue:251/255.0 alpha:1];
+        getVerCodeBtn.backgroundColor = kRGBColor(64, 129, 251);
     }
 }
 

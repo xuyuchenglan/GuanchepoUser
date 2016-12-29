@@ -36,7 +36,7 @@
     _voucherModels = [NSMutableArray array];
     
     _scrollView = [[UIScrollView alloc] initWithFrame:[UIScreen mainScreen].bounds];
-    _scrollView.backgroundColor = [UIColor colorWithRed:248/255.0 green:249/255.0 blue:250/255.0 alpha:1];
+    _scrollView.backgroundColor = kRGBColor(248, 249, 250);
     _scrollView.contentSize = CGSizeMake(kScreenWidth, 1000 + kImgWidth * 2);
     _scrollView.showsVerticalScrollIndicator = NO;
     [self.view addSubview:_scrollView];

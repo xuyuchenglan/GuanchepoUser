@@ -10,6 +10,7 @@
 
 @interface OrderModel : NSObject
 
+@property (nonatomic, strong)NSString       *mid;
 @property (nonatomic, strong)NSURL          *headImgUrl;//车行头像URL
 @property (nonatomic, strong)NSString       *nameStr;//车行名字
 @property (nonatomic, strong)NSString       *stateStr;//

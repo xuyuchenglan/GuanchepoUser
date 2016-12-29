@@ -27,7 +27,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.view.backgroundColor = [UIColor colorWithRed:233/255.0 green:239/255.0 blue:239/255.0 alpha:1];
+    self.view.backgroundColor = kRGBColor(233, 239, 239);
     
     //设置导航栏
     [self addNavBar];
@@ -178,7 +178,7 @@
     rechargeBtn.layer.cornerRadius = 5.0*kRate;
     rechargeBtn.titleLabel.font = [UIFont systemFontOfSize:19.0*kRate];
     [rechargeBtn setTitle:@"立即充值" forState:UIControlStateNormal];
-    [rechargeBtn setBackgroundColor:[UIColor colorWithRed:22/255.0 green:129/255.0 blue:251/255.0 alpha:1]];
+    [rechargeBtn setBackgroundColor:kRGBColor(22, 129, 251)];
     [rechargeBtn addTarget:self action:@selector(rechargeBtnAction) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:rechargeBtn];
     [rechargeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -211,7 +211,7 @@
     }];
     
     UILabel *nonFuelCardLB = [[UILabel alloc] init];
-    nonFuelCardLB.textColor = [UIColor colorWithRed:156/255.0 green:157/255.0 blue:158/255.0 alpha:1];
+    nonFuelCardLB.textColor = kRGBColor(156, 157, 158);
     nonFuelCardLB.textAlignment  = NSTextAlignmentCenter;
     nonFuelCardLB.font = [UIFont systemFontOfSize:15.0*kRate];
     nonFuelCardLB.text = @"暂无加油卡";
@@ -224,7 +224,7 @@
     
     //"添加加油卡"按钮
     UIButton *addFuelcardBtn = [[UIButton alloc] init];
-    addFuelcardBtn.backgroundColor = [UIColor colorWithRed:22/255.0 green:129/255.0 blue:251/255.0 alpha:1];
+    addFuelcardBtn.backgroundColor = kRGBColor(22, 129, 251);
     addFuelcardBtn.layer.cornerRadius = 3.0*kRate;
     [addFuelcardBtn setTitle:@"添 加 加 油 卡" forState:UIControlStateNormal];
     [self.view addSubview:addFuelcardBtn];

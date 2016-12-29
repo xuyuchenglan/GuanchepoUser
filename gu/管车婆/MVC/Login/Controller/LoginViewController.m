@@ -51,13 +51,13 @@
 - (void)addContentView
 {
     UIView *contentView = [[UIView alloc] initWithFrame:CGRectMake(0, 65*kRate, kScreenWidth, kScreenHeight - 65*kRate)];
-    contentView.backgroundColor = [UIColor colorWithRed:249/255.0 green:249/255.0 blue:249/255.0 alpha:1];
+    contentView.backgroundColor = kRGBColor(249, 249, 249);
     [self.view addSubview:contentView];
     
     //手机验证码登录
     verificationCodeBtn = [[UIButton alloc] initWithFrame:CGRectMake(kScreenWidth - 130*kRate, 10*kRate, 110*kRate, 25*kRate)];
     [verificationCodeBtn setTitle:@"手机验证码登录>" forState:UIControlStateNormal];
-    [verificationCodeBtn setTitleColor:[UIColor colorWithRed:0 green:126/255.0 blue:1 alpha:1] forState:UIControlStateNormal];
+    [verificationCodeBtn setTitleColor:kRGBColor(0, 126, 255) forState:UIControlStateNormal];
     verificationCodeBtn.titleLabel.font = [UIFont systemFontOfSize:14.0*kRate];
     [verificationCodeBtn addTarget:self action:@selector(verificationCodeBtnAction) forControlEvents:UIControlEventTouchUpInside];
     [contentView addSubview:verificationCodeBtn];
@@ -110,7 +110,7 @@
     
     //登录按钮
     loginBtn = [[UIButton alloc] initWithFrame:CGRectMake(40*kRate, CGRectGetMaxY(passwordTF.frame) + 30*kRate, kScreenWidth - 80*kRate, 40*kRate)];
-    [loginBtn setBackgroundColor:[UIColor colorWithRed:64/255.0 green:129/255.0 blue:251/255.0 alpha:1]];
+    [loginBtn setBackgroundColor:kRGBColor(64, 129, 251)];
     loginBtn.titleLabel.font = [UIFont systemFontOfSize:18.0*kRate];
     loginBtn.layer.cornerRadius = 6.0*kRate;
     [loginBtn setTitle:@"登 录" forState:UIControlStateNormal];

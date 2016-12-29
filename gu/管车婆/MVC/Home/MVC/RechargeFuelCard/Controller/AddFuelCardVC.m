@@ -26,7 +26,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.view.backgroundColor = [UIColor colorWithRed:233/255.0 green:239/255.0 blue:239/255.0 alpha:1];
+    self.view.backgroundColor = kRGBColor(233, 239, 239);
     
     //设置导航栏
     [self addNavBar];
@@ -278,7 +278,7 @@
     UIButton *addFuelCardBtn = [[UIButton alloc] init];
     [addFuelCardBtn setTitle:@"添 加 加 油 卡" forState:UIControlStateNormal];
     addFuelCardBtn.titleLabel.font = [UIFont systemFontOfSize:18.0*kRate];
-    addFuelCardBtn.backgroundColor = [UIColor colorWithRed:22/255.0 green:130/255.0 blue:251/255.0 alpha:1];
+    addFuelCardBtn.backgroundColor = kRGBColor(22, 130, 251);
     addFuelCardBtn.layer.cornerRadius = 5.0*kRate;
     [self.view addSubview:addFuelCardBtn];
     [addFuelCardBtn mas_makeConstraints:^(MASConstraintMaker *make) {
