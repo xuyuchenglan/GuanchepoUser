@@ -72,7 +72,6 @@
     [self.navigationController pushViewController:itemStoresVC animated:NO];
     itemStoresVC.hidesBottomBarWhenPushed = NO;
     
-    
 }
 
 #pragma mark

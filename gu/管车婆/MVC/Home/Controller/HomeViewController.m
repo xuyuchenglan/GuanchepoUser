@@ -402,7 +402,6 @@
     itemStoresVC.sname = serviceModel.serviceName;
     itemStoresVC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:itemStoresVC animated:NO];
-    itemStoresVC.hidesBottomBarWhenPushed = NO;
 }
 
 
@@ -437,7 +436,6 @@
     itemStoresVC.sname = serviceModel.serviceName;
     itemStoresVC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:itemStoresVC animated:NO];
-    itemStoresVC.hidesBottomBarWhenPushed = NO;
 }
 
 
@@ -472,7 +470,6 @@
     itemStoresVC.sname = serviceModel.serviceName;
     itemStoresVC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:itemStoresVC animated:NO];
-    itemStoresVC.hidesBottomBarWhenPushed = NO;
 }
 
 //上4
@@ -506,7 +503,6 @@
     itemStoresVC.sname = serviceModel.serviceName;
     itemStoresVC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:itemStoresVC animated:NO];
-    itemStoresVC.hidesBottomBarWhenPushed = NO;
 }
 
 //中1
@@ -540,7 +536,6 @@
     itemStoresVC.sname = serviceModel.serviceName;
     itemStoresVC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:itemStoresVC animated:NO];
-    itemStoresVC.hidesBottomBarWhenPushed = NO;
 }
 
 //广告位
@@ -599,7 +594,6 @@
     itemStoresVC.sname = serviceModel.serviceName;
     itemStoresVC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:itemStoresVC animated:NO];
-    itemStoresVC.hidesBottomBarWhenPushed = NO;
 }
 
 //下1
@@ -633,7 +627,6 @@
     itemStoresVC.sname = serviceModel.serviceName;
     itemStoresVC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:itemStoresVC animated:NO];
-    itemStoresVC.hidesBottomBarWhenPushed = NO;
 }
 
 //下2
@@ -667,7 +660,6 @@
     itemStoresVC.sname = serviceModel.serviceName;
     itemStoresVC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:itemStoresVC animated:NO];
-    itemStoresVC.hidesBottomBarWhenPushed = NO;
 }
 
 //下3
@@ -701,7 +693,6 @@
     itemStoresVC.sname = serviceModel.serviceName;
     itemStoresVC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:itemStoresVC animated:NO];
-    itemStoresVC.hidesBottomBarWhenPushed = NO;
     
     
 }
@@ -732,7 +723,6 @@
     moreVC.services = _homeModel.services;
     moreVC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:moreVC animated:NO];
-    moreVC.hidesBottomBarWhenPushed = NO;
 }
 
 

@@ -11,15 +11,20 @@
 #import "SYQRCodeViewController.h"
 #import "QRCodeView.h"
 #import "LewPopupViewController.h"
+#import "EnterVerificationCodeView.h"
 
 
+#define kLeftEdge  30*kRate
+#define kEnterVerificationCodeViewWidth (kScreenWidth-kLeftEdge*2)
+#define kSubmitBtnWidth 111*kRate
 #define kEdgeWidth (kScreenWidth - 300)/4
 
-@interface LWOrderVC ()
+@interface LWOrderVC ()<UITextFieldDelegate>
 {
     AppointOrderView *_appointOrderView;
     QRCodeView *_qrcodeView;//生成的二维码所在的视图
     UIImageView *_qrCodeImgView;//生成的二维码视图（UIImageView）
+    UITextField *_enterVerificationTF;//输入验证码的textField
 }
 @property (nonatomic, strong)UIView          *qrView;//装载扫描生成二维码按钮的view
 
@@ -85,8 +90,8 @@
     //生成客户二维码
     [self createQR];
     
-    //发送手机验证码
-    [self createYanzhengma];
+    //输入商户验证码
+    [self enterYanzhengma];
 }
 
 //扫描商家二维码
@@ -129,21 +134,21 @@
 }
 
 //输入商户手机验证码
-- (void)createYanzhengma
+- (void)enterYanzhengma
 {
-    UIButton *createYanzhengmaBtn = [[UIButton alloc] initWithFrame:CGRectMake(kEdgeWidth*3 + 200, 0, 100, 100)];
-    [createYanzhengmaBtn addTarget:self action:@selector(createYanzhengmaBtnAction) forControlEvents:UIControlEventTouchUpInside];
+    UIButton *enterYanzhengmaBtn = [[UIButton alloc] initWithFrame:CGRectMake(kEdgeWidth*3 + 200, 0, 100, 100)];
+    [enterYanzhengmaBtn addTarget:self action:@selector(enterYanzhengmaBtnAction) forControlEvents:UIControlEventTouchUpInside];
     
-    [createYanzhengmaBtn setImage:[UIImage imageNamed:@"yanzhengma"] forState:UIControlStateNormal];
-    createYanzhengmaBtn.imageEdgeInsets = UIEdgeInsetsMake(10, 25, 40, 25);
+    [enterYanzhengmaBtn setImage:[UIImage imageNamed:@"yanzhengma"] forState:UIControlStateNormal];
+    enterYanzhengmaBtn.imageEdgeInsets = UIEdgeInsetsMake(10, 25, 40, 25);
     
-    [createYanzhengmaBtn setTitle:@"输入商户验证码" forState:UIControlStateNormal];
-    createYanzhengmaBtn.titleLabel.font = [UIFont systemFontOfSize:12.0];
-    createYanzhengmaBtn.titleLabel.textAlignment = NSTextAlignmentCenter;
-    [createYanzhengmaBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    createYanzhengmaBtn.titleEdgeInsets = UIEdgeInsetsMake(70, -createYanzhengmaBtn.titleLabel.bounds.size.width - 150, 20, 0);
+    [enterYanzhengmaBtn setTitle:@"输入商户验证码" forState:UIControlStateNormal];
+    enterYanzhengmaBtn.titleLabel.font = [UIFont systemFontOfSize:12.0];
+    enterYanzhengmaBtn.titleLabel.textAlignment = NSTextAlignmentCenter;
+    [enterYanzhengmaBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    enterYanzhengmaBtn.titleEdgeInsets = UIEdgeInsetsMake(70, -enterYanzhengmaBtn.titleLabel.bounds.size.width - 150, 20, 0);
     
-    [_qrView addSubview:createYanzhengmaBtn];
+    [_qrView addSubview:enterYanzhengmaBtn];
     
 }
 
@@ -401,10 +406,109 @@ void ProviderReleaseData (void *info, const void *data, size_t size){
 
 #pragma mark ------ <3>输入验证码~
 //输入商户手机验证码下单
-- (void)createYanzhengmaBtnAction
+- (void)enterYanzhengmaBtnAction
 {
     NSLog(@"输入商户手机验证码");
+    
+    /* 装有二维码以及上下两个label的视图 */
+    EnterVerificationCodeView *enterVerificationCodeView = [[EnterVerificationCodeView alloc] initWithFrame:CGRectMake(kLeftEdge, 150*kRate, kEnterVerificationCodeViewWidth, kEnterVerificationCodeViewWidth*0.571)];
+    enterVerificationCodeView.image = [UIImage imageNamed:@"enterVerificationCode"];
+    enterVerificationCodeView.layer.cornerRadius = 5.0*kRate;
+    enterVerificationCodeView.userInteractionEnabled = YES;
+    enterVerificationCodeView.parentVC = self;
+    [self lew_presentPopupView:enterVerificationCodeView animation:[LewPopupViewAnimationFade new] dismissed:^{
+        NSLog(@"生成手机验证码结束");
+    }];
+    
+    /* 上面的titleLabel */
+    UILabel *upLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 15*kRate, kEnterVerificationCodeViewWidth, 20*kRate)];
+    upLabel.text = @"请输入商家生成的验证码，完成下单~😁";
+    upLabel.font = [UIFont systemFontOfSize:16.0*kRate];
+    upLabel.textColor = [UIColor whiteColor];
+    upLabel.textAlignment = NSTextAlignmentCenter;
+    [enterVerificationCodeView addSubview:upLabel];
+    
+    /* 中间的输入验证码的TextField */
+    _enterVerificationTF = [[UITextField alloc] initWithFrame:CGRectMake(0, 50*kRate, kEnterVerificationCodeViewWidth, 60*kRate)];
+    _enterVerificationTF.placeholder = @"点击此处输入验证码";
+    _enterVerificationTF.delegate = self;
+    _enterVerificationTF.returnKeyType = UIReturnKeyDone;
+    _enterVerificationTF.clearButtonMode = UITextFieldViewModeWhileEditing;
+    _enterVerificationTF.keyboardType = UIKeyboardTypeNumberPad;
+    _enterVerificationTF.textAlignment = NSTextAlignmentCenter;
+    _enterVerificationTF.font = [UIFont systemFontOfSize:30.0*kRate];
+    [enterVerificationCodeView addSubview:_enterVerificationTF];
+
+    
+    /* 下面的确定按钮 */
+    UIButton *submitBtn = [[UIButton alloc] initWithFrame:CGRectMake((kEnterVerificationCodeViewWidth - kSubmitBtnWidth)/2, 135*kRate, kSubmitBtnWidth, kSubmitBtnWidth*0.4)];
+    [submitBtn addTarget:self action:@selector(submitBtnAction) forControlEvents:UIControlEventTouchUpInside];
+    [submitBtn setImage:[UIImage imageNamed:@"enterVerificationCodeSubmit"] forState:UIControlStateNormal];
+    [enterVerificationCodeView addSubview:submitBtn];
 }
+
+        //确定按钮Action
+- (void)submitBtnAction
+{
+    [self.view endEditing:YES];
+    
+    if (_enterVerificationTF.text.length > 0) {
+        
+        //获取到存储在本地的uid、uname、uphone
+        NSString *uid = [[self getLocalDic] objectForKey:@"uid"];
+        NSString *uname = [[self getLocalDic] objectForKey:@"realname"];
+        NSString *uphone = [[self getLocalDic] objectForKey:@"phone"];
+        
+        //发起网络请求，进行下单
+        NSString *url_post = [NSString stringWithFormat:@"http://%@createOrder.action", kHead];
+        
+        NSDictionary *params = @{
+                                 @"uid":uid,//用户id
+                                 @"mid":_storeModel.mid,//商户id
+                                 @"otype":@"2",//1预约订单，2正式订单，写死传2
+                                 @"superid":_sid,//一级服务id,sid
+                                 @"urealname":uname,//用户名字
+                                 @"uphone":uphone,//用户电话
+                                 @"oway":@"3",//下单方式，写死传3（用户输入验证码）
+                                 @"ordercode":_enterVerificationTF.text//商户下单码，用户输入验证码下单的时候传递，其他不传递
+                                 };
+        
+//        NSLog(@"%@?uid=%@&mid=%@&otype=2&superid=%@&mname=%@&mphone=%@&oway=3&ordercode=%@", url_post, uid, _storeModel.mid, _sid, uname, uphone, _enterVerificationTF.text);
+        
+        AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+        AFHTTPResponseSerializer *responseSerializer = [AFHTTPResponseSerializer serializer];
+        manager.responseSerializer = responseSerializer;
+        
+        [manager POST:url_post parameters:params progress:NULL success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+            
+            NSDictionary *content = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+            NSLog(@"下单，请求下来的Json格式的数据是%@", content);
+            
+            NSString *result = [content objectForKey:@"result"];
+            if ([result isEqual:@"success"]) {
+                
+                //提示下单成功
+                [self showAlertViewWithTitle:@"下单成功" WithMessage:@"请到“我的-我的订单”页面查看您的订单详细信息"];
+                [self lew_dismissPopupView];//隐藏输入验证码页面，防止重复下单
+                
+            } else if ([result isEqual:@"fail"]) {
+                
+                //提示下单失败，将errormsg显示出来
+                NSString *errMsg = [content objectForKey:@"errormsg"];
+                [self showAlertViewWithTitle:@"下单失败" WithMessage:errMsg];
+                
+            }
+            
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            NSLog(@"请求失败， 失败原因是：%@", error);
+        }];
+        
+    } else {
+        [self showAlertViewWithTitle:@"提示" WithMessage:@"请输入您的验证码"];
+    }
+    
+}
+
 
 #pragma  mark --  注意事项
 - (void)addMettersNeedingAttention
