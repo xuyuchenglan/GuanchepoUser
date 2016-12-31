@@ -37,6 +37,7 @@
     //第三块内容
     UITableView *_tableView;
 }
+@property (nonatomic, assign)BOOL isSigned;//是否已签到
 @end
 
 @implementation AboutViewController
@@ -131,7 +132,12 @@
 {
     _signInBtn = [[UIButton alloc] initWithFrame:CGRectMake(kScreenWidth/2 - kSignBtnWidth/2, CGRectGetMaxY(_up_bgView.frame) - kSignBtnWidth/2, kSignBtnWidth, kSignBtnWidth)];
     [_signInBtn setBackgroundImage:[UIImage imageNamed:@"about_first_circle"] forState:UIControlStateNormal];
-    [_signInBtn setTitle:@"签到" forState:UIControlStateNormal];
+    if (_isSigned) {
+        [_signInBtn setTitle:@"已签到" forState:UIControlStateNormal];
+    } else {
+        [_signInBtn setTitle:@"签到" forState:UIControlStateNormal];
+    }
+    
     [_signInBtn setTitleColor:kRGBColor(0, 126, 255) forState:UIControlStateNormal];
     _signInBtn.titleLabel.font = [UIFont systemFontOfSize:14.0*kRate];
     [_signInBtn addTarget:self action:@selector(signInBtnAction) forControlEvents:UIControlEventTouchUpInside];
@@ -574,6 +580,11 @@
         NSDictionary *content = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
         
         NSDictionary *jsonDataDic = [content objectForKey:@"jsondata"];
+        
+        NSString *signTime = [jsonDataDic objectForKey:@"sign"];
+        if (signTime.length > 0) {
+            _isSigned = YES;//签到状态
+        }
         
         //更新缓存的数据
         [self saveDataToPlistWithDic:jsonDataDic];
