@@ -48,8 +48,12 @@
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getOrder) name:@"cancelAppointment" object:nil];
     }
     
-    if ([_type isEqualToString:@"3"] || [_type isEqualToString:@"4"]) {//监听评论完成时发送过来的通知,以刷新“已完成”和“已评价”页面
+    if ([_type isEqualToString:@"0"] || [_type isEqualToString:@"3"] || [_type isEqualToString:@"4"]) {//监听评论完成时发送过来的通知,以刷新"全部"、“已完成”和“已评价”页面
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getOrder) name:@"completeComment" object:nil];
+    }
+    
+    if ([_type isEqualToString:@"0"] || [_type isEqualToString:@"2"] || [_type isEqualToString:@"3"]) {//上传凭证完成时发送过来的通知,以刷新"全部"、“未完成”和“已完成”页面
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getOrder) name:@"documentsUploaded" object:nil];
     }
     
     //网络请求订单列表数据
