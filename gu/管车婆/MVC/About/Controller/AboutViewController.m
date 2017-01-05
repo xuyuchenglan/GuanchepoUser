@@ -49,6 +49,9 @@
         //网络请求用户数据
         [self getUserInfo];
         
+        //网络请求分享数据
+        [self getShareInfo];
+        
     }
     return self;
 }
@@ -492,6 +495,7 @@
             
             NSLog(@"邀请好友");
             
+            
         } else {
             
             NSLog(@"我要卖卡");
@@ -661,5 +665,20 @@
     NSString *plistPath1 = [paths objectAtIndex:0];
     NSString *filename=[plistPath1 stringByAppendingPathComponent:@"my.plist"];
     [contentDic  writeToFile:filename atomically:YES];
+}
+
+#pragma mark --- 请求分享数据
+- (void)getShareInfo
+{
+    NSString *url_get = [NSString stringWithFormat:@"http://%@getShareInfo.action", kHead];
+    
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];//单例
+    manager.requestSerializer = [AFHTTPRequestSerializer serializer];
+    manager.responseSerializer = [AFJSONResponseSerializer serializer];
+    [manager GET:url_get parameters:nil progress:NULL success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        
+        NSLog(@"分享数据请求成功，相应内容是%@", responseObject);
+        
+    } failure:nil];
 }
 @end

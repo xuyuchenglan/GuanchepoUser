@@ -10,4 +10,6 @@
 
 @interface BuyCouponVC : ParentViewController
 
+@property (nonatomic, strong)NSString *mid;
+
 @end

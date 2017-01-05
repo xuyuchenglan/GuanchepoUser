@@ -12,6 +12,7 @@
 
 @property (nonatomic, strong)NSString *title;
 @property (nonatomic, strong)NSString *subTitle;
+@property (nonatomic, strong)NSString *sid;
 @property (nonatomic, strong)NSString *charge;
 
 

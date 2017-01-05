@@ -44,7 +44,6 @@
 {
     _membershipModels = [NSMutableArray array];
     
-    NSLog(@"%@", [self getLocalDic]);
     NSDictionary *localDic = [self getLocalDic];
     NSString *name = [NSString stringWithFormat:@"姓名：%@", [localDic objectForKey:@"realname"]];
     NSString *carno = [NSString stringWithFormat:@"车牌号：%@", [localDic objectForKey:@"carno"]];
