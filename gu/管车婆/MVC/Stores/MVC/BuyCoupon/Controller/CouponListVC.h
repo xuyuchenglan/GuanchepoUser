@@ -11,5 +11,6 @@
 @interface CouponListVC : UIViewController
 
 @property (nonatomic, strong)NSString *type;
+@property (nonatomic, copy)NSArray *couponModels;
 
 @end

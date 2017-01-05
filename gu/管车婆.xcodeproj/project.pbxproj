@@ -145,6 +145,11 @@
 		D0A30F721E14A32000F0AD80 /* about_order_star_gray.png in Resources */ = {isa = PBXBuildFile; fileRef = D0A30F701E14A32000F0AD80 /* about_order_star_gray.png */; };
 		D0A30F731E14A32000F0AD80 /* about_order_star_red.png in Resources */ = {isa = PBXBuildFile; fileRef = D0A30F711E14A32000F0AD80 /* about_order_star_red.png */; };
 		D0A30F7E1E14E6DB00F0AD80 /* PlaceholderTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = D0A30F7D1E14E6DB00F0AD80 /* PlaceholderTextView.m */; };
+		D0A30F811E15EAD900F0AD80 /* ViewEvaluationVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D0A30F801E15EAD900F0AD80 /* ViewEvaluationVC.m */; };
+		D0A30F841E15F47B00F0AD80 /* UIResponder+GetDate.m in Sources */ = {isa = PBXBuildFile; fileRef = D0A30F831E15F47B00F0AD80 /* UIResponder+GetDate.m */; };
+		D0A30F8A1E163D4C00F0AD80 /* EnterVerificationCodeView.m in Sources */ = {isa = PBXBuildFile; fileRef = D0A30F891E163D4C00F0AD80 /* EnterVerificationCodeView.m */; };
+		D0A30F8C1E1643BB00F0AD80 /* enterVerificationCode.png in Resources */ = {isa = PBXBuildFile; fileRef = D0A30F8B1E1643BB00F0AD80 /* enterVerificationCode.png */; };
+		D0A30F8E1E16488F00F0AD80 /* enterVerificationCodeSubmit.png in Resources */ = {isa = PBXBuildFile; fileRef = D0A30F8D1E16488F00F0AD80 /* enterVerificationCodeSubmit.png */; };
 		D0A4B49C1DBB4163005C8C79 /* OrderInfoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D0A4B49B1DBB4163005C8C79 /* OrderInfoVC.m */; };
 		D0A4B4A31DBB46CF005C8C79 /* OrderContentInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = D0A4B49E1DBB46CF005C8C79 /* OrderContentInfoView.m */; };
 		D0A4B4A41DBB46CF005C8C79 /* OrderContentMoreView.m in Sources */ = {isa = PBXBuildFile; fileRef = D0A4B4A01DBB46CF005C8C79 /* OrderContentMoreView.m */; };
@@ -521,6 +526,14 @@
 		D0A30F711E14A32000F0AD80 /* about_order_star_red.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = about_order_star_red.png; sourceTree = "<group>"; };
 		D0A30F7C1E14E6DB00F0AD80 /* PlaceholderTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlaceholderTextView.h; sourceTree = "<group>"; };
 		D0A30F7D1E14E6DB00F0AD80 /* PlaceholderTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlaceholderTextView.m; sourceTree = "<group>"; };
+		D0A30F7F1E15EAD900F0AD80 /* ViewEvaluationVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewEvaluationVC.h; sourceTree = "<group>"; };
+		D0A30F801E15EAD900F0AD80 /* ViewEvaluationVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewEvaluationVC.m; sourceTree = "<group>"; };
+		D0A30F821E15F47B00F0AD80 /* UIResponder+GetDate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIResponder+GetDate.h"; sourceTree = "<group>"; };
+		D0A30F831E15F47B00F0AD80 /* UIResponder+GetDate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIResponder+GetDate.m"; sourceTree = "<group>"; };
+		D0A30F881E163D4C00F0AD80 /* EnterVerificationCodeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnterVerificationCodeView.h; sourceTree = "<group>"; };
+		D0A30F891E163D4C00F0AD80 /* EnterVerificationCodeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnterVerificationCodeView.m; sourceTree = "<group>"; };
+		D0A30F8B1E1643BB00F0AD80 /* enterVerificationCode.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = enterVerificationCode.png; sourceTree = "<group>"; };
+		D0A30F8D1E16488F00F0AD80 /* enterVerificationCodeSubmit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = enterVerificationCodeSubmit.png; sourceTree = "<group>"; };
 		D0A4B49A1DBB4163005C8C79 /* OrderInfoVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderInfoVC.h; sourceTree = "<group>"; };
 		D0A4B49B1DBB4163005C8C79 /* OrderInfoVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderInfoVC.m; sourceTree = "<group>"; };
 		D0A4B49D1DBB46CF005C8C79 /* OrderContentInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderContentInfoView.h; sourceTree = "<group>"; };
@@ -935,6 +948,8 @@
 				D026E9B21DF56A8D00C563D8 /* UIViewController+ShowAlertView.m */,
 				D026E9D31DFE836A00C563D8 /* UIResponder+GetLocalDic.h */,
 				D026E9D41DFE836A00C563D8 /* UIResponder+GetLocalDic.m */,
+				D0A30F821E15F47B00F0AD80 /* UIResponder+GetDate.h */,
+				D0A30F831E15F47B00F0AD80 /* UIResponder+GetDate.m */,
 				D0758A771D9CAF710071D8A6 /* Login */,
 				D0C5F9D61D9A0DCA00D00B85 /* MVC */,
 				D00F8CE11D9A0A1B00AD7CC8 /* Assets.xcassets */,
@@ -1145,6 +1160,8 @@
 			children = (
 				D0A1D8111E02813D00BB8D34 /* QRCodeView.h */,
 				D0A1D8121E02813D00BB8D34 /* QRCodeView.m */,
+				D0A30F881E163D4C00F0AD80 /* EnterVerificationCodeView.h */,
+				D0A30F891E163D4C00F0AD80 /* EnterVerificationCodeView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1185,6 +1202,8 @@
 				D0A4B49B1DBB4163005C8C79 /* OrderInfoVC.m */,
 				D04F2B801E1102600085F879 /* EvaluationVC.h */,
 				D04F2B811E1102600085F879 /* EvaluationVC.m */,
+				D0A30F7F1E15EAD900F0AD80 /* ViewEvaluationVC.h */,
+				D0A30F801E15EAD900F0AD80 /* ViewEvaluationVC.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1324,6 +1343,8 @@
 				D026E9EC1DFFC4DA00C563D8 /* scanQR.png */,
 				D026E9ED1DFFC4DA00C563D8 /* yanzhengma.png */,
 				D0A1D8281E02878400BB8D34 /* createQR_bg.png */,
+				D0A30F8B1E1643BB00F0AD80 /* enterVerificationCode.png */,
+				D0A30F8D1E16488F00F0AD80 /* enterVerificationCodeSubmit.png */,
 			);
 			path = Stores;
 			sourceTree = "<group>";
@@ -2440,6 +2461,7 @@
 				D0758AB71D9E17C50071D8A6 /* about_tableview_membership.png in Resources */,
 				D0C5FA211D9A4D0100D00B85 /* home_navbar_search.png in Resources */,
 				D0758AA91D9E17C50071D8A6 /* about_second_all.png in Resources */,
+				D0A30F8C1E1643BB00F0AD80 /* enterVerificationCode.png in Resources */,
 				D09BC1691DC865740035DE65 /* alipay.png in Resources */,
 				D037E5D01DB07FD9008D14E7 /* home_top_weather.png in Resources */,
 				D006C25E1DB9F30E0017FCD5 /* about_order_head_placeholdre.png in Resources */,
@@ -2519,6 +2541,7 @@
 				D006C25D1DB9F30E0017FCD5 /* about_order_head.png in Resources */,
 				D0F4B7551DD6F64900F3CD5F /* icon29.png in Resources */,
 				D0EE8B001DC1E59A00468B8A /* carOwners_like_blue.png in Resources */,
+				D0A30F8E1E16488F00F0AD80 /* enterVerificationCodeSubmit.png in Resources */,
 				D04C80591DC0ABE700C72829 /* carOwners_like.png in Resources */,
 				D0F4B75B1DD6F64900F3CD5F /* icon60@2x.png in Resources */,
 				D0C5FA491D9A5E7000D00B85 /* home_second_zhenpi.png in Resources */,
@@ -2654,11 +2677,13 @@
 			files = (
 				D00F8CDA1D9A0A1B00AD7CC8 /* AppDelegate.m in Sources */,
 				D032F9DA1DB740B10052562D /* WeatherCell.m in Sources */,
+				D0A30F841E15F47B00F0AD80 /* UIResponder+GetDate.m in Sources */,
 				D0139A9F1DD5B7DA005141F2 /* CashWithdrawalVC.m in Sources */,
 				D0758A801D9CB0FB0071D8A6 /* VerificationCodeLoginVC.m in Sources */,
 				D026E9E41DFE97C500C563D8 /* LWOrderVC.m in Sources */,
 				D052B2031E00EDA1006E74C1 /* ItemStoresVC.m in Sources */,
 				D0758A8D1D9CF0030071D8A6 /* LoginParentVC.m in Sources */,
+				D0A30F811E15EAD900F0AD80 /* ViewEvaluationVC.m in Sources */,
 				D006C2511DB8C12A0017FCD5 /* OrderModel.m in Sources */,
 				D0A4B4A31DBB46CF005C8C79 /* OrderContentInfoView.m in Sources */,
 				D00F8D0A1D9A0AEF00AD7CC8 /* MainViewController.m in Sources */,
@@ -2695,6 +2720,7 @@
 				D0139A9C1DD5A20A005141F2 /* BalanceViewController.m in Sources */,
 				D01CB9CE1DA8855600DD5527 /* ProtocolViewController.m in Sources */,
 				D0C5F9F51D9A0F4F00D00B85 /* AboutViewController.m in Sources */,
+				D0A30F8A1E163D4C00F0AD80 /* EnterVerificationCodeView.m in Sources */,
 				D0FA2AF31DCAE48100BCA242 /* CarCouponVC.m in Sources */,
 				D026E9CF1DFBD56D00C563D8 /* MembershipServicesView.m in Sources */,
 				D0A1D8131E02813D00BB8D34 /* QRCodeView.m in Sources */,

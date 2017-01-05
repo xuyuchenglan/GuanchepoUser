@@ -119,6 +119,7 @@
     [manager POST:url_post parameters:params progress:NULL success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
         NSDictionary *content = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+        NSLog(@"优惠券列表：%@", content);
         
         NSArray *jsondataArr = [content objectForKey:@"jsondata"];
         

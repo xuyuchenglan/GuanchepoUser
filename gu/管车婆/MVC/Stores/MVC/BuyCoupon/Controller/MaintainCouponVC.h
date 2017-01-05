@@ -10,4 +10,6 @@
 
 @interface MaintainCouponVC : UIViewController
 
+@property (nonatomic, copy)NSArray *couponModels;
+
 @end

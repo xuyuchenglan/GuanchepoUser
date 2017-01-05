@@ -9,6 +9,7 @@
 #import "OrderCell.h"
 #import "ItemAndCountView.h"
 #import "EvaluationVC.h"
+#import "ViewEvaluationVC.h"
 
 @interface OrderCell()
 {
@@ -259,6 +260,11 @@
     } else if ([_orderModel.pjState isEqualToString:@"已评价"]) {
         
         NSLog(@"查看评论");
+        ViewEvaluationVC *viewEvaluationVC = [[ViewEvaluationVC alloc] init];
+        viewEvaluationVC.orderModel = _orderModel;
+        viewEvaluationVC.hidesBottomBarWhenPushed = YES;
+        [self.vc.navigationController pushViewController:viewEvaluationVC animated:NO];
+        viewEvaluationVC.hidesBottomBarWhenPushed = NO;
         
     }
     

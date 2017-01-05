@@ -15,7 +15,8 @@
     if (self = [super init]) {
         
         self.title = [dic objectForKey:@"name"];
-        
+        self.charge = [dic objectForKey:@"price"];
+        self.sid = [dic objectForKey:@"sid"];
         
     }
     

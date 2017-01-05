@@ -400,9 +400,8 @@
         if ([result isEqual:@"success"]) {
             
             NSLog(@"上传凭证成功");
-            //把刚刚上传的凭证显示出来，两种方式，直接根据返回的url加载，或者刷新一下UI
-            //给OrderInfoVC页面发送一个通知,刷新UI
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadOrderInfoView" object:self];
+            //刷新UI,更新“全部”、“未完成”和“已完成”页面
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"documentsUploaded" object:self];
             
         } else {
             

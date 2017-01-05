@@ -37,6 +37,7 @@
     //第三块内容
     UITableView *_tableView;
 }
+@property (nonatomic, assign)BOOL isSigned;//是否已签到
 @end
 
 @implementation AboutViewController
@@ -47,6 +48,9 @@
         
         //网络请求用户数据
         [self getUserInfo];
+        
+        //网络请求分享数据
+        [self getShareInfo];
         
     }
     return self;
@@ -131,7 +135,12 @@
 {
     _signInBtn = [[UIButton alloc] initWithFrame:CGRectMake(kScreenWidth/2 - kSignBtnWidth/2, CGRectGetMaxY(_up_bgView.frame) - kSignBtnWidth/2, kSignBtnWidth, kSignBtnWidth)];
     [_signInBtn setBackgroundImage:[UIImage imageNamed:@"about_first_circle"] forState:UIControlStateNormal];
-    [_signInBtn setTitle:@"签到" forState:UIControlStateNormal];
+    if (_isSigned) {
+        [_signInBtn setTitle:@"已签到" forState:UIControlStateNormal];
+    } else {
+        [_signInBtn setTitle:@"签到" forState:UIControlStateNormal];
+    }
+    
     [_signInBtn setTitleColor:kRGBColor(0, 126, 255) forState:UIControlStateNormal];
     _signInBtn.titleLabel.font = [UIFont systemFontOfSize:14.0*kRate];
     [_signInBtn addTarget:self action:@selector(signInBtnAction) forControlEvents:UIControlEventTouchUpInside];
@@ -486,6 +495,7 @@
             
             NSLog(@"邀请好友");
             
+            
         } else {
             
             NSLog(@"我要卖卡");
@@ -575,6 +585,11 @@
         
         NSDictionary *jsonDataDic = [content objectForKey:@"jsondata"];
         
+        NSString *signTime = [jsonDataDic objectForKey:@"sign"];
+        if (signTime.length > 0) {
+            _isSigned = YES;//签到状态
+        }
+        
         //更新缓存的数据
         [self saveDataToPlistWithDic:jsonDataDic];
         
@@ -650,5 +665,20 @@
     NSString *plistPath1 = [paths objectAtIndex:0];
     NSString *filename=[plistPath1 stringByAppendingPathComponent:@"my.plist"];
     [contentDic  writeToFile:filename atomically:YES];
+}
+
+#pragma mark --- 请求分享数据
+- (void)getShareInfo
+{
+    NSString *url_get = [NSString stringWithFormat:@"http://%@getShareInfo.action", kHead];
+    
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];//单例
+    manager.requestSerializer = [AFHTTPRequestSerializer serializer];
+    manager.responseSerializer = [AFJSONResponseSerializer serializer];
+    [manager GET:url_get parameters:nil progress:NULL success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        
+        NSLog(@"分享数据请求成功，相应内容是%@", responseObject);
+        
+    } failure:nil];
 }
 @end
