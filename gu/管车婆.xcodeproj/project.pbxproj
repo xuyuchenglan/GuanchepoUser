@@ -84,6 +84,7 @@
 		D052B2031E00EDA1006E74C1 /* ItemStoresVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D052B2021E00EDA1006E74C1 /* ItemStoresVC.m */; };
 		D052B2061E00FB0E006E74C1 /* ItemStoresListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D052B2051E00FB0E006E74C1 /* ItemStoresListVC.m */; };
 		D0629F291DC6CD3400076CF4 /* CompanyCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = D0629F281DC6CD3400076CF4 /* CompanyCardView.m */; };
+		D06A7D3E1E1E45C800E0E44D /* ShareModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D06A7D3D1E1E45C800E0E44D /* ShareModel.m */; };
 		D06DEC831DBF5DFD00B8B04D /* MaintainItemsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D06DEC821DBF5DFD00B8B04D /* MaintainItemsVC.m */; };
 		D0758A621D9C9F300071D8A6 /* StoreCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D0758A611D9C9F300071D8A6 /* StoreCell.m */; };
 		D0758A651D9C9FD80071D8A6 /* StoreModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D0758A641D9C9FD80071D8A6 /* StoreModel.m */; };
@@ -438,6 +439,8 @@
 		D052B2051E00FB0E006E74C1 /* ItemStoresListVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemStoresListVC.m; sourceTree = "<group>"; };
 		D0629F271DC6CD3400076CF4 /* CompanyCardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CompanyCardView.h; sourceTree = "<group>"; };
 		D0629F281DC6CD3400076CF4 /* CompanyCardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CompanyCardView.m; sourceTree = "<group>"; };
+		D06A7D3C1E1E45C800E0E44D /* ShareModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareModel.h; sourceTree = "<group>"; };
+		D06A7D3D1E1E45C800E0E44D /* ShareModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareModel.m; sourceTree = "<group>"; };
 		D06DEC811DBF5DFD00B8B04D /* MaintainItemsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MaintainItemsVC.h; sourceTree = "<group>"; };
 		D06DEC821DBF5DFD00B8B04D /* MaintainItemsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MaintainItemsVC.m; sourceTree = "<group>"; };
 		D0758A601D9C9F300071D8A6 /* StoreCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoreCell.h; sourceTree = "<group>"; };
@@ -1629,6 +1632,8 @@
 			children = (
 				D026E9C61DFA9D6400C563D8 /* AboutModel.h */,
 				D026E9C71DFA9D6400C563D8 /* AboutModel.m */,
+				D06A7D3C1E1E45C800E0E44D /* ShareModel.h */,
+				D06A7D3D1E1E45C800E0E44D /* ShareModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2731,6 +2736,7 @@
 				D04C804D1DC07C9900C72829 /* MaintainItemCell.m in Sources */,
 				D0C5F9EF1D9A0F2A00D00B85 /* StoresViewController.m in Sources */,
 				D026E9EA1DFF922800C563D8 /* AppointOnLineView.m in Sources */,
+				D06A7D3E1E1E45C800E0E44D /* ShareModel.m in Sources */,
 				D032F9E51DB76A400052562D /* OrderListVC.m in Sources */,
 				D0758A7D1D9CB0340071D8A6 /* LoginViewController.m in Sources */,
 				D04F2B851E1266FB0085F879 /* LWAppointmentCell.m in Sources */,
@@ -2950,9 +2956,10 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = RRJR6A5BF9;
+				ENABLE_BITCODE = NO;
 				GCC_PREFIX_HEADER = "/Users/liwei/Git/GuanchepoUser/gu/管车婆/PrefixHeader.pch";
 				INFOPLIST_FILE = "管车婆/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.yuanheng.GuanchepoUser;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2969,9 +2976,10 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = RRJR6A5BF9;
+				ENABLE_BITCODE = NO;
 				GCC_PREFIX_HEADER = "/Users/liwei/Git/GuanchepoUser/gu/管车婆/PrefixHeader.pch";
 				INFOPLIST_FILE = "管车婆/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.yuanheng.GuanchepoUser;
 				PRODUCT_NAME = "$(TARGET_NAME)";

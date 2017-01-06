@@ -18,11 +18,17 @@
 #import "BalanceViewController.h"
 #import "AboutModel.h"
 #import "MyMembershipCardViewController.h"
+#import "UMSocial.h"
+#import "UMSocialWechatHandler.h"
+#import "UMSocialQQHandler.h"
+#import "UMSocialSinaSSOHandler.h"
+#import "ShareModel.h"
 
+#define kUmengAppkey @"586e0429c62dca606900044f"
 #define kSignBtnWidth 60*kRate
 #define kEdgeWidth    (kScreenWidth - 60*kRate*5)/6
 
-@interface AboutViewController ()<UITableViewDelegate, UITableViewDataSource>
+@interface AboutViewController ()<UITableViewDelegate, UITableViewDataSource, UMSocialUIDelegate>
 {
     UIScrollView *_scrollView;//滑动视图（所有的控件都加在这上面）
     
@@ -38,6 +44,7 @@
     UITableView *_tableView;
 }
 @property (nonatomic, assign)BOOL isSigned;//是否已签到
+@property (nonatomic, strong)ShareModel *shareModel;
 @end
 
 @implementation AboutViewController
@@ -494,7 +501,7 @@
         } else if (indexPath.row == 1) {
             
             NSLog(@"邀请好友");
-            
+            [self setShare];
             
         } else {
             
@@ -560,6 +567,61 @@
     [super viewDidDisappear:animated];
     
     [self.navigationController setNavigationBarHidden:NO animated:animated];
+}
+
+#pragma mark
+#pragma mark 邀请好友，分享管家婆
+- (void)setShare
+{
+    /*
+     要分享的标题title
+     */
+    [UMSocialData defaultData].extConfig.title = _shareModel.shareTitle;
+    
+    
+    /*
+     当分享消息类型为图文时，点击分享内容会跳转到预设的链接（注意设置的链接必须为http或https链接）
+     */
+    [UMSocialData defaultData].extConfig.wechatSessionData.url = _shareModel.shareLink;//微信好友
+    [UMSocialData defaultData].extConfig.wechatTimelineData.url = _shareModel.shareLink;//微信朋友圈
+    [UMSocialData defaultData].extConfig.qqData.url = _shareModel.shareLink;//QQ好友
+    [UMSocialData defaultData].extConfig.qzoneData.url = _shareModel.shareLink;//QQ空间
+    
+    
+    /*
+     分享的内容
+     */
+    //作如下判断主要是为了防止获取不到网络图片时导致分享链接失效（图文类型时链接才生效，没有图片就不是图文类型）
+    if (_shareModel.shareImg) {
+        
+        [UMSocialSnsService presentSnsIconSheetView:self
+                                             appKey:kUmengAppkey
+                                          shareText:_shareModel.shareContent//要分享的文字
+                                         shareImage:_shareModel.shareImg//要分享的图片.
+                                    shareToSnsNames:@[UMShareToWechatSession,UMShareToWechatTimeline,UMShareToSina,UMShareToQQ,UMShareToQzone]//要分享到的平台。分享面板中各个分享平台的排列顺序是按照这里的顺序的。
+                                           delegate:self];
+        
+    } else {
+        
+        [UMSocialSnsService presentSnsIconSheetView:self
+                                             appKey:kUmengAppkey
+                                          shareText:_shareModel.shareContent//要分享的文字
+                                         shareImage:[UIImage imageNamed:@"icon83.5@2x"]//要分享的图片.
+                                    shareToSnsNames:@[UMShareToWechatSession,UMShareToWechatTimeline,UMShareToSina,UMShareToQQ,UMShareToQzone]//要分享到的平台。分享面板中各个分享平台的排列顺序是按照这里的顺序的。
+                                           delegate:self];
+        
+    }
+}
+
+//分享成功并且返回客户端后回调的方法（如果留在分享到的平台如QQ,那么不会回调该方法）
+-(void)didFinishGetUMSocialDataInViewController:(UMSocialResponseEntity *)response
+{
+    //根据`responseCode`得到发送结果,如果分享成功
+    if(response.responseCode == UMSResponseCodeSuccess)
+    {
+        //得到分享到的平台名（即分享到哪个平台了）
+        NSLog(@"share to sns name is %@",[[response.data allKeys] objectAtIndex:0]);
+    }
 }
 
 #pragma mark
@@ -677,7 +739,8 @@
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
     [manager GET:url_get parameters:nil progress:NULL success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
-        NSLog(@"分享数据请求成功，相应内容是%@", responseObject);
+        NSDictionary *jsondataDic = [responseObject objectForKey:@"jsondata"];
+        _shareModel = [[ShareModel alloc] initWithDic:jsondataDic];
         
     } failure:nil];
 }
