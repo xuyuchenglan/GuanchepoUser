@@ -23,6 +23,7 @@
 #import "UMSocialQQHandler.h"
 #import "UMSocialSinaSSOHandler.h"
 #import "ShareModel.h"
+#import "FeedbackViewController.h"
 
 #define kUmengAppkey @"586e0429c62dca606900044f"
 #define kSignBtnWidth 60*kRate
@@ -516,6 +517,10 @@
         if (indexPath.row == 0) {
             
             NSLog(@"意见反馈");
+    
+            FeedbackViewController *feedbackVC = [[FeedbackViewController alloc] init];
+            feedbackVC.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:feedbackVC animated:NO];
             
         } else if (indexPath.row == 1) {
             
