@@ -8,6 +8,9 @@
 
 #import "ParentViewController.h"
 
+
 @interface MaintainItemsVC : ParentViewController
+
+@property (nonatomic, copy)NSArray *couponModels;
 
 @end

@@ -30,7 +30,7 @@
 #import "UIResponder+FindResponderVC.h"
 #import "AFNetworking.h"
 #import "UIViewController+ShowAlertView.h"
-#import "UIResponder+GetLocalDic.h"
+#import "NSObject+GetLocalDic.h"
 #import "UIImageView+WebCache.h"
 #import <SDWebImage/UIButton+WebCache.h>
 #import "UIResponder+GetDate.h"

@@ -75,8 +75,6 @@
             make.top.equalTo(_titleLB.mas_bottom).with.offset(10*kRate);
         }];
         
-        
-        
     }
     
     return self;
@@ -84,8 +82,10 @@
 
 - (void)layoutSubviews
 {
-    _titleLB.text = @"普通洗车-5座轿车";
-    _chargeLB.text = @"66元";
+//    _titleLB.text = @"普通洗车-5座轿车";
+    _titleLB.text = _couponModel.title;
+//    _chargeLB.text = @"66元";
+    _chargeLB.text = [NSString stringWithFormat:@"%@元", _couponModel.charge];
     _subTitleLB.text = @"整车泡沫清洗， 轮胎轮毂冲洗，车内吸尘，内饰简单清洗";
 }
 

@@ -321,7 +321,7 @@
     NSLog(@"买券");
     
     BuyCouponVC *buyCouponVC = [[BuyCouponVC alloc] init];
-    buyCouponVC.mid = _storeModel.mid;
+    buyCouponVC.storeModel = _storeModel;
     buyCouponVC.hidesBottomBarWhenPushed = YES;
     [self.vc.navigationController pushViewController:buyCouponVC animated:NO];
 }

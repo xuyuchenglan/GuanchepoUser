@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CouponModel.h"
 
 @interface MaintainItemCell : UITableViewCell
+
+@property (nonatomic, strong)CouponModel *couponModel;
 
 @end
