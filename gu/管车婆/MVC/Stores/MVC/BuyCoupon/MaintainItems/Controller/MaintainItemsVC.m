@@ -51,7 +51,7 @@
 #pragma mark --- UITableViewDelegate && UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 6;
+    return _couponModels.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -64,6 +64,10 @@
         
         cell = [[MaintainItemCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
         
+    }
+    
+    if (_couponModels.count > indexPath.row) {
+        cell.couponModel = _couponModels[indexPath.row];
     }
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;

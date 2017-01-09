@@ -37,7 +37,7 @@
 #pragma mark UITableViewDelegate && UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 6;
+    return _couponModels.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -46,13 +46,13 @@
     
     CouponCell *cell = (CouponCell *)[tableView dequeueReusableCellWithIdentifier:identifier];
     
-    CouponModel *couponModel = [[CouponModel alloc] init];
-    
     if (!cell) {
         cell = [[CouponCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
     }
     
-    cell.couponModel = couponModel;
+    if (_couponModels.count  > indexPath.row) {
+        cell.couponModel = _couponModels[indexPath.row];
+    }
     
     return cell;
 }

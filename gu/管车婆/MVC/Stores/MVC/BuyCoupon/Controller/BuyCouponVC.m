@@ -86,10 +86,10 @@
     
     NSDictionary *params = @{
                              @"uid":[[self getLocalDic] objectForKey:@"uid"],
-                             @"mid":_mid
+                             @"mid":_storeModel.mid
                              };
     
-    NSLog(@"%@, %@", [[self getLocalDic] objectForKey:@"uid"], _mid);
+    NSLog(@"%@, %@", [[self getLocalDic] objectForKey:@"uid"], _storeModel.mid);
     
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     AFHTTPResponseSerializer *responseSerializer = [AFHTTPResponseSerializer serializer];
@@ -102,6 +102,8 @@
         NSArray *arr2 = [content objectForKey:@"2"];
         NSArray *arr3 = [content objectForKey:@"3"];
         NSArray *arr4 = [content objectForKey:@"4"];
+        
+        NSLog(@"arr2:%@", arr2);
         
         for (NSDictionary *dic in arr1) {
             CouponModel *couponModel = [[CouponModel alloc] initWithDic:dic];

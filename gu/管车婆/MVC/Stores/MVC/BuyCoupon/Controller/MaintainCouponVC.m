@@ -59,7 +59,7 @@
     [firstView addSubview:subTitleLB];
     
     UIButton * selectItemsBtn = [[UIButton alloc] init];
-    [selectItemsBtn setTitle:@"剩余可选项目x14>" forState:UIControlStateNormal];
+    [selectItemsBtn setTitle:[NSString stringWithFormat:@"剩余可选项目x%lu>", (unsigned long)_couponModels.count] forState:UIControlStateNormal];
     [selectItemsBtn setTitleColor:kRGBColor(22, 129, 252) forState:UIControlStateNormal];
     selectItemsBtn.titleLabel.font = [UIFont systemFontOfSize:15.0*kRate];
     [selectItemsBtn addTarget:self action:@selector(selectItemsBtnAction) forControlEvents:UIControlEventTouchUpInside];
@@ -120,6 +120,7 @@
     NSLog(@"剩余可选项目");
     
     MaintainItemsVC *maintainItems = [[MaintainItemsVC alloc] init];
+    maintainItems.couponModels = _couponModels;
     maintainItems.hidesBottomBarWhenPushed = YES;
     [[self findResponderVCWith:[[BuyCouponVC alloc]init]].navigationController pushViewController:maintainItems animated:NO];
 }

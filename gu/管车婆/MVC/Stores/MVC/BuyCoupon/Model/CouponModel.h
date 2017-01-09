@@ -16,6 +16,7 @@
 @property (nonatomic, strong)NSString *charge;
 
 
+
 @property (nonatomic, strong)NSString   *itemTitle;
 @property (nonatomic, strong)NSString   *itemImg;
 @property (nonatomic, strong)NSString   *itemCharge;

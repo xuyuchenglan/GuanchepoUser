@@ -7,9 +7,10 @@
 //
 
 #import "ParentViewController.h"
+#import "StoreModel.h"
 
 @interface BuyCouponVC : ParentViewController
 
-@property (nonatomic, strong)NSString *mid;
+@property (nonatomic, strong)StoreModel *storeModel;
 
 @end
