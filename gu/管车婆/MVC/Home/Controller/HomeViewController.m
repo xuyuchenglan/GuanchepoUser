@@ -21,6 +21,11 @@
 #import "ServiceModel.h"
 #import "MoreViewController.h"
 #import "ItemStoresVC.h"
+#import "ShareModel.h"
+#import "UMSocial.h"
+#import "UMSocialWechatHandler.h"
+#import "UMSocialQQHandler.h"
+#import "UMSocialSinaSSOHandler.h"
 
 #import <AMapLocationKit/AMapLocationKit.h>//定位SDK头文件
 
@@ -29,7 +34,9 @@
 #define kSecondBtnWidth kScreenWidth/4
 #define kForthBtnWidth  kScreenWidth/3
 
-@interface HomeViewController ()<UIScrollViewDelegate, ScrollImageViewDelegate>
+#define kUmengAppkey @"586e0429c62dca606900044f"
+
+@interface HomeViewController ()<UIScrollViewDelegate, ScrollImageViewDelegate, UMSocialUIDelegate>
 {
     UIScrollView *_scrollView;//滑动视图（所有的控件都加在这上面）
 }
@@ -46,6 +53,8 @@
 @property (nonatomic, strong)HomeModel       *homeModel;
 
 @property (nonatomic, assign)BOOL             isLoadSuccess;//当网络请求成功时设置其值
+
+@property (nonatomic, strong)ShareModel      *shareModel;
 
 @end
 
@@ -65,6 +74,7 @@
     
     //网络请求数据
     [self getHomeInfo];
+    [self getShareInfo];
     
     //获取当前定位信息，并存入本地数据库
     [self getCurrentLocation];
@@ -374,7 +384,7 @@
 - (void)addActivityBtn
 {
     UIButton *activityBtn = [[UIButton alloc] initWithFrame:CGRectMake(kFirstBtnWidth*2, 0, kFirstBtnWidth, kFirstBtnHeight)];
-    [activityBtn addTarget:self action:@selector(appointmentBtnAction) forControlEvents:UIControlEventTouchUpInside];
+    [activityBtn addTarget:self action:@selector(activityBtnAction) forControlEvents:UIControlEventTouchUpInside];
     
     [activityBtn setImage:[UIImage imageNamed:@"home_first_activity"] forState:UIControlStateNormal];
     activityBtn.imageEdgeInsets = UIEdgeInsetsMake(10*kRate, 28*kRate, 22*kRate, 28*kRate);
@@ -388,7 +398,7 @@
     [_firstBtnsView addSubview:activityBtn];
 }
 
-- (void)appointmentBtnAction
+- (void)activityBtnAction
 {
     NSLog(@"活动");
 }
@@ -397,7 +407,7 @@
 - (void)addShareBtn
 {
     UIButton *shareBtn = [[UIButton alloc] initWithFrame:CGRectMake(kFirstBtnWidth*3, 0, kFirstBtnWidth, kFirstBtnHeight)];
-    [shareBtn addTarget:self action:@selector(activitybtnAction) forControlEvents:UIControlEventTouchUpInside];
+    [shareBtn addTarget:self action:@selector(shareBtnAction) forControlEvents:UIControlEventTouchUpInside];
     
     [shareBtn setImage:[UIImage imageNamed:@"home_first_share"] forState:UIControlStateNormal];
     shareBtn.imageEdgeInsets = UIEdgeInsetsMake(10*kRate, 28*kRate, 22*kRate, 28*kRate);
@@ -411,10 +421,66 @@
     [_firstBtnsView addSubview:shareBtn];
 }
 
-- (void)activitybtnAction
+- (void)shareBtnAction
 {
     NSLog(@"分享");
+    
+    if (_shareModel) {
+        
+        /*
+         要分享的标题title
+         */
+        [UMSocialData defaultData].extConfig.title = _shareModel.shareTitle;
+        
+        
+        /*
+         当分享消息类型为图文时，点击分享内容会跳转到预设的链接（注意设置的链接必须为http或https链接）
+         */
+        [UMSocialData defaultData].extConfig.wechatSessionData.url = _shareModel.shareLink;//微信好友
+        [UMSocialData defaultData].extConfig.wechatTimelineData.url = _shareModel.shareLink;//微信朋友圈
+        [UMSocialData defaultData].extConfig.qqData.url = _shareModel.shareLink;//QQ好友
+        [UMSocialData defaultData].extConfig.qzoneData.url = _shareModel.shareLink;//QQ空间
+        
+        
+        /*
+         分享的内容
+         */
+        //作如下判断主要是为了防止获取不到网络图片时导致分享链接失效（图文类型时链接才生效，没有图片就不是图文类型）
+        if (_shareModel.shareImg) {
+            
+            [UMSocialSnsService presentSnsIconSheetView:self
+                                                 appKey:kUmengAppkey
+                                              shareText:_shareModel.shareContent//要分享的文字
+                                             shareImage:_shareModel.shareImg//要分享的图片.
+                                        shareToSnsNames:@[UMShareToWechatSession,UMShareToWechatTimeline,UMShareToSina,UMShareToQQ,UMShareToQzone]//要分享到的平台。分享面板中各个分享平台的排列顺序是按照这里的顺序的。
+                                               delegate:self];
+            
+        } else {
+            
+            [UMSocialSnsService presentSnsIconSheetView:self
+                                                 appKey:kUmengAppkey
+                                              shareText:_shareModel.shareContent//要分享的文字
+                                             shareImage:[UIImage imageNamed:@"icon83.5@2x"]//要分享的图片.
+                                        shareToSnsNames:@[UMShareToWechatSession,UMShareToWechatTimeline,UMShareToSina,UMShareToQQ,UMShareToQzone]//要分享到的平台。分享面板中各个分享平台的排列顺序是按照这里的顺序的。
+                                               delegate:self];
+            
+        }
+        
+    }
+
 }
+
+        //分享成功并且返回客户端后回调的方法（如果留在分享到的平台如QQ,那么不会回调该方法）
+-(void)didFinishGetUMSocialDataInViewController:(UMSocialResponseEntity *)response
+{
+    //根据`responseCode`得到发送结果,如果分享成功
+    if(response.responseCode == UMSResponseCodeSuccess)
+    {
+        //得到分享到的平台名（即分享到哪个平台了）
+        NSLog(@"share to sns name is %@",[[response.data allKeys] objectAtIndex:0]);
+    }
+}
+
 
 
 #pragma mark ******************      第二块内容      ****************
@@ -1115,8 +1181,9 @@
 }
 
 
-#pragma mark 
-#pragma mark --- 网络请求
+#pragma mark
+#pragma mark 网络请求
+#pragma mark --- 请求首页各项数据
 - (void)getHomeInfo
 {
     NSString *url_post = [NSString stringWithFormat:@"http://%@getIndexInfo.action", kHead];
@@ -1155,6 +1222,23 @@
         
     }];
 
+}
+
+#pragma mark --- 请求分享数据
+- (void)getShareInfo
+{
+    NSString *url_get = [NSString stringWithFormat:@"http://%@getShareInfo.action", kHead];
+    
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];//单例
+    manager.requestSerializer = [AFHTTPRequestSerializer serializer];
+    manager.responseSerializer = [AFJSONResponseSerializer serializer];
+    [manager GET:url_get parameters:nil progress:NULL success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        
+        NSDictionary *jsondataDic = [responseObject objectForKey:@"jsondata"];
+        
+        _shareModel = [[ShareModel alloc] initWithDic:jsondataDic];
+        
+    } failure:nil];
 }
 
 
