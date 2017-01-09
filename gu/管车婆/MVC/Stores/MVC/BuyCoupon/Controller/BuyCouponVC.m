@@ -67,8 +67,10 @@
     CouponListVC *carCleanVC = [[CouponListVC alloc] init];
     carCleanVC.couponModels = _couponModelsArr1;
     carCleanVC.type = @"1";//洗车
-    MaintainCouponVC *carMaintainVC = [[MaintainCouponVC alloc] init];//保养
+    //MaintainCouponVC *carMaintainVC = [[MaintainCouponVC alloc] init];//本来保养页面是特制的，但是由于工期紧，所以先暂且直接罗列了。如果后期需要修改，只需用MaintainCouponVC创建即可。
+    CouponListVC *carMaintainVC = [[CouponListVC alloc] init];
     carMaintainVC.couponModels = _couponModelsArr2;
+    carMaintainVC.type = @"2";//保养
     CouponListVC *carBeautyVC = [[CouponListVC alloc] init];
     carBeautyVC.couponModels = _couponModelsArr3;
     carBeautyVC.type = @"3";//美容
@@ -102,8 +104,6 @@
         NSArray *arr2 = [content objectForKey:@"2"];
         NSArray *arr3 = [content objectForKey:@"3"];
         NSArray *arr4 = [content objectForKey:@"4"];
-        
-        NSLog(@"arr2:%@", arr2);
         
         for (NSDictionary *dic in arr1) {
             CouponModel *couponModel = [[CouponModel alloc] initWithDic:dic];
