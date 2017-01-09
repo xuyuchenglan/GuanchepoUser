@@ -191,6 +191,10 @@
 		D0A4B4CE1DBEF074005C8C79 /* stores_oil.png in Resources */ = {isa = PBXBuildFile; fileRef = D0A4B4CD1DBEF074005C8C79 /* stores_oil.png */; };
 		D0A4B4D11DBEF6F7005C8C79 /* CouponItemsView.m in Sources */ = {isa = PBXBuildFile; fileRef = D0A4B4D01DBEF6F7005C8C79 /* CouponItemsView.m */; };
 		D0B562CC1DAF3B8900C9FACC /* NormanStarRateView.m in Sources */ = {isa = PBXBuildFile; fileRef = D0B562CB1DAF3B8900C9FACC /* NormanStarRateView.m */; };
+		D0C1F1531E232FB4008C4CDB /* ActivityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D0C1F1521E232FB4008C4CDB /* ActivityViewController.m */; };
+		D0C1F1561E2330F2008C4CDB /* ActivityModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D0C1F1551E2330F2008C4CDB /* ActivityModel.m */; };
+		D0C1F1591E2331E0008C4CDB /* ActivityCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D0C1F1581E2331E0008C4CDB /* ActivityCell.m */; };
+		D0C1F15C1E23329D008C4CDB /* ActivityInfoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D0C1F15B1E23329D008C4CDB /* ActivityInfoVC.m */; };
 		D0C3E9551DB1F6D90084CDA4 /* forth_illegal_car.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D0C3E9541DB1F6D90084CDA4 /* forth_illegal_car.jpg */; };
 		D0C3E9581DB205570084CDA4 /* IllegalResultAccountView.m in Sources */ = {isa = PBXBuildFile; fileRef = D0C3E9571DB205570084CDA4 /* IllegalResultAccountView.m */; };
 		D0C3E95B1DB215F60084CDA4 /* IllegalCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D0C3E95A1DB215F60084CDA4 /* IllegalCell.m */; };
@@ -619,6 +623,14 @@
 		D0A4B4D01DBEF6F7005C8C79 /* CouponItemsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CouponItemsView.m; sourceTree = "<group>"; };
 		D0B562CA1DAF3B8900C9FACC /* NormanStarRateView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NormanStarRateView.h; sourceTree = "<group>"; };
 		D0B562CB1DAF3B8900C9FACC /* NormanStarRateView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NormanStarRateView.m; sourceTree = "<group>"; };
+		D0C1F1511E232FB4008C4CDB /* ActivityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityViewController.h; sourceTree = "<group>"; };
+		D0C1F1521E232FB4008C4CDB /* ActivityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityViewController.m; sourceTree = "<group>"; };
+		D0C1F1541E2330F2008C4CDB /* ActivityModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityModel.h; sourceTree = "<group>"; };
+		D0C1F1551E2330F2008C4CDB /* ActivityModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityModel.m; sourceTree = "<group>"; };
+		D0C1F1571E2331E0008C4CDB /* ActivityCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityCell.h; sourceTree = "<group>"; };
+		D0C1F1581E2331E0008C4CDB /* ActivityCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityCell.m; sourceTree = "<group>"; };
+		D0C1F15A1E23329D008C4CDB /* ActivityInfoVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityInfoVC.h; sourceTree = "<group>"; };
+		D0C1F15B1E23329D008C4CDB /* ActivityInfoVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityInfoVC.m; sourceTree = "<group>"; };
 		D0C3E9541DB1F6D90084CDA4 /* forth_illegal_car.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = forth_illegal_car.jpg; sourceTree = "<group>"; };
 		D0C3E9561DB205570084CDA4 /* IllegalResultAccountView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IllegalResultAccountView.h; sourceTree = "<group>"; };
 		D0C3E9571DB205570084CDA4 /* IllegalResultAccountView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IllegalResultAccountView.m; sourceTree = "<group>"; };
@@ -1705,6 +1717,45 @@
 			path = NormanStarRateView;
 			sourceTree = "<group>";
 		};
+		D0C1F14D1E232F33008C4CDB /* Activity */ = {
+			isa = PBXGroup;
+			children = (
+				D0C1F14E1E232F33008C4CDB /* Controller */,
+				D0C1F14F1E232F33008C4CDB /* Model */,
+				D0C1F1501E232F33008C4CDB /* View  */,
+			);
+			path = Activity;
+			sourceTree = "<group>";
+		};
+		D0C1F14E1E232F33008C4CDB /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				D0C1F1511E232FB4008C4CDB /* ActivityViewController.h */,
+				D0C1F1521E232FB4008C4CDB /* ActivityViewController.m */,
+				D0C1F15A1E23329D008C4CDB /* ActivityInfoVC.h */,
+				D0C1F15B1E23329D008C4CDB /* ActivityInfoVC.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		D0C1F14F1E232F33008C4CDB /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				D0C1F1541E2330F2008C4CDB /* ActivityModel.h */,
+				D0C1F1551E2330F2008C4CDB /* ActivityModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		D0C1F1501E232F33008C4CDB /* View  */ = {
+			isa = PBXGroup;
+			children = (
+				D0C1F1571E2331E0008C4CDB /* ActivityCell.h */,
+				D0C1F1581E2331E0008C4CDB /* ActivityCell.m */,
+			);
+			path = "View ";
+			sourceTree = "<group>";
+		};
 		D0C3E9531DB1F6D90084CDA4 /* Illegal */ = {
 			isa = PBXGroup;
 			children = (
@@ -2076,6 +2127,7 @@
 		D0D918B71DA8E748003379E3 /* MVC */ = {
 			isa = PBXGroup;
 			children = (
+				D0C1F14D1E232F33008C4CDB /* Activity */,
 				D052B1FE1E00ED8D006E74C1 /* ItemStores */,
 				D003F0B11DD05C50003F0A3C /* OpenCard */,
 				D0D918BF1DA8F3E6003379E3 /* EnquiryIllegal */,
@@ -2839,6 +2891,7 @@
 				D052B1FD1E00E2C1006E74C1 /* MoreViewController.m in Sources */,
 				D0E6A72B1E03E3130080F997 /* CarOwnerClassifyModel.m in Sources */,
 				D092004E1E0D0356006CF7EB /* VoucherModel.m in Sources */,
+				D0C1F1591E2331E0008C4CDB /* ActivityCell.m in Sources */,
 				D0D918DB1DA8F46D003379E3 /* RechargeFuelCardVC.m in Sources */,
 				D026E9C81DFA9D6400C563D8 /* AboutModel.m in Sources */,
 				D0129AE61E0E4AA60063CDB6 /* DatePickerVC.m in Sources */,
@@ -2893,6 +2946,7 @@
 				D032F9E21DB765F30052562D /* OrderViewController.m in Sources */,
 				D0A4B4BF1DBDB294005C8C79 /* CouponModel.m in Sources */,
 				D026E9F31DFFF56700C563D8 /* AppointOnLineView+GetCurrentDate.m in Sources */,
+				D0C1F1531E232FB4008C4CDB /* ActivityViewController.m in Sources */,
 				D0D918D81DA8F44F003379E3 /* EnquiryWeatherVC.m in Sources */,
 				D0A4B4D11DBEF6F7005C8C79 /* CouponItemsView.m in Sources */,
 				D003F0A51DCC2962003F0A3C /* SellCardView.m in Sources */,
@@ -2910,6 +2964,7 @@
 				D0A1D8251E0281D700BB8D34 /* LewPopupViewAnimationSlide.m in Sources */,
 				D0E8F9E71D9BBCE700582D96 /* CarOwnersListVC.m in Sources */,
 				D05093011E20BB62006C9BA5 /* ChatCell.m in Sources */,
+				D0C1F15C1E23329D008C4CDB /* ActivityInfoVC.m in Sources */,
 				D0F4ABB61DDBFC6600416636 /* UIControlFlagView.m in Sources */,
 				D09BC15F1DC844C10035DE65 /* PayForFuelCardRechargingVC.m in Sources */,
 				D0EE8AFE1DC1CD3F00468B8A /* CardRechargeMoneyView.m in Sources */,
@@ -2948,6 +3003,7 @@
 				D026E9BF1DF80A8900C563D8 /* ADViewController.m in Sources */,
 				D0F92F8C1DD1A20100BC0302 /* PayForOpeningCard.m in Sources */,
 				D0A4B4B41DBB6873005C8C79 /* BuyCouponVC.m in Sources */,
+				D0C1F1561E2330F2008C4CDB /* ActivityModel.m in Sources */,
 				D0C5FA141D9A254500D00B85 /* NormanGuideViewManager.m in Sources */,
 				D06DEC831DBF5DFD00B8B04D /* MaintainItemsVC.m in Sources */,
 				D026E9E11DFE977500C563D8 /* LWAppointmentVc.m in Sources */,

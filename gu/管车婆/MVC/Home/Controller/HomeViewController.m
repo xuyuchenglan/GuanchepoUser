@@ -26,6 +26,7 @@
 #import "UMSocialWechatHandler.h"
 #import "UMSocialQQHandler.h"
 #import "UMSocialSinaSSOHandler.h"
+#import "ActivityViewController.h"
 
 #import <AMapLocationKit/AMapLocationKit.h>//定位SDK头文件
 
@@ -401,6 +402,10 @@
 - (void)activityBtnAction
 {
     NSLog(@"活动");
+    
+    ActivityViewController *activityVC = [[ActivityViewController alloc] init];
+    activityVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:activityVC animated:NO];
 }
 
 //分享
@@ -1190,6 +1195,7 @@
     
     NSDictionary *params = @{
                              @"phone":[NSString stringWithFormat:@"%@", [[self getLocalDic] objectForKey:@"phone"]],
+                             @"cityName":@"德州"
                              };
     
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
