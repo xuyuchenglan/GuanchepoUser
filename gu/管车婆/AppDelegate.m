@@ -86,19 +86,21 @@
 //增加下面的系统回调配置，添加了这个方法才能在分享后从其他应用回到我们的应用来。注意如果同时使用微信支付、支付宝等其他需要改写回调代理的SDK，请在if分支下做区分，否则会影响 分享、登录的回调。
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
 {
-    BOOL result = [UMSocialSnsService handleOpenURL:url];
+    //    BOOL result = [UMSocialSnsService handleOpenURL:url];
+    //
+    //    NSLog(@"友盟分享回调:%d", result);
+    //
+    //    if (result == FALSE) {
+    //        //调用其他SDK，例如支付宝SDK等
+    //
+    //        result = [WXApi handleOpenURL:url delegate:self];
+    //        NSLog(@"微信支付回调：%d", result);
+    //
+    //    }
+    //
+    //    return result;
     
-    NSLog(@"友盟分享回调:%d", result);
-    
-    if (result == FALSE) {
-        //调用其他SDK，例如支付宝SDK等
-        
-        result = [WXApi handleOpenURL:url delegate:self];
-        NSLog(@"微信支付回调：%d", result);
-        
-    }
-    
-    return result;
+    return [WXApi handleOpenURL:url delegate:self];//这里的逻辑啥的我没怎么搞懂，先暂且这样吧。即便把openURL整个方法都给注释掉，无论是友盟分享完毕后还是微信支付完毕后，都是可以返回管车婆app的。但是如果不调用[WXApi handleOpenURL:url delegate:self]的话，代理方法onResp就不会在支付完成返回管车婆APP后被调用，这肯定是不行的，所以[WXApi handleOpenURL:url delegate:self]方法是必须被调用的。
 }
 
 
@@ -177,7 +179,7 @@
     }
 }
 
-//查询后台的支付状态
+#pragma mark --- 在支付成功后验证后台是否也是支付成功的状态
 - (void)varifyTheBackgroundState
 {
     NSString *url_post = [NSString stringWithFormat:@"http://%@/zcar/wxCtl/orderquery.action", kIP];
@@ -200,9 +202,11 @@
             NSString *trade_state = [content objectForKey:@"trade_state"];
             if ([trade_state isEqualToString:@"SUCCESS"]) {
                 
-                //查询后台的支付结果是成功的之后，在这里面进行页面的刷新等操作
-                NSLog(@"页面刷新");
-                //可以弹出个alertView提醒用户去汽车券列表页面查看买到的汽车券
+                //查询后台的支付结果是成功的之后，在这里面进行页面的刷新或者是支付成功后的业务逻辑等操作
+                NSLog(@"添加店铺券");
+                
+                //给CouponCell.m发送个通知，让CouponCell来完成添加店铺券的网络申请
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"addDianpuquan.action" object:self];
                 
                 
             }
@@ -213,6 +217,7 @@
         
     } failure:nil];
 }
+
 
 
 #pragma mark

@@ -66,16 +66,20 @@
     //配置控制器数组(需要与上面的标题相对应)
     CouponListVC *carCleanVC = [[CouponListVC alloc] init];
     carCleanVC.couponModels = _couponModelsArr1;
+    carCleanVC.storeModel = _storeModel;
     carCleanVC.type = @"1";//洗车
     //MaintainCouponVC *carMaintainVC = [[MaintainCouponVC alloc] init];//本来保养页面是特制的，但是由于工期紧，所以先暂且直接罗列了。如果后期需要修改，只需用MaintainCouponVC创建即可。
     CouponListVC *carMaintainVC = [[CouponListVC alloc] init];
     carMaintainVC.couponModels = _couponModelsArr2;
+    carMaintainVC.storeModel = _storeModel;
     carMaintainVC.type = @"2";//保养
     CouponListVC *carBeautyVC = [[CouponListVC alloc] init];
     carBeautyVC.couponModels = _couponModelsArr3;
+    carBeautyVC.storeModel = _storeModel;
     carBeautyVC.type = @"3";//美容
     CouponListVC *otherVC = [[CouponListVC alloc] init];
     otherVC.couponModels = _couponModelsArr4;
+    otherVC.storeModel = _storeModel;
     otherVC.type = @"4";//其他
     self.controllerArray = [NSArray arrayWithObjects:carCleanVC, carMaintainVC, carBeautyVC, otherVC, nil];
 }
@@ -91,14 +95,13 @@
                              @"mid":_storeModel.mid
                              };
     
-    NSLog(@"%@, %@", [[self getLocalDic] objectForKey:@"uid"], _storeModel.mid);
-    
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     AFHTTPResponseSerializer *responseSerializer = [AFHTTPResponseSerializer serializer];
     manager.responseSerializer = responseSerializer;
     [manager POST:url_post parameters:params progress:NULL success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
         NSDictionary *content = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+        //NSLog(@"汽车全列表：%@", content);
         
         NSArray *arr1 = [content objectForKey:@"1"];
         NSArray *arr2 = [content objectForKey:@"2"];
