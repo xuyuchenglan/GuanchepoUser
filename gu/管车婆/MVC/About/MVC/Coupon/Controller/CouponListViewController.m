@@ -123,14 +123,17 @@
         
         NSArray *jsondataArr = [content objectForKey:@"jsondata"];
         
-        for (NSDictionary *dic in jsondataArr) {
-            AboutCouponModel *model = [[AboutCouponModel alloc] initWithDic:dic];
-            [_aboutCouponModels addObject:model];
+        if (jsondataArr.count > 0) {//防止数组越界
+            
+            for (NSDictionary *dic in jsondataArr) {
+                AboutCouponModel *model = [[AboutCouponModel alloc] initWithDic:dic];
+                [_aboutCouponModels addObject:model];
+            }
+            
+            //刷新UI
+            [_tableView reloadData];
+            
         }
-        
-        //刷新UI
-        [_tableView reloadData];
-        
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"请求失败， 失败原因是：%@", error);

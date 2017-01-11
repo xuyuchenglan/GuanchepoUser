@@ -140,6 +140,13 @@
 		D0758AB61D9E17C50071D8A6 /* about_tableview_service.png in Resources */ = {isa = PBXBuildFile; fileRef = D0758AA31D9E17C50071D8A6 /* about_tableview_service.png */; };
 		D0758AB71D9E17C50071D8A6 /* about_tableview_membership.png in Resources */ = {isa = PBXBuildFile; fileRef = D0758AA41D9E17C50071D8A6 /* about_tableview_membership.png */; };
 		D0758AB91D9E18090071D8A6 /* rightArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = D0758AB81D9E18090071D8A6 /* rightArrow.png */; };
+		D0850AAF1E2469CE00EF1949 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D0850AAA1E2469CE00EF1949 /* libWeChatSDK.a */; };
+		D0850AB01E2469CE00EF1949 /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = D0850AAB1E2469CE00EF1949 /* README.txt */; };
+		D0850AB21E24ADFB00EF1949 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0850AB11E24ADFB00EF1949 /* SystemConfiguration.framework */; };
+		D0850AB41E24AE1000EF1949 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = D0850AB31E24AE1000EF1949 /* libz.tbd */; };
+		D0850AB61E24AE1D00EF1949 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = D0850AB51E24AE1D00EF1949 /* libsqlite3.tbd */; };
+		D0850AB81E24AE3000EF1949 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = D0850AB71E24AE3000EF1949 /* libc++.tbd */; };
+		D0850ABA1E24AE3800EF1949 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0850AB91E24AE3800EF1949 /* CoreTelephony.framework */; };
 		D092004E1E0D0356006CF7EB /* VoucherModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D092004D1E0D0356006CF7EB /* VoucherModel.m */; };
 		D092F7E41DAC750A002581F5 /* PhoneChargesView.m in Sources */ = {isa = PBXBuildFile; fileRef = D092F7E31DAC750A002581F5 /* PhoneChargesView.m */; };
 		D092F7E71DAC9775002581F5 /* MovableParentVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D092F7E61DAC9775002581F5 /* MovableParentVC.m */; };
@@ -536,6 +543,16 @@
 		D0758AA31D9E17C50071D8A6 /* about_tableview_service.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = about_tableview_service.png; sourceTree = "<group>"; };
 		D0758AA41D9E17C50071D8A6 /* about_tableview_membership.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = about_tableview_membership.png; sourceTree = "<group>"; };
 		D0758AB81D9E18090071D8A6 /* rightArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rightArrow.png; sourceTree = "<group>"; };
+		D0850AAA1E2469CE00EF1949 /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeChatSDK.a; sourceTree = "<group>"; };
+		D0850AAB1E2469CE00EF1949 /* README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.txt; sourceTree = "<group>"; };
+		D0850AAC1E2469CE00EF1949 /* WechatAuthSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WechatAuthSDK.h; sourceTree = "<group>"; };
+		D0850AAD1E2469CE00EF1949 /* WXApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApi.h; sourceTree = "<group>"; };
+		D0850AAE1E2469CE00EF1949 /* WXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiObject.h; sourceTree = "<group>"; };
+		D0850AB11E24ADFB00EF1949 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		D0850AB31E24AE1000EF1949 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		D0850AB51E24AE1D00EF1949 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		D0850AB71E24AE3000EF1949 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
+		D0850AB91E24AE3800EF1949 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		D092004C1E0D0356006CF7EB /* VoucherModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VoucherModel.h; sourceTree = "<group>"; };
 		D092004D1E0D0356006CF7EB /* VoucherModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VoucherModel.m; sourceTree = "<group>"; };
 		D092F7E21DAC750A002581F5 /* PhoneChargesView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhoneChargesView.h; sourceTree = "<group>"; };
@@ -800,6 +817,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D0850ABA1E24AE3800EF1949 /* CoreTelephony.framework in Frameworks */,
+				D0850AB81E24AE3000EF1949 /* libc++.tbd in Frameworks */,
+				D0850AB61E24AE1D00EF1949 /* libsqlite3.tbd in Frameworks */,
+				D0850AB41E24AE1000EF1949 /* libz.tbd in Frameworks */,
+				D0850AB21E24ADFB00EF1949 /* SystemConfiguration.framework in Frameworks */,
+				D0850AAF1E2469CE00EF1949 /* libWeChatSDK.a in Frameworks */,
 				019CC990CF6AF5705193B7AD /* libPods-管车婆.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -824,6 +847,11 @@
 		1F79EE1BB1CD81FAD6E9ADB0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D0850AB91E24AE3800EF1949 /* CoreTelephony.framework */,
+				D0850AB71E24AE3000EF1949 /* libc++.tbd */,
+				D0850AB51E24AE1D00EF1949 /* libsqlite3.tbd */,
+				D0850AB31E24AE1000EF1949 /* libz.tbd */,
+				D0850AB11E24ADFB00EF1949 /* SystemConfiguration.framework */,
 				06AA8A373B9B1CDB8191C81F /* libPods-管车婆.a */,
 			);
 			name = Frameworks;
@@ -1587,6 +1615,26 @@
 			path = TableView;
 			sourceTree = "<group>";
 		};
+		D0850AA81E2469CE00EF1949 /* WechatPay */ = {
+			isa = PBXGroup;
+			children = (
+				D0850AA91E2469CE00EF1949 /* OpenSDK1.7.5 */,
+			);
+			path = WechatPay;
+			sourceTree = "<group>";
+		};
+		D0850AA91E2469CE00EF1949 /* OpenSDK1.7.5 */ = {
+			isa = PBXGroup;
+			children = (
+				D0850AAA1E2469CE00EF1949 /* libWeChatSDK.a */,
+				D0850AAB1E2469CE00EF1949 /* README.txt */,
+				D0850AAC1E2469CE00EF1949 /* WechatAuthSDK.h */,
+				D0850AAD1E2469CE00EF1949 /* WXApi.h */,
+				D0850AAE1E2469CE00EF1949 /* WXApiObject.h */,
+			);
+			path = OpenSDK1.7.5;
+			sourceTree = "<group>";
+		};
 		D09BC15C1DC844C10035DE65 /* PayForFuelcardRecharging */ = {
 			isa = PBXGroup;
 			children = (
@@ -2002,6 +2050,7 @@
 		D0C5FA101D9A254500D00B85 /* Third */ = {
 			isa = PBXGroup;
 			children = (
+				D0850AA81E2469CE00EF1949 /* WechatPay */,
 				D0A30F7B1E14E6DB00F0AD80 /* NormanTextView */,
 				D0A1D8141E0281D700BB8D34 /* popupViewController */,
 				D0C5FA111D9A254500D00B85 /* NormanGuideViewManager */,
@@ -2789,6 +2838,7 @@
 				D0758AA71D9E17C50071D8A6 /* about_first_coupon.png in Resources */,
 				D0C5FA2D1D9A5C3400D00B85 /* home_first_wash.png in Resources */,
 				D0758AAE1D9E17C50071D8A6 /* about_tableview_coupon.png in Resources */,
+				D0850AB01E2469CE00EF1949 /* README.txt in Resources */,
 				D0A4B4C81DBE097D005C8C79 /* stores_btnBorder_blue.png in Resources */,
 				D0F92F981DD1A9D100BC0302 /* home_third_membership_pay_unselected.png in Resources */,
 				D0C5FA0E1D9A240500D00B85 /* daohangye2.png in Resources */,
@@ -3159,6 +3209,10 @@
 				INFOPLIST_FILE = "管车婆/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/管车婆/Third/WechatPay/OpenSDK1.7.5",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.yuanheng.GuanchepoUser;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -3179,6 +3233,10 @@
 				INFOPLIST_FILE = "管车婆/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/管车婆/Third/WechatPay/OpenSDK1.7.5",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.yuanheng.GuanchepoUser;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";

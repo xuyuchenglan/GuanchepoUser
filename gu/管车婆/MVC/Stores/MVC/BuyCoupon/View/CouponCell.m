@@ -7,6 +7,8 @@
 //
 
 #import "CouponCell.h"
+#import "WXApi.h"
+//#import "WXApiObject.h"
 
 @interface CouponCell()
 {
@@ -68,6 +70,7 @@
         _payBtn.titleLabel.font = [UIFont systemFontOfSize:15.0*kRate];
         _payBtn.backgroundColor = kRGBColor(22, 129, 251);
         _payBtn.layer.cornerRadius = 6.0*kRate;
+        [_payBtn addTarget:self action:@selector(payBtnAction) forControlEvents:UIControlEventTouchUpInside];
         [self.contentView addSubview:_payBtn];
         [_payBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(80*kRate, 35*kRate));
@@ -80,6 +83,67 @@
     return self;
 }
 
+#pragma mark ButtonAction
+- (void)payBtnAction
+{
+    NSLog(@"购买按钮");
+    [self getInfoThatCallWXPay];
+}
+
+#pragma mark
+#pragma mark 微信支付
+//获取调起微信支付所需的参数
+- (void)getInfoThatCallWXPay
+{
+    NSString *url_post = [NSString stringWithFormat:@"http://%@/zcar/wxCtl/unifiedorder.action", kIP];
+    
+    float chargeFloat = [_couponModel.charge floatValue];
+    if (chargeFloat<=0) {
+        chargeFloat = 0.01;
+    }
+    _couponModel.charge = [NSString stringWithFormat:@"%.2f", chargeFloat];
+    NSDictionary *params = @{
+                             @"openid":[[self getLocalDic] objectForKey:@"phone"],//传入电话号码或微信openid   (APP支付填入phone)
+                             @"price":_couponModel.charge,//金额 单位元
+                             @"pName":_couponModel.title,//产品名称
+                             @"zfType":@"2",//支付类型    1-微信公众号支付   2-微信APP支付
+                             @"attach":@""//附加数据  可为空
+                             };
+    
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    AFHTTPResponseSerializer *responseSerializer = [AFHTTPResponseSerializer serializer];
+    manager.responseSerializer = responseSerializer;
+    [manager POST:url_post parameters:params progress:NULL success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        
+        NSDictionary *content = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+//        NSLog(@"获取调起微信支付所需的参数：%@", content);
+        
+        NSString *result = [content objectForKey:@"result"];
+        if ([result isEqualToString:@"success"]) {
+            
+            //给 AppDelegate.m 中发送一个通知，把后台返回的 out_trade_no 传过去。
+            NSDictionary *out_trade_no_Dic = @{
+                                               @"out_trade_no":[content objectForKey:@"out_trade_no"]
+                                               };
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"out_trade_no" object:self userInfo:out_trade_no_Dic];
+            
+            //调起支付(除了timeStamp之外，其他五个少传哪一个都是调不起来微信支付的)
+            PayReq *request = [[PayReq alloc] init];
+            request.partnerId = [content objectForKey:@"mchId"];//微信支付分配的商户号
+            request.prepayId= [content objectForKey:@"prepayid"];//预支付交易会话ID
+            request.package = @"Sign=WXPay";//扩展字段，暂填写固定值Sign=WXPay
+            request.nonceStr= [content objectForKey:@"nonceStr"];//随机字符串
+            request.timeStamp= [[content objectForKey:@"timeStamp"] intValue];//时间戳
+            request.sign = [content objectForKey:@"paySign"];//签名
+            //            request.sign= @"18";//签名
+            [WXApi sendReq:request];
+            
+        }
+        
+    } failure:nil];
+}
+
+#pragma mark
 - (void)layoutSubviews
 {
 //    _titleLB.text = @"普通洗车-5座轿车";
