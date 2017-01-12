@@ -140,6 +140,8 @@
 		D0758AB61D9E17C50071D8A6 /* about_tableview_service.png in Resources */ = {isa = PBXBuildFile; fileRef = D0758AA31D9E17C50071D8A6 /* about_tableview_service.png */; };
 		D0758AB71D9E17C50071D8A6 /* about_tableview_membership.png in Resources */ = {isa = PBXBuildFile; fileRef = D0758AA41D9E17C50071D8A6 /* about_tableview_membership.png */; };
 		D0758AB91D9E18090071D8A6 /* rightArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = D0758AB81D9E18090071D8A6 /* rightArrow.png */; };
+		D07D133D1E2722BC00427B2E /* CarCouponModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D07D133C1E2722BC00427B2E /* CarCouponModel.m */; };
+		D07D133F1E272CE500427B2E /* about_carCoupon_used.png in Resources */ = {isa = PBXBuildFile; fileRef = D07D133E1E272CE500427B2E /* about_carCoupon_used.png */; };
 		D0850AAF1E2469CE00EF1949 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D0850AAA1E2469CE00EF1949 /* libWeChatSDK.a */; };
 		D0850AB01E2469CE00EF1949 /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = D0850AAB1E2469CE00EF1949 /* README.txt */; };
 		D0850AB21E24ADFB00EF1949 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0850AB11E24ADFB00EF1949 /* SystemConfiguration.framework */; };
@@ -543,6 +545,9 @@
 		D0758AA31D9E17C50071D8A6 /* about_tableview_service.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = about_tableview_service.png; sourceTree = "<group>"; };
 		D0758AA41D9E17C50071D8A6 /* about_tableview_membership.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = about_tableview_membership.png; sourceTree = "<group>"; };
 		D0758AB81D9E18090071D8A6 /* rightArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rightArrow.png; sourceTree = "<group>"; };
+		D07D133B1E2722BC00427B2E /* CarCouponModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CarCouponModel.h; sourceTree = "<group>"; };
+		D07D133C1E2722BC00427B2E /* CarCouponModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CarCouponModel.m; sourceTree = "<group>"; };
+		D07D133E1E272CE500427B2E /* about_carCoupon_used.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = about_carCoupon_used.png; sourceTree = "<group>"; };
 		D0850AAA1E2469CE00EF1949 /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeChatSDK.a; sourceTree = "<group>"; };
 		D0850AAB1E2469CE00EF1949 /* README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.txt; sourceTree = "<group>"; };
 		D0850AAC1E2469CE00EF1949 /* WechatAuthSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WechatAuthSDK.h; sourceTree = "<group>"; };
@@ -2547,6 +2552,8 @@
 		D0FA2AEF1DCAE46700BCA242 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				D07D133B1E2722BC00427B2E /* CarCouponModel.h */,
+				D07D133C1E2722BC00427B2E /* CarCouponModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2564,6 +2571,7 @@
 			isa = PBXGroup;
 			children = (
 				D0FA2AFD1DCB313000BCA242 /* about_carCoupon_unused.png */,
+				D07D133E1E272CE500427B2E /* about_carCoupon_used.png */,
 			);
 			path = CarCoupon;
 			sourceTree = "<group>";
@@ -2811,6 +2819,7 @@
 				D0C7A4AA1DA9EEE9005FC697 /* weather_thunderStorm_bg.png in Resources */,
 				D0A4B4AB1DBB6088005C8C79 /* about_order_camera_selected.png in Resources */,
 				D0F4B75F1DD6F64900F3CD5F /* icon83.5@2x.png in Resources */,
+				D07D133F1E272CE500427B2E /* about_carCoupon_used.png in Resources */,
 				D0A4B4CE1DBEF074005C8C79 /* stores_oil.png in Resources */,
 				D0E8F9DF1D9BA65B00582D96 /* ad_01.png in Resources */,
 				D0758AB51D9E17C50071D8A6 /* about_tableview_sellCard.png in Resources */,
@@ -2961,6 +2970,7 @@
 				D052B2061E00FB0E006E74C1 /* ItemStoresListVC.m in Sources */,
 				D092F7E41DAC750A002581F5 /* PhoneChargesView.m in Sources */,
 				D0139A9C1DD5A20A005141F2 /* BalanceViewController.m in Sources */,
+				D07D133D1E2722BC00427B2E /* CarCouponModel.m in Sources */,
 				D01CB9CE1DA8855600DD5527 /* ProtocolViewController.m in Sources */,
 				D0C5F9F51D9A0F4F00D00B85 /* AboutViewController.m in Sources */,
 				D0A30F8A1E163D4C00F0AD80 /* EnterVerificationCodeView.m in Sources */,

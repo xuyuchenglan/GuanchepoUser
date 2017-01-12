@@ -40,15 +40,15 @@
     
     //配置控制器数组(需要与上面的标题相对应)
     CarCouponListVC *allVC = [[CarCouponListVC alloc] init];
-    allVC.type = @"1";//全部
+    allVC.type = @"0";//全部
     CarCouponListVC *cleanVC = [[CarCouponListVC alloc] init];
-    cleanVC.type = @"2";//洗车
+    cleanVC.type = @"1";//洗车
     CarCouponListVC *maintainVC = [[CarCouponListVC alloc] init];
-    maintainVC.type = @"3";//保养
+    maintainVC.type = @"2";//保养
     CarCouponListVC *beautyVC = [[CarCouponListVC alloc] init];
-    beautyVC.type = @"4";//美容
+    beautyVC.type = @"3";//美容
     CarCouponListVC *otherVC = [[CarCouponListVC alloc] init];
-    otherVC.type = @"5";//其他
+    otherVC.type = @"4";//其他
     self.controllerArray = [NSArray arrayWithObjects:allVC, cleanVC, maintainVC, beautyVC,  otherVC, nil];
 }
 

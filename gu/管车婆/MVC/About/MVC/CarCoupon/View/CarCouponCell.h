@@ -7,9 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CarCouponModel.h"
 
 @interface CarCouponCell : UITableViewCell
 
 @property (nonatomic, strong)NSString *type;
+@property (nonatomic, strong)CarCouponModel *carCouponModel;
 
 @end
