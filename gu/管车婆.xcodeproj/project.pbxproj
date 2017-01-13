@@ -140,6 +140,8 @@
 		D0758AB61D9E17C50071D8A6 /* about_tableview_service.png in Resources */ = {isa = PBXBuildFile; fileRef = D0758AA31D9E17C50071D8A6 /* about_tableview_service.png */; };
 		D0758AB71D9E17C50071D8A6 /* about_tableview_membership.png in Resources */ = {isa = PBXBuildFile; fileRef = D0758AA41D9E17C50071D8A6 /* about_tableview_membership.png */; };
 		D0758AB91D9E18090071D8A6 /* rightArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = D0758AB81D9E18090071D8A6 /* rightArrow.png */; };
+		D07BBDC21E277AC200966E9E /* CarCouponInfoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D07BBDC11E277AC200966E9E /* CarCouponInfoVC.m */; };
+		D07BBDC51E27810200966E9E /* CarCouponMoreView.m in Sources */ = {isa = PBXBuildFile; fileRef = D07BBDC41E27810200966E9E /* CarCouponMoreView.m */; };
 		D07D133D1E2722BC00427B2E /* CarCouponModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D07D133C1E2722BC00427B2E /* CarCouponModel.m */; };
 		D07D133F1E272CE500427B2E /* about_carCoupon_used.png in Resources */ = {isa = PBXBuildFile; fileRef = D07D133E1E272CE500427B2E /* about_carCoupon_used.png */; };
 		D0850AAF1E2469CE00EF1949 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D0850AAA1E2469CE00EF1949 /* libWeChatSDK.a */; };
@@ -545,6 +547,10 @@
 		D0758AA31D9E17C50071D8A6 /* about_tableview_service.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = about_tableview_service.png; sourceTree = "<group>"; };
 		D0758AA41D9E17C50071D8A6 /* about_tableview_membership.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = about_tableview_membership.png; sourceTree = "<group>"; };
 		D0758AB81D9E18090071D8A6 /* rightArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rightArrow.png; sourceTree = "<group>"; };
+		D07BBDC01E277AC200966E9E /* CarCouponInfoVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CarCouponInfoVC.h; sourceTree = "<group>"; };
+		D07BBDC11E277AC200966E9E /* CarCouponInfoVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CarCouponInfoVC.m; sourceTree = "<group>"; };
+		D07BBDC31E27810200966E9E /* CarCouponMoreView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CarCouponMoreView.h; sourceTree = "<group>"; };
+		D07BBDC41E27810200966E9E /* CarCouponMoreView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CarCouponMoreView.m; sourceTree = "<group>"; };
 		D07D133B1E2722BC00427B2E /* CarCouponModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CarCouponModel.h; sourceTree = "<group>"; };
 		D07D133C1E2722BC00427B2E /* CarCouponModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CarCouponModel.m; sourceTree = "<group>"; };
 		D07D133E1E272CE500427B2E /* about_carCoupon_used.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = about_carCoupon_used.png; sourceTree = "<group>"; };
@@ -2545,6 +2551,8 @@
 				D0FA2AF21DCAE48100BCA242 /* CarCouponVC.m */,
 				D0FA2AF41DCAE7F400BCA242 /* CarCouponListVC.h */,
 				D0FA2AF51DCAE7F400BCA242 /* CarCouponListVC.m */,
+				D07BBDC01E277AC200966E9E /* CarCouponInfoVC.h */,
+				D07BBDC11E277AC200966E9E /* CarCouponInfoVC.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -2563,6 +2571,8 @@
 			children = (
 				D0FA2AF71DCB063500BCA242 /* CarCouponCell.h */,
 				D0FA2AF81DCB063500BCA242 /* CarCouponCell.m */,
+				D07BBDC31E27810200966E9E /* CarCouponMoreView.h */,
+				D07BBDC41E27810200966E9E /* CarCouponMoreView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2935,6 +2945,7 @@
 				D0758A8D1D9CF0030071D8A6 /* LoginParentVC.m in Sources */,
 				D0A30F811E15EAD900F0AD80 /* ViewEvaluationVC.m in Sources */,
 				D006C2511DB8C12A0017FCD5 /* OrderModel.m in Sources */,
+				D07BBDC21E277AC200966E9E /* CarCouponInfoVC.m in Sources */,
 				D0A4B4A31DBB46CF005C8C79 /* OrderContentInfoView.m in Sources */,
 				D00F8D0A1D9A0AEF00AD7CC8 /* MainViewController.m in Sources */,
 				D0FA2AF61DCAE7F400BCA242 /* CarCouponListVC.m in Sources */,
@@ -2943,6 +2954,7 @@
 				D026E9C21DF8ED5600C563D8 /* ServiceModel.m in Sources */,
 				D006C2491DB84BD00017FCD5 /* OrderCell.m in Sources */,
 				D0D918D51DA8F432003379E3 /* EnquiryIllegalVC.m in Sources */,
+				D07BBDC51E27810200966E9E /* CarCouponMoreView.m in Sources */,
 				D026E9B31DF56A8D00C563D8 /* UIViewController+ShowAlertView.m in Sources */,
 				D0C5FA181D9A25E600D00B85 /* NormanGuideViewCell.m in Sources */,
 				D0A4B4C21DBDE67F005C8C79 /* MaintainCouponVC.m in Sources */,

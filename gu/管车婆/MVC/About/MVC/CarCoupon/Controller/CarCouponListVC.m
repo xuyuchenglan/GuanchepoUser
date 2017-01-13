@@ -9,6 +9,8 @@
 #import "CarCouponListVC.h"
 #import "CarCouponCell.h"
 #import "CarCouponModel.h"
+#import "CarCouponInfoVC.h"
+#import "CarCouponVC.h"
 
 @interface CarCouponListVC ()<UITableViewDelegate, UITableViewDataSource>
 {
@@ -75,8 +77,22 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    //选中单元格时高亮显示，交互完成之后移除高亮显示。
+    [self performSelector:@selector(unselectCell:) withObject:nil afterDelay:0.3];//0.3秒后取消单元格选中状态。
     
+    CarCouponModel *currentModel = _carCoupons[indexPath.row];
+    
+    CarCouponInfoVC *carCouponInfoVC = [[CarCouponInfoVC alloc] init];
+    carCouponInfoVC.hidesBottomBarWhenPushed = YES;
+    carCouponInfoVC.carCouponModel = currentModel;
+    [[self findResponderVCWith:[[CarCouponVC alloc] init]].navigationController pushViewController:carCouponInfoVC animated:NO];
 }
+
+-(void)unselectCell:(id)sender{
+    
+    [_tableView deselectRowAtIndexPath:[_tableView indexPathForSelectedRow] animated:YES];
+}
+
 
 #pragma mark 
 #pragma mark 网络请求汽车券列表
@@ -97,7 +113,7 @@
     [manager POST:url_post parameters:params progress:NULL success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
         NSDictionary *content = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
-        NSLog(@"我的店铺券：%@", content);
+        //NSLog(@"我的店铺券：%@", content);
         
         [_carCoupons removeAllObjects];
         
