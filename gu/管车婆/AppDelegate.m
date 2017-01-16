@@ -78,7 +78,6 @@
     //接收CouponCell中发送过来的通知，以接收传递过来的out_trade_no值，在支付成功后验证后台是否也是支付成功的状态
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateOut_trade_no_Value:) name:@"out_trade_no" object:nil];
     
-    
     return YES;
 }
 
@@ -203,12 +202,12 @@
             if ([trade_state isEqualToString:@"SUCCESS"]) {
                 
                 //查询后台的支付结果是成功的之后，在这里面进行页面的刷新或者是支付成功后的业务逻辑等操作
-                NSLog(@"添加店铺券");
                 
                 //给CouponCell.m发送个通知，让CouponCell来完成添加店铺券的网络申请
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"addDianpuquan.action" object:self];
                 
-                
+                //给PayForOpeningCard.m发送通知，让其完成添加会员卡的网络申请
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"addCard.action" object:self];
             }
             
         }

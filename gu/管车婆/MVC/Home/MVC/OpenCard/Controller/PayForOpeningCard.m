@@ -8,19 +8,25 @@
 
 #import "PayForOpeningCard.h"
 #import "Way4PaymentOfOpencardView.h"
+#import "ServiceItemsView.h"
+#import "MembershipServicesModel.h"
+#import "WXApi.h"
 
 #define kThirdHeight 50*kRate
 #define kMembershipWidth (kScreenWidth-40*kRate*2)
 
-@interface PayForOpeningCard ()
+@interface PayForOpeningCard ()<UITextFieldDelegate>
 {
-    UIImageView *_firstImgView;
-    UIView      *_secondView;
-    UIView      *_thirdView;
-    UIView      *_forthView;
-    UIButton    *_openCardBtn;
+    UIImageView           *_firstImgView;
+    ServiceItemsView      *_secondView;
+    UIView                *_thirdView;
+    UIView                *_forthView;
+    UIButton              *_openCardBtn;
+    UITextField           *_valueTF_recommandCode;
 }
-@property (nonatomic, strong)UIScrollView *scrollView;
+@property (nonatomic, strong)UIScrollView   *scrollView;
+@property (nonatomic, strong)NSMutableArray *membershipServiceModels;
+@property (nonatomic, strong)NSString       *payWay;
 @end
 
 @implementation PayForOpeningCard
@@ -28,11 +34,29 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    
+    //添加通知中心监听，当键盘弹出或者消失时收到消息
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+
+    
+    
+    _membershipServiceModels = [NSMutableArray array];
+    _payWay = [[NSString alloc] init];
+    
+    //监测Way4PaymentOfOpencardView中发送过来的通知，以实时改变支付方式payWay
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changePayWay:) name:@"changePayWay" object:nil];
+    //监听 AppDelegate.m 在验证后台支付成功后发送过来的通知，以添加会员卡
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(addCard) name:@"addCard.action" object:nil];
+    
     //设置导航栏
     [self addNavBar];
     
     //设置下面的内容视图
     [self addContentView];
+    
+    //网络请求卡片详情数据
+    [self getCardInfo];
 }
 #pragma mark
 #pragma mark ****** 设置导航栏 ******
@@ -45,10 +69,10 @@
 #pragma mark ****** 设置下面的内容视图 ******
 - (void)addContentView
 {
-    _scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
+    _scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 64, kScreenWidth, kScreenHeight)];
     _scrollView.backgroundColor = kRGBColor(233, 239, 239);
     _scrollView.showsVerticalScrollIndicator = NO;
-    _scrollView.contentSize = CGSizeMake(kScreenWidth, kScreenHeight + 200);
+    _scrollView.contentSize = CGSizeMake(kScreenWidth, kScreenHeight+30*kRate*_membershipServiceModels.count);
     [self.view addSubview:_scrollView];
     
     //第一部分：卡片名称、金额
@@ -81,7 +105,9 @@
     }];
     
     UIImageView *membershipImgView = [[UIImageView alloc] init];
-    membershipImgView.image = [UIImage imageNamed:@"home_third_membership_card"];
+    membershipImgView.layer.cornerRadius = 6.0*kRate;
+    membershipImgView.layer.masksToBounds = YES;
+    [membershipImgView sd_setImageWithURL:_openCardModel.picUrl placeholderImage:[UIImage imageNamed:@"home_third_membership_card"] options:SDWebImageRefreshCached];
     [_firstImgView addSubview:membershipImgView];
     [membershipImgView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(kMembershipWidth, kMembershipWidth*0.58));
@@ -99,7 +125,7 @@
     }];
     
     UILabel *cardNameLB = [[UILabel alloc] init];
-    cardNameLB.text = @"铂金贵宾卡";
+    cardNameLB.text = _openCardModel.name;
     cardNameLB.font = [UIFont systemFontOfSize:15*kRate];
     [_firstImgView addSubview:cardNameLB];
     [cardNameLB mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -109,7 +135,7 @@
     }];
     
     UILabel *moneyLB = [[UILabel alloc] init];
-    moneyLB.text = @"1980元";
+    moneyLB.text = [NSString stringWithFormat:@"%@ 元", _openCardModel.price];
     moneyLB.textAlignment = NSTextAlignmentRight;
     moneyLB.font = [UIFont systemFontOfSize:13.0*kRate];
     moneyLB.textColor = [UIColor redColor];
@@ -124,11 +150,12 @@
 //第二部分：服务项目、详细
 - (void)addSecond
 {
-    _secondView = [[UIView alloc] init];
+    _secondView = [[ServiceItemsView alloc] init];
+    _secondView.membershipServiceModels = _membershipServiceModels;
     _secondView.backgroundColor = [UIColor whiteColor];
     [_scrollView addSubview:_secondView];
     [_secondView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(kScreenWidth, 160*kRate));
+        make.size.mas_equalTo(CGSizeMake(kScreenWidth, (40+10+30*_membershipServiceModels.count)*kRate));
         make.top.equalTo(_firstImgView.mas_bottom).with.offset(8*kRate);
         make.left.equalTo(_scrollView).with.offset(0);
     }];
@@ -157,13 +184,16 @@
         make.top.equalTo(_thirdView).with.offset(0);
     }];
     
-    UILabel *valueLB = [[UILabel alloc] init];
-    valueLB.text = @"125487524555";
-    valueLB.font = [UIFont systemFontOfSize:13.5*kRate];
-    valueLB.textColor = [UIColor colorWithWhite:0.6 alpha:1];
-    valueLB.adjustsFontSizeToFitWidth = YES;
-    [_thirdView addSubview:valueLB];
-    [valueLB mas_makeConstraints:^(MASConstraintMaker *make) {
+    _valueTF_recommandCode = [[UITextField alloc] init];
+    _valueTF_recommandCode.delegate = self;
+    _valueTF_recommandCode.borderStyle = UITextBorderStyleNone;
+    _valueTF_recommandCode.returnKeyType = UIReturnKeyDone;
+    _valueTF_recommandCode.font = [UIFont systemFontOfSize:13.5*kRate];
+    _valueTF_recommandCode.adjustsFontSizeToFitWidth = YES;
+    _valueTF_recommandCode.placeholder = @"可选";
+    _valueTF_recommandCode.keyboardType = UIKeyboardTypeNumberPad;
+    [_thirdView addSubview:_valueTF_recommandCode];
+    [_valueTF_recommandCode mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(150*kRate, kThirdHeight));
         make.left.equalTo(titleLB.mas_right).with.offset(10*kRate);
         make.top.equalTo(_thirdView).with.offset(0);
@@ -255,6 +285,189 @@
 - (void)openCardBtnAction
 {
     NSLog(@"立即开卡");
+    [self.view endEditing:YES];
+    
+    if (_payWay.length > 0) {
+        
+        //付款
+        [self getInfoThatCallWXPay];
+        
+    } else {
+        
+        [self showAlertViewWithTitle:@"提示" WithMessage:@"请选择支付方式"];
+        
+    }
+}
+
+#pragma mark
+#pragma mark 弹出键盘时视图上移,键盘收起时视图恢复
+//键盘显示
+- (void)keyboardWillShow:(NSNotification *)notification
+{
+    NSLog(@"键盘显示");
+    
+    //1，取得键盘最后的frame
+    CGRect keyboardFrame = [notification.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    CGFloat height = keyboardFrame.size.height;
+    //2，计算控制器的View需要移动的距离
+    [UIView beginAnimations:@"animation" context:nil];
+    [UIView setAnimationDuration:0.2];
+    [UIView setAnimationBeginsFromCurrentState:YES];
+    ///移动（带有动画）
+    CGRect frame = self.view.frame;
+    frame.origin.y = -height ;
+    self.view.frame = frame;
+    [UIView commitAnimations];
+    
+    
+}
+
+
+//键盘隐藏
+- (void)keyboardWillHide:(NSNotification *)notification
+{
+    NSLog(@"键盘隐藏");
+    
+    //键盘消失时，试图恢复原样
+    [UIView beginAnimations:@"animation" context:nil];
+    [UIView setAnimationDuration:0.2];
+    [UIView setAnimationBeginsFromCurrentState:YES];
+    ///移动（带有动画）
+    CGRect frame = self.view.frame;
+    frame.origin.y = 0;
+    self.view.frame = frame;
+    [UIView commitAnimations];
+    
+}
+
+
+
+#pragma mark UITextFieldDelegate
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [self.view endEditing:YES];
+    return YES;
+}
+
+
+#pragma mark 
+#pragma mark 网络请求卡片详情数据
+- (void)getCardInfo
+{
+    NSString *url_post = [NSString stringWithFormat:@"http://%@getCardTypeDetails.action", kHead];
+    
+    NSDictionary *params = @{
+                             @"cid":_openCardModel.cid
+                             };
+    
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    AFHTTPResponseSerializer *responseSerializer = [AFHTTPResponseSerializer serializer];
+    manager.responseSerializer = responseSerializer;
+    [manager POST:url_post parameters:params progress:NULL success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        
+        NSDictionary *content = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+        NSArray *jsondataArr = [content objectForKey:@"jsondata"];
+        for (NSDictionary *dic in jsondataArr) {
+            MembershipServicesModel *model = [[MembershipServicesModel alloc] initWithDic:dic];
+            [_membershipServiceModels addObject:model];
+        }
+        
+        //刷新视图
+        [_scrollView removeFromSuperview];
+        [self addContentView];
+        
+    } failure:nil];
+
+}
+
+#pragma mark --- 获取调起微信支付所需的参数
+- (void)getInfoThatCallWXPay
+{
+    NSString *url_post = [NSString stringWithFormat:@"http://%@/zcar/wxCtl/unifiedorder.action", kIP];
+
+    NSDictionary *params = @{
+                             @"openid":[[self getLocalDic] objectForKey:@"phone"],//传入电话号码或微信openid   (APP支付填入phone)
+                             @"price":@"0.01",//金额 单位元
+                             @"pName":_openCardModel.name,//产品名称
+                             @"zfType":@"2",//支付类型    1-微信公众号支付   2-微信APP支付
+                             @"attach":@""//附加数据  可为空
+                             };
+    
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    AFHTTPResponseSerializer *responseSerializer = [AFHTTPResponseSerializer serializer];
+    manager.responseSerializer = responseSerializer;
+    [manager POST:url_post parameters:params progress:NULL success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        
+        NSDictionary *content = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+        //NSLog(@"获取调起微信支付所需的参数：%@", content);
+        
+        NSString *result = [content objectForKey:@"result"];
+        if ([result isEqualToString:@"success"]) {
+            
+            //给 AppDelegate.m 中发送一个通知，把后台返回的 out_trade_no 传过去。
+            NSDictionary *out_trade_no_Dic = @{
+                                               @"out_trade_no":[content objectForKey:@"out_trade_no"]
+                                               };
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"out_trade_no" object:self userInfo:out_trade_no_Dic];
+            
+            //调起支付(除了timeStamp之外，其他五个少传哪一个都是调不起来微信支付的)
+            PayReq *request = [[PayReq alloc] init];
+            request.partnerId = [content objectForKey:@"mchId"];//微信支付分配的商户号
+            request.prepayId= [content objectForKey:@"prepayid"];//预支付交易会话ID
+            request.package = @"Sign=WXPay";//扩展字段，暂填写固定值Sign=WXPay
+            request.nonceStr= [content objectForKey:@"nonceStr"];//随机字符串
+            request.timeStamp= [[content objectForKey:@"timeStamp"] intValue];//时间戳
+            request.sign = [content objectForKey:@"paySign"];//签名
+            //            request.sign= @"18";//签名
+            [WXApi sendReq:request];
+            
+        }
+        
+    } failure:nil];
+}
+
+#pragma mark 添加会员卡接口
+- (void)addCard
+{
+    NSLog(@"添加店铺券接口");
+    
+    NSString *url_post = [NSString stringWithFormat:@"http://%@addCard.action", kHead];
+    
+    NSDictionary *params = @{
+                             @"prefixNo":_openCardModel.prefixNo,
+                             @"openid":[[self getLocalDic] objectForKey:@"phone"],
+                             @"cardTypeId":_openCardModel.cid,
+                             @"recommendCode":_valueTF_recommandCode.text
+                             };
+    
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    AFHTTPResponseSerializer *responseSerializer = [AFHTTPResponseSerializer serializer];
+    manager.responseSerializer = responseSerializer;
+    [manager POST:url_post parameters:params progress:NULL success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        
+        NSDictionary *content = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+        NSLog(@"添加会员卡：%@", content);
+        
+    } failure:nil];
+    
+}
+
+
+#pragma mark
+#pragma mark 通知相关
+//接收到通知后的操作，修改payWay的值
+- (void)changePayWay:(NSNotification *)notification
+{
+    NSDictionary *dic = notification.userInfo;
+    
+    _payWay = [dic objectForKey:@"payWay"];
+    
+}
+
+//移除通知
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 @end

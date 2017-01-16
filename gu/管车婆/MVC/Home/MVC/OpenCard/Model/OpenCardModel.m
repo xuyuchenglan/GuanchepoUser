@@ -22,6 +22,10 @@
         
         self.desc = [NSString stringWithFormat:@"%@", [dic objectForKey:@"cdesc"]];
         
+        self.cid = [NSString stringWithFormat:@"%@", [dic objectForKey:@"cid"]];
+        
+        self.prefixNo = [NSString stringWithFormat:@"%@", [dic objectForKey:@"prefixNo"]];
+        
     }
     
     return self;

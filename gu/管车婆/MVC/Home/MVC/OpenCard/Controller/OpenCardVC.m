@@ -99,6 +99,7 @@
     [manager GET:url_get parameters:nil progress:NULL success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
         NSArray *jsonDataArr = [responseObject objectForKey:@"jsondata"];
+//        NSLog(@"%@", jsonDataArr);
         NSMutableArray *muArr = [NSMutableArray array];
         for (NSDictionary *jsonDataDic in jsonDataArr) {
             

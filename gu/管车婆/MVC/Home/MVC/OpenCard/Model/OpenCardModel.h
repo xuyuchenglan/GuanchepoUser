@@ -14,6 +14,8 @@
 @property (nonatomic, strong)NSString *name;
 @property (nonatomic, strong)NSString *price;
 @property (nonatomic, strong)NSString *desc;
+@property (nonatomic, strong)NSString *cid;
+@property (nonatomic, strong)NSString *prefixNo;
 
 - (instancetype)initWithDic:(NSDictionary *)dic;
 
