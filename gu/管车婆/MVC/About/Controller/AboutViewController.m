@@ -649,11 +649,22 @@
     [manager POST:url_post parameters:params progress:NULL success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
         NSDictionary *content = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+        //NSLog(@"getUserByUid.action:%@", content);
         
         NSDictionary *jsonDataDic = [content objectForKey:@"jsondata"];
         
-        NSString *signTime = [jsonDataDic objectForKey:@"sign"];
-        if (signTime.length > 0) {
+            //最近一次签到的时间
+        NSString *signTimeStr = [jsonDataDic objectForKey:@"sign"];
+        NSString *signDateStr = [signTimeStr substringToIndex:10];
+        
+            //当前的系统时间
+        NSDate *currentTime = [NSDate date];
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+        NSString *currentTimeStr = [formatter stringFromDate:currentTime];
+        NSString *currentDateStr = [currentTimeStr substringToIndex:10];
+        
+        if ([signDateStr isEqualToString:currentDateStr]) {
             _isSigned = YES;//签到状态
         }
         

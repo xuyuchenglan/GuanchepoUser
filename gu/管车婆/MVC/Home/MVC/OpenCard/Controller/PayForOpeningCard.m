@@ -448,6 +448,9 @@
         NSDictionary *content = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
         NSLog(@"添加会员卡：%@", content);
         
+        
+        
+        
     } failure:nil];
     
 }

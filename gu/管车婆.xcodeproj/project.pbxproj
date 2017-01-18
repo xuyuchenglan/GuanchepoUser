@@ -201,6 +201,8 @@
 		D0A4B4CC1DBEE514005C8C79 /* CouponItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = D0A4B4CB1DBEE514005C8C79 /* CouponItemView.m */; };
 		D0A4B4CE1DBEF074005C8C79 /* stores_oil.png in Resources */ = {isa = PBXBuildFile; fileRef = D0A4B4CD1DBEF074005C8C79 /* stores_oil.png */; };
 		D0A4B4D11DBEF6F7005C8C79 /* CouponItemsView.m in Sources */ = {isa = PBXBuildFile; fileRef = D0A4B4D01DBEF6F7005C8C79 /* CouponItemsView.m */; };
+		D0B229761E2EFAC6005916EA /* FillInPersonalInfoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D0B229751E2EFAC6005916EA /* FillInPersonalInfoVC.m */; };
+		D0B229791E2F1624005916EA /* FillInPersonalInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D0B229781E2F1624005916EA /* FillInPersonalInfoCell.m */; };
 		D0B562CC1DAF3B8900C9FACC /* NormanStarRateView.m in Sources */ = {isa = PBXBuildFile; fileRef = D0B562CB1DAF3B8900C9FACC /* NormanStarRateView.m */; };
 		D0C1F1531E232FB4008C4CDB /* ActivityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D0C1F1521E232FB4008C4CDB /* ActivityViewController.m */; };
 		D0C1F1561E2330F2008C4CDB /* ActivityModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D0C1F1551E2330F2008C4CDB /* ActivityModel.m */; };
@@ -649,6 +651,10 @@
 		D0A4B4CD1DBEF074005C8C79 /* stores_oil.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = stores_oil.png; sourceTree = "<group>"; };
 		D0A4B4CF1DBEF6F7005C8C79 /* CouponItemsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CouponItemsView.h; sourceTree = "<group>"; };
 		D0A4B4D01DBEF6F7005C8C79 /* CouponItemsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CouponItemsView.m; sourceTree = "<group>"; };
+		D0B229741E2EFAC6005916EA /* FillInPersonalInfoVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FillInPersonalInfoVC.h; sourceTree = "<group>"; };
+		D0B229751E2EFAC6005916EA /* FillInPersonalInfoVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FillInPersonalInfoVC.m; sourceTree = "<group>"; };
+		D0B229771E2F1624005916EA /* FillInPersonalInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FillInPersonalInfoCell.h; sourceTree = "<group>"; };
+		D0B229781E2F1624005916EA /* FillInPersonalInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FillInPersonalInfoCell.m; sourceTree = "<group>"; };
 		D0B562CA1DAF3B8900C9FACC /* NormanStarRateView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NormanStarRateView.h; sourceTree = "<group>"; };
 		D0B562CB1DAF3B8900C9FACC /* NormanStarRateView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NormanStarRateView.m; sourceTree = "<group>"; };
 		D0C1F1511E232FB4008C4CDB /* ActivityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityViewController.h; sourceTree = "<group>"; };
@@ -1767,6 +1773,17 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		D0B229731E2EFAA1005916EA /* FillInPersonalInfo */ = {
+			isa = PBXGroup;
+			children = (
+				D0B229741E2EFAC6005916EA /* FillInPersonalInfoVC.h */,
+				D0B229751E2EFAC6005916EA /* FillInPersonalInfoVC.m */,
+				D0B229771E2F1624005916EA /* FillInPersonalInfoCell.h */,
+				D0B229781E2F1624005916EA /* FillInPersonalInfoCell.m */,
+			);
+			path = FillInPersonalInfo;
+			sourceTree = "<group>";
+		};
 		D0B562C91DAF3B8900C9FACC /* NormanStarRateView */ = {
 			isa = PBXGroup;
 			children = (
@@ -2187,6 +2204,7 @@
 		D0D918B71DA8E748003379E3 /* MVC */ = {
 			isa = PBXGroup;
 			children = (
+				D0B229731E2EFAA1005916EA /* FillInPersonalInfo */,
 				D0C1F14D1E232F33008C4CDB /* Activity */,
 				D052B1FE1E00ED8D006E74C1 /* ItemStores */,
 				D003F0B11DD05C50003F0A3C /* OpenCard */,
@@ -2965,6 +2983,7 @@
 				D0C1F1591E2331E0008C4CDB /* ActivityCell.m in Sources */,
 				D0D918DB1DA8F46D003379E3 /* RechargeFuelCardVC.m in Sources */,
 				D026E9C81DFA9D6400C563D8 /* AboutModel.m in Sources */,
+				D0B229791E2F1624005916EA /* FillInPersonalInfoCell.m in Sources */,
 				D0129AE61E0E4AA60063CDB6 /* DatePickerVC.m in Sources */,
 				D0139A861DD417F6005141F2 /* LWCouponCell.m in Sources */,
 				D003F0B71DD05E3E003F0A3C /* OpenCardVC.m in Sources */,
@@ -3068,6 +3087,7 @@
 				D026E9C51DFA7AF800C563D8 /* OpenCardModel.m in Sources */,
 				D09BC1621DC844F70035DE65 /* PaymentWayView.m in Sources */,
 				D0A4B4A41DBB46CF005C8C79 /* OrderContentMoreView.m in Sources */,
+				D0B229761E2EFAC6005916EA /* FillInPersonalInfoVC.m in Sources */,
 				D0C7A4AF1DAA3390005FC697 /* IllegalResultVC.m in Sources */,
 				D0C3E9581DB205570084CDA4 /* IllegalResultAccountView.m in Sources */,
 				D05093041E20BB73006C9BA5 /* ChatCellView.m in Sources */,

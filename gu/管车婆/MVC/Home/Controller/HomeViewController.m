@@ -27,6 +27,7 @@
 #import "UMSocialQQHandler.h"
 #import "UMSocialSinaSSOHandler.h"
 #import "ActivityViewController.h"
+#import "FillInPersonalInfoVC.h"
 
 #import <AMapLocationKit/AMapLocationKit.h>//定位SDK头文件
 
@@ -981,6 +982,10 @@
     OpenCardVC *openCardVC = [[OpenCardVC alloc] init];
     openCardVC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:openCardVC animated:NO];
+    
+//    FillInPersonalInfoVC *fillInPersonalInfoVC = [[FillInPersonalInfoVC alloc] init];
+//    fillInPersonalInfoVC.hidesBottomBarWhenPushed = YES;
+//    [self.navigationController pushViewController:fillInPersonalInfoVC animated:NO];
     
 }
 
