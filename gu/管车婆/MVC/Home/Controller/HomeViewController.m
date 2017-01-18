@@ -237,7 +237,7 @@
     
     //是否适宜洗车
     UIImageView *weatherImg = [[UIImageView alloc] initWithFrame:CGRectMake(kScreenWidth - 100*kRate, 6*kRate, 22*kRate, 22*kRate)];
-    weatherImg.image = [UIImage imageNamed:@"home_top_weather"];
+    weatherImg.image = [UIImage imageNamed:_homeModel.weatherImgStr];
     [_topView addSubview:weatherImg];
     
     UILabel *isSuitable = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(weatherImg.frame), 6*kRate, 70*kRate, 22*kRate)];
@@ -1212,6 +1212,7 @@
     [manager POST:url_post parameters:params progress:NULL success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
         NSDictionary *content = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+        //NSLog(@"%@", content);
         
         _homeModel = [[HomeModel alloc] initWithDic:content];
         _isLoadSuccess = YES;

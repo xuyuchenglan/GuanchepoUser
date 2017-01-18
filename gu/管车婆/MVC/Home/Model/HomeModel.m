@@ -33,6 +33,7 @@
         self.car = [dic objectForKey:@"car"];
         
         NSDictionary *weatherDic = [dic objectForKey:@"weather"];
+        self.weatherImgStr = [weatherDic objectForKey:@"img"];
         self.isSuitableForClean = [weatherDic objectForKey:@"info"];
         
         NSMutableArray *servicesMutable = [NSMutableArray array];
