@@ -54,6 +54,8 @@
         cell.couponModel = _couponModels[indexPath.row];
     }
     
+    cell.storeModel = _storeModel;
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }
 

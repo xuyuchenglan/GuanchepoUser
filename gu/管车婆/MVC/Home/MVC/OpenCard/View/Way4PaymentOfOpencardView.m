@@ -7,6 +7,7 @@
 //
 
 #import "Way4PaymentOfOpencardView.h"
+#import "PayForOpeningCard.h"
 
 #define kHeadImgViewWidth  23*kRate
 
@@ -44,16 +45,37 @@
 {
     _isSelected = !_isSelected;
     
-    if (_isSelected) {
-        _selectImgView.image = [UIImage imageNamed:@"pay_selected"];
-    } else {
-        _selectImgView.image = [UIImage imageNamed:@"pay_unselected"];
+    if ([_type isEqualToString:@"wechat"]) {
+        
+        if (_isSelected) {
+            _selectImgView.image = [UIImage imageNamed:@"pay_selected"];
+            
+            //给PayForOpeningCard发通知，以实时修改payWay的值
+            NSDictionary *dic = @{
+                                  @"payWay":_type
+                                  };
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"changePayWay" object:nil userInfo:dic];
+        } else {
+            _selectImgView.image = [UIImage imageNamed:@"pay_unselected"];
+            
+            //给PayForOpeningCard发通知，以实时修改payWay的值
+            NSDictionary *dic = @{
+                                  @"payWay":@""
+                                  };
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"changePayWay" object:nil userInfo:dic];
+        }
+        
+    } else if ([_type isEqualToString:@"alipay"]) {
+        
+        [[self findResponderVCWith:[[PayForOpeningCard alloc] init]] showAlertViewWithTitle:@"提示" WithMessage:@"暂未开通支付宝付款，请使用微信支付"];
     }
+    
 }
 
 
 - (void)setType:(NSString *)type
 {
+    _type = type;
     _headImgView = [[UIImageView alloc] init];
     [self addSubview:_headImgView];
     [_headImgView mas_makeConstraints:^(MASConstraintMaker *make) {

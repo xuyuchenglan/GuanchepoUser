@@ -24,6 +24,7 @@
 
 
 //weather
+@property (nonatomic, strong) NSString *weatherImgStr;
 @property (nonatomic, strong) NSString *isSuitableForClean;
 
 

@@ -7,7 +7,10 @@
 //
 
 #import "ParentViewController.h"
+#import "OpenCardModel.h"
 
 @interface PayForOpeningCard : ParentViewController
+
+@property (nonatomic, strong)OpenCardModel *openCardModel;
 
 @end

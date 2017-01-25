@@ -7,10 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "StoreModel.h"
 
 @interface CouponListVC : UIViewController
 
 @property (nonatomic, strong)NSString *type;
 @property (nonatomic, copy)NSArray *couponModels;
+@property (nonatomic, strong)StoreModel *storeModel;
 
 @end

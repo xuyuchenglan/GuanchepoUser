@@ -17,7 +17,7 @@
         self.title = [dic objectForKey:@"name"];
         self.charge = [dic objectForKey:@"price"];
         self.sid = [dic objectForKey:@"sid"];
-        
+        self.pid = [dic objectForKey:@"pid"];
     }
     
     return self;

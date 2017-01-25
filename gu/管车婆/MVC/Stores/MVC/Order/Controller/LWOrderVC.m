@@ -299,7 +299,7 @@
 
 }
 
-//生成商户二维码需要传入的字符串
+//生成用户二维码需要传入的字符串
 - (NSString *)creatQRStr
 {
     NSString *head = @"jnzddevqrcode-com.gcp0534://";

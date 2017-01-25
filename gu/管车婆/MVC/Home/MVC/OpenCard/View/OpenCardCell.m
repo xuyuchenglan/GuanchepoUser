@@ -143,6 +143,7 @@
 {
     NSLog(@"立即开卡");
     PayForOpeningCard *pay4CardVC = [[PayForOpeningCard alloc] init];
+    pay4CardVC.openCardModel = _openCardModel;
     pay4CardVC.hidesBottomBarWhenPushed = YES;
     [[self findResponderVCWith:[[OpenCardVC alloc] init]].navigationController pushViewController:pay4CardVC animated:NO];
     

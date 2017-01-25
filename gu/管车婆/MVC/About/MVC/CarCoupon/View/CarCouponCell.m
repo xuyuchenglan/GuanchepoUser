@@ -120,23 +120,37 @@
 #pragma mark
 - (void)layoutSubviews
 {
-    if ([_type isEqualToString:@"洗车券"]) {
+    if ([_type isEqualToString:@"0"]) {//全部
+        _upView.backgroundColor = kRGBColor(86, 214, 128);//与“其他”相同
+    } else if ([_type isEqualToString:@"1"]) {//洗车券
         _upView.backgroundColor = kRGBColor(170, 213, 253);
-        _couponNameLB.text = @"洗车券";
-    } else if ([_type isEqualToString:@"保养券"]) {
+    } else if ([_type isEqualToString:@"2"]) {//保养券
         _upView.backgroundColor = kRGBColor(251, 184, 172);
-        _couponNameLB.text = @"保养券";
-    } else if ([_type isEqualToString:@"美容券"]) {
+    } else if ([_type isEqualToString:@"3"]) {//美容券
         _upView.backgroundColor = kRGBColor(253, 233, 174);
-        _couponNameLB.text = @"美容券";
+    } else if ([_type isEqualToString:@"4"]) {//其他
+        _upView.backgroundColor = kRGBColor(86, 214, 128);
+    }
+    if (_carCouponModel.isUsed) {//所有已经使用过的券，变成灰色
+        _upView.backgroundColor = kRGBColor(211, 212, 213);
     }
     
-    _dateLB.text = @"2016-10-08";
+    _couponNameLB.text = _carCouponModel.name;
     
-    _storeNameLB.text = @"店铺：盛大车行";
-    _addressLB.text = @"地址：南隆国际";
-    _serviceLB.text = @"服务：嘉实多磁炉4升*1 嘉实多磁炉1升*1";
-    _isUsedImgView.image = [UIImage imageNamed:@"about_carCoupon_unused"];
+    _dateLB.text = [self getDate:YES getTime:NO WithTimeDateStr:_carCouponModel.addtime];
+    
+    _storeNameLB.text = [NSString stringWithFormat:@"店铺：%@", _carCouponModel.mname];
+    
+    _addressLB.text = [NSString stringWithFormat:@"地址：%@", _carCouponModel.maddr];
+
+    _serviceLB.text = [NSString stringWithFormat:@"服务：%@", _carCouponModel.name];
+    
+    if (!_carCouponModel.isUsed) {//未使用
+        _isUsedImgView.image = [UIImage imageNamed:@"about_carCoupon_unused"];
+    } else {//已使用
+        _isUsedImgView.image = [UIImage imageNamed:@"about_carCoupon_used"];
+    }
+    
 }
 
 - (void)setFrame:(CGRect)frame

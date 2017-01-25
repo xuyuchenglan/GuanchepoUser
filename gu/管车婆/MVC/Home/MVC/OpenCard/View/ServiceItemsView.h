@@ -10,4 +10,6 @@
 
 @interface ServiceItemsView : UIView
 
+@property (nonatomic, copy)NSArray *membershipServiceModels;
+
 @end

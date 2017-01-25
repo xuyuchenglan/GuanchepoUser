@@ -8,9 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "CouponModel.h"
+#import "StoreModel.h"
 
 @interface CouponCell : UITableViewCell
 
 @property (nonatomic, strong)CouponModel *couponModel;
+@property (nonatomic, strong)StoreModel *storeModel;
 
 @end

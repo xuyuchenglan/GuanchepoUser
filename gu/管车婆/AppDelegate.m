@@ -15,14 +15,17 @@
 #import "UMSocialWechatHandler.h"//微信
 #import "UMSocialQQHandler.h"//QQ
 #import "UMSocialSinaSSOHandler.h"//新浪微博
+#import "WXApi.h"
 
 
 #define AMapKey @"9cb391853ef6652d8a67f4d571d4169f"
 #define kUmengAppkey @"586e0429c62dca606900044f"
 
 
-@interface AppDelegate ()
-
+@interface AppDelegate ()<WXApiDelegate>
+{
+    NSString *_out_trade_no;
+}
 @end
 
 @implementation AppDelegate
@@ -55,6 +58,10 @@
     //对未安装客户端平台进行隐藏(这个接口只对默认分享面板平台有隐藏功能)
     [UMSocialConfig hiddenNotInstallPlatforms:@[UMShareToQQ, UMShareToQzone, UMShareToWechatSession, UMShareToWechatTimeline, UMShareToSina]];
     
+    /*********************************   微信支付   *******************************/
+    //如果项目中第三方分享用的是友盟，在注册的时候要把友盟注册放在微信注册的前面执行
+    [WXApi registerApp:@"wxfaf46b7e52252829" withDescription:@"管车婆用户版微信支付"];//向微信注册APPID
+    
     
     
     BOOL isLogin = [self isLogin];
@@ -68,6 +75,9 @@
     [self.window makeKeyAndVisible];
     
     
+    //接收CouponCell中发送过来的通知，以接收传递过来的out_trade_no值，在支付成功后验证后台是否也是支付成功的状态
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateOut_trade_no_Value:) name:@"out_trade_no" object:nil];
+    
     return YES;
 }
 
@@ -75,14 +85,23 @@
 //增加下面的系统回调配置，添加了这个方法才能在分享后从其他应用回到我们的应用来。注意如果同时使用微信支付、支付宝等其他需要改写回调代理的SDK，请在if分支下做区分，否则会影响 分享、登录的回调。
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
 {
-    BOOL result = [UMSocialSnsService handleOpenURL:url];
+    //    BOOL result = [UMSocialSnsService handleOpenURL:url];
+    //
+    //    NSLog(@"友盟分享回调:%d", result);
+    //
+    //    if (result == FALSE) {
+    //        //调用其他SDK，例如支付宝SDK等
+    //
+    //        result = [WXApi handleOpenURL:url delegate:self];
+    //        NSLog(@"微信支付回调：%d", result);
+    //
+    //    }
+    //
+    //    return result;
     
-    if (result == FALSE) {
-        //调用其他SDK，例如支付宝SDK等
-    }
-    
-    return result;
+    return [WXApi handleOpenURL:url delegate:self];//这里的逻辑啥的我没怎么搞懂，先暂且这样吧。即便把openURL整个方法都给注释掉，无论是友盟分享完毕后还是微信支付完毕后，都是可以返回管车婆app的。但是如果不调用[WXApi handleOpenURL:url delegate:self]的话，代理方法onResp就不会在支付完成返回管车婆APP后被调用，这肯定是不行的，所以[WXApi handleOpenURL:url delegate:self]方法是必须被调用的。
 }
+
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
@@ -127,5 +146,83 @@
     }
 }
 
+#pragma mark
+#pragma mark 接收传递过来的out_trade_no值，以在支付成功后验证后台是否也是支付成功的状态
+- (void)updateOut_trade_no_Value:(NSNotification *)notification
+{
+    _out_trade_no = notification.userInfo[@"out_trade_no"];
+}
 
+#pragma mark
+#pragma mark WXApiDelegate
+- (void)onResp:(BaseResp *)resp
+{
+    if ([resp isKindOfClass:[PayResp class]]){
+        
+        PayResp *response=(PayResp*)resp;
+        
+        switch(response.errCode){
+            case WXSuccess:
+                //服务器端查询支付通知或查询API返回的结果再提示成功
+                NSLog(@"支付成功－PaySuccess，retcode = %d", resp.errCode);
+                
+                //查询后台的支付状态
+                [self varifyTheBackgroundState];
+                
+                break;
+            default:
+                NSLog(@"错误，retcode = %d, retstr = %@", resp.errCode,resp.errStr);
+                
+                break;
+        }
+    }
+}
+
+#pragma mark --- 在支付成功后验证后台是否也是支付成功的状态
+- (void)varifyTheBackgroundState
+{
+    NSString *url_post = [NSString stringWithFormat:@"http://%@/zcar/wxCtl/orderquery.action", kIP];
+    
+    NSDictionary *params = @{
+                             @"outTradeNo":_out_trade_no,
+                             @"zfType":@"2",//支付类型    1-微信公众号支付   2-微信APP支付
+                             };
+    
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    AFHTTPResponseSerializer *responseSerializer = [AFHTTPResponseSerializer serializer];
+    manager.responseSerializer = responseSerializer;
+    [manager POST:url_post parameters:params progress:NULL success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        
+        NSDictionary *content = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+        
+        NSString *result = [content objectForKey:@"result"];
+        if ([result isEqualToString:@"success"]) {
+            
+            NSString *trade_state = [content objectForKey:@"trade_state"];
+            if ([trade_state isEqualToString:@"SUCCESS"]) {
+                
+                //查询后台的支付结果是成功的之后，在这里面进行页面的刷新或者是支付成功后的业务逻辑等操作
+                
+                //给CouponCell.m发送个通知，让CouponCell来完成添加店铺券的网络申请
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"addDianpuquan.action" object:self];
+                
+                //给PayForOpeningCard.m发送通知，让其完成添加会员卡的网络申请
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"addCard.action" object:self];
+            }
+            
+        }
+        
+        
+        
+    } failure:nil];
+}
+
+
+
+#pragma mark
+#pragma mark 移除通知
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 @end
